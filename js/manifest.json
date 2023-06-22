@@ -1,24 +1,19 @@
 {
   "lang": "en",
   "dir": "ltr",
-  "name": "Super Racer 3000",
-  "short_name": "Racer3K",
+  "name": "Stable",
+  "short_name": "Stable",
   "icons": [{
-    "src": "icon/lowres.webp",
-    "sizes": "64x64",
-    "type": "image/webp"
+    "src": "images/favicon/favicon-32x32.png",
+    "sizes": "32x32",
+    "type": "image/png"
   }, {
-    "src": "icon/lowres.png",
-    "sizes": "64x64"
-  }, {
-    "src": "icon/hd_hi",
-    "sizes": "128x128"
+    "src": "images/favicon/android-chrome-192x192.png",
+    "sizes": "192x192"
   }],
   "scope": "/",
   "id": "superracer",
-  "start_url": "/start.html",
+  "start_url": "/index.html",
   "display": "fullscreen",
-  "orientation": "landscape",
-  "theme_color": "aliceblue",
-  "background_color": "red"
+  "orientation": "portrait"
 }
