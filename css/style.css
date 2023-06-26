@@ -190,7 +190,6 @@ footer {
 	-webkit-transition : -webkit-filter 500ms linear
 }
 .plans img {
-	mix-blend-mode: multiply;
 	object-fit: contain;
 }
 .about {
