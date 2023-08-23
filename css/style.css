@@ -283,6 +283,9 @@ button {
 	height: 100%;
 	object-fit: cover;
 }
+.feature_description {
+	max-width: 1000px;
+}
 .feature_description a {
 	font-family: 'League Spartan', sans-serif;
 	color: #8a38f0;
