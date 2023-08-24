@@ -18,12 +18,15 @@
 <body>
 	<nav></nav>
 	<div id="butter" class="content">
-		<div id="block_content"></div>
-		<div class="project_title">Casa Ornato Verde</div>
-		<div class="project_description">1. When classical elements are combined with contemporary intervention, the result is a magical fusion. A juxtaposition of eras and a contrast of styles bring great value to the intervention. A dialogue that speaks of respect and the passage of time. </div>
-		<div class="project_description">residential / coimbra / 165m²</div>
-		<div class="software">revit, 3ds max, vray, photoshop</div>
-		<div class="section_title">Visualization</div>
+		<div class="dictionary">
+			<div class="type">(project)</div>
+			<div class="title">Casa Ornato Verde</div>
+			<div class="definition">1. A juxtaposition of minimal scandinavian and cozy mid-century modern. This 165m² house remodeling in Coimbra respects the passage of time.</div>
+			<div class="synonyms">
+				<div>synonyms:</div>
+				<span>renovation, portugal, scandinavian, mid-century modern</span>
+			</div>
+		</div>
 		<div class="row">
 			<div class="image gsap_image">
 				<img src="images/casaornato_02.jpg">
@@ -40,7 +43,6 @@
 				<img src="images/casaornato_04.jpg">
 			</div>
 		</div>
-		<div class="section_title">Plans</div>
 		<div class="row">
 			<div class="image plans">
 				<img src="images/plant01.jpg">
@@ -99,25 +101,7 @@
 		butter.init();
 
 		imageviewer();
-
-		// /* EXPAND IMAGE */
-		// $(".image").click(function() {
-		// 	$(this).toggleClass("expanded");
-		// 	$("#block_content").toggleClass("visible");
-		// });
-
-		// /* SHOW BLOCK CONTENT */
-		// $("#block_content").click(function() {
-		// 	$(".image").removeClass("expanded");
-		// 	$("#block_content").toggleClass("visible");
-		// });
-
-		/* SHOW BLOCK CONTENT */
-		$("#block_content").click(function() {
-			$(".image").removeClass("expanded");
-			$("#block_content").toggleClass("visible");
-		});
-
+		
 		/* HOVER ON THUMBNAIL */
 		$(".other_projects").hover(function() {
 			$(this).find("img").toggleClass("clear");
