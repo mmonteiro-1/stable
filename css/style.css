@@ -75,7 +75,7 @@ footer {
 	top: -20px;
 	left: -20px;
 }
-.definition {
+.dictionary {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -83,16 +83,23 @@ footer {
 	padding: 0 50px;
 	box-sizing: border-box;
 }
-.hero_title {
+.type {
+	color: gray;
+	font-size: 1.5rem;
+	letter-spacing: 2px;
+}
+.title {
 	font-size: 6rem;
 	width: 100%;
 	font-weight: 800;
+	line-height: 5rem;
+	margin: 20px 0;
 }
-.hero_definition {
+.definition {
 	font-size: 3rem;
-	max-width: 1000px;
+	max-width: 1050px;
 }
-.hero_synonyms {
+.synonyms {
 	display: flex;
 	font-size: 2rem;
 	font-family: 'League Spartan', sans-serif;
@@ -100,14 +107,25 @@ footer {
 	margin-top: 50px;
 	line-height: 2.5rem;
 }
-.hero_synonyms span {
-/*	color: #5731f0;*/
+.synonyms span {
 	margin-left: 100px;
 	max-width: 420px;
 }
 .hero img {
 	object-fit: cover;
 	width: 100%;
+}
+.dark {
+	position: relative;
+	left: -20px;
+	width: 100vw;
+	background: #232323;
+}
+.dictionary.darkmode .title, .dictionary.darkmode .definition {
+	color: #f2f2f2;
+}
+.dictionary.darkmode .synonyms {
+	color: gray;
 }
 #block_content {
 	position: fixed;
@@ -122,6 +140,35 @@ footer {
 }
 #block_content.visible {
 	display: block;
+}
+.slider_container {
+	position: relative; 
+	width: 100vw;
+	height: calc(100vh - 60px);
+	overflow: hidden;
+}
+.slider {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	height: 500px;
+	width: fit-content;
+	display: grid;
+	grid-template-columns: repeat(8, 1fr);
+	gap: 20px;
+	pointer-events: none;
+	transform: translate(0, -50%);
+}
+.slider div {
+	height: 100%;
+	width: 500px;
+}
+.slider div img {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	aspect-ratio: 1;
 }
 .content {
 	margin: 0;
@@ -162,7 +209,7 @@ footer {
 }
 .row.feature {
 	max-width: 1500px;
-	margin: 200px auto;
+	margin: 150px auto;
 }
 .image {
 	display: flex;
@@ -283,7 +330,7 @@ button {
 .feature_title {
 	width: 100%;
 	font-size: 3rem;
-	font-family: 'League Spartan', sans-serif;
+	line-height: 3rem;
 }
 .feature_images {
 	display: flex;
@@ -304,9 +351,10 @@ button {
 }
 .feature_description {
 	max-width: 1000px;
+	font-family: 'League Spartan', sans-serif;
 }
 .feature_description a {
-	font-family: 'League Spartan', sans-serif;
+	line-height: 3rem;
 	color: #8a38f0;
 }
 .bim {
@@ -334,21 +382,21 @@ button {
 	.logo div {
 		display: none;
 	}
-	.definition {
+	.dictionary {
 		padding: 20px;
 	}
-	.hero_title {
+	.title {
 		font-size: 5rem;
 	}
-	.hero_definition {
+	.definition {
 		font-size: 2rem;
 	}
-	.hero_synonyms {
+	.synonyms {
 		flex-direction: column;
 		font-size: 1.5rem;
 		line-height: 2rem;
 	}
-	.hero_synonyms span {
+	.synonyms span {
 		margin-left: 0;
 	}
 	.project_title {

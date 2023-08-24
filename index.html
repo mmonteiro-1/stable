@@ -22,17 +22,40 @@
 		<div class="hero">
 			<img src="images/maisonhaute_01.jpg">
 		</div>
-		<div class="definition">
-			<div class="hero_title">Stable</div>
-			<div class="hero_definition">1. An architectural visualization studio specialized on both interior and exterior imagery.</div>
-			<div class="hero_synonyms">
+		<div class="dictionary">
+			<div class="type">(company)</div>
+			<div class="title">Stable</div>
+			<div class="definition">1. An architectural visualization studio specialized on interior and exterior computer generated imagery.</div>
+			<div class="synonyms">
 				<div>synonyms:</div>
 				<span>archviz, realism, BIM workflow, 3D studio, building modeling</span>
 			</div>
 		</div>
+		<div class="slider_container">
+			<div class="slider">
+				<div>
+					<img src="images/chevron_03.jpg">
+				</div>
+				<div>
+					<img src="images/chevron_03.jpg">
+				</div>
+				<div>
+					<img src="images/chevron_03.jpg">
+				</div>
+				<div>
+					<img src="images/chevron_03.jpg">
+				</div>
+				<div>
+					<img src="images/chevron_03.jpg">
+				</div>
+				<div>
+					<img src="images/chevron_03.jpg">
+				</div>
+			</div>
+		</div>
 		<div class="row feature">
 			<div class="feature_title">
-				Ultra realistic images
+				Realism
 			</div>
 			<div class="feature_images">
 				<div>
@@ -54,7 +77,7 @@
 				</div>
 			</div>
 			<div class="feature_description">
-				The Revit - 3DS Max integration is key to a precise model creation while the BIM workflow ensures the model is always up to date throught several project's revisions. Stable bridges complicated architectural plans to ultra realistic imagery.<br>
+				The Revit - 3DS Max integration is key to a precise model creation while the BIM workflow ensures the model is always up to date throught several project's revisions. Stable bridges complicated architectural plans to realistic imagery.<br>
 				<a href="contacts.html">GET IN TOUCH →</a>
 			</div>
 		</div>
@@ -86,9 +109,17 @@
 				<a href="project_casaornatoverde.html">GO TO PROJECT →</a>
 			</div>
 		</div>
-		<div class="bim">
-			<div class="hero_title">BIM integration</div>
-		</div>
+		<section class="dark">
+			<div class="dictionary darkmode">
+				<div class="type">(method)</div>
+				<div class="title">BIM workflow</div>
+				<div class="definition">1. An integration between Revit and 3DS Max to ensure accurate dimensions and updated renders.</div>
+				<div class="synonyms">
+					<div>synonyms:</div>
+					<span>fast-paced, scalable projects, simplified modeling, accuracy</span>
+				</div>
+			</div>
+		</section>
 		<footer></footer>
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
@@ -99,6 +130,62 @@
 		$("nav").load("nav.html");
 		$("footer").load("footer.html");
 		butter.init();
+
+		//carousel slider
+		let slider=document.querySelector(".slider_container");
+		let innerSlider=document.querySelector(".slider");
+
+		let pressed = false;
+		let startx;
+		let x;
+
+		slider.addEventListener("mousedown", (e) => {
+
+		  pressed = true;
+		  startx = e.offsetX - innerSlider.offsetLeft;
+
+		  slider.style.cursor = "grabbing";
+		})
+
+		slider.addEventListener("mouseenter", () => {
+
+		  slider.style.cursor = "grab";
+		})
+
+		slider.addEventListener("mouseup", () => {
+
+		  slider.style.cursor = "grab";
+		})
+
+		window.addEventListener("mouseup", () => {
+
+		  pressed = false;
+		})
+
+		slider.addEventListener("mousemove", (e) => {
+
+		  e.preventDefault();
+		  if (!pressed) return;
+
+		  x = e.offsetX;
+
+		  innerSlider.style.left = `${x - startx}px`;
+
+		  checkBoundary();
+		})
+
+		function checkBoundary() {
+		  let outer = slider.getBoundingClientRect();
+		  let inner = innerSlider.getBoundingClientRect();
+
+		  if (parseInt(innerSlider.style.left) > 0) {
+		    innerSlider.style.left = "0px";
+		  } else if(inner.right < outer.right){
+		    innerSlider.style.left = `-${inner.width - outer.width}px`;
+		  }
+		}
+
+		checkBoundary();
 	</script>
 </body>
 </html>
