@@ -121,6 +121,7 @@ footer {
 	position: relative;
 	left: -20px;
 	width: 100vw;
+	height: 200vh;
 	background: #232323;
 }
 .dictionary.darkmode .title, .dictionary.darkmode .definition {
@@ -128,20 +129,6 @@ footer {
 }
 .dictionary.darkmode .synonyms {
 	color: gray;
-}
-#block_content {
-	position: fixed;
-	display: none;
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	background: #f2f2f2;
-	z-index: 1;
-	cursor: zoom-out;
-}
-#block_content.visible {
-	display: block;
 }
 .slider_container {
 	position: relative; 
@@ -186,6 +173,7 @@ footer {
 .content {
 	margin: 0;
 	padding: 20px;
+	padding-top: 60px;
 	box-sizing: border-box;
 	min-height: 100vh;
 }
@@ -223,6 +211,11 @@ footer {
 .image img {
 	height: 100%;
 	object-fit: cover;
+}
+.image span {
+	font-family: 'League Spartan', sans-serif;
+	margin-top: 10px;
+
 }
 .expanded img {
 	object-fit: contain;
@@ -371,9 +364,6 @@ button {
 	}
 	.logo div {
 		display: none;
-	}
-	.content {
-		padding-top: 80px;
 	}
 	.dictionary {
 		justify-content: flex-start;
