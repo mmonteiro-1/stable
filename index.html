@@ -131,61 +131,64 @@
 		$("footer").load("footer.html");
 		butter.init();
 
-		//carousel slider
+		//carousel slider on media query
+		const mediaQuery = window.matchMedia('(min-width: 700px)');
 		let slider=document.querySelector(".slider_container");
 		let innerSlider=document.querySelector(".slider");
 
 		let pressed = false;
 		let startx;
 		let x;
+		if (mediaQuery.matches) {
 
-		slider.addEventListener("mousedown", (e) => {
+			slider.addEventListener("mousedown", (e) => {
 
-		  pressed = true;
-		  startx = e.offsetX - innerSlider.offsetLeft;
+			  pressed = true;
+			  startx = e.offsetX - innerSlider.offsetLeft;
 
-		  slider.style.cursor = "grabbing";
-		})
+			  slider.style.cursor = "grabbing";
+			})
 
-		slider.addEventListener("mouseenter", () => {
+			slider.addEventListener("mouseenter", () => {
 
-		  slider.style.cursor = "grab";
-		})
+			  slider.style.cursor = "grab";
+			})
 
-		slider.addEventListener("mouseup", () => {
+			slider.addEventListener("mouseup", () => {
 
-		  slider.style.cursor = "grab";
-		})
+			  slider.style.cursor = "grab";
+			})
 
-		window.addEventListener("mouseup", () => {
+			window.addEventListener("mouseup", () => {
 
-		  pressed = false;
-		})
+			  pressed = false;
+			})
 
-		slider.addEventListener("mousemove", (e) => {
+			slider.addEventListener("mousemove", (e) => {
 
-		  e.preventDefault();
-		  if (!pressed) return;
+			  e.preventDefault();
+			  if (!pressed) return;
 
-		  x = e.offsetX;
+			  x = e.offsetX;
 
-		  innerSlider.style.left = `${x - startx}px`;
+			  innerSlider.style.left = `${x - startx}px`;
 
-		  checkBoundary();
-		})
+			  checkBoundary();
+			})
 
-		function checkBoundary() {
-		  let outer = slider.getBoundingClientRect();
-		  let inner = innerSlider.getBoundingClientRect();
+			function checkBoundary() {
+			  let outer = slider.getBoundingClientRect();
+			  let inner = innerSlider.getBoundingClientRect();
 
-		  if (parseInt(innerSlider.style.left) > 0) {
-		    innerSlider.style.left = "0px";
-		  } else if(inner.right < outer.right){
-		    innerSlider.style.left = `-${inner.width - outer.width}px`;
-		  }
+			  if (parseInt(innerSlider.style.left) > 0) {
+			    innerSlider.style.left = "0px";
+			  } else if(inner.right < outer.right){
+			    innerSlider.style.left = `-${inner.width - outer.width}px`;
+			  }
+			}
+
+			checkBoundary();
 		}
-
-		checkBoundary();
 	</script>
 </body>
 </html>

@@ -418,7 +418,7 @@ button {
 	.about, .contacts {
 		width: 100vw;
 		height: unset;
-		padding: 50px 50px;
+		padding: 50px 20px;
 	}
 	.about div {
 		margin-top: 50px;
@@ -437,5 +437,8 @@ button {
 	}
 	.email a:last-child {
 		margin-left: auto;
+	}
+	.slider_container {
+		overflow: auto;
 	}
 }
