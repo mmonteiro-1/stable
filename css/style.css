@@ -184,7 +184,7 @@ footer {
 .content {
 	margin: 0;
 	padding: 20px;
-	padding-top: 80px;
+/*	padding-top: 80px;*/
 	box-sizing: border-box;
 	min-height: 100vh;
 }
@@ -361,7 +361,7 @@ button {
 	object-fit: cover;
 }
 .feature_description {
-	max-width: 1000px;
+	font-size: 1rem;
 	font-family: 'League Spartan', sans-serif;
 }
 .feature_description a {
