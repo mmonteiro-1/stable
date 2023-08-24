@@ -30,7 +30,7 @@ nav a div {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font-weight: 600;
+	font-family: 'League Spartan', sans-serif;
 	width: 100px;
 	height: 100%;
 	gap: 10px;
@@ -184,31 +184,8 @@ footer {
 .content {
 	margin: 0;
 	padding: 20px;
-/*	padding-top: 80px;*/
 	box-sizing: border-box;
 	min-height: 100vh;
-}
-.project_title {
-	font-weight: 800;
-	font-size: 6rem;
-	line-height: 90px;
-	margin-bottom: 20px;
-}
-.project_description {
-	width: 50%;
-	max-width: 1000px;
-	margin-bottom: 20px;
-}
-.software {
-	display: flex;
-	font-family: 'League Spartan', sans-serif;
-	margin-bottom: 30px;
-	color: #bdbdbd;
-}
-.section_title {
-	font-family: 'League Spartan', sans-serif;
-	font-size: 2rem;
-	padding-top: 50px;
 }
 .row {
 	display: flex;
@@ -397,6 +374,7 @@ button {
 		padding-top: 80px;
 	}
 	.dictionary {
+		justify-content: flex-start;
 		padding: 20px;
 	}
 	.title {
