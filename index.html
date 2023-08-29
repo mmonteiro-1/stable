@@ -18,6 +18,22 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
 </head>
 <body>
+	<style type="text/css">
+		.pnlm-load-button {
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			margin: 0;
+			background-color: rgba(0,0,0,.6);
+			border-radius: 0;
+			font-size: 3rem;
+			display: table;
+			font-family: 'League Spartan', sans-serif;
+			color: #f2f2f2;
+			cursor: pointer;
+		}
+	</style>
 	<nav></nav>
 	<div id="butter" class="content">
 		<div class="hero">
@@ -226,7 +242,11 @@
 		//panorama
 		pannellum.viewer('panorama', {
 			"type": "equirectangular",
-			"panorama": "https://mmonteiro-1.github.io/stable/images/panoramic_livingroom.jpg"
+			"preview": "https://mmonteiro-1.github.io/stable/images/guntherhouse_02.jpg",
+			"panorama": "https://mmonteiro-1.github.io/stable/images/panoramic_livingroom2.jpg",
+			"showZoomCtrl": false,
+			"keyboardZoom": false,
+			"mouseZoom": false
 		});
 	</script>
 </body>

@@ -363,6 +363,7 @@ button {
 	max-width: 1500px;
 	height: 400px;
 }
+
 @media (max-width: 700px) {
 	body {
 		background: linear-gradient(
