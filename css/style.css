@@ -74,7 +74,6 @@ footer {
 	display: flex;
 	height: calc(100vh - 60px);
 	width: 100vw;
-	top: -20px;
 	left: -20px;
 }
 .dictionary {
@@ -121,8 +120,12 @@ footer {
 	position: relative;
 	left: -20px;
 	width: 100vw;
-	height: 200vh;
 	background: #232323;
+	padding: 20px;
+	box-sizing: border-box;
+}
+.dark .feature, .dark a {
+	color: #f2f2f2;
 }
 .dictionary.darkmode .title, .dictionary.darkmode .definition {
 	color: #f2f2f2;
@@ -131,9 +134,10 @@ footer {
 	color: gray;
 }
 .slider_container {
-	position: relative; 
-	width: calc(100vw - 20px);
-	height: calc(100vh - 60px);
+	position: relative;
+	left: -20px; 
+	width: 100vw;
+	height: 80vh;
 	overflow: hidden;
 }
 .slider {
@@ -162,7 +166,7 @@ footer {
 .slider_icon {
 	position: absolute;
 	bottom: 0;
-	left: calc(50% - 20px);
+	left: 50%;
 	width: 50px;
 	height: 50px;
 	font-size: 2rem;
@@ -338,18 +342,21 @@ button {
 }
 .feature_description a {
 	line-height: 3rem;
-	color: #8a38f0;
 }
 .bim {
 	position: relative;
 	top: -20px;
 	left: -20px;
-	width: 100vw;
 	height: 100vh;
+	width: 100vw;
 	padding: 20px;
 	box-sizing: border-box;
 	background: #232323;
 	color: #f2f2f2;
+}
+.logo_signature {
+	height: 50px;
+	margin: 100px auto;
 }
 
 @media (max-width: 700px) {
@@ -365,12 +372,15 @@ button {
 	.logo div {
 		display: none;
 	}
+	.hero {
+		width: calc(100vw + 20px);
+	}
 	.dictionary {
 		justify-content: flex-start;
-		padding: 20px;
+		padding: 50px 10px;
 	}
 	.title {
-		font-size: 5rem;
+		font-size: 4rem;
 	}
 	.definition {
 		font-size: 2rem;
@@ -382,6 +392,10 @@ button {
 	}
 	.synonyms span {
 		margin-left: 0;
+	}
+	.content {
+		padding: 10px;
+		padding-top: 60px;
 	}
 	.project_title {
 		font-size: 4rem;
@@ -423,6 +437,14 @@ button {
 		margin-left: auto;
 	}
 	.slider_container {
+		height: 100vh;
+		width: calc(100vw + 20px);
 		overflow: auto;
+	}
+	.slider div {
+		width: 300px;
+	}
+	.feature_title {
+		font-size: 2.5rem;
 	}
 }
