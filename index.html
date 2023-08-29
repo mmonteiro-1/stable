@@ -15,6 +15,7 @@
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<title>Stable</title>
 	<link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
 </head>
 <body>
 	<nav></nav>
@@ -54,6 +55,9 @@
 			</div>
 			<div class="slider_icon">⇄</div>
 		</div>
+		<div class="row">
+			
+		</div>
 		<div class="row feature">
 			<div class="feature_title">
 				Realism
@@ -72,11 +76,7 @@
 			<div class="feature_title">
 				Immersive views
 			</div>
-			<div class="feature_images">
-				<div>
-					<img src="images/guntherhouse_02.jpg">
-				</div>
-			</div>
+			<div id="panorama"></div>
 			<div class="feature_description">
 				We don't envision houses, but homes. Stable's ultimate goal is to allow viewers to picture themselves living in our creations. Realism alone is not enough, a space needs to feel lived and personal.<br>
 				<a href="contacts.html">GET IN TOUCH →</a>
@@ -158,6 +158,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
 	<script type="text/javascript" src="js/gsap.js"></script>
 	<script src="js/butter.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
 	<script type="text/javascript">
 		$("nav").load("nav.html");
 		$("footer").load("footer.html");
@@ -221,6 +222,12 @@
 
 			checkBoundary();
 		}
+
+		//panorama
+		pannellum.viewer('panorama', {
+			"type": "equirectangular",
+			"panorama": "https://mmonteiro-1.github.io/stable/images/panoramic_livingroom.jpg"
+		});
 	</script>
 </body>
 </html>

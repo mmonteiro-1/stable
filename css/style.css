@@ -358,7 +358,11 @@ button {
 	height: 50px;
 	margin: 100px auto;
 }
-
+#panorama {
+	width: 100vw;
+	max-width: 1500px;
+	height: 400px;
+}
 @media (max-width: 700px) {
 	body {
 		background: linear-gradient(
