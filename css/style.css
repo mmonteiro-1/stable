@@ -110,7 +110,11 @@ footer {
 }
 .synonyms span {
 	margin-left: 100px;
-	max-width: 420px;
+	max-width: 500px;
+}
+.synonyms span a {
+	text-decoration: underline;
+	color: #a2c4d2;
 }
 .hero img {
 	object-fit: cover;
@@ -223,6 +227,9 @@ footer {
 }
 .expanded img {
 	object-fit: contain;
+}
+.section_title {
+	font-family: 'League Spartan', sans-serif;;
 }
 .row_other_projects a {
 	width: calc(25% - 15px);
@@ -443,7 +450,7 @@ button {
 	}
 	.slider_container {
 		height: 100vh;
-		width: calc(100vw + 20px);
+		width: 100vw;
 		overflow: auto;
 	}
 	.slider div {

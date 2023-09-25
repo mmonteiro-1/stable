@@ -20,27 +20,32 @@
 	<div id="butter" class="content">
 		<div class="dictionary">
 			<div class="type">(project)</div>
-			<div class="title">Maison Haute</div>
-			<div class="definition">1. Less is more, more or less. This house was created to take advantage of the landscape and natural light, not to overstate its presence. The hilltop property location allows for an private open house.</div>
+			<div class="title">Porto Lidador</div>
+			<div class="definition">1. An uniquely shaped, 3 store apartment bulding in the heart of Porto. Contrasting with a traditional neighbourhood, it doesn't need more than white stucco wall and dark metal balcony to make itself relevant.</div>
 			<div class="synonyms">
 				<div>synonyms:</div>
-				<span>residential, lyon, modernism, mies van der rohe</span>
+				<span><a href="https://www.actualarquitectos.pt">actual arquitectos</a>, apartment, portugal, geometric arquitecture</span>
 			</div>
 		</div>
 		<div class="row">
 			<div class="image">
-				<img src="images/maisonhaute_01.jpg">
+				<img src="images/lidador_01.jpg">
 			</div>
 			<div class="image">
-				<img src="images/maisonhaute_02.jpg">
+				<img src="images/lidador_02.jpg">
 			</div>
 		</div>
 		<div class="row">
 			<div class="image gsap_image">
-				<img src="images/maisonhaute_03.jpg">
+				<img src="images/lidador_04.jpg">
 			</div>
 			<div class="image gsap_image">
-				<img src="images/maisonhaute_04.jpg">
+				<img src="images/lidador_03.jpg">
+			</div>
+		</div>
+		<div class="row">
+			<div class="image gsap_image">
+				<img src="images/lidador_05.jpg">
 			</div>
 		</div>
 		<div class="row">
@@ -63,25 +68,25 @@
 		<div class="row row_other_projects">
 			<a href="project_casaornatoverde.html">
 				<div class="other_projects">
-					<img src="images/casaornato_01.jpg">
+					<img src="images/casaornato_02.jpg">
 					<div>Casa Ornato Verde</div>
 				</div>
 			</a>
 			<a href="project_guntherhouse.html">
 				<div class="other_projects">
-					<img src="images/guntherhouse_04.jpg">
+					<img src="images/guntherhouse_01.jpg">
 					<div>Gunther House</div>
 				</div>
 			</a>
-			<a href="project_lidador.html">
+			<a href="project_maisonhaute.html">
 				<div class="other_projects">
-					<img src="images/lidador_04.jpg">
-					<div>Porto Lidador</div>
+					<img src="images/maisonhaute_03.jpg">
+					<div>Maison Haute</div>
 				</div>
 			</a>
-			<a href="">
+			<a href="project_chevron.html">
 				<div class="other_projects">
-					<img src="images/chevron_03.jpg">
+					<img src="images/chevron_01.jpg">
 					<div>Chevron</div>
 				</div>
 			</a>
@@ -97,22 +102,11 @@
 
 		$("nav").load("nav.html");
 		$("footer").load("footer.html");
+		
 
 		butter.init();
 
 		imageviewer();
-
-		// /* EXPAND IMAGE */
-		// $(".image").click(function() {
-		// 	$(this).toggleClass("expanded");
-		// 	$("#block_content").toggleClass("visible");
-		// });
-
-		// /* SHOW BLOCK CONTENT */
-		// $("#block_content").click(function() {
-		// 	$(".image").removeClass("expanded");
-		// 	$("#block_content").toggleClass("visible");
-		// });
 
 		/* HOVER ON THUMBNAIL */
 		$(".other_projects").hover(function() {
