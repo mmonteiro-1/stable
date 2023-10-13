@@ -236,7 +236,8 @@ footer {
 	object-fit: contain;
 }
 .section_title {
-	font-family: 'League Spartan', sans-serif;;
+	font-family: 'League Spartan', sans-serif;
+	margin-top: 100px;
 }
 .row_other_projects a {
 	width: calc(25% - 15px);
