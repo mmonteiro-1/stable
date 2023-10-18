@@ -11,8 +11,8 @@ if (array_key_exists('email', $_POST)) {
     $mail->SMTPAuth = true;
     $mail->Username = 'stable@stablearchviz.com';
     $mail->Password = 'Matheus785463*';
-    $mail->setFrom($_POST['email'], $_POST['name']);
-    $mail->addAddress('stable@stablearchviz.com', 'Stable');
+    $mail->setFrom('stable@stablearchviz.com');
+    $mail->addAddress($_POST['mail']);
     if ($mail->addReplyTo($_POST['email'], $_POST['name'])) {
         $mail->Subject = 'PHPMailer contact form';
         $mail->isHTML(false);
@@ -38,7 +38,7 @@ EOT;
     <title>Contact form</title>
 </head>
 <body>
-<h1>Contact us</h1>
+<h1>Contact us2</h1>
 <?php if (!empty($msg)) {
     echo "<h2>$msg</h2>";
 } ?>
