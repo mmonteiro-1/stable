@@ -189,6 +189,12 @@ footer {
 	box-sizing: border-box;
 	min-height: 100vh;
 }
+.content_email_sent {
+	height: 100vh;
+}
+.content_email_sent .dictionary {
+	height: 100vh;
+}
 .row {
 	display: flex;
 	align-items: flex-start;
