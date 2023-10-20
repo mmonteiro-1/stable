@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar" content="white">
+	<meta name="theme-color" content="#FFFFFF">
+	<meta name="description" content="3D architectural visualization renders of an office bulding lobby with waiting seats, reception and lifts.">
+	<link rel="apple-touch-icon" href="images/favicon/apple-touch-icon.png">
+	<link rel="manifest" href="js/manifest.json">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700;800&family=League+Spartan:wght@400;600;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<title></title>
+</head>
+<body>
+	<nav></nav>
+	<div id="butter" class="content">
+		<div class="dictionary">
+			<div class="type">(project)</div>
+			<div class="title">Acrylic Hail</div>
+			<div class="definition">1. A 170 year old colonial house renovation in Belo Horizonte that exposes the contrast between the rustic environment and the elegant interior.</div>
+			<div class="synonyms">
+				<div>synonyms:</div>
+				<span>renovation, rural, brazil, colonial, 19th century</span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="image">
+				<img alt="3d render of an office lobby" src="images/acrylichail_01.webp">
+			</div>
+			<div class="image">
+				<img alt="3d render of an office lobby" src="images/acrylichail_02.webp">
+			</div>
+		</div>
+		<div class="row">
+			<div class="image gsap_image">
+				<img alt="3d render of an office lobby" src="images/acrylichail_05.webp">
+			</div>
+			<div class="image gsap_image">
+				<img alt="3d render of an office lobby" src="images/acrylichail_05.webp">
+			</div>
+		</div>
+		<div class="section_title">Other projects</div>
+		<div class="row row_other_projects">
+			<a href="project_casaornatoverde.html">
+				<div class="other_projects">
+					<img alt="3d render of a house" src="images/small/casaornato_02_small.webp">
+					<div>Casa Ornato Verde</div>
+				</div>
+			</a>
+			<a href="project_electriccentury.html">
+				<div class="other_projects">
+					<img alt="3d render of a house" src="images/small/electriccentury_01_small.webp">
+					<div>Electric Century</div>
+				</div>
+			</a>
+			<a href="project_maisonhaute.html">
+				<div class="other_projects">
+					<img alt="3d render of a house" src="images/small/maisonhaute_03_small.webp">
+					<div>Maison Haute</div>
+				</div>
+			</a>
+			<a href="project_chevron.html">
+				<div class="other_projects">
+					<img alt="3d render of a house" src="images/small/chevron_01_small.webp">
+					<div>Chevron</div>
+				</div>
+			</a>
+		</div>
+		<footer></footer>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+	<script type="text/javascript" src="js/gsap.js"></script>
+	<script src="js/jquery.imageviewer.js"></script>
+	<script src="js/butter.js"></script>
+	<script type="text/javascript">
+
+		$("nav").load("nav.html");
+		$("footer").load("footer.html");
+		
+
+		butter.init();
+
+		imageviewer();
+
+		/* HOVER ON THUMBNAIL */
+		$(".other_projects").hover(function() {
+			$(this).find("img").toggleClass("clear");
+		});
+	</script>
+</body>
+</html>
