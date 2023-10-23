@@ -262,8 +262,9 @@ footer {
 }
 .other_projects div {
 	position: absolute;
+	width: 80%;
 	color: white;
-	font-size: 2rem;
+	font-size: 3rem;
 	top: 50%;
 	left: 20px;
 	transform: translate(0, -50%);
