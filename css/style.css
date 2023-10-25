@@ -389,7 +389,7 @@ button {
 	margin: 100px auto;
 }
 #panorama {
-	width: 100vw;
+	width: 100%;
 	max-width: 1500px;
 	height: 600px;
 	background: #000000;
@@ -502,7 +502,7 @@ button {
 	}
 	.feature {
 		width: calc(50% - 10px);
-		margin: 100px 0;
+		margin: 100px auto;
 	}
 	.feature_images {
 		height: 600px;
