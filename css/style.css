@@ -246,7 +246,10 @@ footer {
 	margin-top: 100px;
 }
 .row_other_projects a {
-	width: calc(25% - 15px);
+	flex: 1;
+}
+.row_other_projects a:last-child  {
+	display: none;
 }
 .other_projects {
 	display: flex;
@@ -256,6 +259,7 @@ footer {
 }
 .other_projects img {
 	height: 100%;
+	width: 100%;
 	object-fit: cover;
 	filter: brightness(0.4);
 	-webkit-transition : -webkit-filter 500ms linear
@@ -264,7 +268,7 @@ footer {
 	position: absolute;
 	width: 80%;
 	color: white;
-	font-size: 3rem;
+	font-size: 3vw;
 	top: 50%;
 	left: 20px;
 	transform: translate(0, -50%);
@@ -387,7 +391,7 @@ button {
 	background: #000000;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
 	body {
 		background: linear-gradient(
 			to bottom, 
@@ -406,6 +410,7 @@ button {
 	.dictionary {
 		justify-content: flex-start;
 		padding: 50px 10px;
+		padding-top: 100px;
 	}
 	.title {
 		font-size: 4rem;
@@ -440,6 +445,13 @@ button {
 	}
 	.row_other_projects a {
 		width: 100%;
+		flex: unset;
+	}
+	.other_projects {
+		aspect-ratio: 3;
+	}
+	.other_projects div  {
+		font-size: 10vw;
 	}
 	.about, .contacts {
 		width: 100vw;
@@ -453,7 +465,7 @@ button {
 		margin-top: 0;
 	}
 	.image {
-		aspect-ratio: 1.7;
+		aspect-ratio: 1;
 	}
 	footer div:first-child {
 		display: none;
@@ -470,9 +482,18 @@ button {
 		overflow: auto;
 	}
 	.slider div {
-		width: 300px;
+		aspect-ratio: 1;
 	}
 	.feature_title {
 		font-size: 2.5rem;
+	}
+}
+
+@media (min-width: 1700px) {
+	.row_other_projects a:last-child  {
+		display: block;
+	}
+	.other_projects div  {
+		font-size: 3rem;
 	}
 }
