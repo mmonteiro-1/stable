@@ -147,6 +147,7 @@ footer {
 	width: 100vw;
 	height: 80vh;
 	overflow: hidden;
+	margin-bottom: 100px;
 }
 .slider {
 	position: absolute;
@@ -204,7 +205,10 @@ footer {
 	margin: 20px auto;
 }
 .feature {
-	max-width: 1500px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	width: 100%;
 	margin: 150px auto;
 }
 .marginless {
@@ -495,5 +499,12 @@ button {
 	}
 	.other_projects div  {
 		font-size: 3rem;
+	}
+	.feature {
+		width: calc(50% - 10px);
+		margin: 100px 0;
+	}
+	.feature_images {
+		height: 600px;
 	}
 }
