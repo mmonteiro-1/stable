@@ -472,6 +472,10 @@ button {
 	.image {
 		aspect-ratio: 1;
 	}
+	footer {
+		left: -10px;
+		bottom: -10px;
+	}
 	footer div:first-child {
 		display: none;
 	}
@@ -491,6 +495,10 @@ button {
 	}
 	.feature_title {
 		font-size: 2.5rem;
+	}
+	.dark {
+		left: -10px;
+		padding: 10px;
 	}
 }
 
