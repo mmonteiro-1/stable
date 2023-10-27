@@ -492,9 +492,14 @@ button {
 		height: 100vh;
 		width: 100vw;
 		overflow: auto;
+		left: -10px;
+	}
+	.slider {
+		height: 400px;
 	}
 	.slider div {
 		aspect-ratio: 1;
+		width: unset;
 	}
 	.feature_title {
 		font-size: 2.5rem;
