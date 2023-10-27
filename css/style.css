@@ -409,7 +409,8 @@ button {
 		display: none;
 	}
 	.hero {
-		width: calc(100vw + 20px);
+		width: 100vw;
+		left: -10px;
 	}
 	.dictionary {
 		justify-content: flex-start;
