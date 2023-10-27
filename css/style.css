@@ -433,6 +433,7 @@ button {
 	.content {
 		padding: 10px;
 		padding-top: 60px;
+		overflow-x: hidden;
 	}
 	.project_title {
 		font-size: 4rem;
