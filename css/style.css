@@ -388,6 +388,9 @@ button {
 	height: 50px;
 	margin: 100px auto;
 }
+.email a {
+	color: white;
+}
 #panorama {
 	width: 100%;
 	max-width: 1500px;
