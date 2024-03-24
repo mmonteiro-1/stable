@@ -12,6 +12,9 @@ function imageviewer(selector = 'img') {
             return; // If it exists, do nothing
         }
 
+        // Prevent scrolling of parent div
+        $('body').css('overflow', 'hidden');
+
         $('<div>', {
             id: 'imageviewer-wrapper',
             css: {
@@ -61,6 +64,7 @@ function imageviewer(selector = 'img') {
                 on: {
                     click: function(event) {
                         $('#imageviewer-wrapper').remove();
+                        $('body').css('overflow', ''); // Re-enable scrolling of parent div
                     }
                 }
             })

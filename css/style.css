@@ -398,6 +398,9 @@ button {
 	background: #000000;
 }
 #imageviewer-image.expanded {
+	position: absolute;
+	top: 0;
+	left: 0;
 	max-height: unset !important;
 	max-width: unset !important;
 	cursor: zoom-out !important;
