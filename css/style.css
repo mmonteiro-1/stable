@@ -397,6 +397,11 @@ button {
 	height: 600px;
 	background: #000000;
 }
+#imageviewer-image.expanded {
+	max-height: unset !important;
+	max-width: unset !important;
+	cursor: zoom-out !important;
+}
 
 @media (max-width: 800px) {
 	body {

@@ -24,7 +24,7 @@ function imageviewer(selector = 'img') {
                 alignItems: 'center',
                 width: '100vw',
                 height: '100vh',
-                backgroundColor: '#f2f2f2',
+                backgroundColor: '#232323',
                 overflow: 'auto',
             },
             append: $('<img>', {
@@ -37,11 +37,7 @@ function imageviewer(selector = 'img') {
                 src: imageLink,
                 on: {
                     click: function(event) {
-                        $(this).css({ maxHeight: 'unset', maxWidth: 'unset', cursor: 'grabbing' });
-                    },
-                    load: function(event) {
-                        $(this).css({ cursor: 'grab' });
-                        $(this).draggable(); // Make the image draggable
+                        $(this).toggleClass('expanded');
                     }
                 }
             }),
@@ -49,17 +45,19 @@ function imageviewer(selector = 'img') {
             $('<div>', {
                 id: 'imageviewer-close',
                 css: {
-                    position: 'absolute',
-                    top: '10px', // Adjusted for space from top
-                    right: '10px', // Adjusted for space from right
+                    position: 'fixed',
+                    top: '20px', // Adjusted for space from top
+                    right: '20px', // Adjusted for space from right
                     zIndex: 100000,
                     cursor: 'pointer',
-                    padding: '5px 10px',
-                    backgroundColor: '#fff',
-                    borderRadius: '5px',
-                    boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)',
+                    padding: '20px',
+                    backgroundColor: 'white',
+                    backgroundImage: 'url(images/icon_close.png)',
+                    backgroundSize: '20px',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    borderRadius: '50%',
                 },
-                text: 'Close',
                 on: {
                     click: function(event) {
                         $('#imageviewer-wrapper').remove();
