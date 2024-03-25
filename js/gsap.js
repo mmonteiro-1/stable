@@ -1,34 +1,3 @@
-// scroll animations
-// gsap.registerPlugin(ScrollTrigger);
-// let tl = gsap.timeline();
-
-
-// gsap.from(".playground_title", {
-// 	opacity: 0, 
-// 	y: 20, 
-// 	duration: 0.5,
-// 	delay: 0.5
-// });
-
-// gsap.from(".playground_subtitle", {
-// 	opacity: 0, 
-// 	y: 20, 
-// 	duration: 0.5,
-// 	delay: 0.7
-// });
-
-// gsap.from(".playground", {
-// 	opacity: 0,
-// 	delay: 0.2
-// });
-
-
-
-
-
-
-
-
 const gsapText = gsap.utils.toArray('.gsap_text');
 
 gsapText.forEach((gsap_text, i) => {
