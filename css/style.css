@@ -407,6 +407,27 @@ button {
 	cursor: zoom-out !important;
 }
 
+.video {
+	position: relative;
+	width: 100%;
+	aspect-ratio: 3.3;
+}
+
+.video-full-width {
+	object-fit: cover;
+	object-position: center;
+}
+
+.play-button {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	height: 100px;
+	width: 100px;
+	transform: translate(-50%, -50%);
+	cursor: pointer;
+}
+
 @media (max-width: 800px) {
 	body {
 		background: linear-gradient(
