@@ -428,6 +428,14 @@ button {
 	cursor: pointer;
 }
 
+.featured-project {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	gap: 20px;
+	margin: 100px auto;
+}
+
 @media (max-width: 800px) {
 	body {
 		background: linear-gradient(
