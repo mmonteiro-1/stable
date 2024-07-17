@@ -156,7 +156,7 @@ footer {
 	height: 500px;
 	width: min-content;
 	display: grid;
-	grid-template-columns: repeat(9, 1fr);
+	grid-template-columns: repeat(10, 1fr);
 	gap: 20px;
 	pointer-events: none;
 	transform: translate(0, -50%);
