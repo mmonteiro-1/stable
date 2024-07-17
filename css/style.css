@@ -428,6 +428,15 @@ button {
 	cursor: pointer;
 }
 
+.unmute-button {
+	position: absolute;
+	right: 50px;
+	bottom: 50px;
+	height: 60px;
+	width: 60px;
+	cursor: pointer;
+}
+
 .featured-project {
 	display: flex;
 	flex-direction: column;
@@ -546,6 +555,13 @@ button {
 	}
 	.video {
 		aspect-ratio: 1;
+	}
+
+	.unmute-button {
+		bottom: 30px;
+		right: 30px;
+		height: 40px;
+		width: 40px;
 	}
 }
 
