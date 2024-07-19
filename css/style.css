@@ -477,15 +477,16 @@ button {
 		padding-top: 100px;
 	}
 	.title {
-		font-size: 3.8rem;
+		margin-top: 0;
+		font-size: 3.3rem;
 	}
 	.definition {
-		font-size: 2rem;
+		font-size: 1.5rem;
 	}
 	.synonyms {
 		flex-direction: column;
-		font-size: 1.5rem;
-		line-height: 2rem;
+		font-size: 1.3rem;
+		line-height: 1.5rem;
 	}
 	.synonyms span {
 		margin-left: 0;
@@ -555,8 +556,11 @@ button {
 		aspect-ratio: 1;
 		width: unset;
 	}
+	.feature {
+		width: 100%;
+	}
 	.feature_title {
-		font-size: 2.5rem;
+		font-size: 2rem;
 	}
 	.dark {
 		left: -10px;
