@@ -80,7 +80,7 @@ footer {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	min-height: calc(100vh - 60px);
+	min-height: 70vh;
 	padding: 0 50px;
 	box-sizing: border-box;
 }
@@ -208,11 +208,14 @@ footer {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
-	width: 100%;
-	margin: 100px auto;
+	width: calc(50% - 10px);
+	margin-bottom: 100px;
 }
 .marginless {
 	margin: 0 auto;
+}
+.marginless .feature {
+	width: 100%;
 }
 .image {
 	display: flex;
@@ -396,6 +399,7 @@ button {
 	max-width: 1500px;
 	height: 600px;
 	background: #000000;
+	margin: 0 auto;
 }
 #imageviewer-image.expanded {
 	position: absolute;
