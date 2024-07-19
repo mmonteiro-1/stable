@@ -127,10 +127,10 @@ footer {
 .dark {
 	position: relative;
 	left: -20px;
-	width: 100vw;
 	background: #232323;
 	padding: 20px;
 	box-sizing: border-box;
+	color: #f2f2f2;
 }
 .dark .feature, .dark a {
 	color: #f2f2f2;
@@ -154,7 +154,7 @@ footer {
 	top: 50%;
 	left: 0;
 	height: 500px;
-	width: min-content;
+	width: max-content;
 	display: grid;
 	grid-template-columns: repeat(10, 1fr);
 	gap: 20px;
@@ -445,6 +445,10 @@ button {
 	margin: 100px auto;
 }
 
+.full-width {
+	width: 100vw;
+}
+
 @media (max-width: 800px) {
 	body {
 		background: linear-gradient(
@@ -468,7 +472,7 @@ button {
 		padding-top: 100px;
 	}
 	.title {
-		font-size: 4rem;
+		font-size: 3.8rem;
 	}
 	.definition {
 		font-size: 2rem;
