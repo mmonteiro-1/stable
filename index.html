@@ -45,6 +45,9 @@
 		}
 	</style>
 	<nav></nav>
+	<a href="contact.php">
+		<div class="chat">Get a quote</div>
+	</a>
 	<div id="butter" class="content">
 		<div class="hero">
 			<img alt="3d render of a house exterior" src="images/maisonhaute_01.webp">
@@ -114,6 +117,19 @@
 				</div>
 			</div>
 		</section>
+		<div class="dictionary">
+			<div class="title">Panoramas</div>
+			<div class="definition">1. A 360 degree interactive image surrounding the viewer for a better understanding of the space.</div>
+		</div>
+		<div class="row marginless">
+			<div class="feature">
+				<div id="panorama"></div>
+				<div class="feature_description">
+					A panoramic view brings continuity and sense of space to an otherwise segmented representation. It instigates exploration and immersiveness. <br>
+					<a href="project_acrylichail.html">GO TO PROJECT →</a>
+				</div>
+			</div>
+		</div>
 		<div class="row fundamentals">
 			<div class="dictionary">
 				<div class="title">Fundamentals</div>
@@ -212,19 +228,6 @@
 				</div>
 			</div>
 			<div class="slider_icon">⇄</div>
-		</div>
-		<div class="dictionary">
-			<div class="title">Panoramas</div>
-			<div class="definition">1. A 360 degree interactive image surrounding the viewer for a better understanding of the space.</div>
-		</div>
-		<div class="row marginless">
-			<div class="feature">
-				<div id="panorama"></div>
-				<div class="feature_description">
-					A panoramic view brings continuity and sense of space to an otherwise segmented representation. It instigates exploration and immersiveness. <br>
-					<a href="project_acrylichail.html">GO TO PROJECT →</a>
-				</div>
-			</div>
 		</div>
 		<div class="row">
 			<img alt="stable logo" class="logo_signature" src="images/logo_stable_short.svg">
@@ -335,6 +338,21 @@
 
                 // Optionally, start playing the new video
                 videoElement.play();
+            });
+        });
+
+        $(document).ready(function() {
+            $(window).scroll(function() {
+                var scrollPosition = $(window).scrollTop();
+                var windowHeight = $(window).height();
+                var documentHeight = $(document).height();
+                
+                // Check if the scroll position is past the lower 50% of the page
+                if (scrollPosition > (documentHeight - windowHeight) / 2) {
+                    $('.chat').fadeIn();
+                } else {
+                    $('.chat').fadeOut();
+                }
             });
         });
 	</script>
