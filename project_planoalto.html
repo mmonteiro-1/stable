@@ -182,7 +182,7 @@
 		$(document).ready(function(){
             $('.play-button').click(function(){
                 var newVideoSrc = 'videos/planoalto_cinematic.mp4'; // Replace with the new video source
-                var videoElement = $('.video-full-width')[0]; // Get the video element
+                var videoElement = $('.planoalto_cinematic > .video-full-width')[0]; // Get the video element
 
                 // Change the video source
                 $(videoElement).find('source').attr('src', newVideoSrc);
@@ -209,7 +209,7 @@
         // Play vcam video
 		$(document).ready(function(){
             $('.unmute-button').click(function(){
-                var videoElement = $('.video-full-width')[0]; // Get the video element
+                var videoElement = $('.planoalto_vcam > .video-full-width')[0]; // Get the video element
              
                 // Remove muted and loop attributes
                 videoElement.muted = false;
