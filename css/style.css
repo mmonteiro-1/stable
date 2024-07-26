@@ -431,6 +431,7 @@ button {
 	width: 100px;
 	transform: translate(-50%, -50%);
 	cursor: pointer;
+	z-index: 10;
 }
 .unmute-button {
 	position: absolute;
@@ -439,6 +440,7 @@ button {
 	height: 60px;
 	width: 60px;
 	cursor: pointer;
+	z-index: 10;
 }
 .featured-project {
 	display: flex;
