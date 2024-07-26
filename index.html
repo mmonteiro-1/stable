@@ -337,19 +337,6 @@
                 videoElement.play();
             });
         });
-
-        $(document).ready(function() {
-            $(window).scroll(function() {
-                var scrollPosition = $(window).scrollTop();
-                var windowHeight = $(window).height();
-                var documentHeight = $(document).height();
-                
-                // Check if the scroll position is past the lower 50% of the page
-                if (scrollPosition > (documentHeight - windowHeight) / 2) {
-                    $('.chat').fadeIn();
-                }
-            });
-        });
 	</script>
 </body>
 </html>
