@@ -630,7 +630,8 @@ button {
 	background-size: cover;
 	background-position: bottom;
 }
-.citadel_cinematic > img {
+.citadel_cinematic > img,
+.citadel_cinematic > video {
 	width: 100%;
 }
 @media (max-width: 800px) {

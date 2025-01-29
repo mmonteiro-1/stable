@@ -24,7 +24,10 @@
 		<div class="dictionary">
 			<div class="type">project</div>
 			<div class="title">4040 Citadel Park</div>
-			<div class="definition">1. An office building lobby in Eindhoven that uses yellow, translucent acrylic to contrast the city's moody weather while maintaining its sobriety.</div>
+			<div class="definition">1. The complex is a testament to modern architectural innovation and mixed-use development. Over 85 offices, 47 shops, 112 apartments proud as a citadel.</div>
+			<div class="definition">
+				2. An interactive experience.
+			</div>
 		</div>
 		<div class="row">
 			<div class="video citadel_cinematic">
@@ -47,9 +50,6 @@
 						</g>
 					</g>
 				</svg>
-				<!-- <video class="video-full-width" width="100%" height="100%" autoplay loop muted preload playsinline>
-					<source src="videos/citadel_cinematic.mov" type="video/mov">
-				</video> -->
 			</div>
 		</div>
 		<div class="section_title">Other projects</div>
@@ -89,7 +89,6 @@
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
 	<script type="text/javascript" src="js/gsap.js"></script>
 	<script src="js/jquery.imageviewer.js"></script>
 	<script src="js/butter.js"></script>
@@ -97,38 +96,24 @@
 
 		$("nav").load("nav.html");
 		$("footer").load("footer.html");
-		
 
 		butter.init();
 
 		imageviewer();
 
-		//panorama
-		pannellum.viewer('panorama', {
-			"type": "equirectangular",
-			"preview": "https://stablearchviz.com/images/acrylichail_03.webp",
-			"panorama": "images/acrylichail_06.jpg",
-			"showZoomCtrl": false,
-			"keyboardZoom": false,
-			"mouseZoom": false,
-			"strings": {
-				"loadButtonLabel": "Click to explore"
-			}
-		});
-
-		document.querySelector('.play-button').addEventListener('click', function() {
-			console.log('opa');
-			const videoWrapper = document.querySelector('.citadel_cinematic');
-			const video = document.createElement('video');
-			video.src = 'videos/planoalto_cinematic.mp4';
-			video.controls = true;
-			videoWrapper.appendChild(video);
-			video.play();
-
-
-			// Hide placeholder and play button
-			document.querySelector('.placeholder-image').style.display = 'none';
-			this.style.display = 'none';
+		$(document).ready(function(){
+			$('.play-button').click(function(){
+				console.log('opa');
+				const videoWrapper = document.querySelector('.citadel_cinematic');
+				const video = document.createElement('video');
+				video.src = 'videos/citadel_cinematic.mov';
+				video.controls = true;
+				video.width = 100;
+				videoWrapper.appendChild(video);
+				video.play();
+				this.style.display = 'none';
+				$('.citadel_cinematic').css('background-image', 'none');
+			});
 		});
 		
 		/* HOVER ON THUMBNAIL */
