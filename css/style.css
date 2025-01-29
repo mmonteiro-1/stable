@@ -97,6 +97,7 @@ footer {
 	width: 100%;
 	margin-top: 30%;
 	bottom: -6px;
+	mix-blend-mode: difference;
 }
 .hero-video {
 	position: absolute;
