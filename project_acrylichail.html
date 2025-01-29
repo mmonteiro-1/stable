@@ -14,6 +14,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700;800&family=League+Spartan:wght@400;600;800&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<title>Stable</title>
 </head>
@@ -21,13 +22,9 @@
 	<nav></nav>
 	<div id="butter" class="content">
 		<div class="dictionary">
-			<div class="type">(project)</div>
+			<div class="type">project</div>
 			<div class="title">Acrylic Hail</div>
 			<div class="definition">1. An office building lobby in Eindhoven that uses yellow, translucent acrylic to contrast the city's moody weather while maintaining its sobriety.</div>
-			<div class="synonyms">
-				<div>synonyms:</div>
-				<span>netherlands, office, building, modern, natural light</span>
-			</div>
 		</div>
 		<div class="row">
 			<div class="image">
@@ -46,9 +43,12 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="image gsap_image">
+			<div class="image gsap_image solo">
 				<img alt="3d render of an office lobby" src="images/acrylichail_05.webp">
 			</div>
+		</div>
+		<div class="row">
+			<div id="panorama"></div>
 		</div>
 		<div class="section_title">Other projects</div>
 		<div class="row row_other_projects">
@@ -87,6 +87,7 @@
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
 	<script type="text/javascript" src="js/gsap.js"></script>
 	<script src="js/jquery.imageviewer.js"></script>
 	<script src="js/butter.js"></script>
@@ -99,6 +100,19 @@
 		butter.init();
 
 		imageviewer();
+
+		//panorama
+		pannellum.viewer('panorama', {
+			"type": "equirectangular",
+			"preview": "https://stablearchviz.com/images/acrylichail_03.webp",
+			"panorama": "images/acrylichail_06.jpg",
+			"showZoomCtrl": false,
+			"keyboardZoom": false,
+			"mouseZoom": false,
+			"strings": {
+				"loadButtonLabel": "Click to explore"
+			}
+		});
 
 		/* HOVER ON THUMBNAIL */
 		$(".other_projects").hover(function() {

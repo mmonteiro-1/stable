@@ -17,20 +17,45 @@
 	<title>Stable</title>
 </head>
 <body>
+	<style type="text/css">
+		.feature_description {
+			position: absolute;
+			bottom: 5%;
+		}
+	</style>
 	<nav></nav>
 	<div class="content_email_sent">
 		<div class="dictionary">
 			<div class="title">Thank you for getting in touch.</div>
 			<div class="definition">We'll get back to you as soon as possible.</div>
+			<div class="feature_description">You'll be redirected to the home page in <span id="countdown">5</span> seconds.</div>
 		</div>
 	</div>
 	<script type="text/javascript">
 		$("nav").load("nav.html");
 		window.onload = function() {
-		    setTimeout(function() {
-		        window.location.href = "https://stablearchviz.com";
-		    }, 5000);
+			setTimeout(function() {
+				window.location.href = "https://stablearchviz.com";
+			}, 7000);
 		}
+		function startCountdown() {
+			var count = 5;
+			var countdownElement = $('#countdown');
+			
+			var timer = setInterval(function() {
+			countdownElement.text(count);
+			count--;
+			
+				if (count < 0) {
+					clearInterval(timer);
+					countdownElement.text('0');
+				}
+			}, 1000);
+		}
+
+		$(document).ready(function() {
+			startCountdown();
+		});
 	</script>
 </body>
 </html>
