@@ -624,6 +624,15 @@ button {
 	font-size: 1.7vw;
 	padding: 10px 0 40px 0;
 }
+.video.citadel_cinematic {
+	aspect-ratio: 1.7;
+	background-image: url('../images/citadel_02.webp');
+	background-size: cover;
+	background-position: bottom;
+}
+.citadel_cinematic > img {
+	width: 100%;
+}
 @media (max-width: 800px) {
 	body {
 		background: linear-gradient(
@@ -865,5 +874,9 @@ button {
 	}
 	#panorama {
 		height: 800px;
+	}
+	.video.citadel_cinematic {
+		margin: 0 200px;
+		box-sizing: border-box;
 	}
 }
