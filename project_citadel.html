@@ -118,13 +118,19 @@
 
 		document.querySelector('.play-button').addEventListener('click', function() {
 			console.log('opa');
-		  const videoWrapper = document.querySelector('.citadel_cinematic');
-		  const video = document.createElement('video');
-		  video.src = 'videos/planoalto_cinematic.mp4';
-		  video.controls = true;
-		  videoWrapper.appendChild(video);
-		  video.play();
+			const videoWrapper = document.querySelector('.citadel_cinematic');
+			const video = document.createElement('video');
+			video.src = 'videos/planoalto_cinematic.mp4';
+			video.controls = true;
+			videoWrapper.appendChild(video);
+			video.play();
 
+
+			// Hide placeholder and play button
+			document.querySelector('.placeholder-image').style.display = 'none';
+			this.style.display = 'none';
+		});
+		
 		/* HOVER ON THUMBNAIL */
 		$(".other_projects").hover(function() {
 			$(this).find("img").toggleClass("clear");
