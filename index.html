@@ -271,9 +271,13 @@
 			}
 		});
 
-		if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+		const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+		const isWindows = navigator.platform.toLowerCase().indexOf('win') > -1;
+
+		if (isFirefox && isWindows) {
 		  document.querySelector('.hero img').style.mixBlendMode = 'difference';
 		}
+
 	</script>
 </body>
 </html>
