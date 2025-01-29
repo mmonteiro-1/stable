@@ -270,6 +270,10 @@
 				scrub: 1,
 			}
 		});
+
+		if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+		  document.querySelector('.hero img').style.mixBlendMode = 'difference';
+		}
 	</script>
 </body>
 </html>
