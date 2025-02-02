@@ -243,6 +243,9 @@ footer {
 .row.fundamentals .feature_title {
 	font-size: clamp(1.4em, 3vw, 3em);
 }
+.row > .feature_description {
+	margin-top: -10px;
+}
 .feature {
 	display: flex;
 	flex-direction: column;
@@ -261,9 +264,14 @@ footer {
 	flex-direction: column;
 	width: calc(50% - 10px);
 	aspect-ratio: 1.2;
+	overflow: hidden;
 }
 .image:hover {
 	cursor: zoom-in;
+}
+.image:hover > img {
+	transform: scale(1.03);
+	transition: transform .2s ease;
 }
 .image.solo {
 	width: 100%;
@@ -282,6 +290,8 @@ footer {
 .image img {
 	height: 100%;
 	object-fit: cover;
+	transform: scale(1.0);
+	transition: transform .2s ease;
 }
 .image span {
 	font-family: 'League Spartan', sans-serif;
@@ -587,9 +597,15 @@ button {
 	box-sizing: border-box;
 	margin-bottom: 0;
 }
-.office .video {
+.office .video,
+.office img {
 	aspect-ratio: 1.7;
 	max-height: 80vh;
+}
+.office img {
+	width: 100%;
+	object-fit: cover;
+	object-position: center;
 }
 .office video {
 	filter: brightness(.6);
@@ -619,6 +635,13 @@ button {
 .citadel .feature_description {
 	padding: 0 20px;
 	box-sizing: border-box;
+}
+.units {
+	padding-top: 200px;
+}
+.units img {
+	width: 100%;
+	object-fit: cover;
 }
 .gallery {
 	display: flex;
@@ -660,7 +683,7 @@ button {
 .buttons-row a {
 	margin: 20px 0 0 0;
 	flex: 1;
-}	
+}
 @media (max-width: 800px) {
 	body {
 		background: linear-gradient(
@@ -902,6 +925,14 @@ button {
 	}
 	#panorama {
 		height: 800px;
+	}
+	.office {
+		padding: 200px;
+	}
+	.units {
+		position: relative;
+		left: -20px;
+		width: 100vw;
 	}
 /*	.video.citadel_cinematic {
 		margin: 0 200px;
