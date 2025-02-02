@@ -34,7 +34,7 @@
 	<div id="butter" class="content">
 		<div class="hero">
 			<div class="title centered">I'll believe when I see it</div>
-			<img alt="3d render of a house exterior" src="images/citadel_01.webp">
+			<img alt="3d render of a house exterior" src="images/citadel_00.webp">
 		</div>
 		<div class="feature_description">
 			<a href="project_citadel.html">GO TO PROJECT →</a>
@@ -108,11 +108,18 @@
 		<section class="citadel">
 			<div class="title centered">
 				<div>30 044 km<sup>2</sup></div>
-				<a href="project_citadel.html">
-					<div class="button centered">
-						Explore 4040 Citadel Park
-					</div>
-				</a>
+				<div class="buttons-row">
+					<a href="project_citadel.html">
+						<div class="button">
+							Go to project
+						</div>
+					</a>
+					<a href="project_citadel.html">
+						<div class="button">
+							Try demo
+						</div>
+					</a>
+				</div>
 			</div>
 			<img src="images/citadel_ortho.webp">
 			<div class="feature_description">
@@ -230,7 +237,7 @@
 			var heroBottom;
 
 			function setInitialNavStyle() {
-				$nav.css('background-color', '#070707');
+				$nav.css('background-color', '#1b1c1b');
 				$navLinks.css('color', '#f2f2f2');
 				$logo.attr('src', 'images/logo_stable_inverted.svg');
 			}
@@ -244,7 +251,7 @@
 					$navLinks.css('color', '#232323');
 					$logo.attr('src', 'images/logo_stable.svg');
 				} else {
-					$nav.css('background-color', '#070707');
+					$nav.css('background-color', '#1b1c1b');
 					$navLinks.css('color', '#fff');
 					$logo.attr('src', 'images/logo_stable_inverted.svg');
 				}
@@ -270,14 +277,6 @@
 				scrub: 1,
 			}
 		});
-
-		const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
-		const isWindows = navigator.platform.toLowerCase().indexOf('win') > -1;
-
-		if (isFirefox && isWindows) {
-		  document.querySelector('.hero img').style.mixBlendMode = 'difference';
-		}
-
 	</script>
 </body>
 </html>

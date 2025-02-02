@@ -79,12 +79,12 @@ footer {
 	position: relative;
 	width: 100vw;
 	left: -20px;
-	background: #070707;
+	background: #1b1c1b;
 }
 .hero .title {
 	color: #f2f2f2;
 	position: absolute;
-	top: 30%;
+	top: 25%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	padding: 0 20px;
@@ -97,7 +97,7 @@ footer {
 	width: 100%;
 	margin-top: 30%;
 	bottom: -6px;
-	mix-blend-mode: lighten;
+/*	mix-blend-mode: lighten;*/
 }
 .hero-video {
 	position: absolute;
@@ -565,6 +565,7 @@ button {
 	font-family: 'League Spartan', sans-serif;
 	text-align: center;
 	font-size: 1rem;
+	font-weight: normal;
 	line-height: normal;
 	margin: 0 auto;
 }
@@ -578,6 +579,24 @@ button {
 	width: 100vw;
 	height: 1200px;
 	background: #f3f1ee;
+}
+.office {
+	position: relative;
+	left: -20px;
+	padding: 200px 20px;
+	box-sizing: border-box;
+	margin-bottom: 0;
+}
+.office .video {
+	aspect-ratio: 1.7;
+	max-height: 80vh;
+}
+.office video {
+	filter: brightness(.6);
+}
+.office .hero-video {
+	color: #fff;
+	width: unset;
 }
 .citadel .title {
 	position: absolute;
@@ -625,7 +644,7 @@ button {
 	padding: 10px 0 40px 0;
 }
 .video.citadel_cinematic {
-	aspect-ratio: 1.7;
+/*	aspect-ratio: 1.7;*/
 	background-image: url('../images/citadel_02.webp');
 	background-size: cover;
 	background-position: bottom;
@@ -634,6 +653,14 @@ button {
 .citadel_cinematic > video {
 	width: 100%;
 }
+.buttons-row {
+	display: flex;
+	gap: 20px;
+}
+.buttons-row a {
+	margin: 20px 0 0 0;
+	flex: 1;
+}	
 @media (max-width: 800px) {
 	body {
 		background: linear-gradient(
@@ -876,8 +903,8 @@ button {
 	#panorama {
 		height: 800px;
 	}
-	.video.citadel_cinematic {
+/*	.video.citadel_cinematic {
 		margin: 0 200px;
 		box-sizing: border-box;
-	}
+	}*/
 }

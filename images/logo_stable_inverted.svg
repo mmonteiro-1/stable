@@ -4,11 +4,11 @@
     <g id="Layer_2-2" data-name="Layer 2">
       <g>
         <g>
-          <polygon points="40.9 83.7 6 63.5 40.7 43.5 75.6 63.7 40.9 83.7" fill="#0e1012"/>
-          <polygon points="40.9 63.6 6 43.4 40.7 23.4 75.6 43.5 40.9 63.6" fill="#0e1012"/>
-          <polygon points="40.9 63.6 40.9 83.7 75.6 63.7 75.6 43.5 40.9 63.6" fill="#0e1012"/>
-          <polygon points="6 23.5 6 43.4 40.7 23.4 40.7 3.5 6 23.5" fill="#0e1012"/>
-          <polygon points="40.9 43.6 6 23.5 40.7 3.5 75.6 23.6 40.9 43.6" fill="#0e1012"/>
+          <polygon points="40.9 83.7 6 63.5 40.7 43.5 75.6 63.7 40.9 83.7" fill="#1b1c1b"/>
+          <polygon points="40.9 63.6 6 43.4 40.7 23.4 75.6 43.5 40.9 63.6" fill="#1b1c1b"/>
+          <polygon points="40.9 63.6 40.9 83.7 75.6 63.7 75.6 43.5 40.9 63.6" fill="#1b1c1b"/>
+          <polygon points="6 23.5 6 43.4 40.7 23.4 40.7 3.5 6 23.5" fill="#1b1c1b"/>
+          <polygon points="40.9 43.6 6 23.5 40.7 3.5 75.6 23.6 40.9 43.6" fill="#1b1c1b"/>
           <polygon points="75.6 23.6 40.7 3.5 6 23.5 6 43.4 23.3 53.4 6 63.5 40.9 83.7 75.6 63.7 75.6 43.5 58.3 33.6 75.6 23.6" fill="none" stroke="#f2f2f2" stroke-miterlimit="10" stroke-width="6"/>
           <polyline points="6 23.5 40.9 43.6 58.3 33.6" fill="none" stroke="#f2f2f2" stroke-miterlimit="10" stroke-width="6"/>
           <polyline points="23.3 53.4 40.9 63.6 40.9 83.7" fill="none" stroke="#f2f2f2" stroke-miterlimit="10" stroke-width="6"/>

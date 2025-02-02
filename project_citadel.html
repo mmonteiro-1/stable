@@ -14,11 +14,18 @@
 	<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700;800&family=League+Spartan:wght@400;600;800&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<title>Stable</title>
 </head>
 <body>
+	<style type="text/css">
+		.dictionary > .definition > a {
+			color: #eabb13
+		}
+		section {
+			margin: 0;
+		}
+	</style>
 	<nav></nav>
 	<div id="butter" class="content">
 		<div class="dictionary">
@@ -26,10 +33,10 @@
 			<div class="title">4040 Citadel Park</div>
 			<div class="definition">1. The complex is a testament to modern architectural innovation and mixed-use development. Over 85 offices, 47 shops, 112 apartments proud as a citadel.</div>
 			<div class="definition">
-				2. An interactive experience.
+				2. An interactive experience. <a href="">Try for yourself.</a>
 			</div>
 		</div>
-		<div class="row">
+		<!-- <div class="row">
 			<div class="video citadel_cinematic">
 				<svg class="play-button" id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 302.05 302.05">
 					<defs>
@@ -50,6 +57,81 @@
 						</g>
 					</g>
 				</svg>
+			</div>
+		</div> -->
+		<div class="row">
+			<div class="image gsap_image">
+				<img alt="3d render of a house" src="images/citadel_04.webp">
+			</div>
+			<div class="image gsap_image">
+				<img alt="3d render of a house" src="images/citadel_01.webp">
+			</div>
+		</div>
+		<div class="row">
+			<div class="image gsap_image solo">
+				<img alt="3d render of a house" src="images/citadel_03.webp">
+			</div>
+		</div>
+		<section class="office dark full-width">
+			<div class="video">
+				<div class="hero-video">
+					<div class="title centered">
+						<div>Go outside</div>
+						<div class="buttons-row">
+							<a href="">
+								<div class="button">
+									Watch video
+								</div>
+							</a>
+							<a href="project_citadel.html">
+								<div class="button">
+									Try demo
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+				<video class="video-full-width" width="100%" height="100%" autoplay loop muted preload playsinline>
+					<source src="videos/citadel_surroundings_teaser.mp4" type="video/mp4">
+				</video>
+			</div>
+			<div class="feature_description">
+				We build the crowd so <i>4040 Citadel Park</i> could stand out from it.<br>
+			</div>
+		</section>
+		<section class="office full-width">
+			<div class="video">
+				<div class="hero-video">
+					<div class="title centered">
+						<div>Step inside</div>
+						<div class="buttons-row">
+							<a href="">
+								<div class="button">
+									Watch video
+								</div>
+							</a>
+							<a href="project_citadel.html">
+								<div class="button">
+									Try demo
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+				<video class="video-full-width" width="100%" height="100%" autoplay loop muted preload playsinline>
+					<source src="videos/citadel_office_teaser.mp4" type="video/mp4">
+				</video>
+			</div>
+			<div class="feature_description">
+				We build the crowd so <i>4040 Citadel Park</i> could stand out from it.<br>
+			</div>
+		</section>
+		<div class="row">
+			<div class="image gsap_image">
+				<img alt="3d render of a house" src="images/citadel_05.webp">
+			</div>
+			<div class="image gsap_image">
+				<img alt="3d render of a house" src="images/citadel_01.webp">
 			</div>
 		</div>
 		<div class="section_title">Other projects</div>
@@ -115,7 +197,7 @@
 				$('.citadel_cinematic').css('background-image', 'none');
 			});
 		});
-		
+
 		/* HOVER ON THUMBNAIL */
 		$(".other_projects").hover(function() {
 			$(this).find("img").toggleClass("clear");

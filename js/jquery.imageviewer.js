@@ -1,4 +1,4 @@
-function imageviewer(selector = 'img') {
+function imageviewer(selector = '.image > img') {
 	$(document).on('click', selector, function() {
 		const imageLink = $(this).attr('src');
 
