@@ -469,19 +469,10 @@ button {
 	overflow: auto;
 }
 #imageviewer-image {
-	cursor: zoom-in;
+	cursor: zoom-out;
 	height: 100%;
 	width: 100%;
 	object-fit: contain;
-}
-#imageviewer-image.expanded {
-	position: absolute;
-	top: 0;
-	left: 0;
-	object-fit: unset !important;
-	height: unset !important;
-	width: unset !important;
-	cursor: zoom-out !important;
 }
 #imageviewer-close {
 	position: fixed;
@@ -493,14 +484,6 @@ button {
 	background: white url('../images/icon_close.png') no-repeat center;
 	background-size: 20px;
 	border-radius: 50%;
-}
-#imageviewer-text {
-	position: fixed;
-	bottom: 10%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	color: #f2f2f2;
-	font-family: 'League Spartan', sans-serif !important;
 }
 .pnlm-load-button {
 	top: 0 !important;
