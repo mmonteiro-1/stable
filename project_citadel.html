@@ -89,11 +89,11 @@
 					<div class="title centered">
 						<div>Step inside</div>
 						<div class="buttons-row">
-							<a href="">
+							<div class="watch-office">
 								<div class="button">
 									Watch video
 								</div>
-							</a>
+							</div>
 							<a href="project_citadel.html">
 								<div class="button">
 									Try demo
@@ -102,19 +102,19 @@
 						</div>
 					</div>
 				</div>
-				<video class="video-full-width" width="100%" height="100%" autoplay loop muted preload playsinline>
+				<video class="video-full-width office-teaser" width="100%" height="100%" autoplay loop muted preload playsinline>
 					<source src="videos/citadel_office_teaser.mp4" type="video/mp4">
 				</video>
 			</div>
 			<div class="feature_description">
-				Don't just stand there looking. Walk around the units.
+				Don't just stand there looking. Walk around the units. <br>
 			</div>
 		</section>
 		<section class="units">
 			<img alt="3d render of a house exterior" src="images/citadel_06.webp">
 			<div class="feature_description">
 				Advanced search for the right apartment. <br>
-				<a href="project_citadel.html">TRY DEMO →</a>
+				<a href="">TRY DEMO →</a>
 			</div>
 		</section>
 		<section class="office full-width">
@@ -123,11 +123,11 @@
 					<div class="title centered">
 						<div>Go outside</div>
 						<div class="buttons-row">
-							<a href="">
+							<div class="watch-cinematic">
 								<div class="button">
 									Watch video
 								</div>
-							</a>
+							</div>
 							<a href="project_citadel.html">
 								<div class="button">
 									Try demo
@@ -177,6 +177,13 @@
 				</div>
 			</a>
 		</div>
+		<div id="video-overlay" style="display: none;">
+			<div id="video-container">
+				<iframe id="office-video" width="100%" height="100%" src="https://www.youtube.com/embed/qBjrA3zwUfg?si=FnTWRLsjIRWjo0fN&rel=0" title="YouTube video player" enablejsapi=1 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="display: none;"></iframe>
+				<iframe id="cinematic-video" width="100%" height="100%" src="https://www.youtube.com/embed/b-a8b2OD-Mg?si=EFWgFpe7aJTXfNSK&rel=0" title="YouTube video player" enablejsapi=1 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="display: none;"></iframe>
+			</div>
+			<div id="video-close"></div>
+		</div>
 		<footer></footer>
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
@@ -193,18 +200,38 @@
 
 		imageviewer();
 
-		$(document).ready(function(){
-			$('.play-button').click(function(){
-				console.log('opa');
-				const videoWrapper = document.querySelector('.citadel_cinematic');
-				const video = document.createElement('video');
-				video.src = 'videos/citadel_cinematic.mov';
-				video.controls = true;
-				video.width = 100;
-				videoWrapper.appendChild(video);
-				video.play();
-				this.style.display = 'none';
-				$('.citadel_cinematic').css('background-image', 'none');
+		// $(document).ready(function(){
+		// 	$('.play-button').click(function(){
+		// 		console.log('opa');
+		// 		const videoWrapper = document.querySelector('.citadel_cinematic');
+		// 		const video = document.createElement('video');
+		// 		video.src = 'videos/citadel_cinematic.mov';
+		// 		video.controls = true;
+		// 		video.width = 100;
+		// 		videoWrapper.appendChild(video);
+		// 		video.play();
+		// 		this.style.display = 'none';
+		// 		$('.citadel_cinematic').css('background-image', 'none');
+		// 	});
+		// });
+
+		$(document).ready(function() {
+			$('.watch-office, .watch-cinematic, .watch-surroundings').click(function() {
+				var videoType = $(this).attr('class').split('-')[1];
+				var scrollTop = $(window).scrollTop();
+				$('#video-overlay').css('top', scrollTop + 'px').show();
+				$('#' + videoType + '-video').show().siblings('iframe').hide();
+				$('body').addClass('no-scroll');
+				$('nav').hide();
+			});
+
+			$('#video-close').click(function() {
+				$('#video-overlay').hide();
+				$('#video-container iframe').each(function() {
+					this.src = this.src;
+				});
+				$('body').removeClass('no-scroll');
+				$('nav').show();
 			});
 		});
 
