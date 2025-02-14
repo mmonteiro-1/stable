@@ -266,6 +266,15 @@ footer {
 	aspect-ratio: 1.2;
 	overflow: hidden;
 }
+.image > .watch-cinematic {
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	width: 100%;
+	transform: translate(-50%, 0);
+	z-index: 1;
+	cursor: pointer;
+}
 .image:hover {
 	cursor: zoom-in;
 }

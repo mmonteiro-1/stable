@@ -77,6 +77,11 @@
 				<img alt="3d render of a house" src="images/citadel_05.webp">
 			</div>
 			<div class="image gsap_image">
+				<div class="watch-cinematic">
+					<div class="button">
+						Watch cinematic
+					</div>
+				</div>
 				<img alt="3d render of a house" src="images/citadel_07.webp">
 			</div>
 			<div class="feature_description">
@@ -123,7 +128,7 @@
 					<div class="title centered">
 						<div>Go outside</div>
 						<div class="buttons-row">
-							<div class="watch-cinematic">
+							<div class="watch-surroundings">
 								<div class="button">
 									Watch video
 								</div>
@@ -178,10 +183,7 @@
 			</a>
 		</div>
 		<div id="video-overlay" style="display: none;">
-			<div id="video-container">
-				<iframe id="office-video" width="100%" height="100%" src="https://www.youtube.com/embed/qBjrA3zwUfg?si=FnTWRLsjIRWjo0fN&rel=0" title="YouTube video player" enablejsapi=1 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="display: none;"></iframe>
-				<iframe id="cinematic-video" width="100%" height="100%" src="https://www.youtube.com/embed/b-a8b2OD-Mg?si=EFWgFpe7aJTXfNSK&rel=0" title="YouTube video player" enablejsapi=1 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="display: none;"></iframe>
-			</div>
+			<div id="video-container"></div>
 			<div id="video-close"></div>
 		</div>
 		<footer></footer>
@@ -200,20 +202,47 @@
 
 		imageviewer();
 
-		// $(document).ready(function(){
-		// 	$('.play-button').click(function(){
-		// 		console.log('opa');
-		// 		const videoWrapper = document.querySelector('.citadel_cinematic');
-		// 		const video = document.createElement('video');
-		// 		video.src = 'videos/citadel_cinematic.mov';
-		// 		video.controls = true;
-		// 		video.width = 100;
-		// 		videoWrapper.appendChild(video);
-		// 		video.play();
-		// 		this.style.display = 'none';
-		// 		$('.citadel_cinematic').css('background-image', 'none');
-		// 	});
-		// });
+		// Create Iframes
+		function createIframes() {
+			var videoContainer = document.getElementById("video-container");
+
+			// Create Office Iframe
+			var officeIframe = document.createElement("iframe");
+			officeIframe.id = "office-video";
+			officeIframe.width = "100%";
+			officeIframe.height = "100%";
+			officeIframe.src = "https://www.youtube.com/embed/qBjrA3zwUfg?si=FnTWRLsjIRWjo0fN&rel=0";
+			officeIframe.title = "YouTube video player";
+			officeIframe.frameBorder = "0";
+			officeIframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+			officeIframe.referrerPolicy = "strict-origin-when-cross-origin";
+			officeIframe.allowFullscreen = true;
+			officeIframe.style.display = "none";
+			videoContainer.appendChild(officeIframe);
+
+			// Create Cinematic Iframe
+			var cinematicIframe = document.createElement("iframe");
+			cinematicIframe.id = "cinematic-video";
+			cinematicIframe.width = "100%";
+			cinematicIframe.height = "100%";
+			cinematicIframe.src = "https://www.youtube.com/embed/b-a8b2OD-Mg?si=EFWgFpe7aJTXfNSK&rel=0";
+			cinematicIframe.title = "YouTube video player";
+			cinematicIframe.frameBorder = "0";
+			cinematicIframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+			cinematicIframe.referrerPolicy = "strict-origin-when-cross-origin";
+			cinematicIframe.allowFullscreen = true;
+			cinematicIframe.style.display = "none";
+			videoContainer.appendChild(cinematicIframe);
+		}
+
+		// Load the iframes after the page has loaded
+		if (window.addEventListener) {
+			window.addEventListener("load", createIframes, false);
+		} else if (window.attachEvent) {
+			window.attachEvent("onload", createIframes);
+		} else {
+			window.onload = createIframes;
+		}
 
 		$(document).ready(function() {
 			$('.watch-office, .watch-cinematic, .watch-surroundings').click(function() {
