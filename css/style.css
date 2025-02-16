@@ -580,10 +580,48 @@ button {
 .citadel {
 	position: relative;
 	left: -20px;
-	top: -20px;
 	width: 100vw;
-	height: 1200px;
-	background: #f3f1ee;
+	height: 100vh;
+	background: #131313;
+}
+.citadel .title {
+	position: absolute;
+	top: 200px;
+	left: 50%;
+	transform: translate(-50%, 0%);
+	font-weight: 400;
+	font-size: 5rem;
+	line-height: 3rem	;
+	color: #f2f2f2;
+	white-space: nowrap;
+	margin: 0;
+	width: fit-content;
+}
+.citadel .button {
+	margin-top: 20px;
+}
+.citadel img,
+.citadel .dim,
+.citadel .blank {
+	position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+/*  height: 100%;
+*/  /*object-fit: cover;
+  object-position: 50% 90%;*/
+} 
+.citadel img.gsap-layer {
+  opacity: 0;
+}
+.citadel .dim {
+	height: 100%;
+	opacity: 0;
+	background: #000000a1;
+}
+.citadel .blank {
+	height: 100%;
+	opacity: 0;
 }
 .office {
 	position: relative;
@@ -608,28 +646,6 @@ button {
 .office .hero-video {
 	color: #fff;
 	width: unset;
-}
-.citadel .title {
-	position: absolute;
-	top: 200px;
-	left: 50%;
-	transform: translate(-50%, 0%);
-	font-weight: 400;
-	margin: 0;
-	width: fit-content;
-}
-.citadel .button {
-	margin-top: 20px;
-}
-.citadel img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	object-position: bottom;
-}
-.citadel .feature_description {
-	padding: 0 20px;
-	box-sizing: border-box;
 }
 .units {
 	padding-top: 200px;
@@ -860,21 +876,6 @@ button {
 		left: 50%;
 		transform: translate(-50%, -50%);
 	}
-	.citadel {
-		left: -10px;
-		top: 0;
-		height: 100vh;
-	}
-	.citadel .title {
-		top: 100px;
-		white-space: nowrap;
-	}
-	.citadel .feature_description {
-		padding: 0 10px;
-	}
-	.citadel img {
-		object-position: 80%;
-	}
 	.gallery {
 		padding: 0 20px;
 		box-sizing: border-box;
@@ -930,10 +931,10 @@ button {
 		padding: 0 200px;
 		box-sizing: border-box;
 	}
-	section.citadel {
+/*	section.citadel {
 		padding: 0;
 		height: 1850px;
-	}
+	}*/
 	.dictionary {
 		padding: 200px;
 	}

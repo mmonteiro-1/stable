@@ -89,6 +89,32 @@
 				<a href="project_olivagiulianova.html">GO TO PROJECT →</a>
 			</div>
 		</section>
+		<section class="citadel">
+			<img  src="images/citadel_layer0.webp">
+			<img class="gsap-layer" src="images/citadel_layer1.webp">
+			<img class="gsap-layer" src="images/citadel_layer2.webp">
+			<img class="gsap-layer" src="images/citadel_layer3.webp">
+			<img class="gsap-layer" src="images/citadel_layer4.webp">
+			<img class="gsap-layer" src="images/citadel_layer6.png">
+			<div class="gsap-layer dim">
+				<div class="title centered">
+					<div>30 044 km<sup>2</sup></div>
+					<div class="buttons-row">
+						<a href="project_citadel.html">
+							<div class="button">
+								Go to project
+							</div>
+						</a>
+						<a href="project_citadel.html">
+							<div class="button">
+								Try demo
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="gsap-layer blank"></div>
+		</section>
 		<section class="dark full-width">
 			<div class="video">
 				<div class="hero-video">
@@ -103,28 +129,6 @@
 			<div class="feature_description">
 				Images alone won't cut it for this <i>Plano Alto</i> apartment unit.<br>
 				<a href="project_planoalto.html">GO TO PROJECT →</a>
-			</div>
-		</section>
-		<section class="citadel">
-			<div class="title centered">
-				<div>30 044 km<sup>2</sup></div>
-				<div class="buttons-row">
-					<a href="project_citadel.html">
-						<div class="button">
-							Go to project
-						</div>
-					</a>
-					<a href="project_citadel.html">
-						<div class="button">
-							Try demo
-						</div>
-					</a>
-				</div>
-			</div>
-			<img src="images/citadel_ortho.webp">
-			<div class="feature_description">
-				We build the crowd so <i>4040 Citadel Park</i> could stand out from it.<br>
-				<a href="project_citadel.html">GO TO PROJECT →</a>
 			</div>
 		</section>
 		<section class="featured-projects">
@@ -189,7 +193,7 @@
 	<script type="text/javascript">
 		$("nav").load("nav.html");
 		$("footer").load("footer.html");
-		butter.init();
+		/*butter.init();*/
 
 		//panorama
 		pannellum.viewer('panorama', {
@@ -276,6 +280,31 @@
 				end: "center center",
 				scrub: 1,
 			}
+		});
+
+		// Select the section
+		const citadelSection = document.querySelector('.citadel');
+
+		// Create timeline
+		const tl = gsap.timeline({
+		  scrollTrigger: {
+		    trigger: citadelSection,
+		    start: 'center center', // Start when the bottom of .citadel hits the bottom of the viewport
+		    end: '+=4000', // Adjust this to control how long the animation lasts
+		    scrub: true, // Optional: for smooth scrubbing
+		    pin: true, // Pin the section
+		  },
+		});
+
+		// Animate each image
+		const images = document.querySelectorAll('.citadel .gsap-layer');
+		images.forEach((image, index) => {
+		  tl.to(image, {
+		    opacity: 1, // Adjust opacity as needed
+		    duration: 5, // Duration for each image's animation
+		    ease: 'power2.inOut', // Apply easing
+		    delay: index * 0.5, // Stagger the animations
+		  });
 		});
 	</script>
 </body>
