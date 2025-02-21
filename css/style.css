@@ -622,6 +622,7 @@ button {
 .citadel .blank {
 	height: 100%;
 	opacity: 0;
+	pointer-events: none;
 }
 .office {
 	position: relative;
