@@ -80,6 +80,7 @@ footer {
 	width: 100vw;
 	left: -20px;
 	background: #1b1c1b;
+	padding-top: 30%;
 }
 .hero .title {
 	color: #f2f2f2;
@@ -95,9 +96,7 @@ footer {
 	position: relative;
 	object-fit: cover;
 	width: 100%;
-	margin-top: 30%;
-	bottom: -6px;
-/*	mix-blend-mode: lighten;*/
+	margin-bottom: -6px;
 }
 .hero-video {
 	position: absolute;
@@ -648,6 +647,7 @@ button {
 .office .hero-video {
 	color: #fff;
 	width: unset;
+	white-space: nowrap;
 }
 .units {
 	padding-top: 200px;
@@ -755,7 +755,6 @@ button {
 	}
 	.hero img {
 		height: 100%;
-		margin-top: 0;
 	}
 	.dictionary {
 		padding: 50px 20px;
@@ -770,6 +769,10 @@ button {
 		margin-top: 0;
 		font-size: 3.3rem;
 		line-height: 3.3rem;
+	}
+	.title.centered {
+		padding: 0 10px;
+		box-sizing: border-box;
 	}
 	.definition {
 		font-size: 1.5rem;
@@ -863,12 +866,37 @@ button {
 	.video {
 		aspect-ratio: .8;
 	}
-
+	.office {
+		margin-top: 100px;
+		left: -10px;
+		padding: 100px 10px;
+		box-sizing: border-box;
+	}
+	.office .title.centered {
+		line-height: normal;
+	}
+	.office .video {
+		aspect-ratio: .8;
+	}
 	.unmute-button {
 		bottom: 30px;
 		right: 30px;
 		height: 40px;
 		width: 40px;
+	}
+	.citadel {
+		height: calc(100dvh - 60px);
+		left: -10px;
+	}
+	.citadel img {
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
+	}
+	.citadel .title {
+		top: 50%;
+		transform: translate(-50%, -50%);
+		font-size: 4rem;
 	}
 	.thousand img {
 		aspect-ratio: .6;
@@ -879,8 +907,6 @@ button {
 		transform: translate(-50%, -50%);
 	}
 	.gallery {
-		padding: 0 20px;
-		box-sizing: border-box;
 		flex-direction: column;
 	}
 	.gallery > div {
@@ -900,6 +926,19 @@ button {
 	}
 	#imageviwer-text {
 		display: block;
+	}
+	.buttons-row a,
+	.buttons-row div {
+		margin: 0;
+	}
+	.button {
+		padding: 10px 20px;
+	}
+	.units {
+		padding-top: 100px;
+	}
+	.units img {
+		aspect-ratio: 1;
 	}
 }
 
