@@ -287,25 +287,34 @@
 
 		// Create timeline
 		const tl = gsap.timeline({
-		  scrollTrigger: {
-		    trigger: citadelSection,
-		    start: 'center center', // Start when the bottom of .citadel hits the bottom of the viewport
-		    end: '+=4000', // Adjust this to control how long the animation lasts
-		    scrub: true, // Optional: for smooth scrubbing
-		    pin: true, // Pin the section
-		    once: true,
-		  },
+			scrollTrigger: {
+				trigger: citadelSection,
+				start: 'center center', // Start when the bottom of .citadel hits the bottom of the viewport
+				end: '+=4000', // Adjust this to control how long the animation lasts
+				scrub: true, // Optional: for smooth scrubbing
+				pin: true, // Pin the section
+				once: true, // Plays animation only on the way down
+				onLeave: function (self) { // Removes white space above left from animation
+					console.log("left");
+					let start = self.start;
+					self.scroll(self.start);
+					self.disable();
+					self.animation.progress(1);
+					ScrollTrigger.refresh();
+					window.scrollTo(0, start);
+				}
+			},
 		});
 
 		// Animate each image
 		const images = document.querySelectorAll('.citadel .gsap-layer');
 		images.forEach((image, index) => {
-		  tl.to(image, {
-		    opacity: 1, // Adjust opacity as needed
-		    duration: 5, // Duration for each image's animation
-		    ease: 'power2.inOut', // Apply easing
-		    delay: index * 0.5, // Stagger the animations
-		  });
+			tl.to(image, {
+				opacity: 1, // Adjust opacity as needed
+				duration: 5, // Duration for each image's animation
+				ease: 'power2.inOut', // Apply easing
+				delay: index * 0.5, // Stagger the animations
+			});
 		});
 	</script>
 </body>
