@@ -265,7 +265,8 @@ footer {
 	aspect-ratio: 1.2;
 	overflow: hidden;
 }
-.image > .watch-cinematic {
+.image > .watch-cinematic,
+.image > .youtube-bypass.cinematic {
 	position: absolute;
 	bottom: 0;
 	left: 50%;
@@ -725,6 +726,9 @@ button {
 .no-scroll {
   overflow: hidden;
 }
+.youtube-bypass {
+	display: none	;
+}
 @media (max-width: 800px) {
 	body {
 		background: linear-gradient(
@@ -939,6 +943,14 @@ button {
 	}
 	.units img {
 		aspect-ratio: 1;
+	}
+	.youtube-bypass {
+		display: block;
+	}
+	.watch-cinematic,
+	.watch-office,
+	.watch-surroundings {
+		display: none;
 	}
 }
 
