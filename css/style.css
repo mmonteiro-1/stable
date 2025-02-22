@@ -944,10 +944,10 @@ button {
 
 @media (min-width: 1900px) {
 	.hero .title {
-		top: 25%;
+		top: 20%;
 	}
-	.hero img{
-		margin-top: 20%;
+	.hero {
+	padding-top: 15%;
 	}
 	.row_other_projects a:last-child  {
 		display: block;
