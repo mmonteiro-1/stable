@@ -4,7 +4,7 @@ body {
 	overflow-x: hidden;
 	font-family: 'EB Garamond', serif;
 	font-weight: 500;
-	font-size: 20px;
+	font-size: 16px;
 	background: #f2f2f2;
 	color: #232323;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -32,6 +32,7 @@ nav a div {
 	justify-content: center;
 	align-items: center;
 	font-family: 'League Spartan', sans-serif;
+	font-size: 1.2em;
 	width: 100px;
 	height: 100%;
 	gap: 10px;
@@ -44,7 +45,7 @@ a {
 	height: 60%;
 }
 .logo div {
-	font-size: 2rem;
+	font-size: 2em;
 	font-family: 'EB Garamond', serif;;
 	font-weight: 600;
 }
@@ -66,7 +67,6 @@ footer {
 	box-sizing: border-box;
 	font-family: 'League Spartan', sans-serif;
 	font-weight: 300;
-	font-size: 1.2rem;
 }
 .email {
 	display: flex;
@@ -111,9 +111,9 @@ footer {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	min-height: 70vh;
+	height: calc(100dvh - 60px);
 	width: 100%;
-	padding: 200px 50px;
+	padding: 200px 0;
 	box-sizing: border-box;
 }
 .dictionary.stable {
@@ -121,21 +121,21 @@ footer {
 }
 .type {
 	color: gray;
-	font-size: 1.5rem;
+	font-size: 1.5em;
 	font-family: 'League Spartan', sans-serif;
 	margin-bottom: 10px;
 }
 .title {
-	font-size: 6rem;
+	font-size: 5em;
 	width: 100%;
 	font-weight: 800;
-	line-height: 6rem;
+	line-height: normal;
 }
 .title.centered {
 	text-align: center;
-	}
+}
 .definition {
-	font-size: 2.5rem;
+	font-size: 1.5em;
 	margin-top: 20px;
 	max-width: 1050px;
 }
@@ -144,11 +144,11 @@ footer {
 }
 .synonyms {
 	display: flex;
-	font-size: 2rem;
+	font-size: 2em;
 	font-family: 'League Spartan', sans-serif;
 	color: #bdbdbd;
 	margin-top: 50px;
-	line-height: 2.5rem;
+	line-height: 2.5em;
 }
 .synonyms span {
 	margin-left: 100px;
@@ -213,7 +213,7 @@ footer {
 	left: 50%;
 	width: 50px;
 	height: 50px;
-	font-size: 2rem;
+	font-size: 2em;
 	text-align: center;
 	z-index: 2;
 	transform: translate(-50%, 0);
@@ -337,7 +337,7 @@ footer {
 	position: absolute;
 	width: 80%;
 	color: white;
-	font-size: 3vw;
+	font-size: 2em;
 	top: 50%;
 	left: 20px;
 	transform: translate(0, -50%);
@@ -358,7 +358,7 @@ footer {
 }
 .about div {
 	color: white;
-	font-size: 2rem;
+	font-size: 2em;
 }
 .row_contacts {
 	display: flex;
@@ -378,7 +378,6 @@ input, textarea {
 	border: none;
 	border-bottom: 3px #3e3e3e solid;
 	padding: 10px 0;
-	font-size: 1rem;
 	color: lightgray;
 	border-radius: none;
 }
@@ -397,7 +396,6 @@ button {
 	padding: 10px 20px;
 	color: #232323;
 	border: none;
-	font-size: 1rem;
 	cursor: pointer;
 }
 .socia_media {
@@ -411,7 +409,7 @@ button {
 }
 .feature_title {
 	width: 100%;
-	font-size: 3rem;
+	font-size: 3em;
 	margin: 10px 0;
 	font-family: 'League Spartan', sans-serif;
 }
@@ -433,7 +431,6 @@ button {
 	object-fit: cover;
 }
 .feature_description {
-	font-size: 1rem;
 	font-family: 'League Spartan', sans-serif;
 	margin-top: 10px;
 }
@@ -505,7 +502,7 @@ button {
 	margin: 0 !important;
 	background-color: rgba(0,0,0,.6) !important;
 	border-radius: 0 !important;
-	font-size: 3rem !important;
+	font-size: 3em !important;
 	color: #f2f2f2 !important;
 	font-family: 'League Spartan', sans-serif !important;
 }
@@ -569,8 +566,8 @@ button {
 	padding: 15px 25px;
 	font-family: 'League Spartan', sans-serif;
 	text-align: center;
-	font-size: 1rem;
 	font-weight: normal;
+	font-size: 1em;
 	line-height: normal;
 	margin: 0 auto;
 }
@@ -585,40 +582,35 @@ button {
 	background: #131313;
 	overflow: hidden;
 }
-.citadel .title {
-	position: absolute;
-	top: 200px;
-	left: 50%;
-	transform: translate(-50%, 0%);
-	font-weight: 400;
-	font-size: 5rem;
-	line-height: 3rem	;
-	color: #f2f2f2;
-	white-space: nowrap;
-	margin: 0;
-	width: fit-content;
-}
-.citadel .button {
-	margin-top: 20px;
-}
 .citadel img,
 .citadel .dim,
 .citadel .blank {
 	position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-/*  height: 100%;
-*/  /*object-fit: cover;
-  object-position: 50% 90%;*/
+	bottom: 0;
+	left: 0;
+	width: 100%;
 } 
 .citadel img.gsap-layer {
-  opacity: 0;
+	opacity: 0;
 }
 .citadel .dim {
 	height: 100%;
 	opacity: 0;
 	background: #000000a1;
+
+}
+.dim > div {
+	position: absolute;
+	top: 200px;
+	left: 50%;
+	transform: translate(-50%, 0%);
+	color: #f2f2f2;
+	white-space: nowrap;
+	margin: 0;
+	width: fit-content;
+}
+.dim .title {
+	font-weight: 400;
 }
 .citadel .blank {
 	height: 100%;
@@ -632,7 +624,7 @@ button {
 	border: 2px gray solid;
 	padding: 10px;
 	text-align: center;
-	font-size: .8rem;
+	font-size: .8em;
 	font-family: 'League Spartan', sans-serif;
 	color: gray;
 }
@@ -707,7 +699,6 @@ button {
 }
 .buttons-row a,
 .buttons-row > div {
-	margin: 20px 0 0 0;
 	flex: 1;
 	cursor: pointer;
 }
@@ -735,7 +726,7 @@ button {
 	right: 20px;
 }
 .no-scroll {
-  overflow: hidden;
+	overflow: hidden;
 }
 .youtube-bypass {
 	display: none	;
@@ -765,37 +756,34 @@ button {
 		left: -10px;
 		height: 100vh;
 	}
-	.hero .title {
+	.hero .title.centered {
 		top: 25%;
+		font-size: 4em;
+		padding: 0 30px;
 	}
 	.hero img {
 		height: 100%;
-	}
-	.dictionary {
-		padding: 50px 20px;
 	}
 	.dictionary.stable {
 		height: unset;
 		min-height: unset;
 		justify-content: flex-start;
-		padding: 200px 20px
 	}
 	.title {
 		margin-top: 0;
-		font-size: 3.3rem;
-		line-height: 3.3rem;
+		font-size: 3em;
 	}
 	.title.centered {
 		padding: 0 10px;
 		box-sizing: border-box;
 	}
 	.definition {
-		font-size: 1.5rem;
+		font-size: 1.5em;
 	}
 	.synonyms {
 		flex-direction: column;
-		font-size: 1.3rem;
-		line-height: 1.5rem;
+		font-size: 1.3em;
+		line-height: 1.5em;
 	}
 	.synonyms span {
 		margin-left: 0;
@@ -805,7 +793,7 @@ button {
 		padding-top: 60px;
 	}
 	.project_title {
-		font-size: 4rem;
+		font-size: 4em;
 		line-height: 60px;
 	}
 	.project_description {
@@ -825,9 +813,9 @@ button {
 	.other_projects {
 		aspect-ratio: 3;
 	}
-	.other_projects div  {
+/*	.other_projects div  {
 		font-size: 10vw;
-	}
+	}*/
 	.about, .contacts {
 		width: 100vw;
 		height: unset;
@@ -869,7 +857,7 @@ button {
 		width: 100%;
 	}
 	.feature_title {
-		font-size: 2rem;
+		font-size: 2em;
 	}
 	.dark {
 		left: -10px;
@@ -909,9 +897,7 @@ button {
 		object-fit: cover;
 	}
 	.citadel .title {
-		top: 50%;
-		transform: translate(-50%, -50%);
-		font-size: 4rem;
+		font-size: 4em;
 	}
 	.thousand img {
 		aspect-ratio: .6;
@@ -934,7 +920,7 @@ button {
 		height: 400px;
 	}
 	.pnlm-load-button {
-		font-size: 2rem !important;
+		font-size: 2em !important;
 	}
 	#imageviewer-image.expanded {
 		height: 100dvh !important;
@@ -966,6 +952,9 @@ button {
 }
 
 @media (min-width: 1900px) {
+	body {
+		font-size: 20px;
+	}
 	.hero .title {
 		top: 20%;
 	}
@@ -976,7 +965,7 @@ button {
 		display: block;
 	}
 	.other_projects div  {
-		font-size: 3rem;
+		font-size: 3em;
 	}
 	.feature {
 		width: calc(50% - 10px);
@@ -995,10 +984,6 @@ button {
 		padding: 0 200px;
 		box-sizing: border-box;
 	}
-/*	section.citadel {
-		padding: 0;
-		height: 1850px;
-	}*/
 	.dictionary {
 		padding: 200px;
 	}
