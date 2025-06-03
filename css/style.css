@@ -625,6 +625,17 @@ button {
 	opacity: 0;
 	pointer-events: none;
 }
+.citadel .scroll-down {
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+	border: 2px gray solid;
+	padding: 10px;
+	text-align: center;
+	font-size: .8rem;
+	font-family: 'League Spartan', sans-serif;
+	color: gray;
+}
 .office {
 	position: relative;
 	left: -20px;
