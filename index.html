@@ -271,14 +271,18 @@
 		//hero title parallax
 		gsap.registerPlugin(ScrollTrigger);
 
-		gsap.to(".hero > .title", {
-			yPercent: -300,
-			ease: "none",
-			scrollTrigger: {
-				trigger: ".hero",
-				start: "top 60px",
-				end: "center center",
-				scrub: 1,
+		ScrollTrigger.matchMedia({
+			"(min-width: 801px)": function () {
+				gsap.to(".hero > .title", {
+					yPercent: -300,
+					ease: "none",
+					scrollTrigger: {
+						trigger: ".hero",
+						start: "top 60px",
+						end: "center center",
+						scrub: 1,
+					}
+				});
 			}
 		});
 

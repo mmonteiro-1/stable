@@ -528,7 +528,7 @@ button {
 	color: white;
 }
 #panorama {
-	width: 100%;
+	width: 100%
 	height: 600px;
 	background: #000000;
 	margin: 0 auto;
@@ -822,13 +822,13 @@ button {
 		margin-left: 15px;
 	}
 	.hero {
-		left: -10px;
+		left: -20px;
 		height: 100vh;
 	}
 	.hero .title.centered {
-		top: 25%;
-		font-size: 4em;
-		padding: 0 30px;
+		top: 20%;
+		font-size: 3.5em;
+/*		padding: 0 30px;*/
 	}
 	.hero img {
 		height: 100%;
@@ -843,7 +843,7 @@ button {
 		font-size: 3em;
 	}
 	.title.centered {
-		padding: 0 10px;
+		/*padding: 0 10px;*/
 		box-sizing: border-box;
 	}
 	.definition {
@@ -858,7 +858,7 @@ button {
 		margin-left: 0;
 	}
 	.content {
-		padding: 10px;
+		/*padding: 10px;*/
 		padding-top: 60px;
 	}
 	.project_title {
@@ -897,8 +897,8 @@ button {
 		margin-top: 0;
 	}
 	footer {
-		left: -10px;
-		bottom: -10px;
+		left: -20px;
+		bottom: -20px;
 	}
 	footer div:last-child {
 		display: none;
@@ -913,7 +913,7 @@ button {
 		height: 100vh;
 		width: 100vw;
 		overflow: auto;
-		left: -10px;
+		left: -20px;
 	}
 	.slider {
 		height: 400px;
@@ -929,7 +929,7 @@ button {
 		font-size: 2em;
 	}
 	.dark {
-		left: -10px;
+		left: -20px;
 		padding: 100px 10px;
 	}
 	.dark video, .thousand img {
@@ -940,7 +940,7 @@ button {
 	}
 	.office {
 		margin-top: 100px;
-		left: -10px;
+		left: -20px;
 		padding: 100px 10px;
 		box-sizing: border-box;
 	}
@@ -958,7 +958,7 @@ button {
 	}
 	.citadel {
 		height: calc(100dvh - 60px);
-		left: -10px;
+		left: -20px;
 	}
 	.citadel img {
 		height: 100%;
@@ -1017,6 +1017,17 @@ button {
 	.watch-office,
 	.watch-surroundings {
 		display: none;
+	}
+	.mosaic .tile {
+		flex: unset;
+	}
+	.grid > div {
+		max-width: 100%;
+		padding: 0;
+		margin-bottom: 50px;
+	}
+	.grid .title {
+		font-size: 2em;
 	}
 }
 
