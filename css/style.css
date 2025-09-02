@@ -83,7 +83,7 @@ nav {
 	justify-content: space-between;
 	height: 60px;
 	width: 100vw;
-	background: #fff;
+	/*background: #fff;*/
 	z-index: 3;
 	transition: background .2s;
 }
@@ -96,9 +96,25 @@ nav a div {
 	align-items: center;
 	font-family: 'League Spartan', sans-serif;
 	font-size: 1.2em;
-	width: 100px;
+	width: 120px;
 	height: 100%;
 	gap: 10px;
+	color: white;
+}
+nav .logo-stable {
+	display: none;
+}
+nav.inverted {
+	background: white;
+}
+nav.inverted .logo-stable {
+	display: block;
+}
+nav.inverted .logo-stable-white {
+	display: none;
+}
+nav.inverted a div {
+	color: #232323;
 }
 a {
 	text-decoration: none;
@@ -172,7 +188,7 @@ footer {
 }
 .project-hero {
 	position: relative;
-	top: -60px;
+	top: 0px;
 	left: -20px;
 	width: 100vw;
 	height: 100vh;
@@ -180,11 +196,14 @@ footer {
 	padding: 40px;
 	box-sizing: border-box;
 }
+.project-hero .type {
+	color: white;
+}
 .project-hero-image {
 	position: absolute;
 	top: 0;
 	left: 0;
-	z-index: -1;
+	z-index: 0;
 	height: 100%;
 	width: 100%;
 	object-fit: cover;
@@ -196,8 +215,11 @@ footer {
 	justify-content: center;
 	height: calc(100dvh - 60px);
 	width: 100%;
-	padding: 200px 0;
+	/*padding: 200px 0;*/
+	position: absolute;
+	top: 35%;
 	box-sizing: border-box;
+	z-index: 1;
 }
 .dictionary.stable {
 	height: 100vh;
@@ -224,6 +246,7 @@ footer {
 }
 .definition a {
 	text-decoration: underline;
+	color: white;
 }
 .synonyms {
 	display: flex;
@@ -307,8 +330,9 @@ footer {
 .content {
 	margin: 0;
 	padding: 20px;
-	padding-top: 60px;
-	box-sizing: border-box;
+	padding-top: 0;
+/*	padding-top: 60px;
+*/	box-sizing: border-box;
 	min-height: 100vh;
 }
 .content_email_sent {

@@ -22,6 +22,9 @@
 </head>
 <body>
 	<style type="text/css">
+		.dictionary {
+			position: unset;
+		}
 		.video {
 			height: 80vh;
 		}
@@ -285,69 +288,6 @@
 				</div>
 			</div>
 			<div class="feature_description"></div>
-			<script>
-				$(document).ready(function() {
-
-					function switchView($icon, $container) {
-						let target = $icon.data("target");
-						let description = $icon.data("description");
-
-						// Update selected state
-						$container.find(".bp-icon").removeClass("selected");
-						$icon.addClass("selected");
-
-						// Fade images
-						$container.find(".bp-image:visible").fadeOut(150, function() {
-							$container.find('.bp-image[data-target="' + target + '"]').fadeIn(150);
-						});
-
-						// Update text
-						$container.next(".feature_description").fadeOut(150, function() {
-							$(this).html(description).fadeIn(150);
-						});
-
-						// Sidebars
-						$(".bp-sidebar-line, .bp-sidebar-tour").removeClass("visible");
-						if (target === "line") {
-							$(".bp-sidebar-line").addClass("visible");
-						} else if (target === "tour") {
-							$(".bp-sidebar-tour").addClass("visible");
-						}
-					}
-
-					// Icon click
-					$(".bp-icon").on("click", function() {
-						let $container = $(this).closest(".bp-container");
-						switchView($(this), $container);
-					});
-
-					// Hover zone: trigger only once on first enter
-					$(".bp-hover-zone").one("mouseenter", function() {
-						let $container = $(this).closest(".bp-container");
-						let $lineIcon = $container.find('.bp-icon[data-target="line"]');
-						switchView($lineIcon, $container);
-					});
-
-					// Initial state
-					$(".bp-container").each(function() {
-						let $container = $(this);
-						let $first = $container.find(".bp-icon.selected");
-						let firstTarget = $first.data("target");
-						let firstDesc = $first.data("description");
-
-						$container.find(".bp-image").hide();
-						$container.find('.bp-image[data-target="' + firstTarget + '"]').show();
-						$container.next(".feature_description").html(firstDesc);
-
-						if (firstTarget === "line") {
-							$(".bp-sidebar-line").addClass("visible");
-						} else if (firstTarget === "tour") {
-							$(".bp-sidebar-tour").addClass("visible");
-						}
-					});
-				});
-
-			</script>
 		</section>
 		<div class="citadel-logo">
 			<a href="project_citadel.html">
@@ -558,42 +498,6 @@
 			});
 		});
 
-
-		//change nav color
-		$(window).on('load', function() {
-			var $nav = $('nav');
-			var $navLinks = $('nav > a');
-			var $logo = $('.logo > img');
-			var heroBottom;
-
-			function setInitialNavStyle() {
-				$nav.css('background-color', '#1b1c1b');
-				$navLinks.css('color', '#f2f2f2');
-				$logo.attr('src', 'images/logo_stable_inverted.svg');
-			}
-
-			function updateNav() {
-				heroBottom = $('.hero').offset().top + $('.hero').outerHeight();
-				var scrollPosition = $(window).scrollTop();
-
-				if (scrollPosition >= heroBottom - 60) {
-					$nav.css('background-color', '#fff');
-					$navLinks.css('color', '#232323');
-					$logo.attr('src', 'images/logo_stable.svg');
-				} else {
-					$nav.css('background-color', '#1b1c1b');
-					$navLinks.css('color', '#fff');
-					$logo.attr('src', 'images/logo_stable_inverted.svg');
-				}
-			}
-
-			setInitialNavStyle();
-
-			$(window).on('scroll', updateNav);
-
-			$(window).on('resize', updateNav);
-		});
-
 		//hero title parallax
 		gsap.registerPlugin(ScrollTrigger);
 
@@ -644,6 +548,68 @@
 				duration: 5, // Duration for each image's animation
 				ease: 'power2.inOut', // Apply easing
 				delay: index * 0.5, // Stagger the animations
+			});
+		});
+
+		// Breitner & Payne change view and sidebar
+		$(document).ready(function() {
+
+			function switchView($icon, $container) {
+				let target = $icon.data("target");
+				let description = $icon.data("description");
+
+				// Update selected state
+				$container.find(".bp-icon").removeClass("selected");
+				$icon.addClass("selected");
+
+				// Fade images
+				$container.find(".bp-image:visible").fadeOut(150, function() {
+					$container.find('.bp-image[data-target="' + target + '"]').fadeIn(150);
+				});
+
+				// Update text
+				$container.next(".feature_description").fadeOut(150, function() {
+					$(this).html(description).fadeIn(150);
+				});
+
+				// Sidebars
+				$(".bp-sidebar-line, .bp-sidebar-tour").removeClass("visible");
+				if (target === "line") {
+					$(".bp-sidebar-line").addClass("visible");
+				} else if (target === "tour") {
+					$(".bp-sidebar-tour").addClass("visible");
+				}
+			}
+
+			// Icon click
+			$(".bp-icon").on("click", function() {
+				let $container = $(this).closest(".bp-container");
+				switchView($(this), $container);
+			});
+
+			// Hover zone: trigger only once on first enter
+			$(".bp-hover-zone").one("mouseenter", function() {
+				let $container = $(this).closest(".bp-container");
+				let $lineIcon = $container.find('.bp-icon[data-target="line"]');
+				switchView($lineIcon, $container);
+			});
+
+			// Initial state
+			$(".bp-container").each(function() {
+				let $container = $(this);
+				let $first = $container.find(".bp-icon.selected");
+				let firstTarget = $first.data("target");
+				let firstDesc = $first.data("description");
+
+				$container.find(".bp-image").hide();
+				$container.find('.bp-image[data-target="' + firstTarget + '"]').show();
+				$container.next(".feature_description").html(firstDesc);
+
+				if (firstTarget === "line") {
+					$(".bp-sidebar-line").addClass("visible");
+				} else if (firstTarget === "tour") {
+					$(".bp-sidebar-tour").addClass("visible");
+				}
 			});
 		});
 	</script>
