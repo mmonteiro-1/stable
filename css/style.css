@@ -381,7 +381,7 @@ footer {
 	flex-wrap: nowrap;
 }
 .mosaic .tile {
-	flex: 1 1 24%;
+	flex: 1 1 23%;
 	box-sizing: border-box;
 	aspect-ratio: 1/1;
 	overflow: hidden;
