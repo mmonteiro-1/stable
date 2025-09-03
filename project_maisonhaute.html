@@ -19,77 +19,78 @@
 </head>
 <body>
 	<nav></nav>
-	<div id="butter" class="content">
-		<div class="project-hero">
-			<img class="project-hero-image" src="images/maisonhaute_04.webp">
-			<div class="dictionary">
-				<div class="type">project</div>
-				<div class="title">Maison Haute</div>
-				<div class="definition">1. This house was created to take advantage of the landscape and natural light, not to overstate its presence. The hilltop property location allows for a private open house.</div>
+	<div class="smooth-wrapper">
+		<div class="smooth-content">
+			<div class="content">
+				<div class="project-hero">
+					<img class="project-hero-image" src="images/maisonhaute_04.webp">
+					<div class="dictionary">
+						<div class="type">project</div>
+						<div class="title">Maison Haute</div>
+						<div class="definition">1. This house was created to take advantage of the landscape and natural light, not to overstate its presence. The hilltop property location allows for a private open house.</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="image">
+						<img alt="3d render of a house" src="images/maisonhaute_01.webp">
+					</div>
+					<div class="image">
+						<img alt="3d render of a house" src="images/maisonhaute_02.webp">
+					</div>
+				</div>
+				<div class="row">
+					<div class="image gsap_image">
+						<img alt="3d render of a house" src="images/maisonhaute_03.webp">
+					</div>
+					<div class="image gsap_image">
+						<img alt="3d render of a house" src="images/maisonhaute_04.webp">
+					</div>
+				</div>
+				<div class="section_title">Other projects</div>
+				<div class="row row_other_projects">
+					<a href="project_casaornatoverde.html">
+						<div class="other_projects">
+							<img alt="3d render of a house" src="images/small/casaornato_01_small.webp">
+							<div>Casa Ornato Verde</div>
+						</div>
+					</a>
+					<a href="project_guntherhouse.html">
+						<div class="other_projects">
+							<img alt="3d render of a house" src="images/small/guntherhouse_04_small.webp">
+							<div>Gunther House</div>
+						</div>
+					</a>
+					<a href="project_olivagiulianova.html">
+						<div class="other_projects">
+							<img alt="3d render of a house" src="images/small/oliva_02_small.webp">
+							<div>Oliva Giulianova</div>
+						</div>
+					</a>
+					<a href="project_planoalto.html">
+						<div class="other_projects">
+							<img alt="3d render of a house" src="images/small/planoalto_04_small.jpg">
+							<div>Plano Alto</div>
+						</div>
+					</a>
+					<a href="project_citadel.html">
+						<div class="other_projects">
+							<img alt="3d render of a house" src="images/citadel_02.webp">
+							<div>4040 Citadel Park</div>
+						</div>
+					</a>
+				</div>
+				<footer></footer>
 			</div>
 		</div>
-		<div class="row">
-			<div class="image">
-				<img alt="3d render of a house" src="images/maisonhaute_01.webp">
-			</div>
-			<div class="image">
-				<img alt="3d render of a house" src="images/maisonhaute_02.webp">
-			</div>
-		</div>
-		<div class="row">
-			<div class="image gsap_image">
-				<img alt="3d render of a house" src="images/maisonhaute_03.webp">
-			</div>
-			<div class="image gsap_image">
-				<img alt="3d render of a house" src="images/maisonhaute_04.webp">
-			</div>
-		</div>
-		<div class="section_title">Other projects</div>
-		<div class="row row_other_projects">
-			<a href="project_casaornatoverde.html">
-				<div class="other_projects">
-					<img alt="3d render of a house" src="images/small/casaornato_01_small.webp">
-					<div>Casa Ornato Verde</div>
-				</div>
-			</a>
-			<a href="project_guntherhouse.html">
-				<div class="other_projects">
-					<img alt="3d render of a house" src="images/small/guntherhouse_04_small.webp">
-					<div>Gunther House</div>
-				</div>
-			</a>
-			<a href="project_olivagiulianova.html">
-				<div class="other_projects">
-					<img alt="3d render of a house" src="images/small/oliva_02_small.webp">
-					<div>Oliva Giulianova</div>
-				</div>
-			</a>
-			<a href="project_planoalto.html">
-				<div class="other_projects">
-					<img alt="3d render of a house" src="images/small/planoalto_04_small.jpg">
-					<div>Plano Alto</div>
-				</div>
-			</a>
-			<a href="project_citadel.html">
-				<div class="other_projects">
-					<img alt="3d render of a house" src="images/citadel_02.webp">
-					<div>4040 Citadel Park</div>
-				</div>
-			</a>
-		</div>
-		<footer></footer>
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
 	<script type="text/javascript" src="js/gsap.js"></script>
 	<script src="js/jquery.imageviewer.js"></script>
-	<script src="js/butter.js"></script>
 	<script type="text/javascript">
 
 		$("nav").load("nav.html");
 		$("footer").load("footer.html");
-
-		butter.init();
 
 		imageviewer();
 

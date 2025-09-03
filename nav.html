@@ -1,13 +1,25 @@
-<a href="projects.html">
-	<div>Projects</div>
-</a>
-<a href="index.html">
-	<div>
-		<img class="logo-stable" src="images/logo_stable.svg">
-		<img class="logo-stable-white" src="images/logo_stable_white.svg">
-		<!-- <div>Stable</div> -->
+<div class="flip-click" data-link="projects.html">
+	<div class="flip-mask">
+		<div class="default-text white-shadow">Projects</div>
 	</div>
-</a>
-<a href="contact.php">
-	<div>Contact</div>
-</a>
+</div>
+<div data-link="index.html">
+	<img class="logo-stable" src="images/logo_stable.svg">
+	<img class="logo-stable-white" src="images/logo_stable_white.svg">
+</div>
+<div class="flip-click" data-link="contact.php">
+	<div class="flip-mask">
+		<div class="default-text white-shadow">Contact</div>
+	</div>
+</div>
+<script>
+	//Redirect nav data-links because this page is not calling the gsap.js on time
+	$("[data-link]").on("click", function() {
+		const url = $(this).data("link");
+		if (url) {
+			$("body").fadeOut(500, function() {
+				window.location.href = url;
+			});
+		}
+	});
+</script>

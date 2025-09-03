@@ -16,17 +16,21 @@
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico">
 	<title>Stable</title>
-</head>
-<body>
-	<style type="text/css">
+	<style>
 		.image:hover {
 			cursor: pointer;
 		}
-		.image:hover > img {
-			transform: none;
+		.image:hover .default-text {
+			transform: translateY(-1em);
 		}
-		.image {
-			overflow: unset;
+		.image .flip-click {
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+			height: 30px;
+			padding-top: 10px;
+			box-sizing: border-box;
+			background: #f2f2f2;
 		}
 		.row {
 			margin: 20px 0 40px 0;
@@ -35,74 +39,122 @@
 			padding-top: 60px;
 		}
 	</style>
+</head>
+<body>
 	<nav class="inverted"></nav>
-	<div id="butter" class="content">
-		<div class="row">
-			<a class="image gsap_image" href="project_citadel.html">
-				<img alt="3d render of a living room" src="images/citadel_05.webp">
-				<span>4040 Citadel Park</span>
-			</a>
-			<a class="image gsap_image" href="project_breitnerpayne.html">
-				<img alt="3d render of a building exterior" src="images/breitnerpayne_production_line2.webp">
-				<span>Breitner & Payne</span>
-			</a>
+	<div class="smooth-wrapper">
+		<div class="smooth-content">
+			<div class="content">
+				<div class="row">
+					<div class="image" data-link="project_citadel.html">
+						<img alt="3d render of a living room" src="images/citadel_05.webp">
+						<div class="flip-click">
+							<div class="flip-mask">
+								<div class="default-text dark-shadow">4040 Citadel Park</div>
+							</div>
+						</div>
+					</div>
+					<div class="image" data-link="project_breitnerpayne.html">
+						<img alt="3d render of a building exterior" src="images/breitnerpayne_production_line2.webp">
+						<div class="flip-click">
+							<div class="flip-mask">
+								<div class="default-text dark-shadow">Breitner & Payne</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="image" data-link="project_lidador.html">
+						<img alt="3d render of a building exterior" src="images/lidador_02.webp">
+						<div class="flip-click">
+							<div class="flip-mask">
+								<div class="default-text dark-shadow">Porto Lidador</div>
+							</div>
+						</div>
+					</div>
+					<div class="image" data-link="project_planoalto.html">
+						<img alt="3d render of a living room" src="images/planoalto_09.webp" style="object-position: 100%">
+						<div class="flip-click">
+							<div class="flip-mask">
+								<div class="default-text dark-shadow">Plano Alto</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="image" data-link="project_electriccentury.html">
+						<img alt="3d render of a building exterior" src="images/electriccentury_02.webp">
+						<div class="flip-click">
+							<div class="flip-mask">
+								<div class="default-text dark-shadow">Electric Century</div>
+							</div>
+						</div>
+					</div>
+					<div class="image" data-link="project_olivagiulianova.html">
+						<img alt="3d render of a house exterior" src="images/oliva_02.webp">
+						<div class="flip-click">
+							<div class="flip-mask">
+								<div class="default-text dark-shadow">Oliva Giulianova</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="image" data-link="project_maisonhaute.html">
+						<img alt="3d render of a house exterior" src="images/maisonhaute_04.webp">
+						<div class="flip-click">
+							<div class="flip-mask">
+								<div class="default-text dark-shadow">Maison Haute</div>
+							</div>
+						</div>
+					</div>
+					<div class="image" href="project_casaalmada.html">
+						<img alt="3d render of a house exterior" src="images/casaalmada_01.webp">
+						<div class="flip-click">
+							<div class="flip-mask">
+								<div class="default-text dark-shadow">Casa Almada</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="image" data-link="project_acrylichail.html">
+						<img alt="3d render of a house exterior" src="images/acrylichail_02.webp">
+						<div class="flip-click">
+							<div class="flip-mask">
+								<div class="default-text dark-shadow">Acrylic Hail</div>
+							</div>
+						</div>
+					</div>
+					<div class="image" data-link="project_guntherhouse.html">
+						<img alt="3d render of a kitchen" src="images/guntherhouse_02.webp">
+						<div class="flip-click">
+							<div class="flip-mask">
+								<div class="default-text dark-shadow">Gunther House</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="image" data-link="project_casaornatoverde.html">
+						<img alt="3d render of a living room" src="images/casaornato_02.webp">
+						<div class="flip-click">
+							<div class="flip-mask">
+								<div class="default-text dark-shadow">Casa Ornato Verde</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<footer></footer>
+			</div>
 		</div>
-		<div class="row">
-			<a class="image gsap_image" href="project_lidador.html">
-				<img alt="3d render of a building exterior" src="images/lidador_02.webp">
-				<span>Porto Lidador</span>
-			</a>
-			<a class="image gsap_image" href="project_planoalto.html">
-				<img alt="3d render of a living room" src="images/planoalto_09.webp" style="object-position: 100%">
-				<span>Plano Alto</span>
-			</a>
-		</div>
-		<div class="row">
-			<a class="image gsap_image" href="project_electriccentury.html">
-				<img alt="3d render of a building exterior" src="images/electriccentury_02.webp">
-				<span>Electric Century</span>
-			</a>
-			<a class="image gsap_image" href="project_olivagiulianova.html">
-				<img alt="3d render of a house exterior" src="images/oliva_02.webp">
-				<span>Oliva Giulianova</span>
-			</a>
-		</div>
-		<div class="row">
-			<a class="image gsap_image" href="project_maisonhaute.html">
-				<img alt="3d render of a house exterior" src="images/maisonhaute_04.webp">
-				<span>Maison Haute</span>
-			</a>
-			<a class="image gsap_image" href="project_casaalmada.html">
-				<img alt="3d render of a house exterior" src="images/casaalmada_01.webp">
-				<span>Casa Almada</span>
-			</a>
-		</div>
-		<div class="row">
-			<a class="image gsap_image" href="project_acrylichail.html">
-				<img alt="3d render of a house exterior" src="images/acrylichail_02.webp">
-				<span>Acrylic Hail</span>
-			</a>
-			<a class="image gsap_image" href="project_guntherhouse.html">
-				<img alt="3d render of a kitchen" src="images/guntherhouse_02.webp">
-				<span>Gunther House</span>
-			</a>
-		</div>
-		<div class="row">
-			<a class="image gsap_image" href="project_casaornatoverde.html">
-				<img alt="3d render of a living room" src="images/casaornato_02.webp">
-				<span>Casa Ornato Verde</span>
-			</a>
-		</div>
-		<footer></footer>
 	</div>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 	<script type="text/javascript" src="js/gsap.js"></script>
-	<script src="js/butter.js"></script>
-	<script type="text/javascript">
+	<script>
 		$("nav").load("nav.html");
 		$("footer").load("footer.html");
-		butter.init();
 	</script>
 </body>
 </html>

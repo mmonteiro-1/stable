@@ -19,77 +19,78 @@
 </head>
 <body>
 	<nav></nav>
-	<div id="butter" class="content">
-		<div class="project-hero">
-			<img class="project-hero-image" src="images/guntherhouse_01.webp">
-			<div class="dictionary">
-				<div class="type">project</div>
-				<div class="title">Gunther House</div>
-				<div class="definition">1. A zen-styled city escape in the heart of Berlin built off pinewood, concrete and plaster.</div>
+	<div class="smooth-wrapper">
+		<div class="smooth-content">
+			<div class="content">
+				<div class="project-hero">
+					<img class="project-hero-image" src="images/guntherhouse_01.webp">
+					<div class="dictionary">
+						<div class="type">project</div>
+						<div class="title">Gunther House</div>
+						<div class="definition">1. A zen-styled city escape in the heart of Berlin built off pinewood, concrete and plaster.</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="image">
+						<img alt="3d render of a house" src="images/guntherhouse_02.webp">
+					</div>
+					<div class="image">
+						<img alt="3d render of a house" src="images/guntherhouse_04.webp">
+					</div>
+				</div>
+				<div class="row">
+					<div class="image gsap_image">
+						<img alt="3d render of a house" src="images/guntherhouse_03.webp">
+					</div>
+					<div class="image gsap_image">
+						<img alt="3d render of a house" src="images/guntherhouse_01.webp">
+					</div>
+				</div>
+				<div class="section_title">Other projects</div>
+				<div class="row row_other_projects">
+					<a href="project_planoalto.html">
+						<div class="other_projects">
+							<img alt="3d render of a house" src="images/small/planoalto_09_small.jpg">
+							<div>Plano Alto</div>
+						</div>
+					</a>
+					<a href="project_electriccentury.html">
+						<div class="other_projects">
+							<img alt="3d render of a house" src="images/small/electriccentury_03_small.webp">
+							<div>Electric Century</div>
+						</div>
+					</a>
+					<a href="project_citadel.html">
+						<div class="other_projects">
+							<img alt="3d render of a house" src="images/citadel_02.webp">
+							<div>4040 Citadel Park</div>
+						</div>
+					</a>
+					<a href="project_casaalmada.html">
+						<div class="other_projects">
+							<img alt="3d render of a house" src="images/small/casaalmada_02_small.webp">
+							<div>Casa Almada</div>
+						</div>
+					</a>
+					<a href="project_acrylichail.html">
+						<div class="other_projects">
+							<img alt="3d render of a house" src="images/small/acrylichail_02_small.webp">
+							<div>Acrylic Hail</div>
+						</div>
+					</a>
+				</div>
+				<footer></footer>
 			</div>
 		</div>
-		<div class="row">
-			<div class="image">
-				<img alt="3d render of a house" src="images/guntherhouse_02.webp">
-			</div>
-			<div class="image">
-				<img alt="3d render of a house" src="images/guntherhouse_04.webp">
-			</div>
-		</div>
-		<div class="row">
-			<div class="image gsap_image">
-				<img alt="3d render of a house" src="images/guntherhouse_03.webp">
-			</div>
-			<div class="image gsap_image">
-				<img alt="3d render of a house" src="images/guntherhouse_01.webp">
-			</div>
-		</div>
-		<div class="section_title">Other projects</div>
-		<div class="row row_other_projects">
-			<a href="project_planoalto.html">
-				<div class="other_projects">
-					<img alt="3d render of a house" src="images/small/planoalto_09_small.jpg">
-					<div>Plano Alto</div>
-				</div>
-			</a>
-			<a href="project_electriccentury.html">
-				<div class="other_projects">
-					<img alt="3d render of a house" src="images/small/electriccentury_03_small.webp">
-					<div>Electric Century</div>
-				</div>
-			</a>
-			<a href="project_citadel.html">
-				<div class="other_projects">
-					<img alt="3d render of a house" src="images/citadel_02.webp">
-					<div>4040 Citadel Park</div>
-				</div>
-			</a>
-			<a href="project_casaalmada.html">
-				<div class="other_projects">
-					<img alt="3d render of a house" src="images/small/casaalmada_02_small.webp">
-					<div>Casa Almada</div>
-				</div>
-			</a>
-			<a href="project_acrylichail.html">
-				<div class="other_projects">
-					<img alt="3d render of a house" src="images/small/acrylichail_02_small.webp">
-					<div>Acrylic Hail</div>
-				</div>
-			</a>
-		</div>
-		<footer></footer>
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
 	<script type="text/javascript" src="js/gsap.js"></script>
 	<script src="js/jquery.imageviewer.js"></script>
-	<script src="js/butter.js"></script>
 	<script type="text/javascript">
 
 		$("nav").load("nav.html");
 		$("footer").load("footer.html");
-
-		butter.init();
 
 		imageviewer();
 

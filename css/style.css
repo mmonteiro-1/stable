@@ -9,8 +9,23 @@ body {
 	color: #232323;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+.smooth-wrapper {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+.smooth-content {
+	will-change: transform;
+	transform: translate3d(0,0,0) scale(1.0001); /*TRICK TO AVOID JITTER*/
+}
 *:focus {
 	outline: none;
+}
+[data-link] {
+	cursor: pointer;
 }
 .nowrap {
 	flex-wrap: nowrap;
@@ -90,7 +105,7 @@ nav {
 nav a {
 	height: 100%;
 }
-nav a div {
+nav > div {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -113,8 +128,11 @@ nav.inverted .logo-stable {
 nav.inverted .logo-stable-white {
 	display: none;
 }
-nav.inverted a div {
+nav.inverted div {
 	color: #232323;
+}
+nav.inverted .default-text {
+	text-shadow: 0px 1.1em 0px #232323;
 }
 a {
 	text-decoration: none;
@@ -164,7 +182,7 @@ footer {
 .hero .title {
 	color: #f2f2f2;
 	position: absolute;
-	top: 25%;
+	top: 30%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	padding: 0 20px;
@@ -215,14 +233,14 @@ footer {
 	justify-content: center;
 	height: calc(100dvh - 60px);
 	width: 100%;
-	/*padding: 200px 0;*/
+	padding: 0 100px;
 	position: absolute;
-	top: 35%;
+	/*top: 35%;*/
 	box-sizing: border-box;
 	z-index: 1;
 }
 .dictionary.stable {
-	height: 100vh;
+	height: 100dvh;
 }
 .type {
 	color: gray;
@@ -289,7 +307,7 @@ footer {
 	position: relative;
 	left: -20px; 
 	width: 100vw;
-	height: 80vh;
+	height: 80dvh;
 	overflow: hidden;
 	margin-bottom: 100px;
 }
@@ -464,7 +482,9 @@ footer {
 .image span {
 	font-family: 'League Spartan', sans-serif;
 	margin-top: 10px;
-
+}
+.image .flip-click {
+	margin-top: 10px;
 }
 .expanded img {
 	object-fit: contain;
@@ -622,8 +642,8 @@ button {
 	color: white;
 }
 #panorama {
-	width: 100%
-	height: 80vh;
+	width: 100%;
+	height: 80dvh;
 	background: #000000;
 	margin: 0 auto;
 }
@@ -726,7 +746,7 @@ button {
 }
 .thousand img:not(.project-logo) {
 	width: 100%;
-	height: 80vh;
+	height: 80dvh;
 	object-fit: cover;
 	object-position: center 30%;
 }
@@ -748,7 +768,7 @@ button {
 	position: relative;
 	left: -20px;
 	width: 100vw;
-	height: 100vh;
+	height: 80dvh;
 	background: #131313;
 	overflow: hidden;
 }
@@ -759,13 +779,15 @@ button {
 	bottom: 0;
 	left: 0;
 	width: 100%;
+	height: 100%;
+	object-fit: cover;
 } 
 .citadel img.gsap-layer {
 	opacity: 0;
 }
 .citadel .dim {
 	height: 100%;
-	opacity: 0;
+	/*opacity: 0;*/
 	background: #000000a1;
 
 }
@@ -787,16 +809,36 @@ button {
 	opacity: 0;
 	pointer-events: none;
 }
-.citadel .scroll-down {
+#citadel-play {
 	position: absolute;
-	top: 80px;
-	right: 20px;
-	border: 2px gray solid;
-	padding: 10px;
+	top: 40px;
+	left: 50%;
+	transform: translate(-50%, 0);
+	background: #484848;
+	padding: 10px 20px;
+	border-radius: 30px;
 	text-align: center;
-	font-size: .8em;
+	color: white;
+	cursor: pointer;
+	z-index: 1;
+}
+.flip-click{
+	cursor: pointer;
 	font-family: 'League Spartan', sans-serif;
-	color: gray;
+}
+.flip-mask {
+	line-height: 1em;
+	overflow: hidden;
+}
+.default-text {
+	text-shadow: 0px 1.1em 0px #232323;
+	transition: transform 0.545s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.default-text.white-shadow {
+	text-shadow: 0px 1.1em 0px white;
+}
+.flip-click:hover .default-text {
+	transform: translateY(-1em);
 }
 .office {
 	position: relative;
@@ -808,7 +850,7 @@ button {
 .office .video,
 .office img {
 	aspect-ratio: 1.7;
-	max-height: 80vh;
+	max-height: 80dvh;
 }
 .office img {
 	width: 100%;
@@ -900,7 +942,7 @@ button {
 }
 .bp-container {
 	position: relative;
-	max-height: 80vh;
+	max-height: 80dvh;
 	width: 100%;
 	aspect-ratio: 16/9;
 	background: black;
@@ -1017,16 +1059,6 @@ button {
 }
 .bp-navbar > img.selected {
 	opacity: 1;
-}
-.bp-navbar-legend {
-	position: absolute;
-	bottom: 90px;
-	left: 50%;
-	transform: translate(-50%, 0);
-	text-align: center;
-	font-family: "Overpass Mono", monospace;
-	color: white;
-	font-size: .8em;
 }
 .project-logo {
 	max-width: 200px;
@@ -1278,7 +1310,7 @@ button {
 		font-size: 20px;
 	}
 	.hero .title {
-		top: 20%;
+		top: 25%;
 	}
 	.hero {
 	padding-top: 15%;
