@@ -1,29 +1,13 @@
-//Redirect data-link
-$("[data-link]").on("click", function() {
-	const url = $(this).data("link");
-	if (url) {
-		$("body").fadeOut(500, function() {
-			window.location.href = url;
-		});
-	}
-});
-
-// Custom GSAP smooth scroll
+// CUSTOM GSAP SMOOTH SCROLL
 gsap.registerPlugin(ScrollTrigger);
 
 const wrapper = document.querySelector(".smooth-wrapper");
 const content = document.querySelector(".smooth-content");
 
-let contentHeight;
-
 function setHeight() {
-	contentHeight = content.getBoundingClientRect().height;
+	const contentHeight = content.getBoundingClientRect().height;
 	document.body.style.height = contentHeight + "px";
 }
-
-// Initial setup
-setHeight();
-window.addEventListener("resize", setHeight);
 
 // Scroller proxy
 ScrollTrigger.scrollerProxy(wrapper, {
@@ -48,130 +32,114 @@ gsap.ticker.add(() => {
 	});
 });
 
-// Refresh on load
-ScrollTrigger.addEventListener("refresh", setHeight);
-ScrollTrigger.refresh();
+// Keep refreshing height
+function refreshHeight() {
+	setHeight();
+	ScrollTrigger.refresh();
+}
 
+// On load, resize, image load
+$(window).on("load", function () {
+	refreshHeight();
 
+	// Run multiple refreshes after load
+	setTimeout(refreshHeight, 500);
+	setTimeout(refreshHeight, 1500);
 
-
-
-
-
-
-
-
-
-// DICTIONARY HERO PARALLAX
-const dictionaries = gsap.utils.toArray(".dictionary:not(.stable)");
-
-// store the target scroll progress
-let scrollTarget = 0;
-let proxyScroll = 0;
-
-// update target on scroll
-wrapper.addEventListener("scroll", () => {
-	scrollTarget = wrapper.scrollTop;
+	// Also watch images
+	$("img").on("load", refreshHeight);
 });
 
-// smooth update loop
-gsap.ticker.add(() => {
-	// interpolate proxyScroll towards scrollTarget
-	proxyScroll += (scrollTarget - proxyScroll) * 0.1; // tweak 0.1 for smoothing
+// Resize handler
+window.addEventListener("resize", refreshHeight);
 
-	dictionaries.forEach(el => {
-		// calculate the scroll progress relative to trigger element
-		const trigger = el.closest(".project-hero");
-		if (!trigger) return;
+// Final safety net: run several times via rAF
+let rafRuns = 0;
+function rafFix() {
+	if (rafRuns < 30) { // ~0.5s at 60fps
+		refreshHeight();
+		rafRuns++;
+		requestAnimationFrame(rafFix);
+	}
+}
+requestAnimationFrame(rafFix);
 
-		const triggerRect = trigger.getBoundingClientRect();
-		const viewportHeight = window.innerHeight;
-
-		// compute progress 0 → 1 as trigger enters/leaves viewport
-		let progress = 1 - (triggerRect.bottom / viewportHeight);
-		progress = Math.min(Math.max(progress, 0), 1); // clamp
-
-		// apply GSAP smooth transform
-		gsap.to(el, {
-			yPercent: -50 * progress,
-			duration: 0.2,
-			ease: "power1.out",
-			overwrite: true
+// CONVERTS DATA-LINKS INTO LINKS
+$(document).on("click", "[data-link]", function (e) {
+	e.preventDefault();
+	const url = $(this).data("link");
+	if (url) {
+		$("body").fadeOut(500, function () {
+			window.location.href = url;
 		});
+	}
+});
+
+//HOMEPAGE HERO PARALLAX
+gsap.registerPlugin(ScrollTrigger);
+
+ScrollTrigger.matchMedia({
+	"(min-width: 801px)": function () {
+		gsap.to(".hero > .title", {
+			yPercent: -300,
+			ease: "none",
+			scrollTrigger: {
+				trigger: ".hero",
+				start: "top 60px",
+				end: "center center",
+				scrub: 1,
+			}
+		});
+	}
+});
+
+// PROJECTS PAGE HERO PARALLAX
+gsap.registerPlugin(ScrollTrigger);
+
+ScrollTrigger.matchMedia({
+	"(min-width: 801px)": function () {
+		gsap.to(".project-hero > .dictionary", {
+			yPercent: -300,
+			ease: "none",
+			scrollTrigger: {
+				trigger: ".hero",
+				start: "top 60px",
+				end: "center center",
+				scrub: 1,
+			}
+		});
+	}
+});
+
+// SUGGESTS OTHER PROJECTS RANDOM
+$.get("project_gallery.html", function(data) {
+	var $loaded = $(data);
+	var $projects = $loaded.find(".other_projects").addBack(".other_projects");
+
+	// Get the current page's file name
+	var currentPage = window.location.pathname.split("/").pop();
+
+	// Filter out the project that matches the current page
+	$projects = $projects.filter(function() {
+		return $(this).data("link") !== currentPage;
 	});
+
+	// Convert to array for Fisher–Yates shuffle
+	var projectsArray = $projects.toArray();
+
+	for (let i = projectsArray.length - 1; i > 0; i--) {
+		const j = Math.floor(Math.random() * (i + 1));
+		[projectsArray[i], projectsArray[j]] = [projectsArray[j], projectsArray[i]];
+	}
+
+	// Take 5 random ones
+	var $selected = $(projectsArray.slice(0, 5));
+
+	$(".row_other_projects").empty().append($selected);
 });
 
 
-
-
-
-
-
-
-
-
-
-// const gsapText = gsap.utils.toArray('.gsap_text');
-
-// gsapText.forEach((gsap_text, i) => {
-// 	const anim = gsap.fromTo(gsap_text, {opacity: 0, y: 20}, {duration: 1, opacity: 1, y: 0});
-// 	ScrollTrigger.create({
-// 		trigger: gsap_text,
-// 		start: "top 85%",
-// 		animation: anim,
-// 		toggleActions: 'play none none none',
-// 		once: true,
-// 	});
-// });
-
-
-// const gsapImage = gsap.utils.toArray('.gsap_image');
-
-// gsapImage.forEach((gsap_image, i) => {
-// 	const anim = gsap.fromTo(gsap_image, {opacity: 0, y: 20}, {duration: 1, delay: 0.5, opacity: 1, y: 0});
-// 	ScrollTrigger.create({
-// 		trigger: gsap_image,
-// 		start: "top 100%",
-// 		animation: anim,
-// 		toggleActions: 'play none none none',
-// 		once: true,
-// 	});
-// });
-
-
-// gsap.to(".dictionary:not(.stable)", {
-// 	yPercent: -50, 
-// 	ease: "none",
-// 	scrollTrigger: {
-// 		trigger: ".project-hero",
-// 		start: "top bottom",
-// 		end: "bottom center",
-// 		scrub: true,
-// 	}
-// });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//change nav color
+//CHANGE NAV COLOR WHEN BELOW HERO
 $(window).on('load', function() {
 	var $nav = $('nav');
 	var $navLinks = $('nav > a');

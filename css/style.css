@@ -231,7 +231,9 @@ footer {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	height: calc(100dvh - 60px);
+	/*height: calc(100dvh - 60px);*/
+	top: 50%;
+	transform: translate(0, -50%);
 	width: 100%;
 	padding: 0 100px;
 	position: absolute;
@@ -239,8 +241,13 @@ footer {
 	box-sizing: border-box;
 	z-index: 1;
 }
-.dictionary.stable {
+.dictionary-stable {
 	height: 100dvh;
+	display: flex;
+	align-items: center;
+}
+.dictionary-stable > div {
+	padding-left: 100px;
 }
 .type {
 	color: gray;
@@ -493,37 +500,32 @@ footer {
 	font-family: 'League Spartan', sans-serif;
 	margin-top: 100px;
 }
+.row_other_projects {
+	gap: 10px;
+}
 .row_other_projects a {
 	flex: 1;
 }
-.row_other_projects a:last-child  {
+.row_other_projects > div:last-child  {
 	display: none;
 }
 .other_projects {
-	display: flex;
-	flex-direction: column;
-	aspect-ratio: 2;
+	flex: 1;
+	aspect-ratio: 1;
 	position: relative;
 }
 .other_projects img {
 	height: 100%;
 	width: 100%;
 	object-fit: cover;
-	filter: brightness(0.4);
-	-webkit-transition : -webkit-filter 500ms linear
 }
-.other_projects div {
+.other_projects > div {
 	position: absolute;
-	width: 80%;
-	color: white;
-	font-size: 2em;
-	top: 50%;
-	left: 20px;
-	transform: translate(0, -50%);
-}
-.other_projects img.clear {
-	filter: brightness(1.0);
-	-webkit-transition : -webkit-filter 500ms linear
+	width: 100%;
+	bottom: 0;
+	padding-top: 10px;
+	background: #f2f2f2;
+	font-family: 'League Spartan', sans-serif;
 }
 .plans img {
 	object-fit: contain;
@@ -874,24 +876,22 @@ button {
 }
 .gallery {
 	display: flex;
-	flex-wrap: wrap;
 	gap: 20px;
+	flex-wrap: wrap;
 }
 .gallery > div {
-	flex: 1;
-	background: #fff;
-	padding: 10px;
-	box-sizing: border-box;
+	width: calc(25% - 15px);
+	margin-bottom: 30px;
+	aspect-ratio: 1;
 }
 .gallery > div img {
 	width: 100%;
-	aspect-ratio: 1;
+	height: 100%;
 	object-fit: cover;
 }
 .pantone {
 	font-family: 'League Spartan', sans-serif;
-	font-size: 1.7vw;
-	padding: 10px 0 30px 0;
+	font-size:1em;
 }
 .video.citadel_cinematic {
 	background-image: url('../images/citadel_02.webp');
@@ -1074,16 +1074,8 @@ button {
 	max-width: 400px;
 	max-height: 150px;
 }
+
 @media (max-width: 800px) {
-	body {
-		background: linear-gradient(
-			to bottom, 
-			white,
-			white 60px,
-			#f2f2f2 60px,
-			#f2f2f2
-			);
-	}
 	section {
 		margin-bottom: 100px;
 	}
@@ -1106,10 +1098,12 @@ button {
 	.hero img {
 		height: 100%;
 	}
-	.dictionary.stable {
-		height: unset;
-		min-height: unset;
-		justify-content: flex-start;
+	.dictionary {
+		width: calc(100% - 40px);
+		padding: 0;
+	}
+	.dictionary-stable > div {
+		padding: 0;
 	}
 	.title {
 		margin-top: 0;
@@ -1129,9 +1123,6 @@ button {
 	.synonyms span {
 		margin-left: 0;
 	}
-	.content {
-		padding-top: 60px;
-	}
 	.project_title {
 		font-size: 4em;
 		line-height: 60px;
@@ -1146,12 +1137,12 @@ button {
 		width: 100%;
 		aspect-ratio: 1;
 	}
-	.row_other_projects a {
-		width: 100%;
+	.row_other_projects > div {
+		width: calc(50% - 5px);
 		flex: unset;
 	}
-	.other_projects {
-		aspect-ratio: 3;
+	.row_other_projects > div:last-child {
+		display: block;
 	}
 	.about, .contacts {
 		width: 100vw;
@@ -1244,14 +1235,8 @@ button {
 		left: 50%;
 		transform: translate(-50%, -50%);
 	}
-	.gallery {
-		flex-direction: column;
-	}
 	.gallery > div {
-		aspect-ratio: unset;
-	}
-	.pantone {
-		font-size: 7vw;
+		width: calc(50% - 10px);
 	}
 	#panorama {
 		height: 400px;
@@ -1303,6 +1288,13 @@ button {
 	.bp-sidebar-line, .bp-sidebar-tour {
 		display: none;
 	}
+	.project-hero {
+		padding: 20px;
+	}
+	.spacer-logo img {
+		max-height: 70px;
+		max-width: 250px;
+	}
 }
 
 @media (min-width: 1900px) {
@@ -1315,11 +1307,8 @@ button {
 	.hero {
 	padding-top: 15%;
 	}
-	.row_other_projects a:last-child  {
+	.row_other_projects > div:last-child  {
 		display: block;
-	}
-	.other_projects div  {
-		font-size: 2.5em;
 	}
 	.feature {
 		width: calc(50% - 10px);
@@ -1347,9 +1336,6 @@ button {
 	.citadel .feature_description {
 		padding: 0 220px;
 	}
-	.pantone {
-		font-size: 1.4vw;
-	}
 	#panorama {
 		height: 800px;
 	}
@@ -1367,5 +1353,11 @@ button {
 	.citadel-logo {
 		padding: 0 200px;
 		box-sizing: border-box;
+	}
+	.gallery > div {
+		width: calc(20% - 16px);
+	}
+	.dictionary-stable > div {
+		padding-left: 200px;
 	}
 }

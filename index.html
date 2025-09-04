@@ -47,10 +47,12 @@
 						<div class="default-text">GO TO PROJECT →</div>
 					</div>
 				</div>
-				<div class="dictionary stable">
-					<div class="title">Stable</div>
-					<div class="definition">1. An architectural visualization studio specialized in interior and exterior computer generated imagery and interactive experiences.</div>
-					<div class="definition">2. A bridge from planning to seeing.</div>
+				<div class="dictionary-stable">
+					<div>
+						<div class="title">Stable</div>
+						<div class="definition">1. An architectural visualization studio specialized in interior and exterior computer generated imagery and interactive experiences.</div>
+						<div class="definition">2. A bridge from planning to seeing.</div>
+					</div>
 				</div>
 				<section class="width-100">
 					<a href="project_breitnerpayne.html">
@@ -333,55 +335,6 @@
 						</div>
 					</div>
 				</section>
-				<script>
-					$(document).ready(function() {
-						const $section = $(".citadel");
-						const $images = $section.find(".gsap-layer");
-						const $dim = $section.find(".dim"); // optional: still reveal if needed
-						const $playBtn = $("#citadel-play");
-						let sequenceStarted = false;
-
-						// Hide all images and .dim initially
-						$images.css("opacity", 0);
-						$dim.css("display", "none");
-
-						function startSequence() {
-							sequenceStarted = true;
-
-							$images.each(function(index) {
-								setTimeout(() => {
-									// Show current image
-									$(this).css({
-										"transition": "opacity 0.2s ease",
-										"opacity": 1
-									});
-									// Hide previous image
-									if (index > 0) {
-										$images.eq(index - 1).css("opacity", 0);
-									}
-
-									// If last image, show .dim and change button text
-									if (index === $images.length - 1) {
-										setTimeout(() => {
-											$dim.css("display", "block"); // optional
-											$playBtn.text("Play again");
-										}, 2000); // wait for fade-in
-									}
-
-								}, index * 2000); // 2s per image
-							});
-						}
-
-						$playBtn.on("click", function() {
-							// Reset images and .dim if replay
-							$images.css("opacity", 0);
-							$dim.css("display", "none");
-
-							startSequence();
-						});
-					});
-
-				</script>
 				<section>
 					<a href="project_planoalto.html">
 						<img class="project-logo" src="images/logo_planoalto.svg">
@@ -458,38 +411,72 @@
 						Featured projects
 					</div>
 					<div class="gallery">
-						<div>
-							<a href="project_lidador.html">
-								<img alt="3d render of a house" src="images/lidador_04.webp">
+							<div data-link="project_citadel.html">
+								<img alt="3d render of a house" src="images/citadel_layer4.webp">
 								<div class="pantone">
-									PORTO LIDADOR
+									4040 Citadel Park
 								</div>
-							</a>
-						</div>
-						<div>
-							<a href="project_casaalmada.html">
-								<img alt="3d render of a house" src="images/casaalmada_01.webp">
+							</div>
+							<div data-link="project_breitnerpayne.html">
+								<img alt="3d render of a house" src="images/breitnerpayne_production_line2.webp">
 								<div class="pantone">
-									CASA ALMADA
+									Breitner & Payne
 								</div>
-							</a>
-						</div>
-						<div>
-							<a href="project_electriccentury.html">
-								<img alt="3d render of a house" src="images/electriccentury_01.webp">
-								<div class="pantone">
-									ELECTRIC CENTURY
-								</div>
-							</a>
-						</div>
-						<div>
-							<a href="project_acrylichail.html">
+							</div>
+							<div data-link="project_acrylichail.html">
 								<img alt="3d render of a house" src="images/acrylichail_04.webp">
 								<div class="pantone">
-									ACRYLIC HAIL
+									Acrylic Hail
 								</div>
-							</a>
-						</div>
+							</div>
+							<div data-link="project_electriccentury.html">
+								<img alt="3d render of a house" src="images/electriccentury_03.webp">
+								<div class="pantone">
+									Electric Century
+								</div>
+							</div>
+							<div data-link="project_planoalto.html">
+								<img alt="3d render of a house" src="images/planoalto_04.webp">
+								<div class="pantone">
+									Plano Alto
+								</div>
+							</div>
+							<div data-link="project_lidador.html">
+								<img alt="3d render of a house" src="images/lidador_02.webp">
+								<div class="pantone">
+									Porto Lidador
+								</div>
+							</div>
+							<div data-link="project_casaalmada.html">
+								<img alt="3d render of a house" src="images/casaalmada_08.webp">
+								<div class="pantone">
+									Casa Almada
+								</div>
+							</div>
+							<div data-link="project_olivagiulianova.html">
+								<img alt="3d render of a house" src="images/oliva_03.webp">
+								<div class="pantone">
+									Oliva Giulianova
+								</div>
+							</div>
+							<div data-link="project_casaornatoverde.html">
+								<img alt="3d render of a house" src="images/casaornato_04.webp">
+								<div class="pantone">
+									Casa Ornato Verde
+								</div>
+							</div>
+							<div data-link="project_maisonhaute.html">
+								<img alt="3d render of a house" src="images/maisonhaute_03.webp">
+								<div class="pantone">
+									Maison Haute
+								</div>
+							</div>
+							<div data-link="project_guntherhouse.html">
+								<img alt="3d render of a house" src="images/guntherhouse_04.webp">
+								<div class="pantone">
+									Gunther House
+								</div>
+							</div>
 					</div>
 				</section>
 				<section>
@@ -594,59 +581,53 @@
 			});
 		});
 
-		//hero title parallax
-		gsap.registerPlugin(ScrollTrigger);
+		//Citadel image sequence
+		$(document).ready(function() {
+			const $section = $(".citadel");
+			const $images = $section.find(".gsap-layer");
+			const $dim = $section.find(".dim"); // optional: still reveal if needed
+			const $playBtn = $("#citadel-play");
+			let sequenceStarted = false;
 
-		ScrollTrigger.matchMedia({
-			"(min-width: 801px)": function () {
-				gsap.to(".hero > .title", {
-					yPercent: -300,
-					ease: "none",
-					scrollTrigger: {
-						trigger: ".hero",
-						start: "top 60px",
-						end: "center center",
-						scrub: 1,
-					}
+			// Hide all images and .dim initially
+			$images.css("opacity", 0);
+			$dim.css("display", "none");
+
+			function startSequence() {
+				sequenceStarted = true;
+
+				$images.each(function(index) {
+					setTimeout(() => {
+						// Show current image
+						$(this).css({
+							"transition": "opacity 0.2s ease",
+							"opacity": 1
+						});
+						// Hide previous image
+						if (index > 0) {
+							$images.eq(index - 1).css("opacity", 0);
+						}
+
+						// If last image, show .dim and change button text
+						if (index === $images.length - 1) {
+							setTimeout(() => {
+								$dim.css("display", "block"); // optional
+								$playBtn.text("Play again");
+							}, 2000); // wait for fade-in
+						}
+
+					}, index * 2000); // 2s per image
 				});
 			}
+
+			$playBtn.on("click", function() {
+				// Reset images and .dim if replay
+				$images.css("opacity", 0);
+				$dim.css("display", "none");
+
+				startSequence();
+			});
 		});
-
-
-		// // // Select the section
-		//  const citadelSection = document.querySelector('.citadel');
-
-		// // Create timeline
-		// const tl = gsap.timeline({
-		// 	scrollTrigger: {
-		// 		trigger: citadelSection,
-		// 		start: 'center center', // Start when the bottom of .citadel hits the bottom of the viewport
-		// 		end: '+=4000', // Adjust this to control how long the animation lasts
-		// 		scrub: true, // Optional: for smooth scrubbing
-		// 		pin: true, // Pin the section
-		// 		once: true, // Plays animation only on the way down
-		// 		onLeave: function (self) { // Removes white space above left from animation
-		// 			console.log("left");
-		// 			let start = self.start;
-		// 			self.scroll(self.start);
-		// 			self.disable();
-		// 			self.animation.progress(1);
-		// 			ScrollTrigger.refresh();
-		// 			window.scrollTo(0, start);
-		// 		}
-		// 	},
-		// });
-
-		// // Animate each image
-		// const images = document.querySelectorAll('.citadel .gsap-layer');
-		// images.forEach((image, index) => {
-		// 	tl.to(image, {
-		// 		opacity: 1, // Adjust opacity as needed
-		// 		duration: 5, // Duration for each image's animation
-		// 		ease: 'power2.inOut', // Apply easing
-		// 		delay: index * 0.5, // Stagger the animations
-		// 	});
-		// });
 
 		// Breitner & Payne change view and sidebar
 		$(document).ready(function() {
