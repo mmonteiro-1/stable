@@ -44,20 +44,26 @@
 		<div id="ui">
 			<button id="cam1">Camera 1</button>
 			<button id="cam2">Camera 2</button>
+			<button id="toggle-glass">Toggle Glass</button>
 		</div>
-		<div id="hover-card">Cone island info</div>
+		<div id="hover-card">Hover Info</div>
 	</div>
 
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/DRACOLoader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="helpers.js"></script>
 <script>
 const container = document.getElementById('three-container');
 
+// --- Helper Toggle Flags ---
+const SHOW_CAMERA_HELPERS = false;  // Set to false to hide camera helpers
+const SHOW_LIGHT_HELPERS = false;   // Set to false to hide light helpers
+
 // Scene + renderer
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0xff3333);
+scene.background = new THREE.Color(0xdbdbdb);
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setPixelRatio(window.devicePixelRatio || 1);
 renderer.shadowMap.enabled = true;
@@ -65,20 +71,14 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.autoClear = false;
 container.appendChild(renderer.domElement);
 
-// --- ORTHOGRAPHIC CAMERA SETUP ---
+// --- PERSPECTIVE CAMERA SETUP ---
 let camera;
-function createOrthoCamera(pos, target, frustumSize=10){
+function createPerspectiveCamera(pos, target, fov=50){
 	const aspect = container.clientWidth / container.clientHeight;
-	const cam = new THREE.OrthographicCamera(
-		-frustumSize * aspect / 2,
-		frustumSize * aspect / 2,
-		frustumSize / 2,
-		-frustumSize / 2,
-		0.1, 1000
-	);
+	const cam = new THREE.PerspectiveCamera(fov, aspect, 0.01, 1000);
 	cam.position.copy(pos);
 	cam.lookAt(target);
-	cam.userData.frustumSize = frustumSize; // store for resize
+	cam.userData.fov = fov; // store for resize
 	return cam;
 }
 
@@ -157,11 +157,12 @@ dirLight.castShadow = true;
 dirLight.target.position.set(0, 0, 0);
 scene.add(dirLight);
 
-// const dirHelper = new THREE.DirectionalLightHelper(dirLight, 10, 0xffffff);
-// scene.add(dirHelper);
-
-// const camHelper = new THREE.CameraHelper(dirLight.shadow.camera);
-// scene.add(camHelper);
+// --- Light helpers ---
+const lightHelpers = new LightHelpers(scene);
+if (SHOW_LIGHT_HELPERS) {
+	lightHelpers.addDirectionalLightHelper(dirLight, 10, 0xffffff);
+	lightHelpers.addShadowCameraHelper(dirLight);
+}
 
 const c = dirLight.shadow.camera; // OrthographicCamera
 c.left = -10;
@@ -194,36 +195,119 @@ THREE.DefaultLoadingManager.setURLModifier((url) => {
 	return url;
 });
 
-loader.load('scene.gltf', (gltf) => {
-	const root = gltf.scene;
+let glass = null; // keep a reference outside the loader
 
-	// Center/scale: compute pre-scale size, apply scale, then recompute box for accurate center and minY
-	const sizePre = new THREE.Vector3();
-	new THREE.Box3().setFromObject(root).getSize(sizePre);
-	const maxDim = Math.max(sizePre.x, sizePre.y, sizePre.z) || 1;
-	const targetSize = 10; // desired max dimension in scene units
-	const scale = targetSize / maxDim;
-	root.scale.setScalar(scale);
+loader.load(
+	'factory4.glb',
+	(glb) => {
+		console.log('✅ GLTF loaded:', glb);
 
-	// Recompute bounds after scaling
-	const box = new THREE.Box3().setFromObject(root);
-	const center = new THREE.Vector3();
-	box.getCenter(center);
-	root.position.sub(center); // move to origin
-	// root.position.y -= box.min.y; // sit on ground (y=0)
-	root.position.y = .1
+		const root = glb.scene;
 
-	root.traverse(obj => {
-		if (obj.isMesh && !obj.userData?.isOutline) {
-			obj.castShadow = obj.receiveShadow = true;
-			// addOutline(obj, 0x808080, 1.02);     // silhouette
-			addCreaseEdges(obj, 25);             // creases; try 10–25
+		// --- Center & scale ---
+		const sizePre = new THREE.Vector3();
+		new THREE.Box3().setFromObject(root).getSize(sizePre);
+		const maxDim = Math.max(sizePre.x, sizePre.y, sizePre.z) || 1;
+		const targetSize = 15; // desired max dimension in scene units
+		const scale = targetSize / maxDim;
+		root.scale.setScalar(scale);
+
+		// Recompute bounds after scaling
+		const box = new THREE.Box3().setFromObject(root);
+		const center = new THREE.Vector3();
+		box.getCenter(center);
+
+		// --- Grab target meshes for hover effects (before traverse) ---
+		const containersMesh = root.getObjectByName('containers');
+		const stairsMesh = root.getObjectByName('stairs');
+		
+		if (containersMesh) {
+			console.log('Found containers mesh:', containersMesh);
+		} else {
+			console.warn('⚠️ Containers mesh not found');
 		}
-	});
+		
+		if (stairsMesh) {
+			console.log('Found stairs mesh:', stairsMesh);
+		} else {
+			console.warn('⚠️ Stairs mesh not found');
+		}
 
-	scene.add(root);
-}, undefined, (err) => {
-	console.error('GLB load error:', err);
+		// --- Traverse meshes ---
+		root.traverse((obj) => {
+			if (obj.isMesh && !obj.userData?.isOutline) {
+				obj.castShadow = obj.receiveShadow = true;
+				addCreaseEdges(obj, 40);
+				
+				// Check if mesh name contains "detection"
+				if (obj.name.toLowerCase().includes('detection')) {
+					// Make detection meshes truly invisible and non-interfering
+					obj.material = new THREE.MeshBasicMaterial({ 
+						transparent: true, 
+						opacity: 0,
+						side: THREE.DoubleSide,
+						depthWrite: false,
+						depthTest: false,
+						alphaTest: 0.5,  // Discard pixels with alpha < 0.5
+						blending: THREE.NoBlending  // No blending with background
+					});
+					// Disable shadow casting and receiving for detection meshes
+					obj.castShadow = false;
+					obj.receiveShadow = false;
+					// Make them not affect lighting calculations
+					obj.visible = true; // Keep visible for ray casting but invisible to rendering
+					console.log('Applied truly invisible material to detection mesh:', obj.name);
+					// Add to interactive meshes with target mesh and card text
+					let targetMesh = null;
+					let cardText = '';
+					
+					if (obj.name.toLowerCase().includes('container')) {
+						targetMesh = containersMesh;
+						cardText = 'Containers';
+					} else if (obj.name.toLowerCase().includes('qa')) {
+						targetMesh = stairsMesh;
+						cardText = 'Stairs';
+					}
+					
+					interactiveMeshes.push({ 
+						mesh: obj, 
+						base: new THREE.Color(0xffffff),
+						targetMesh: targetMesh,
+						cardText: cardText
+					});
+				} else {
+					// Override material with simple white material for regular meshes
+					obj.material = new THREE.MeshStandardMaterial({
+						color: 0xffffff,
+						roughness: 1,
+						metalness: 0
+					});
+				}
+			}
+			if (obj.isMesh) {
+				console.log('Mesh:', obj.name);
+			}
+		});
+
+		// Detection meshes are now handled automatically in the traverse loop above
+
+		// --- Add to scene ---
+		scene.add(root);
+	},
+	(xhr) => {
+		console.log(`📦 Loading... ${(xhr.loaded / xhr.total * 100).toFixed(2)}%`);
+	},
+	(err) => {
+		console.error('❌ GLB load error:', err);
+	}
+);
+
+// --- UI handler for glass ---
+document.getElementById('toggle-glass').addEventListener('click', () => {
+	if (glass) {
+		glass.visible = !glass.visible;
+		console.log(`Glass visibility: ${glass.visible}`);
+	}
 });
 
 // After any model load completes, set pan center and limit from its bounds
@@ -247,12 +331,18 @@ THREE.DefaultLoadingManager.onLoad = function(){
 
 // --- Camera homes ---
 const homePositions = {
-	cam1: { pos:new THREE.Vector3(5,5,5), target:new THREE.Vector3(0,0.5,0), color:0xffffff },
-	cam2: { pos:new THREE.Vector3(0,10,10), target:new THREE.Vector3(0,0.5,0), color:0xffffff }
+	cam1: { pos:new THREE.Vector3(15,8,15), target:new THREE.Vector3(0,0,0), color:0xffffff },
+	cam2: { pos:new THREE.Vector3(0,25,25), target:new THREE.Vector3(0,0.5,0), color:0xffffff }
 };
+
+// --- Camera helpers ---
+const cameraHelpers = new CameraHelpers(scene);
+if (SHOW_CAMERA_HELPERS) {
+	cameraHelpers.addCameraHelpers(homePositions);
+}
 let activeHome='cam1';
-camera = createOrthoCamera(homePositions.cam1.pos, homePositions.cam1.target, frustumSize = 12);
-const minHeight=1, minDistance=2, maxDistance=20;
+camera = createPerspectiveCamera(homePositions.cam1.pos, homePositions.cam1.target, fov = 25);
+const minHeight=1, minDistance=5, maxDistance=50;
 let panLimit=5; // updated after model load
 let sceneFocus = new THREE.Vector3(0,0.5,0); // pan center updated from model
 
@@ -344,8 +434,8 @@ window.addEventListener('mousemove',e=>{
 renderer.domElement.addEventListener('wheel', e=>{
 	e.preventDefault();
 	if(isTransitioning) return;
-	const zoomFactor=1 - e.deltaY*0.001;
-	camera.zoom = Math.max(0.1, Math.min(10, camera.zoom*zoomFactor));
+	const zoomFactor=1 + e.deltaY*0.001;
+	camera.fov = Math.max(5, Math.min(125, camera.fov*zoomFactor));
 	camera.updateProjectionMatrix();
 });
 
@@ -376,9 +466,7 @@ window.addEventListener('mousemove',e=>{
 });
 
 const interactiveMeshes = [
-	{ mesh: cube, base: new THREE.Color(0xffffff) },
-	{ mesh: sphere, base: new THREE.Color(0xffffff) },
-	{ mesh: cone, base: new THREE.Color(0xffffff) }
+	// Detection container will be added dynamically when model loads
 ];
 let hoveredMesh = null;
 
@@ -387,7 +475,12 @@ function checkHover() {
 	const intersects = raycaster.intersectObjects(interactiveMeshes.map(o => o.mesh));
 	if (intersects.length > 0) {
 		hoveredMesh = intersects[0].object;
-		hoverCard.style.display = (hoveredMesh === cone) ? 'block' : 'none';
+		// Find the interactive mesh object to get target mesh and card text
+		const interactiveObj = interactiveMeshes.find(obj => obj.mesh === hoveredMesh);
+		if (interactiveObj) {
+			hoverCard.style.display = 'block';
+			hoverCard.textContent = interactiveObj.cardText;
+		}
 		document.body.style.cursor = 'pointer';
 	} else {
 		hoveredMesh = null;
@@ -397,9 +490,15 @@ function checkHover() {
 }
 function updateColors() {
 	const hoverColor = new THREE.Color(0xff3333);
-	interactiveMeshes.forEach(obj => {
-		const target = (obj.mesh === hoveredMesh) ? hoverColor : obj.base;
-		obj.mesh.material.color.lerp(target, 0.1);
+	const baseColor = new THREE.Color(0xffffff);
+	
+	// Update all target meshes
+	interactiveMeshes.forEach(interactiveObj => {
+		if (interactiveObj.targetMesh) {
+			// If this is the hovered mesh, use hover color, otherwise use base color
+			const target = (interactiveObj.mesh === hoveredMesh) ? hoverColor : baseColor;
+			interactiveObj.targetMesh.material.color.lerp(target, 0.1);
+		}
 	});
 }
 
@@ -423,8 +522,10 @@ function animate(){
 
 	checkHover();
 	updateColors();
-	// camHelper.update();
-	// dirHelper.update()
+	// Update light helpers
+	lightHelpers.helpers.forEach(helper => {
+		if (helper.update) helper.update();
+	});
 	// Render
 	renderer.render(scene,camera);
 
@@ -446,11 +547,7 @@ function resizeRenderer(){
 	const h = container.clientHeight;
 	renderer.setSize(w,h);
 	const aspect=w/h;
-	const frustumSize = camera.userData.frustumSize || 10;
-	camera.left = -frustumSize*aspect/2;
-	camera.right = frustumSize*aspect/2;
-	camera.top = frustumSize/2;
-	camera.bottom = -frustumSize/2;
+	camera.aspect = aspect;
 	camera.updateProjectionMatrix();
 }
 window.addEventListener('resize',resizeRenderer);

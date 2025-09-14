@@ -64,16 +64,18 @@ function rafFix() {
 }
 requestAnimationFrame(rafFix);
 
-// CONVERTS DATA-LINKS INTO LINKS
-$(document).on("click", "[data-link]", function (e) {
+// FADE OUT ON LINK CLICK
+/*$(document).on("click", "a[href]", function (e) {
 	e.preventDefault();
-	const url = $(this).data("link");
-	if (url) {
+	const url = $(this).attr("href");
+
+	if (url && url !== "#") {
 		$("body").fadeOut(500, function () {
 			window.location.href = url;
 		});
 	}
-});
+});*/
+
 
 //HOMEPAGE HERO PARALLAX
 gsap.registerPlugin(ScrollTrigger);
