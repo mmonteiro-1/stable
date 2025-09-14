@@ -198,7 +198,7 @@ THREE.DefaultLoadingManager.setURLModifier((url) => {
 let glass = null; // keep a reference outside the loader
 
 loader.load(
-	'factory4.glb',
+	'factory1.glb',
 	(glb) => {
 		console.log('✅ GLTF loaded:', glb);
 
@@ -237,7 +237,7 @@ loader.load(
 		root.traverse((obj) => {
 			if (obj.isMesh && !obj.userData?.isOutline) {
 				obj.castShadow = obj.receiveShadow = true;
-				addCreaseEdges(obj, 40);
+				addCreaseEdges(obj, 30);
 				
 				// Check if mesh name contains "detection"
 				if (obj.name.toLowerCase().includes('detection')) {
@@ -341,7 +341,7 @@ if (SHOW_CAMERA_HELPERS) {
 	cameraHelpers.addCameraHelpers(homePositions);
 }
 let activeHome='cam1';
-camera = createPerspectiveCamera(homePositions.cam1.pos, homePositions.cam1.target, fov = 25);
+camera = createPerspectiveCamera(homePositions.cam1.pos, homePositions.cam1.target, fov = 20);
 const minHeight=1, minDistance=5, maxDistance=50;
 let panLimit=5; // updated after model load
 let sceneFocus = new THREE.Vector3(0,0.5,0); // pan center updated from model
@@ -435,7 +435,7 @@ renderer.domElement.addEventListener('wheel', e=>{
 	e.preventDefault();
 	if(isTransitioning) return;
 	const zoomFactor=1 + e.deltaY*0.001;
-	camera.fov = Math.max(5, Math.min(125, camera.fov*zoomFactor));
+	camera.fov = Math.max(3, Math.min(25, camera.fov*zoomFactor));
 	camera.updateProjectionMatrix();
 });
 
