@@ -118,3 +118,149 @@ class LightHelpers {
 		});
 	}
 }
+
+class CameraDebugger {
+	constructor(camera, homePositions, activeHome) {
+		this.camera = camera;
+		this.homePositions = homePositions;
+		this.activeHome = activeHome;
+		this.initUI();
+	}
+
+	initUI() {
+		// Get UI elements
+		this.xSlider = document.getElementById('cam-x');
+		this.ySlider = document.getElementById('cam-y');
+		this.zSlider = document.getElementById('cam-z');
+		this.fovSlider = document.getElementById('cam-fov');
+		
+		// Target sliders
+		this.targetXSlider = document.getElementById('target-x');
+		this.targetYSlider = document.getElementById('target-y');
+		this.targetZSlider = document.getElementById('target-z');
+		
+		// Value displays
+		this.xValue = document.getElementById('cam-x-value');
+		this.yValue = document.getElementById('cam-y-value');
+		this.zValue = document.getElementById('cam-z-value');
+		this.fovValue = document.getElementById('cam-fov-value');
+		this.targetXValue = document.getElementById('target-x-value');
+		this.targetYValue = document.getElementById('target-y-value');
+		this.targetZValue = document.getElementById('target-z-value');
+
+		// Add event listeners for real-time updates
+		[this.xSlider, this.ySlider, this.zSlider, this.fovSlider].forEach(slider => {
+			slider.addEventListener('input', () => this.updateCamera());
+		});
+		
+		[this.targetXSlider, this.targetYSlider, this.targetZSlider].forEach(slider => {
+			slider.addEventListener('input', () => this.updateTarget());
+		});
+
+		// Initial update
+		this.updateUI();
+	}
+
+	updateUI() {
+		// Update sliders and value displays with current camera values
+		this.xSlider.value = this.camera.position.x;
+		this.ySlider.value = this.camera.position.y;
+		this.zSlider.value = this.camera.position.z;
+		this.fovSlider.value = this.camera.fov;
+		
+		// Update target sliders
+		this.targetXSlider.value = this.camera.target ? this.camera.target.x : 0;
+		this.targetYSlider.value = this.camera.target ? this.camera.target.y : 0;
+		this.targetZSlider.value = this.camera.target ? this.camera.target.z : 0;
+		
+		// Update value displays
+		this.updateValueDisplays();
+	}
+	
+	updateValueDisplays() {
+		this.xValue.textContent = parseFloat(this.xSlider.value).toFixed(1);
+		this.yValue.textContent = parseFloat(this.ySlider.value).toFixed(1);
+		this.zValue.textContent = parseFloat(this.zSlider.value).toFixed(1);
+		this.fovValue.textContent = parseFloat(this.fovSlider.value).toFixed(0);
+		this.targetXValue.textContent = parseFloat(this.targetXSlider.value).toFixed(1);
+		this.targetYValue.textContent = parseFloat(this.targetYSlider.value).toFixed(1);
+		this.targetZValue.textContent = parseFloat(this.targetZSlider.value).toFixed(1);
+	}
+
+	updateCamera() {
+		// Get values from sliders
+		const x = parseFloat(this.xSlider.value);
+		const y = parseFloat(this.ySlider.value);
+		const z = parseFloat(this.zSlider.value);
+		const fov = parseFloat(this.fovSlider.value);
+
+		// Update value displays
+		this.updateValueDisplays();
+
+		// Update camera position
+		this.camera.position.set(x, y, z);
+		
+		// Update camera FOV
+		this.camera.fov = Math.max(1, Math.min(120, fov));
+		this.camera.updateProjectionMatrix();
+
+		// Update the current home position
+		if (this.homePositions[this.activeHome]) {
+			this.homePositions[this.activeHome].pos.set(x, y, z);
+			this.homePositions[this.activeHome].fov = fov;
+		}
+
+		// Update spherical coordinates to match new position
+		// This prevents the spherical system from overriding the position
+		if (window.computeAnglesFromPos && window.targetLookAt) {
+			const ang = window.computeAnglesFromPos(this.camera.position, window.targetLookAt);
+			window.targetAz = window.currentAz = ang.azimuth;
+			window.targetPolar = window.currentPolar = ang.polar;
+			window.targetRadius = window.currentRadius = ang.radius;
+			
+			// Also update the local variables in the main script
+			if (window.updateSphericalCoords) {
+				window.updateSphericalCoords(ang.azimuth, ang.polar, ang.radius);
+			}
+		}
+	}
+	
+	updateTarget() {
+		// Get values from target sliders
+		const x = parseFloat(this.targetXSlider.value);
+		const y = parseFloat(this.targetYSlider.value);
+		const z = parseFloat(this.targetZSlider.value);
+
+		// Update value displays
+		this.updateValueDisplays();
+
+		// Update target position
+		if (window.targetLookAt) {
+			window.targetLookAt.set(x, y, z);
+		}
+
+		// Update the current home position target
+		if (this.homePositions[this.activeHome]) {
+			this.homePositions[this.activeHome].target.set(x, y, z);
+		}
+
+		// Update spherical coordinates to match new target
+		if (window.computeAnglesFromPos && window.targetLookAt) {
+			const ang = window.computeAnglesFromPos(this.camera.position, window.targetLookAt);
+			window.targetAz = window.currentAz = ang.azimuth;
+			window.targetPolar = window.currentPolar = ang.polar;
+			window.targetRadius = window.currentRadius = ang.radius;
+			
+			// Also update the local variables in the main script
+			if (window.updateSphericalCoords) {
+				window.updateSphericalCoords(ang.azimuth, ang.polar, ang.radius);
+			}
+		}
+	}
+
+	// Method to be called when camera changes
+	onCameraChange(newActiveHome) {
+		this.activeHome = newActiveHome;
+		this.updateUI();
+	}
+}

@@ -42,9 +42,65 @@
 <body>
 	<div class="three-display" id="three-container">
 		<div id="ui">
-			<button id="cam1">Camera 1</button>
-			<button id="cam2">Camera 2</button>
-			<button id="toggle-glass">Toggle Glass</button>
+			<button id="cameraFactory">Camera Factory</button>
+			
+			<div id="camera-controls" style="margin-top: 10px; padding: 10px; background: rgba(255,255,255,0.9); border-radius: 6px; max-width: 300px;">
+				<h4 style="margin: 0 0 10px 0; font-size: 14px;">Camera Debug</h4>
+				<div style="display: flex; flex-direction: column; gap: 8px;">
+					<!-- Camera Position -->
+					<div>
+						<label style="font-size: 12px; font-weight: bold;">Camera Position</label>
+						<div style="display: flex; flex-direction: column; gap: 3px; margin-top: 3px;">
+							<div style="display: flex; align-items: center; gap: 5px;">
+								<label style="width: 15px; font-size: 11px;">X:</label>
+								<input type="range" id="cam-x" min="-50" max="50" step="0.5" style="flex: 1;">
+								<span id="cam-x-value" style="width: 35px; font-size: 11px; text-align: right;">0</span>
+							</div>
+							<div style="display: flex; align-items: center; gap: 5px;">
+								<label style="width: 15px; font-size: 11px;">Y:</label>
+								<input type="range" id="cam-y" min="0" max="50" step="0.5" style="flex: 1;">
+								<span id="cam-y-value" style="width: 35px; font-size: 11px; text-align: right;">0</span>
+							</div>
+							<div style="display: flex; align-items: center; gap: 5px;">
+								<label style="width: 15px; font-size: 11px;">Z:</label>
+								<input type="range" id="cam-z" min="-50" max="50" step="0.5" style="flex: 1;">
+								<span id="cam-z-value" style="width: 35px; font-size: 11px; text-align: right;">0</span>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Camera Target -->
+					<div>
+						<label style="font-size: 12px; font-weight: bold;">Camera Target</label>
+						<div style="display: flex; flex-direction: column; gap: 3px; margin-top: 3px;">
+							<div style="display: flex; align-items: center; gap: 5px;">
+								<label style="width: 15px; font-size: 11px;">X:</label>
+								<input type="range" id="target-x" min="-20" max="20" step="0.5" style="flex: 1;">
+								<span id="target-x-value" style="width: 35px; font-size: 11px; text-align: right;">0</span>
+							</div>
+							<div style="display: flex; align-items: center; gap: 5px;">
+								<label style="width: 15px; font-size: 11px;">Y:</label>
+								<input type="range" id="target-y" min="0" max="20" step="0.5" style="flex: 1;">
+								<span id="target-y-value" style="width: 35px; font-size: 11px; text-align: right;">0</span>
+							</div>
+							<div style="display: flex; align-items: center; gap: 5px;">
+								<label style="width: 15px; font-size: 11px;">Z:</label>
+								<input type="range" id="target-z" min="-20" max="20" step="0.5" style="flex: 1;">
+								<span id="target-z-value" style="width: 35px; font-size: 11px; text-align: right;">0</span>
+							</div>
+						</div>
+					</div>
+					
+					<!-- FOV -->
+					<div>
+						<div style="display: flex; align-items: center; gap: 5px;">
+							<label style="width: 30px; font-size: 12px; font-weight: bold;">FOV:</label>
+							<input type="range" id="cam-fov" min="1" max="120" step="1" style="flex: 1;">
+							<span id="cam-fov-value" style="width: 35px; font-size: 11px; text-align: right;">20</span>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 		<div id="hover-card">Hover Info</div>
 	</div>
@@ -113,30 +169,6 @@ function addCreaseEdges(mesh, thresholdAngleDeg = 20) {
 	return edges;
 }
 
-// Cube
-const cubeGeometry = new THREE.BoxGeometry(1,1,1);
-const cubeMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness:0.5, metalness:0.1 });
-const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
-cube.position.set(0,1,20);
-cube.castShadow = true;
-addOutline(cube);
-scene.add(cube);
-
-// Sphere
-const sphere = new THREE.Mesh(new THREE.SphereGeometry(0.5,32,32), new THREE.MeshStandardMaterial({ color: 0xffffff }));
-sphere.position.set(2,1,20);
-sphere.castShadow = true;
-addOutline(sphere);
-scene.add(sphere);
-
-// Cone
-const coneGeometry = new THREE.ConeGeometry(0.5,1,32);
-const coneMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff });
-const cone = new THREE.Mesh(coneGeometry, coneMaterial);
-cone.position.set(-2,1,20);
-cone.castShadow = true;
-addOutline(cone);
-scene.add(cone);
 
 // Ground as shadow catcher
 const ground = new THREE.Mesh(
@@ -195,10 +227,9 @@ THREE.DefaultLoadingManager.setURLModifier((url) => {
 	return url;
 });
 
-let glass = null; // keep a reference outside the loader
 
 loader.load(
-	'factory1.glb',
+	'factoryblender4.glb',
 	(glb) => {
 		console.log('✅ GLTF loaded:', glb);
 
@@ -218,26 +249,46 @@ loader.load(
 		box.getCenter(center);
 
 		// --- Grab target meshes for hover effects (before traverse) ---
-		const containersMesh = root.getObjectByName('containers');
-		const stairsMesh = root.getObjectByName('stairs');
+		const departureMesh = root.getObjectByName('section_departure');
+		const qaMesh = root.getObjectByName('section_qa');
+		const officeMesh = root.getObjectByName('section_office');
+		const arrivalMesh = root.getObjectByName('section_arrival');
+		const climateMesh = root.getObjectByName('section_climate');
+		const productionMesh = root.getObjectByName('section_production');
 		
-		if (containersMesh) {
-			console.log('Found containers mesh:', containersMesh);
+		if (departureMesh) {
+			console.log('Found section_departure mesh:', departureMesh);
 		} else {
-			console.warn('⚠️ Containers mesh not found');
+			console.warn('⚠️ Section_departure mesh not found');
 		}
 		
-		if (stairsMesh) {
-			console.log('Found stairs mesh:', stairsMesh);
+		if (qaMesh) {
+			console.log('Found section_qa mesh:', qaMesh);
 		} else {
-			console.warn('⚠️ Stairs mesh not found');
+			console.warn('⚠️ Section_qa mesh not found');
+		}
+		
+		if (officeMesh) {
+			console.log('Found section_office mesh:', officeMesh);
+		} else {
+			console.warn('⚠️ Section_office mesh not found');
+		}
+		
+		if (arrivalMesh) {
+			console.log('Found section_arrival mesh:', arrivalMesh);
+		} else {
+			console.warn('⚠️ Section_arrival mesh not found');
 		}
 
 		// --- Traverse meshes ---
 		root.traverse((obj) => {
 			if (obj.isMesh && !obj.userData?.isOutline) {
 				obj.castShadow = obj.receiveShadow = true;
-				addCreaseEdges(obj, 30);
+				
+				// Only add crease edges to non-detection meshes
+				if (!obj.name.toLowerCase().includes('detection')) {
+					addCreaseEdges(obj, 45);
+				}
 				
 				// Check if mesh name contains "detection"
 				if (obj.name.toLowerCase().includes('detection')) {
@@ -262,11 +313,23 @@ loader.load(
 					let cardText = '';
 					
 					if (obj.name.toLowerCase().includes('container')) {
-						targetMesh = containersMesh;
-						cardText = 'Containers';
+						targetMesh = departureMesh;
+						cardText = 'Departure';
 					} else if (obj.name.toLowerCase().includes('qa')) {
-						targetMesh = stairsMesh;
-						cardText = 'Stairs';
+						targetMesh = qaMesh;
+						cardText = 'QA';
+					} else if (obj.name.toLowerCase().includes('office')) {
+						targetMesh = officeMesh;
+						cardText = 'Office';
+					} else if (obj.name.toLowerCase().includes('arrival')) {
+						targetMesh = arrivalMesh;
+						cardText = 'Arrival';
+					} else if (obj.name.toLowerCase().includes('climate')) {
+						targetMesh = climateMesh;
+						cardText = 'Climate';
+					} else if (obj.name.toLowerCase().includes('production')) {
+						targetMesh = productionMesh;
+						cardText = 'Production';
 					}
 					
 					interactiveMeshes.push({ 
@@ -293,6 +356,167 @@ loader.load(
 
 		// --- Add to scene ---
 		scene.add(root);
+		
+		// Create and position the departure card
+		window.departureCard = createFacingCard('images/models/2dcard_departure.svg', 0.15);
+		
+		// Find the section_departure mesh to position the card above it
+		let departureMeshForCard = null;
+		root.traverse((obj) => {
+			if (obj.name.toLowerCase().includes('section_departure')) {
+				departureMeshForCard = obj;
+			}
+		});
+		
+		if (departureMeshForCard) {
+			// Get the bounding box of the departure mesh
+			const box = new THREE.Box3().setFromObject(departureMeshForCard);
+			const center = box.getCenter(new THREE.Vector3());
+			const size = box.getSize(new THREE.Vector3());
+			
+			// Position card above the mesh
+			window.departureCard.position.set(center.x, center.y + size.y * 0.5 + 0.5, center.z);
+			
+			// Store the height level for other cards to match
+			window.cardHeightLevel = center.y + size.y * 0.5 + 0.5;
+			
+			// Initially show the card (cameraFactory is the default camera)
+			window.departureCard.visible = true;
+			scene.add(window.departureCard);
+		}
+		
+		// Create and position the QA card
+		window.qaCard = createFacingCard('images/models/2dcard_qa.svg', 0.15);
+		
+		// Find the section_qa mesh to position the card above it
+		let qaMeshForCard = null;
+		root.traverse((obj) => {
+			if (obj.name.toLowerCase().includes('section_qa')) {
+				qaMeshForCard = obj;
+			}
+		});
+		
+		if (qaMeshForCard) {
+			// Get the bounding box of the QA mesh
+			const box = new THREE.Box3().setFromObject(qaMeshForCard);
+			const center = box.getCenter(new THREE.Vector3());
+			
+			// Position card at the same height level as departure card
+			window.qaCard.position.set(center.x, window.cardHeightLevel, center.z);
+			
+			// Initially show the card (cameraFactory is the default camera)
+			window.qaCard.visible = true;
+			scene.add(window.qaCard);
+		}
+		
+		// Create and position the office card
+		window.officeCard = createFacingCard('images/models/2dcard_office.svg', 0.15);
+		
+		// Find the section_office mesh to position the card above it
+		let officeMeshForCard = null;
+		root.traverse((obj) => {
+			if (obj.name.toLowerCase().includes('section_office')) {
+				officeMeshForCard = obj;
+			}
+		});
+		
+		if (officeMeshForCard) {
+			// Get the bounding box of the office mesh
+			const box = new THREE.Box3().setFromObject(officeMeshForCard);
+			const center = box.getCenter(new THREE.Vector3());
+			
+			// Position card at the same height level as departure card
+			window.officeCard.position.set(center.x, window.cardHeightLevel, center.z);
+			
+			// Initially show the card (cameraFactory is the default camera)
+			window.officeCard.visible = true;
+			scene.add(window.officeCard);
+		}
+		
+		// Create and position the arrival card
+		window.arrivalCard = createFacingCard('images/models/2dcard_arrival.svg', 0.15);
+		
+		// Find the section_arrival mesh to position the card above it
+		let arrivalMeshForCard = null;
+		root.traverse((obj) => {
+			if (obj.name.toLowerCase().includes('section_arrival')) {
+				arrivalMeshForCard = obj;
+			}
+		});
+		
+		if (arrivalMeshForCard) {
+			// Get the bounding box of the arrival mesh
+			const box = new THREE.Box3().setFromObject(arrivalMeshForCard);
+			const center = box.getCenter(new THREE.Vector3());
+			
+			// Position card at the same height level as departure card
+			window.arrivalCard.position.set(center.x, window.cardHeightLevel, center.z);
+			
+			// Initially show the card (cameraFactory is the default camera)
+			window.arrivalCard.visible = true;
+			scene.add(window.arrivalCard);
+		}
+		
+		// Create and position the production card
+		window.productionCard = createFacingCard('images/models/2dcard_production.svg', 0.15);
+		
+		// Find the section_production mesh to position the card above it
+		let productionMeshForCard = null;
+		root.traverse((obj) => {
+			if (obj.name.toLowerCase().includes('section_production')) {
+				productionMeshForCard = obj;
+				console.log('✅ Found section_production mesh:', obj.name);
+			}
+		});
+		
+		if (productionMeshForCard) {
+			// Get the bounding box of the production mesh
+			const box = new THREE.Box3().setFromObject(productionMeshForCard);
+			const center = box.getCenter(new THREE.Vector3());
+			
+			// Position card at the same height level as departure card
+			window.productionCard.position.set(center.x, window.cardHeightLevel, center.z);
+			
+			// Initially show the card (cameraFactory is the default camera)
+			window.productionCard.visible = true;
+			scene.add(window.productionCard);
+			console.log('✅ Production card positioned and added to scene');
+		} else {
+			console.log('❌ section_production mesh not found - listing all meshes:');
+			root.traverse((obj) => {
+				if (obj.isMesh && obj.name.toLowerCase().includes('section')) {
+					console.log('  - Found section mesh:', obj.name);
+				}
+			});
+		}
+		
+		// Create and position the climate card
+		window.climateCard = createFacingCard('images/models/2dcard_climate.svg', 0.15);
+		
+		// Find the section_climate mesh to position the card above it
+		let climateMeshForCard = null;
+		root.traverse((obj) => {
+			if (obj.name.toLowerCase().includes('section_climate')) {
+				climateMeshForCard = obj;
+				console.log('✅ Found section_climate mesh:', obj.name);
+			}
+		});
+		
+		if (climateMeshForCard) {
+			// Get the bounding box of the climate mesh
+			const box = new THREE.Box3().setFromObject(climateMeshForCard);
+			const center = box.getCenter(new THREE.Vector3());
+			
+			// Position card at the same height level as departure card
+			window.climateCard.position.set(center.x, window.cardHeightLevel, center.z);
+			
+			// Initially show the card (cameraFactory is the default camera)
+			window.climateCard.visible = true;
+			scene.add(window.climateCard);
+			console.log('✅ Climate card positioned and added to scene');
+		} else {
+			console.log('❌ section_climate mesh not found');
+		}
 	},
 	(xhr) => {
 		console.log(`📦 Loading... ${(xhr.loaded / xhr.total * 100).toFixed(2)}%`);
@@ -302,13 +526,6 @@ loader.load(
 	}
 );
 
-// --- UI handler for glass ---
-document.getElementById('toggle-glass').addEventListener('click', () => {
-	if (glass) {
-		glass.visible = !glass.visible;
-		console.log(`Glass visibility: ${glass.visible}`);
-	}
-});
 
 // After any model load completes, set pan center and limit from its bounds
 THREE.DefaultLoadingManager.onLoad = function(){
@@ -331,17 +548,70 @@ THREE.DefaultLoadingManager.onLoad = function(){
 
 // --- Camera homes ---
 const homePositions = {
-	cam1: { pos:new THREE.Vector3(15,8,15), target:new THREE.Vector3(0,0,0), color:0xffffff },
-	cam2: { pos:new THREE.Vector3(0,25,25), target:new THREE.Vector3(0,0.5,0), color:0xffffff }
+	cameraFactory: { pos:new THREE.Vector3(30,20.5,22.5), target:new THREE.Vector3(0.5,0.5,0), fov:10, color:0xffffff },
+	cameraQA: { pos:new THREE.Vector3(30,20.5,22.5), target:new THREE.Vector3(0.5,0,0.5), fov:4, color:0xffffff },
+	cameraDeparture: { pos:new THREE.Vector3(14.5,15,16.5), target:new THREE.Vector3(3.5,0,0), fov:6, color:0xffffff },
+	cameraArrival: { pos:new THREE.Vector3(16,8,-4), target:new THREE.Vector3(-5,0,2.5), fov:6, color:0xffffff },
+	cameraOffice: { pos:new THREE.Vector3(24,8.5,-26.5), target:new THREE.Vector3(3.5,1,-3.5), fov:6, color:0xffffff },
+	cameraClimate: { pos:new THREE.Vector3(-1.5,6,7), target:new THREE.Vector3(-3,0,-2.5), fov:8, color:0xffffff },
+	cameraProduction: { pos:new THREE.Vector3(-14.5,8,4), target:new THREE.Vector3(0.5,0,-2), fov:8, color:0xffffff }
 };
+
+// --- Create 2D cards that face camera ---
+function createFacingCard(svgPath, size = 2) {
+	// Create texture from SVG file with proper loading callbacks
+	const texture = new THREE.TextureLoader().load(
+		svgPath,
+		// onLoad callback
+		(texture) => {
+			console.log('✅ SVG card loaded successfully:', svgPath);
+			texture.needsUpdate = true;
+			
+			// Calculate proper aspect ratio from texture dimensions
+			const aspectRatio = texture.image.width / texture.image.height;
+			console.log('📐 SVG aspect ratio:', aspectRatio.toFixed(2));
+			
+			// Update sprite scale to respect original aspect ratio
+			sprite.scale.set(size * aspectRatio, size, 1);
+		},
+		// onProgress callback
+		(progress) => {
+			console.log('📦 Loading SVG card...', (progress.loaded / progress.total * 100).toFixed(2) + '%');
+		},
+		// onError callback
+		(error) => {
+			console.error('❌ Failed to load SVG card:', svgPath, error);
+		}
+	);
+	
+	// Create sprite material
+	const spriteMaterial = new THREE.SpriteMaterial({ 
+		map: texture,
+		transparent: true,
+		alphaTest: 0.1
+	});
+	
+	// Create sprite
+	const sprite = new THREE.Sprite(spriteMaterial);
+	// Initial scale (will be updated in onLoad callback)
+	sprite.scale.set(size, size, 1);
+	
+	return sprite;
+}
 
 // --- Camera helpers ---
 const cameraHelpers = new CameraHelpers(scene);
 if (SHOW_CAMERA_HELPERS) {
 	cameraHelpers.addCameraHelpers(homePositions);
 }
-let activeHome='cam1';
-camera = createPerspectiveCamera(homePositions.cam1.pos, homePositions.cam1.target, fov = 20);
+let activeHome='cameraFactory';
+camera = createPerspectiveCamera(homePositions.cameraFactory.pos, homePositions.cameraFactory.target, homePositions.cameraFactory.fov);
+
+// --- Camera debugger ---
+let cameraDebugger;
+// Initialize camera debugger after camera is created
+cameraDebugger = new CameraDebugger(camera, homePositions, activeHome);
+
 const minHeight=1, minDistance=5, maxDistance=50;
 let panLimit=5; // updated after model load
 let sceneFocus = new THREE.Vector3(0,0.5,0); // pan center updated from model
@@ -361,6 +631,17 @@ function computeAnglesFromPos(pos,targetVec){
 	const azimuth = Math.atan2(offset.z, offset.x);
 	return { azimuth, polar, radius };
 }
+
+// Make function accessible to CameraDebugger
+window.computeAnglesFromPos = computeAnglesFromPos;
+
+// Function to update spherical coordinates from CameraDebugger
+function updateSphericalCoords(azimuth, polar, radius) {
+	targetAz = currentAz = azimuth;
+	targetPolar = currentPolar = polar;
+	targetRadius = currentRadius = radius;
+}
+window.updateSphericalCoords = updateSphericalCoords;
 function clampPolar(polar,radius,targetY){
 	const need=(minHeight-targetY)/radius;
 	const safe=Math.max(-0.9999, Math.min(0.9999,need));
@@ -384,24 +665,37 @@ let targetAz,targetPolar,targetRadius;
 let currentAz,currentPolar,currentRadius;
 let targetLookAt=new THREE.Vector3();
 let currentLookAt=new THREE.Vector3();
+let targetFov, currentFov;
 let isTransitioning=false;
 
 (function initCamera(){
-	const home = homePositions.cam1;
+	const home = homePositions.cameraFactory;
 	targetLookAt.copy(home.target);
 	currentLookAt.copy(home.target);
 	const ang = computeAnglesFromPos(home.pos,home.target);
 	targetAz=currentAz=ang.azimuth;
 	targetPolar=currentPolar=ang.polar;
 	targetRadius=currentRadius=ang.radius;
-	sphere.material.color.set(home.color);
+	targetFov=currentFov=home.fov;
+	
+	// Make these accessible to CameraDebugger after initialization
+	window.targetAz = targetAz;
+	window.targetPolar = targetPolar;
+	window.targetRadius = targetRadius;
+	window.currentAz = currentAz;
+	window.currentPolar = currentPolar;
+	window.currentRadius = currentRadius;
+	window.targetLookAt = targetLookAt;
+	window.currentLookAt = currentLookAt;
 })();
 
 // --- Input & Zoom ---
 let isLeft=false,isRight=false,lastX=0,lastY=0;
+let hasDragged=false; // Track if mouse has moved while pressed
 renderer.domElement.addEventListener('contextmenu',e=>e.preventDefault());
 renderer.domElement.addEventListener('mousedown',e=>{
 	lastX=e.clientX; lastY=e.clientY;
+	hasDragged=false; // Reset drag flag on mouse down
 	if(e.button===0)isLeft=true;
 	if(e.button===2)isRight=true;
 });
@@ -419,6 +713,8 @@ window.addEventListener('mousemove',e=>{
 		targetAz+=dx*orbitSpeed;
 		targetPolar+=dy*orbitSpeed;
 		targetPolar=clampPolar(targetPolar,targetRadius,targetLookAt.y);
+		// Mark as dragged if mouse moved while left button is pressed
+		if(Math.abs(dx) > 2 || Math.abs(dy) > 2) hasDragged=true;
 	}else if(isRight){
 		const panSpeed=0.01;
 		const right = new THREE.Vector3();
@@ -429,6 +725,8 @@ window.addEventListener('mousemove',e=>{
 		targetLookAt.addScaledVector(right,-dx*panSpeed);
 		targetLookAt.addScaledVector(up,dy*panSpeed);
 		clampPanTarget(targetLookAt);
+		// Mark as dragged if mouse moved while right button is pressed
+		if(Math.abs(dx) > 2 || Math.abs(dy) > 2) hasDragged=true;
 	}
 });
 renderer.domElement.addEventListener('wheel', e=>{
@@ -440,7 +738,7 @@ renderer.domElement.addEventListener('wheel', e=>{
 });
 
 // --- Camera switch ---
-function goToHome(name){
+function goToHome(name, transitionDuration = 3000){
 	activeHome=name;
 	const home = homePositions[name];
 	targetLookAt.copy(home.target);
@@ -448,11 +746,47 @@ function goToHome(name){
 	targetAz=ang.azimuth;
 	targetPolar=clampPolar(ang.polar,ang.radius,targetLookAt.y);
 	targetRadius=Math.max(minDistance,Math.min(maxDistance,ang.radius));
+	
+	// Set the target FOV (will be smoothly interpolated)
+	targetFov = home.fov;
+	
+	// Update window references for CameraDebugger
+	window.targetAz = targetAz;
+	window.targetPolar = targetPolar;
+	window.targetRadius = targetRadius;
+	window.targetLookAt = targetLookAt;
+	
+	// Show/hide cards based on active camera (all cards visible only in cameraFactory)
+	if (window.departureCard) {
+		window.departureCard.visible = (name === 'cameraFactory');
+	}
+	if (window.qaCard) {
+		window.qaCard.visible = (name === 'cameraFactory');
+	}
+	if (window.officeCard) {
+		window.officeCard.visible = (name === 'cameraFactory');
+	}
+	if (window.arrivalCard) {
+		window.arrivalCard.visible = (name === 'cameraFactory');
+	}
+	if (window.productionCard) {
+		window.productionCard.visible = (name === 'cameraFactory');
+	}
+	if (window.climateCard) {
+		window.climateCard.visible = (name === 'cameraFactory');
+	}
+	
+	// Update camera debugger
+	if (cameraDebugger) {
+		cameraDebugger.onCameraChange(name);
+	}
+	
 	isTransitioning=true;
-	sphere.material.color.set(home.color);
+	
+	// Set transition end time for smoother completion detection
+	window.transitionEndTime = Date.now() + transitionDuration;
 }
-document.getElementById('cam1').addEventListener('click',()=>goToHome('cam1'));
-document.getElementById('cam2').addEventListener('click',()=>goToHome('cam2'));
+document.getElementById('cameraFactory').addEventListener('click',()=>goToHome('cameraFactory'));
 
 // --- Raycaster for hover ---
 const raycaster=new THREE.Raycaster();
@@ -463,6 +797,35 @@ window.addEventListener('mousemove',e=>{
 	const rect = renderer.domElement.getBoundingClientRect();
 	mouse.x=((e.clientX-rect.left)/rect.width)*2-1;
 	mouse.y=-((e.clientY-rect.top)/rect.height)*2+1;
+});
+
+// Add click functionality to detection meshes
+renderer.domElement.addEventListener('click', e => {
+	// Only trigger click if there was no dragging
+	if (hasDragged) return;
+	
+	raycaster.setFromCamera(mouse, camera);
+	const intersects = raycaster.intersectObjects(interactiveMeshes.map(o => o.mesh));
+	if (intersects.length > 0) {
+		const clickedMesh = intersects[0].object;
+		const interactiveObj = interactiveMeshes.find(obj => obj.mesh === clickedMesh);
+		
+		// Check detection mesh type and switch to appropriate camera
+		if (clickedMesh.name.toLowerCase().includes('qa')) {
+			goToHome('cameraQA');
+		} else if (clickedMesh.name.toLowerCase().includes('container')) {
+			goToHome('cameraDeparture');
+		} else if (clickedMesh.name.toLowerCase().includes('arrival')) {
+			goToHome('cameraArrival');
+		} else if (clickedMesh.name.toLowerCase().includes('office')) {
+			goToHome('cameraOffice');
+		} else if (clickedMesh.name.toLowerCase().includes('climate')) {
+			goToHome('cameraClimate');
+		} else if (clickedMesh.name.toLowerCase().includes('production')) {
+			goToHome('cameraProduction');
+		}
+		// You can add more click actions here for other detection meshes
+	}
 });
 
 const interactiveMeshes = [
@@ -503,21 +866,34 @@ function updateColors() {
 }
 
 // --- Animate ---
-const smoothFactor=0.1;
+const smoothFactor=0.05; // Much slower for smooth transitions
+
+// Easing function for smoother transitions
+function easeInOutCubic(t) {
+	return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+}
+
 function animate(){
 	requestAnimationFrame(animate);
-	currentAz+=(targetAz-currentAz)*smoothFactor;
-	currentPolar+=(targetPolar-currentPolar)*smoothFactor;
-	currentRadius+=(targetRadius-currentRadius)*smoothFactor;
-	currentLookAt.lerp(targetLookAt,smoothFactor);
+	
+	// Use consistent, slow smoothing for smooth transitions
+	const smooth = smoothFactor;
+	
+	currentAz+=(targetAz-currentAz)*smooth;
+	currentPolar+=(targetPolar-currentPolar)*smooth;
+	currentRadius+=(targetRadius-currentRadius)*smooth;
+	currentLookAt.lerp(targetLookAt,smooth);
+	
+	// Smoothly interpolate FOV
+	currentFov += (targetFov - currentFov) * smooth;
+	camera.fov = currentFov;
+	camera.updateProjectionMatrix();
 
 	const desiredPos=posFromSpherical(currentLookAt,currentAz,currentPolar,currentRadius);
 	camera.position.copy(desiredPos);
 	if(camera.position.y<minHeight)camera.position.y=minHeight;
 	camera.lookAt(currentLookAt);
 
-	cube.rotation.x+=0.01;
-	cube.rotation.y+=0.01;
 
 
 	checkHover();
@@ -529,14 +905,20 @@ function animate(){
 	// Render
 	renderer.render(scene,camera);
 
-	// End transition when we're close enough to target
+	// End transition when we're close enough to target or time has elapsed
 	if(isTransitioning){
 		const homePos=homePositions[activeHome].pos;
 		const d=camera.position.distanceTo(homePos);
 		const azErr=Math.abs(currentAz-targetAz);
 		const polErr=Math.abs(currentPolar-targetPolar);
 		const rErr=Math.abs(currentRadius-targetRadius);
-		if(d<0.02 && azErr<0.002 && polErr<0.002 && rErr<0.02) isTransitioning=false;
+		const fovErr=Math.abs(currentFov-targetFov);
+		const timeElapsed = window.transitionEndTime ? Date.now() > window.transitionEndTime : false;
+		
+		// End transition if close enough OR time has elapsed (more lenient thresholds)
+		if((d<0.1 && azErr<0.01 && polErr<0.01 && rErr<0.1 && fovErr<0.1) || timeElapsed) {
+			isTransitioning=false;
+		}
 	}
 }
 animate();
