@@ -54,6 +54,9 @@ body {
 .gap-20 {
 	gap: 20px;
 }
+.height-100 {
+	height: 100%;
+}
 .width-100 {
 	width: 100% !important;
 }
@@ -1073,6 +1076,48 @@ button {
 .spacer-logo img {
 	max-width: 400px;
 	max-height: 150px;
+}
+.three-ui {
+	position: absolute;
+	bottom: 20px;
+	left: 20px;
+	z-index: 10;
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	background: #4d4d4d7d;
+	font-family: "Overpass Mono", monospace;
+	border-radius: 10px;
+	padding: 10px;
+	box-sizing: border-box;
+}
+.button-ui {
+	display: flex;
+	align-items: center;
+	border: 1px #b3b3b3 solid;
+	background: #999999;
+	border-radius: 5px;
+}
+.button-ui img {
+	height: 100%;
+}
+.button-ui > div {
+	display: flex;
+	align-items: center;
+	height: 40px;
+	padding: 10px;
+	box-sizing: border-box;
+	font-size: .6em;
+	color: white;
+}
+.button-ui:not(:first-child) {
+	cursor: pointer;
+}
+.button-ui.selected {
+	background: #ff3333;
+}
+.text-vertical {
+	writing-mode: sideways-lr;
 }
 
 @media (max-width: 800px) {

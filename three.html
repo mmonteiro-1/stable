@@ -33,17 +33,40 @@
 		z-index: 20;
 	}
 	canvas { display:block; width:100%; height:100%; }
-	#ui { position:absolute; bottom:10px; left:10px; z-index:10; }
-	button { display:block; margin-bottom:5px; padding:8px 12px; font-size:14px; }
+	button { display:none; }
 </style>
 </head>
 <body>
 	<div class="content">
 		<section class="marginless">
 			<div class="three-display" id="three-container">
-				<div id="ui">
-					<button id="cameraFactory">Camera Factory</button>
-				</div>
+				<div class="three-ui ">
+					<div class="flex align-center button-ui">
+						<div>
+							<div class="text-vertical">ORBIT</div>
+							<img  src="images/icons/icon_mouse_left_white.svg">
+						</div>
+						<div>
+							<div class="text-vertical">PAN</div>
+							<img  src="images/icons/icon_mouse_right_white.svg">
+						</div>
+						<div>
+							<div class="text-vertical">ZOOM</div>
+							<img  src="images/icons/icon_mouse_scroll_white.svg">
+						</div>
+					</div>
+					<div class="button-ui selected" id="cameraFactory">
+						<div>
+							<img  src="images/icons/icon_factory_white.svg">
+						</div>
+					</div>
+					<div class="button-ui" id="cameraProduction">
+						<div>
+							<img  src="images/icons/icon_conveyor_white.svg">
+						</div>
+					</div>
+<!-- 					<button id="cameraFactory">Camera Factory</button>
+ -->				</div>
 				<div id="hover-card">Hover Info</div>
 			</div>
 		</section>
@@ -62,7 +85,7 @@ const SHOW_LIGHT_HELPERS = false;   // Set to false to hide light helpers
 
 // Scene + renderer
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0xdbdbdb);
+scene.background = new THREE.Color(0xc4c4c4);
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setPixelRatio(window.devicePixelRatio || 1);
 renderer.shadowMap.enabled = true;
@@ -431,6 +454,7 @@ function goToHome(name, transitionDuration = 3000){
 	window.transitionEndTime = Date.now() + transitionDuration;
 }
 document.getElementById('cameraFactory').addEventListener('click',()=>goToHome('cameraFactory'));
+document.getElementById('cameraProduction').addEventListener('click',()=>goToHome('cameraProduction'));
 
 // --- Raycaster for hover ---
 const raycaster=new THREE.Raycaster();
