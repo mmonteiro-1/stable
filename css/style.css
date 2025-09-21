@@ -993,7 +993,7 @@ button {
 	padding: 15px;
 	box-sizing: border-box;
 	border-radius: 10px;
-	background: #ff3333;
+	background: #ff3d33;
 }
 .bp-sidebar-content {
 	color: white;
@@ -1038,7 +1038,7 @@ button {
 	border-radius: 50%;
 	height: 70%;
 	aspect-ratio: 1;
-	background: #ff3333;
+	background: #ff3d33;
 }
 .bp-navbar {
 	position: absolute;
@@ -1050,7 +1050,7 @@ button {
 	bottom: 20px;
 	left: 50%;
 	transform: translate(-50%, 0%);
-	background: #ff3333;
+	background: #ff3d33;
 	padding: 15px 20px;
 	box-sizing: border-box;
 	border-radius: 10px;
@@ -1077,18 +1077,24 @@ button {
 	max-width: 400px;
 	max-height: 150px;
 }
+.three-display {
+	font-family: "Overpass Mono", monospace;
+	color: #fff;
+}
+.three-display img {
+	height: 20px;
+}
 .three-ui {
 	position: absolute;
 	bottom: 20px;
 	left: 20px;
 	z-index: 10;
 	display: flex;
-	gap: 10px;
+	gap: 5px;
 	align-items: center;
 	background: #4d4d4d7d;
-	font-family: "Overpass Mono", monospace;
 	border-radius: 10px;
-	padding: 10px;
+	padding: 5px;
 	box-sizing: border-box;
 }
 .button-ui {
@@ -1098,9 +1104,6 @@ button {
 	background: #999999;
 	border-radius: 5px;
 }
-.button-ui img {
-	height: 100%;
-}
 .button-ui > div {
 	display: flex;
 	align-items: center;
@@ -1108,18 +1111,31 @@ button {
 	padding: 10px;
 	box-sizing: border-box;
 	font-size: .6em;
-	color: white;
 }
 .button-ui:not(:first-child) {
 	cursor: pointer;
 }
 .button-ui.selected {
-	background: #ff3333;
+	background: #ff3d33;
 }
 .text-vertical {
 	writing-mode: sideways-lr;
 }
-
+.three-hover-card {
+	position: absolute;
+	bottom: 80px;
+	left: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	background: #ff3d33;
+	border-radius: 5px;
+	padding: 5px;
+	box-sizing: border-box;
+	width: 263px;
+}
+.three-hover-card img 
 @media (max-width: 800px) {
 	section {
 		margin-bottom: 100px;

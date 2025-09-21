@@ -18,20 +18,6 @@
 		width: 100%;
 		height: 80vh;
 	}
-	#hover-card {
-		position: absolute;
-		top: 10px;
-		right: 10px;
-		padding: 12px 18px;
-		background: rgba(255,255,255,0.9);
-		color: #000;
-		font-family: Arial, sans-serif;
-		font-size: 14px;
-		border-radius: 6px;
-		box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-		display: none;
-		z-index: 20;
-	}
 	canvas { display:block; width:100%; height:100%; }
 	button { display:none; }
 </style>
@@ -65,9 +51,11 @@
 							<img  src="images/icons/icon_conveyor_white.svg">
 						</div>
 					</div>
-<!-- 					<button id="cameraFactory">Camera Factory</button>
- -->				</div>
-				<div id="hover-card">Hover Info</div>
+				</div>
+				<div class="three-hover-card" id="hover-card">
+					<div style="margin-bottom: -4px;">GO TO PRODUCTION LINE</div>
+					<img style="transform: rotate(180deg);" src="images/icons/icon_arrow_left_circle_white.svg">
+				</div>
 			</div>
 		</section>
 	</div>
@@ -120,7 +108,7 @@ function addCreaseEdges(mesh, thresholdAngleDeg = 20) {
 // Ground as shadow catcher
 const ground = new THREE.Mesh(
 	new THREE.PlaneGeometry(50,50),
-	new THREE.ShadowMaterial({ opacity:0.1 })
+	new THREE.ShadowMaterial({ opacity:0.2 })
 );
 ground.rotation.x = -Math.PI/2;
 ground.position.y=0;
@@ -242,7 +230,7 @@ loader.load(
 					// Set section_production to always have red material
 					if (obj.name.toLowerCase().includes('section_production')) {
 						obj.material = new THREE.MeshStandardMaterial({
-							color: 0xff3333, // Red color
+							color: 0xff3d33, // Red color
 							roughness: 1,
 							metalness: 0
 						});
@@ -499,8 +487,8 @@ function checkHover() {
 		// Find the interactive mesh object to get target mesh
 		const interactiveObj = interactiveMeshes.find(obj => obj.mesh === hoveredMesh);
 		if (interactiveObj) {
-			hoverCard.style.display = 'block';
-			hoverCard.textContent = 'Production';
+			hoverCard.style.display = 'flex';
+			// hoverCard.textContent = 'Production';
 		}
 		document.body.style.cursor = 'pointer';
 	} else {
@@ -510,7 +498,7 @@ function checkHover() {
 	}
 }
 function updateColors() {
-	const hoverColor = new THREE.Color(0xff3333);
+	const hoverColor = new THREE.Color(0xff3d33);
 	const baseColor = new THREE.Color(0xffffff);
 	const hoverOutlineColor = new THREE.Color(0xffffff); // White for hover
 	const baseOutlineColor = new THREE.Color(0xf4f4f4); // Light gray for default
