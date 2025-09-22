@@ -1081,7 +1081,7 @@ button {
 	font-family: "Overpass Mono", monospace;
 	color: #fff;
 }
-.three-display img {
+.three-ui img, .three-hover-card img {
 	height: 20px;
 }
 .three-ui {
@@ -1100,17 +1100,19 @@ button {
 .button-ui {
 	display: flex;
 	align-items: center;
+	gap: 15px;
+	height: 40px;
 	border: 1px #b3b3b3 solid;
 	background: #999999;
 	border-radius: 5px;
+	padding: 10px;
+	box-sizing: border-box;
+
 }
 .button-ui > div {
 	display: flex;
 	align-items: center;
-	height: 40px;
-	padding: 10px;
-	box-sizing: border-box;
-	font-size: .6em;
+	font-size: .6rem;
 }
 .button-ui:not(:first-child) {
 	cursor: pointer;
@@ -1127,13 +1129,12 @@ button {
 	left: 20px;
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
-	gap: 10px;
+	gap: 17px;
 	background: #ff3d33;
 	border-radius: 5px;
 	padding: 5px;
 	box-sizing: border-box;
-	width: 263px;
+	font-size: 1rem;
 }
 .three-hover-card img 
 @media (max-width: 800px) {

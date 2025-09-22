@@ -27,7 +27,7 @@
 		<section class="marginless">
 			<div class="three-display" id="three-container">
 				<div class="three-ui ">
-					<div class="flex align-center button-ui">
+					<div class="button-ui">
 						<div>
 							<div class="text-vertical">ORBIT</div>
 							<img  src="images/icons/icon_mouse_left_white.svg">
@@ -49,6 +49,112 @@
 					<div class="button-ui" id="cameraProduction">
 						<div>
 							<img  src="images/icons/icon_conveyor_white.svg">
+						</div>
+					</div>
+				</div>
+				<div class="bp-sidebar-line" style="right: 0;">
+					<div class="bp-sidebar-header" style="background: #18ba5f;">
+						<div>
+							<div class="flex gap-5 text-small">
+								<img class="icon-tiny" src="images/icons/icon_conveyor_white.svg">
+								<div>PRODUCTION LINE</div>
+							</div>
+							<div class="text-big">PRIMECOAT</div>
+						</div>
+						<div >
+							<img style="height: 20px" src="images/icons/icon_xmark_circle_white.svg">
+						</div>
+					</div>
+					<div class="bp-sidebar-content">
+						<div>
+							<div class="flex align-center space-between">
+								<div>
+									<div class="flex gap-5 color-gray text-small">
+										<img class="icon-tiny opacity-40" src="images/icons/icon_play_pause_white.svg">
+										<div>STATUS</div>
+									</div>
+									<div class="text-big">
+										RUNNING
+									</div>
+								</div>
+								<div class="switch">
+									<div style="background: #18ba5f; left: unset; right: 10%;"></div>
+								</div>
+							</div>
+						</div>
+						<div>
+							<div class="flex gap-5 color-gray text-small">
+								<img class="icon-tiny opacity-40" src="images/icons/icon_stopwatch_white.svg">
+								<div>SINCE</div>
+							</div>
+							<div class="text-big">
+								18:10h
+							</div>
+						</div>
+					</div>
+					<div class="bp-sidebar-content">
+						<div>
+							<div class="flex gap-5 color-gray text-small">
+								<img class="icon-tiny opacity-40" src="images/icons/icon_layers_white.svg">
+								<div>BATCH</div>
+							</div>
+							<div class="text-big">
+								B456
+							</div>
+						</div>
+						<div>
+							<div class="flex gap-5 color-gray text-small">
+								<img class="icon-tiny opacity-40" src="images/icons/icon_boxes_white.svg">
+								<div>PRODUCED</div>
+							</div>
+							<div class="text-big">
+								631un <span class="text-small color-gray">(78%)</span>
+							</div>
+						</div>
+						<div>
+							<div class="flex gap-5 color-gray text-small">
+								<img class="icon-tiny opacity-40" src="images/icons/icon_target_white.svg">
+								<div>OBJECTIVE</div>
+							</div>
+							<div class="text-big">
+								800un
+							</div>
+						</div>
+						<div>
+							<div class="flex gap-5 color-gray text-small">
+								<img class="icon-tiny opacity-40" src="images/icons/icon_stopwatch_white.svg">
+								<div>DOWNTIME</div>
+							</div>
+							<div class="text-big">
+								9s
+							</div>
+						</div>
+						<div>
+							<div class="flex gap-5 color-gray text-small">
+								<img class="icon-tiny opacity-40" src="images/icons/icon_chart_white.svg">
+								<div>OEE</div>
+							</div>
+							<div class="text-big">
+								87%
+							</div>
+						</div>
+						
+					</div>
+					<div class="bp-sidebar-content">
+						<div>
+							<div class="flex gap-5 color-gray text-small">
+								<img class="icon-tiny opacity-40" src="images/icons/icon_machine_white.svg">
+								<div>MACHINES</div>
+							</div>
+							<div class="flex gap-5 wrap machines text-small margin-top-10">
+								<div>FILLER <div></div></div>
+								<div style="background: #ff3333">LABELER <div></div></div>
+								<div>WEIGHER <div></div></div>
+								<div>SEALER <div></div></div>
+								<div>INSPECTOR <div></div></div>
+								<div>WRAPPER <div></div></div>
+								<div>PALLETIZER <div></div></div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -118,7 +224,7 @@ scene.add(ground);
 // --- Lights ---
 const ambientLight = new THREE.AmbientLight(0xffffff, .9);
 scene.add(ambientLight);
-const dirLight = new THREE.DirectionalLight(0x808080, .8);
+const dirLight = new THREE.DirectionalLight(0x808080, .7);
 dirLight.position.set(20,20,-20);
 dirLight.castShadow = true;
 dirLight.target.position.set(0, 0, 0);
@@ -249,16 +355,9 @@ loader.load(
 			}
 		});
 
-		// Detection meshes are now handled automatically in the traverse loop above
-
 		// --- Add to scene ---
 		scene.add(root);
-		
-		
-		
-		
-		
-		
+
 	},
 	(xhr) => {
 		console.log(`📦 Loading... ${(xhr.loaded / xhr.total * 100).toFixed(2)}%`);
