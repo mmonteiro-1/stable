@@ -57,7 +57,7 @@ function createPerspectiveCamera(pos, target, fov=50){
 
 function addCreaseEdges(mesh, thresholdAngleDeg = 20, edgeColor = 0x808080) {
 	const edgesGeom = new THREE.EdgesGeometry(mesh.geometry, thresholdAngleDeg);
-	const edgesMat = new THREE.LineBasicMaterial({ color: edgeColor, transparent: true, opacity: 0.3});
+	const edgesMat = new THREE.LineBasicMaterial({ color: edgeColor, transparent: true, opacity: 0.4});
 	const edges = new THREE.LineSegments(edgesGeom, edgesMat);
 	edges.userData.isCreaseEdges = true;
 	edges.frustumCulled = false;
