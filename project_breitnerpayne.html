@@ -49,6 +49,36 @@
 						</div>
 					</div>
 				</div>
+				<section class="margin-top-200">
+					<div class="three-display" id="three-container">
+						<div class="three-ui ">
+							<div class="button-ui">
+								<div>
+									<div class="text-vertical">ORBIT</div>
+									<img  src="images/icons/icon_mouse_left_white.svg">
+								</div>
+								<div>
+									<div class="text-vertical">PAN</div>
+									<img  src="images/icons/icon_mouse_right_white.svg">
+								</div>
+								<div>
+									<div class="text-vertical">ZOOM</div>
+									<img  src="images/icons/icon_mouse_scroll_white.svg">
+								</div>
+							</div>
+							<div class="button-ui selected" id="cameraFactory">
+								<div>
+									<img  src="images/icons/icon_factory_white.svg">
+								</div>
+							</div>
+							<div class="button-ui" id="cameraProduction">
+								<div>
+									<img  src="images/icons/icon_conveyor_white.svg">
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
 				<div class="spacer-logo">
 					<img src="images/logo_breitnerpayne.svg">
 				</div>
@@ -128,6 +158,14 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
 	<script type="text/javascript" src="js/gsap.js"></script>
 	<script src="js/jquery.imageviewer.js"></script>
+	
+	<!-- Three.js libraries -->
+	<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/DRACOLoader.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+	<script src="js/ThreeJS/helpers.js"></script>
+	<script src="js/ThreeJS/threejs_breitnerpayne.js"></script>
 	<script type="text/javascript">
 
 		$("nav").load("nav.html");
