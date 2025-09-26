@@ -51,6 +51,9 @@
 				</div>
 				<section class="margin-top-200">
 					<div class="three-display" id="three-container">
+						<div class="three-overlay" id="three-overlay">
+							<div>CLICK TO EXPLORE</div>
+						</div>
 						<div class="three-ui ">
 							<div class="button-ui">
 								<div>
@@ -79,9 +82,6 @@
 						</div>
 					</div>
 				</section>
-				<div class="spacer-logo">
-					<img src="images/logo_breitnerpayne.svg">
-				</div>
 				<div class="mosaic">
 					<div class="tile">
 						<img alt="3d render of a house" src="images/breitnerpayne_machine_filler.webp">
@@ -127,6 +127,12 @@
 						<div class="type">The phone web-app serves as a companion tool, offering a real-time overview of the factory’s operations with key metrics, machine statuses, and production insights. In addition to monitoring, it allows users to adjust select factory parameters on the go, providing a <span class="italic">streamlined and accessible control interface.</span></div>
 					</div>
 				</section>
+				<div class="width-100 devices-mockup image">
+					<img class="width-100" src="images/breitnerpayne_phones_mockup.webp">
+				</div>
+				<div class="spacer-logo">
+					<img src="images/logo_breitnerpayne.svg">
+				</div>
 				<div class="row">
 					<div class="image">
 						<img alt="3d render of an office lobby" src="images/breitnerpayne_aerial2.webp">
@@ -172,6 +178,24 @@
 		$("footer").load("footer.html");
 
 		imageviewer();
+
+		// Handle three.js overlay click
+		document.getElementById('three-overlay').addEventListener('click', function() {
+			// Hide the overlay
+			this.classList.add('hidden');
+			
+			// Enable pointer events on the canvas
+			const canvas = document.querySelector('#three-container canvas');
+			if (canvas) {
+				canvas.style.pointerEvents = 'auto';
+			}
+			
+			// Animate the three-ui into view
+			const threeUI = document.querySelector('.three-ui');
+			if (threeUI) {
+				threeUI.classList.add('visible');
+			}
+		});
 
 	</script>
 </body>
