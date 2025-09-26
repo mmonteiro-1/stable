@@ -33,14 +33,25 @@
 				aspect-ratio: 1;
 			}
 		}
+		nav .logo {
+			opacity: 0;
+			pointer-events: none; /* so it doesn't block clicks when hidden */
+			transition: opacity 0.3s ease;
+		}
+
+		nav .logo.visible {
+			opacity: 1;
+			pointer-events: auto;
+		}
 	</style>
 	<nav></nav>
 	<div class="smooth-wrapper">
 		<div class="smooth-content">
 			<div class="content">
 				<div class="hero">
-					<div class="title centered">I'll believe when I see it</div>
-					<img alt="3d render of a house exterior" src="images/citadel_00.webp">
+					<!-- <div class="title centered">I'll believe when I see it</div> -->
+					<img class="hero-logo" src="images/logo_stable_white.svg" alt="">
+					<img class="hero-bg" alt="3d render of a house exterior" src="images/citadel_00.webp">
 				</div>
 				<a href="project_citadel.html" class="feature_description flip-click"><br>
 					<div class="flip-mask">
@@ -687,6 +698,28 @@
 					$(".bp-sidebar-tour").addClass("visible");
 				}
 			});
+		});
+
+		// ---------- INDEX PAGE SPECIFIC NAV COLOR CHANGE ----------
+		// Override the general nav function for index page with 500px trigger
+		$(window).on('load', function() {
+			var $nav = $('nav');
+			var $logo = $('nav .logo');
+			
+			function updateIndexNav() {
+				var scrollPosition = $(window).scrollTop();
+				
+				if (scrollPosition >= 300) {
+					$nav.addClass('inverted');
+					$logo.addClass("visible");
+				} else {
+					$nav.removeClass('inverted');
+					$logo.removeClass("visible");
+				}
+			}
+			
+			$(window).on('scroll resize', updateIndexNav);
+			updateIndexNav();
 		});
 	</script>
 </body>

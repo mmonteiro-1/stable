@@ -1,151 +1,115 @@
-// CUSTOM GSAP SMOOTH SCROLL
+// CUSTOM GSAP SMOOTH SCROLL + PARALLAX
 gsap.registerPlugin(ScrollTrigger);
 
 const wrapper = document.querySelector(".smooth-wrapper");
 const content = document.querySelector(".smooth-content");
 
-function setHeight() {
-	const contentHeight = content.getBoundingClientRect().height;
-	document.body.style.height = contentHeight + "px";
-}
-
-// Scroller proxy
-ScrollTrigger.scrollerProxy(wrapper, {
-	scrollTop(value) {
-		if (arguments.length) {
-			window.scrollTo(0, value);
-		}
-		return window.scrollY;
-	},
-	getBoundingClientRect() {
-		return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
-	}
-});
-
-// Smooth effect
-gsap.ticker.add(() => {
-	gsap.to(content, {
-		y: -window.scrollY,
-		ease: "power3.out",
-		duration: 1,
-		overwrite: true
-	});
-});
-
-// Keep refreshing height
-function refreshHeight() {
-	setHeight();
-	ScrollTrigger.refresh();
-}
-
-// On load, resize, image load
-$(window).on("load", function () {
-	refreshHeight();
-
-	// Run multiple refreshes after load
-	setTimeout(refreshHeight, 500);
-	setTimeout(refreshHeight, 1500);
-
-	// Also watch images
-	$("img").on("load", refreshHeight);
-});
-
-// Resize handler
-window.addEventListener("resize", refreshHeight);
-
-// Final safety net: run several times via rAF
-let rafRuns = 0;
-function rafFix() {
-	if (rafRuns < 30) { // ~0.5s at 60fps
-		refreshHeight();
-		rafRuns++;
-		requestAnimationFrame(rafFix);
-	}
-}
-requestAnimationFrame(rafFix);
-
-// FADE OUT ON LINK CLICK
-/*$(document).on("click", "a[href]", function (e) {
-	e.preventDefault();
-	const url = $(this).attr("href");
-
-	if (url && url !== "#") {
-		$("body").fadeOut(500, function () {
-			window.location.href = url;
-		});
-	}
-});*/
-
-
-//HOMEPAGE HERO PARALLAX
-gsap.registerPlugin(ScrollTrigger);
-
 ScrollTrigger.matchMedia({
 	"(min-width: 801px)": function () {
-		gsap.to(".hero > .title", {
-			yPercent: -300,
+
+		// ---------- SMOOTH SCROLL ----------
+		function setHeight() {
+			document.body.style.height = content.getBoundingClientRect().height + "px";
+		}
+
+		// Scroller proxy
+		ScrollTrigger.scrollerProxy(wrapper, {
+			scrollTop(value) {
+				if (arguments.length) {
+					window.scrollTo(0, value);
+				}
+				return window.scrollY;
+			},
+			getBoundingClientRect() {
+				return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
+			}
+		});
+
+		// Smooth scroll logic (lerp)
+		let scrollY = 0;
+		let targetY = 0;
+		const ease = 0.1; // lower = smoother
+
+		gsap.ticker.add(() => {
+			targetY = window.scrollY;
+			scrollY += (targetY - scrollY) * ease;
+
+			gsap.set(content, { y: -scrollY });
+			ScrollTrigger.update(); // keep ST in sync
+		});
+
+		// Refresh on load/resize/image load
+		function refreshHeight() {
+			setHeight();
+			ScrollTrigger.refresh();
+		}
+
+		window.addEventListener("resize", refreshHeight);
+		window.addEventListener("load", () => {
+			refreshHeight();
+			setTimeout(refreshHeight, 500);
+			setTimeout(refreshHeight, 1500);
+			document.querySelectorAll("img").forEach(img => {
+				img.addEventListener("load", refreshHeight);
+			});
+		});
+
+		/* // ---------- HERO PARALLAX ----------
+		gsap.to(".hero-logo", {
+			yPercent: -600,
 			ease: "none",
 			scrollTrigger: {
 				trigger: ".hero",
-				start: "top 60px",
-				end: "center center",
-				scrub: 1,
+				start: "top top",
+				end: "bottom top",
+				scrub: true,
+				scroller: wrapper
 			}
-		});
-	}
-});
+		}); */
 
-// PROJECTS PAGE HERO PARALLAX
-gsap.registerPlugin(ScrollTrigger);
-
-ScrollTrigger.matchMedia({
-	"(min-width: 801px)": function () {
 		gsap.to(".project-hero > .dictionary", {
 			yPercent: -300,
 			ease: "none",
 			scrollTrigger: {
 				trigger: ".hero",
-				start: "top 60px",
-				end: "center center",
-				scrub: 1,
+				start: "top top",
+				end: "bottom top",
+				scrub: true,
+				scroller: wrapper
 			}
 		});
 	}
 });
 
-// SUGGESTS OTHER PROJECTS RANDOM
+// ---------- SUGGESTS OTHER PROJECTS RANDOM ----------
 $.get("project_gallery.html", function(data) {
 	var $loaded = $(data);
 	var $projects = $loaded.find(".other_projects").addBack(".other_projects");
 
-	// Get the current page's file name
+	// Current page
 	var currentPage = window.location.pathname.split("/").pop();
 
-	// Filter out the project that matches the current page
+	// Filter out current
 	$projects = $projects.filter(function() {
 		return $(this).data("link") !== currentPage;
 	});
 
-	// Convert to array for Fisher–Yates shuffle
+	// Shuffle
 	var projectsArray = $projects.toArray();
-
 	for (let i = projectsArray.length - 1; i > 0; i--) {
 		const j = Math.floor(Math.random() * (i + 1));
 		[projectsArray[i], projectsArray[j]] = [projectsArray[j], projectsArray[i]];
 	}
 
-	// Take 5 random ones
+	// Take 5
 	var $selected = $(projectsArray.slice(0, 5));
-
 	$(".row_other_projects").empty().append($selected);
 });
 
-
-//CHANGE NAV COLOR WHEN BELOW HERO
+// ---------- CHANGE NAV COLOR + TOGGLE LOGO ----------
 $(window).on('load', function() {
 	var $nav = $('nav');
-	var $navLinks = $('nav > a');
-	var $logo = $('.logo > img');
+	var $logo = $('nav .logo');
 	var heroBottom;
 
 	function updateNav() {
@@ -161,12 +125,22 @@ $(window).on('load', function() {
 
 		if (scrollPosition >= heroBottom - 60) {
 			$nav.addClass('inverted');
+			
+			// only on index page: show logo
+			if (window.location.pathname.endsWith("index.html") || window.location.pathname === "/") {
+				$logo.addClass("visible");
+			}
 		} else {
 			$nav.removeClass('inverted');
+
+			// only on index page: hide logo
+			if (window.location.pathname.endsWith("index.html") || window.location.pathname === "/") {
+				$logo.removeClass("visible");
+			}
 		}
 	}
 
-	$(window).on('scroll', updateNav);
-	$(window).on('resize', updateNav);
-	updateNav(); // run once on load
+	$(window).on('scroll resize', updateNav);
+	updateNav();
 });
+
