@@ -1,14 +1,62 @@
-<a class="flip-click" href="projects.html">
+<a class="flip-click desktop-nav" href="projects.html">
 	<div class="flip-mask">
 		<div class="default-text white-shadow">Projects</div>
 	</div>
 </a>
-<a class="logo" href="index.html">
+<a class="logo desktop-nav" href="index.html">
 	<img class="logo-stable" src="images/logo_stable.svg">
 	<img class="logo-stable-white" src="images/logo_stable_white.svg">
 </a>
-<a class="flip-click" href="contact.php">
+<a class="flip-click desktop-nav" href="contact.php">
 	<div class="flip-mask">
 		<div class="default-text white-shadow">Contact</div>
 	</div>
 </a>
+<a class="mobile-menu-toggle" href="#" id="mobile-menu-btn">
+	<img src="images/icons/icon_globe_orange.svg" alt="Menu">
+</a>
+
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu-overlay" id="mobile-menu">
+	<div class="mobile-menu-content">
+		<a href="index.html" class="mobile-menu-link">Home</a>
+		<a href="projects.html" class="mobile-menu-link">Projects</a>
+		<a href="contact.php" class="mobile-menu-link">Contact</a>
+	</div>
+</div>
+
+<script>
+// Run immediately since nav.html is loaded via jQuery
+console.log('Nav script loaded');
+
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+
+console.log('Mobile menu btn:', mobileMenuBtn);
+console.log('Mobile menu:', mobileMenu);
+
+if (mobileMenuBtn && mobileMenu) {
+	mobileMenuBtn.addEventListener('click', function(e) {
+		e.preventDefault();
+		console.log('Globe clicked, toggling menu');
+		mobileMenu.classList.toggle('active');
+	});
+	
+	// Close menu when clicking on links
+	const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+	mobileMenuLinks.forEach(link => {
+		link.addEventListener('click', function() {
+			mobileMenu.classList.remove('active');
+		});
+	});
+	
+	// Close menu when clicking outside
+	mobileMenu.addEventListener('click', function(e) {
+		if (e.target === mobileMenu) {
+			mobileMenu.classList.remove('active');
+		}
+	});
+} else {
+	console.error('Mobile menu elements not found');
+}
+</script>
