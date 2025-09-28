@@ -439,13 +439,14 @@ footer {
 	flex-wrap: nowrap;
 }
 .mosaic .tile {
-	flex: 1 1 23%;
+	flex: 1 1 calc(25% - 15px);
 	box-sizing: border-box;
 	aspect-ratio: 1/1;
 	overflow: hidden;
 }
-.mosaic .tile.padding-0 {
-	padding: 0;
+.mosaic .tile.double-width {
+	flex: 2 1 calc(50% - 10px);
+	aspect-ratio: 2/1;
 }
 .tile > img {
 	width: 100%;
@@ -1446,6 +1447,10 @@ button {
 	}
 	.mosaic .tile {
 		flex: unset;
+	}
+	.mosaic .tile.double-width {
+		flex: unset;
+		aspect-ratio: 1/1;
 	}
 	.grid > div {
 		max-width: 100%;
