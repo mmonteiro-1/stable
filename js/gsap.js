@@ -91,7 +91,8 @@ $.get("project_gallery.html", function(data) {
 
 	// Filter out current
 	$projects = $projects.filter(function() {
-		return $(this).data("link") !== currentPage;
+		var href = $(this).attr("href");
+		return href !== currentPage;
 	});
 
 	// Shuffle
