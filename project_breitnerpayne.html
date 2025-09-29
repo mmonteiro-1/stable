@@ -12,12 +12,23 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700;800&family=League+Spartan:wght@400;600;800&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Overpass+Mono:wght@300;500&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico">
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<title>Stable</title>
 </head>
-<body >
+<body>
+	<style>
+		.dictionary .title,
+		.grid .title {
+			font-family: "Overpass Mono", monospace;
+			text-transform: uppercase;
+		}
+		.definition {
+			font-family: 'League Spartan', sans-serif;
+		}
+	</style>
 	<nav></nav>
 	<div class="smooth-wrapper">
 		<div class="smooth-content">
@@ -107,23 +118,31 @@
 				</div>
 				<section class="grid">
 					<div>
-						<img src="images/icons/icon_programming_orange.svg">
-						<div class="title">JSON Data</div>
+						<div class="flex gap-10 align-center">
+							<img src="images/icons/icon_programming_orange.svg">
+							<div class="title">JSON Data</div>
+						</div>
 						<div class="type">The application receives factory data in JSON format generated from physical sensors embedded in the machines, parsed at runtime in Unreal Engine. A <span class="italic">UE Blueprint interprets the incoming data</span> and updates the different elements in the scene like machine status, production counts and details.</div>
 					</div>
 					<div>
-						<img src="images/icons/icon_cloud_sync_orange.svg">
-						<div class="title">Unreal Engine Server</div>
+						<div class="flex gap-10 align-center">
+							<img src="images/icons/icon_cloud_sync_orange.svg">
+							<div class="title">Unreal Engine Server</div>
+						</div>
 						<div class="type">The server handles data synchronization, processes incoming JSON updates, and streams real-time factory states to connected clients, enabling remote monitoring and interaction.</div>
 					</div>
 					<div>
-						<img src="images/icons/icon_globe_orange.svg">
-						<div class="title">Browser-based</div>
+						<div class="flex gap-10 align-center">
+							<img src="images/icons/icon_globe_orange.svg">
+							<div class="title">Browser-based</div>
+						</div>
 						<div class="type">Leveraging Pixel Streaming, the factory visualization renders entirely on the server-side and streams video output to any browser, Users interact through instantaneous input forwarding, <span class="italic">ensuring full control with no local processing power.</span></div>
 					</div>
 					<div>
-						<img src="images/icons/icon_phone_app_orange.svg">
-						<div class="title">Control App</div>
+						<div class="flex gap-10 align-center">
+							<img src="images/icons/icon_phone_app_orange.svg">
+							<div class="title">Companion App</div>
+						</div>
 						<div class="type">The phone web-app serves as a companion tool, offering a real-time overview of the factory’s operations with key metrics. In addition to monitoring, it allows users to adjust factory parameters, providing a <span class="italic">streamlined and accessible control interface.</span></div>
 					</div>
 				</section>

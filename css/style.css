@@ -475,7 +475,7 @@ footer {
 	width: 35px;
 }
 .grid .title {
-	font-size: 2.5em;
+	font-size: 2em;
 }
 .grid .type {
 	font-size: 1em;
@@ -501,8 +501,7 @@ footer {
 	aspect-ratio: 1.2;
 	overflow: hidden;
 }
-.image > .watch-cinematic,
-.image > .youtube-bypass.cinematic {
+.watch-button {
 	position: absolute;
 	bottom: 0;
 	left: 50%;
@@ -550,7 +549,7 @@ footer {
 }
 .section_title {
 	font-family: 'League Spartan', sans-serif;
-	margin-top: 100px;
+	margin-top: 400px;
 }
 .row_other_projects {
 	gap: 10px;
@@ -563,7 +562,7 @@ footer {
 }
 .other_projects {
 	flex: 1;
-	aspect-ratio: .8;
+	aspect-ratio: 1;
 	position: relative;
 }
 .other_projects img {
@@ -911,9 +910,6 @@ button {
 	object-fit: cover;
 	object-position: center;
 }
-.office video {
-	filter: brightness(.6);
-}
 .office .hero-video {
 	color: #fff;
 	width: unset;
@@ -977,6 +973,7 @@ button {
 	left: 50%;
 	width: 90vw;
 	max-width: 1200px;
+	max-height: 100vh;
 	aspect-ratio: 16/9;
 	box-sizing: border-box;
 	transform: translate(-50%, -50%);
@@ -1312,6 +1309,9 @@ button {
 		width: calc(50% - 5px);
 		flex: unset;
 	}
+	.other_projects {
+		aspect-ratio: .8;
+	}
 /*	.row_other_projects > a:last-child {
 		display: block;
 	}*/
@@ -1437,12 +1437,16 @@ button {
 	.units img {
 		aspect-ratio: 0.8;
 	}
+	.watch-button {
+		display: none;
+	}
 	.youtube-bypass {
 		display: block;
 	}
 	.watch-cinematic,
 	.watch-office,
-	.watch-surroundings {
+	.watch-surroundings,
+	.watch-walkthrough {
 		display: none;
 	}
 	.mosaic .tile {
@@ -1456,9 +1460,6 @@ button {
 		max-width: 100%;
 		padding: 0;
 		margin-bottom: 50px;
-	}
-	.grid .title {
-		font-size: 2em;
 	}
 	.bp-container {
 		aspect-ratio: 0.8;
@@ -1543,7 +1544,7 @@ button {
 		width: 100vw;
 	}
 	#video-container {
-		max-width: 1920px;
+		max-width: 1500px;
 	}
 	.citadel-logo {
 		padding: 0 200px;
