@@ -48,6 +48,9 @@ body.menu-open {
 .margin-top-200 {
 	margin-top: 200px;
 }
+.margin-bottom-10 {
+	margin-bottom: 10px;
+}
 .gap-5 {
 	gap: 5px;
 }
@@ -262,8 +265,8 @@ footer {
 	width: 100vw;
 	height: 100vh;
 	color: white;
-	padding: 40px;
-	box-sizing: border-box;
+/*	padding: 40px;
+	box-sizing: border-box;*/
 }
 .project-hero .type {
 	color: white;
@@ -443,6 +446,7 @@ footer {
 	box-sizing: border-box;
 	aspect-ratio: 1/1;
 	overflow: hidden;
+	cursor: pointer;
 }
 .mosaic .tile.double-width {
 	flex: 2 1 calc(50% - 10px);
@@ -472,10 +476,11 @@ footer {
 	box-sizing: border-box;
 }
 .grid img {
-	width: 35px;
+	width: 30px;
 }
 .grid .title {
 	font-size: 2em;
+	margin-top: 7px;
 }
 .grid .type {
 	font-size: 1em;
@@ -500,6 +505,7 @@ footer {
 	width: calc(50% - 10px);
 	aspect-ratio: 1.2;
 	overflow: hidden;
+	cursor: pointer;
 }
 .watch-button {
 	position: absolute;
@@ -510,9 +516,9 @@ footer {
 	z-index: 1;
 	cursor: pointer;
 }
-.image:hover, .tile:hover {
+/*.image:hover, .tile:hover {
 	cursor: zoom-in;
-}
+}*/
 .image:hover > img, .tile:hover > img {
 	transform: scale(1.01);
 	transition: transform .2s ease;
@@ -880,8 +886,8 @@ button {
 	font-family: 'League Spartan', sans-serif;
 }
 .flip-mask {
-/*	line-height: 1em;
-*/	overflow: hidden;
+	line-height: 1em;
+	overflow: hidden;
 }
 .default-text {
 	text-shadow: 0px 1.1em 0px #232323;
@@ -1312,9 +1318,9 @@ button {
 	.other_projects {
 		aspect-ratio: .8;
 	}
-/*	.row_other_projects > a:last-child {
-		display: block;
-	}*/
+	.flip-mask {
+		line-height: unset;
+	}
 	.about, .contacts {
 		width: 100vw;
 		height: unset;
