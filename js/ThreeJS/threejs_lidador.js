@@ -44,6 +44,7 @@ const ground = new THREE.Mesh(
 ground.rotation.x = -Math.PI/2;
 ground.position.y=0;
 ground.receiveShadow = true;
+ground.visible = false;
 scene.add(ground);
 
 // --- Lights ---
@@ -110,15 +111,10 @@ loader.load(
 		root.traverse((obj) => {
 			if (obj.isMesh && !obj.userData?.isOutline) {
 				obj.castShadow = obj.receiveShadow = true;
-
-				// Only add crease edges to non-detection and non-floor meshes
-				if (!obj.name.toLowerCase().includes('detection') && !obj.name.toLowerCase().includes('floor')) {
-					// Use white edges for production mesh, gray for others
-					const edgeColor = obj.name.toLowerCase().includes('section_production') ? 0xffffff : 0x808080;
-					addCreaseEdges(obj, 30, edgeColor);
-				}
-			}
-			if (obj.isMesh) {
+				// Apply an unlit white material for the whole model
+				obj.material = new THREE.MeshBasicMaterial({ color: 0xffffff });
+				// Add gray crease edges to all meshes
+				addCreaseEdges(obj, 30, 0x808080);
 			}
 		});
 
@@ -148,7 +144,7 @@ THREE.DefaultLoadingManager.onLoad = function(){
 
 // --- Camera home (single) ---
 const homePositions = {
-	cameraDefault: { pos:new THREE.Vector3(30,15,30), target:new THREE.Vector3(0,0,0), fov:10, color:0xffffff },
+	cameraDefault: { pos:new THREE.Vector3(20,10,20), target:new THREE.Vector3(0,0,0), fov:6, color:0xffffff },
 };
 
 // --- Camera helpers ---
