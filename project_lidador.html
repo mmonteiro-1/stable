@@ -52,16 +52,46 @@
 						<img alt="3d render of a house" src="images/lidador_03.webp">
 					</div>
 				</div>
+				<section class="margin-top-200">
+					<div class="three-display" id="three-container">
+						<div class="three-overlay" id="three-overlay">
+							<div>CLICK TO EXPLORE</div>
+						</div>
+						<div class="three-ui ">
+							<div class="button-ui">
+								<div>
+									<div class="text-vertical">ORBIT</div>
+									<img src="images/icons/icon_mouse_left_white.svg">
+								</div>
+								<div>
+									<div class="text-vertical">PAN</div>
+									<img src="images/icons/icon_mouse_right_white.svg">
+								</div>
+								<div>
+									<div class="text-vertical">ZOOM</div>
+									<img src="images/icons/icon_mouse_scroll_white.svg">
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
 				<div class="section_title">Other projects</div>
 				<div class="row row_other_projects"></div>
 				<footer></footer>
 			</div>
 		</div>
 	</div>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 	<script type="text/javascript" src="js/gsap.js"></script>
 	<script src="js/jquery.imageviewer.js"></script>
+	
+	<!-- Three.js libraries -->
+	<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/DRACOLoader.js"></script>
+	<script src="js/ThreeJS/helpers.js"></script>
+	<script src="js/ThreeJS/threejs_lidador.js"></script>
 	<script type="text/javascript">
 
 		$("nav").load("nav.html");

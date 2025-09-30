@@ -730,3 +730,22 @@ function resizeRenderer(){
 }
 window.addEventListener('resize',resizeRenderer);
 resizeRenderer();
+
+
+// Handle three.js overlay click
+document.getElementById('three-overlay').addEventListener('click', function () {
+	// Hide the overlay
+	this.classList.add('hidden');
+
+	// Enable pointer events on the canvas
+	const canvas = document.querySelector('#three-container canvas');
+	if (canvas) {
+		canvas.style.pointerEvents = 'auto';
+	}
+
+	// Animate the three-ui into view
+	const threeUI = document.querySelector('.three-ui');
+	if (threeUI) {
+		threeUI.classList.add('visible');
+	}
+});

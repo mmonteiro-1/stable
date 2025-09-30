@@ -1,0 +1,356 @@
+const container = document.getElementById('three-container');
+
+// --- Helper Toggle Flags ---
+const SHOW_CAMERA_HELPERS = false;  // Set to false to hide camera helpers
+const SHOW_LIGHT_HELPERS = false;   // Set to false to hide light helpers
+
+// Scene + renderer
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xf2f2f2);
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(window.devicePixelRatio || 1);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.autoClear = false;
+container.appendChild(renderer.domElement);
+
+// --- PERSPECTIVE CAMERA SETUP ---
+let camera;
+function createPerspectiveCamera(pos, target, fov=50){
+	const aspect = container.clientWidth / container.clientHeight;
+	const cam = new THREE.PerspectiveCamera(fov, aspect, 0.01, 1000);
+	cam.position.copy(pos);
+	cam.lookAt(target);
+	cam.userData.fov = fov; // store for resize
+	return cam;
+}
+
+function addCreaseEdges(mesh, thresholdAngleDeg = 20, edgeColor = 0x808080) {
+	const edgesGeom = new THREE.EdgesGeometry(mesh.geometry, thresholdAngleDeg);
+	const edgesMat = new THREE.LineBasicMaterial({ color: edgeColor, transparent: true, opacity: 0.4});
+	const edges = new THREE.LineSegments(edgesGeom, edgesMat);
+	edges.userData.isCreaseEdges = true;
+	edges.frustumCulled = false;
+	edges.renderOrder = 2; // draw on top of mesh
+	mesh.add(edges);
+	return edges;
+}
+
+// Ground as shadow catcher
+const ground = new THREE.Mesh(
+	new THREE.PlaneGeometry(50,50),
+	new THREE.ShadowMaterial({ opacity:0.2 })
+);
+ground.rotation.x = -Math.PI/2;
+ground.position.y=0;
+ground.receiveShadow = true;
+scene.add(ground);
+
+// --- Lights ---
+const ambientLight = new THREE.AmbientLight(0xffffff, .9);
+scene.add(ambientLight);
+const dirLight = new THREE.DirectionalLight(0x808080, .7);
+dirLight.position.set(20,20,-20);
+dirLight.castShadow = true;
+dirLight.target.position.set(0, 0, 0);
+scene.add(dirLight);
+
+// --- Light helpers ---
+const lightHelpers = new LightHelpers(scene);
+if (SHOW_LIGHT_HELPERS) {
+	lightHelpers.addDirectionalLightHelper(dirLight, 10, 0xffffff);
+	lightHelpers.addShadowCameraHelper(dirLight);
+}
+
+const c = dirLight.shadow.camera; // OrthographicCamera
+c.left = -10;
+c.right = 10;
+c.top = 10;
+c.bottom = -10;
+c.near = 1;
+c.far = 50;
+c.updateProjectionMatrix();
+
+// Increase resolution for cleaner edges
+dirLight.shadow.mapSize.set(4096, 4096);
+
+// GLTF / GLB loader with proper base paths and DRACO support
+const loader = new THREE.GLTFLoader()
+	.setPath('images/models/')
+	.setResourcePath('images/models/');
+
+// Uncomment if your asset is Draco-compressed
+const draco = new THREE.DRACOLoader();
+draco.setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/libs/draco/');
+loader.setDRACOLoader(draco);
+
+// Cache-bust model requests to avoid stale .gltf/.bin during dev
+THREE.DefaultLoadingManager.setURLModifier((url) => {
+	if (url.indexOf('images/models/') !== -1) {
+		const sep = url.indexOf('?') === -1 ? '?' : '&';
+		return url + sep + 'v=' + Date.now();
+	}
+	return url;
+});
+
+loader.load(
+	'lidador.glb',
+	(glb) => {
+
+		const root = glb.scene;
+
+		// --- Center & scale ---
+		const sizePre = new THREE.Vector3();
+		new THREE.Box3().setFromObject(root).getSize(sizePre);
+		const maxDim = Math.max(sizePre.x, sizePre.y, sizePre.z) || 1;
+		const targetSize = 5; // desired max dimension in scene units
+		root.scale.setScalar(targetSize / maxDim);
+
+		// --- Traverse meshes ---
+		root.traverse((obj) => {
+			if (obj.isMesh && !obj.userData?.isOutline) {
+				obj.castShadow = obj.receiveShadow = true;
+
+				// Only add crease edges to non-detection and non-floor meshes
+				if (!obj.name.toLowerCase().includes('detection') && !obj.name.toLowerCase().includes('floor')) {
+					// Use white edges for production mesh, gray for others
+					const edgeColor = obj.name.toLowerCase().includes('section_production') ? 0xffffff : 0x808080;
+					addCreaseEdges(obj, 30, edgeColor);
+				}
+			}
+			if (obj.isMesh) {
+			}
+		});
+
+		scene.add(root);
+
+	}
+);
+
+// After any model load completes, set pan center and limit from its bounds
+THREE.DefaultLoadingManager.onLoad = function(){
+	// Find a recently added group as model root; fallback to scene center
+	let modelRoot = null;
+	for (let i = scene.children.length - 1; i >= 0; i--) {
+		const child = scene.children[i];
+		if (child.type === 'Group') { modelRoot = child; break; }
+	}
+	if (modelRoot) {
+		const bbox = new THREE.Box3().setFromObject(modelRoot);
+		const center = new THREE.Vector3();
+		bbox.getCenter(center);
+		sceneFocus.copy(center);
+		const size = new THREE.Vector3();
+		bbox.getSize(size);
+		panLimit = Math.max(5, 0.75 * Math.max(size.x, size.z));
+	}
+};
+
+// --- Camera home (single) ---
+const homePositions = {
+	cameraDefault: { pos:new THREE.Vector3(30,15,30), target:new THREE.Vector3(0,0,0), fov:10, color:0xffffff },
+};
+
+// --- Camera helpers ---
+const cameraHelpers = new CameraHelpers(scene);
+if (SHOW_CAMERA_HELPERS) {
+	cameraHelpers.addCameraHelpers(homePositions);
+}
+camera = createPerspectiveCamera(homePositions.cameraDefault.pos, homePositions.cameraDefault.target, homePositions.cameraDefault.fov);
+
+const minHeight=1, minDistance=5, maxDistance=50;
+let panLimit=5; // updated after model load
+let sceneFocus = new THREE.Vector3(0,0.5,0); // pan center updated from model
+
+// --- Spherical helpers ---
+function posFromSpherical(targetVec, az, pol, r){
+	return new THREE.Vector3(
+		targetVec.x + Math.cos(az)*Math.cos(pol)*r,
+		targetVec.y + Math.sin(pol)*r,
+		targetVec.z + Math.sin(az)*Math.cos(pol)*r
+	);
+}
+
+function computeAnglesFromPos(pos,targetVec){
+	const offset = new THREE.Vector3().subVectors(pos,targetVec);
+	const radius = offset.length();
+	const polar = Math.asin(offset.y/radius);
+	const azimuth = Math.atan2(offset.z, offset.x);
+	return { azimuth, polar, radius };
+}
+
+function clampPolar(polar,radius,targetY){
+	const need=(minHeight-targetY)/radius;
+	const safe=Math.max(-0.9999, Math.min(0.9999,need));
+	const minPolar=Math.asin(safe);
+	const maxPolar=Math.PI/2-0.01;
+	return Math.max(minPolar, Math.min(maxPolar, polar));
+}
+
+// Helper function to find shortest angular distance
+function shortestAngularDistance(current, target) {
+	let diff = target - current;
+	// Normalize to [-π, π]
+	while (diff > Math.PI) diff -= 2 * Math.PI;
+	while (diff < -Math.PI) diff += 2 * Math.PI;
+	return current + diff;
+}
+
+function clampPanTarget(targetVec){
+	const dx = targetVec.x - sceneFocus.x;
+	const dz = targetVec.z - sceneFocus.z;
+	const dist = Math.sqrt(dx*dx + dz*dz);
+	if(dist>panLimit){
+		const scale=panLimit/dist;
+		targetVec.x=sceneFocus.x+dx*scale;
+		targetVec.z=sceneFocus.z+dz*scale;
+	}
+}
+
+// --- Camera state ---
+let targetAz,targetPolar,targetRadius;
+let currentAz,currentPolar,currentRadius;
+let targetLookAt=new THREE.Vector3();
+let currentLookAt=new THREE.Vector3();
+let targetFov, currentFov;
+let isTransitioning=false;
+
+(function initCamera(){
+	const home = homePositions.cameraDefault;
+	targetLookAt.copy(home.target);
+	currentLookAt.copy(home.target);
+	const ang = computeAnglesFromPos(home.pos,home.target);
+	targetAz=currentAz=ang.azimuth;
+	targetPolar=currentPolar=ang.polar;
+	targetRadius=currentRadius=ang.radius;
+	targetFov=currentFov=home.fov;
+	
+})();
+
+// --- Input & Zoom ---
+let isLeft=false,isRight=false,lastX=0,lastY=0;
+let hasDragged=false; // Track if mouse has moved while pressed
+renderer.domElement.addEventListener('contextmenu',e=>e.preventDefault());
+renderer.domElement.addEventListener('mousedown',e=>{
+	lastX=e.clientX; lastY=e.clientY;
+	hasDragged=false; // Reset drag flag on mouse down
+	if(e.button===0)isLeft=true;
+	if(e.button===2)isRight=true;
+});
+
+window.addEventListener('mouseup',e=>{
+	if(e.button===0)isLeft=false;
+	if(e.button===2)isRight=false;
+});
+
+window.addEventListener('mousemove',e=>{
+	const dx = e.clientX-lastX;
+	const dy = e.clientY-lastY;
+	lastX=e.clientX; lastY=e.clientY;
+	if(isTransitioning) return;
+	if(isLeft){
+		const orbitSpeed=0.01;
+		targetAz+=dx*orbitSpeed;
+		targetPolar+=dy*orbitSpeed;
+		targetPolar=clampPolar(targetPolar,targetRadius,targetLookAt.y);
+		// Mark as dragged if mouse moved while left button is pressed
+		if(Math.abs(dx) > 2 || Math.abs(dy) > 2) hasDragged=true;
+	}else if(isRight){
+		const panSpeed=0.01;
+		const right = new THREE.Vector3();
+		const up = new THREE.Vector3();
+		camera.getWorldDirection(right);
+		right.cross(camera.up).normalize();
+		up.copy(camera.up);
+		targetLookAt.addScaledVector(right,-dx*panSpeed);
+		targetLookAt.addScaledVector(up,dy*panSpeed);
+		clampPanTarget(targetLookAt);
+		// Mark as dragged if mouse moved while right button is pressed
+		if(Math.abs(dx) > 2 || Math.abs(dy) > 2) hasDragged=true;
+	}
+});
+
+renderer.domElement.addEventListener('wheel', e=>{
+	e.preventDefault();
+	if(isTransitioning) return;
+	const zoomFactor=1 + e.deltaY*0.001;
+	targetRadius = Math.max(minDistance, Math.min(maxDistance, targetRadius*zoomFactor));
+});
+
+// --- Animate ---
+const smoothFactor=0.05; // Slower camera movement for smoother transitions
+
+function animate(){
+	requestAnimationFrame(animate);
+	
+	// Use dynamic smooth factor during transitions, otherwise use default
+	const smooth = isTransitioning && window.targetSmoothFactor ? window.targetSmoothFactor : smoothFactor;
+	
+	currentAz+=(targetAz-currentAz)*smooth;
+	currentPolar+=(targetPolar-currentPolar)*smooth;
+	currentRadius+=(targetRadius-currentRadius)*smooth;
+	currentLookAt.lerp(targetLookAt,smooth);
+	
+	// Smoothly interpolate FOV
+	currentFov += (targetFov - currentFov) * smooth;
+	camera.fov = currentFov;
+	camera.updateProjectionMatrix();
+
+	const desiredPos=posFromSpherical(currentLookAt,currentAz,currentPolar,currentRadius);
+	camera.position.copy(desiredPos);
+	if(camera.position.y<minHeight)camera.position.y=minHeight;
+	camera.lookAt(currentLookAt);
+
+	// Update light helpers
+	lightHelpers.helpers.forEach(helper => {
+		if (helper.update) helper.update();
+	});
+	// Render
+	renderer.render(scene,camera);
+
+	// End transition when we're close enough to target or time has elapsed
+	if(isTransitioning){
+		const azErr=Math.abs(currentAz-targetAz);
+		const polErr=Math.abs(currentPolar-targetPolar);
+		const rErr=Math.abs(currentRadius-targetRadius);
+		const fovErr=Math.abs(currentFov-targetFov);
+		const timeElapsed = window.transitionEndTime ? Date.now() > window.transitionEndTime : false;
+
+		// End transition if close enough OR time has elapsed (more lenient thresholds)
+		if((azErr<0.01 && polErr<0.01 && rErr<0.1 && fovErr<0.1) || timeElapsed) {
+			isTransitioning=false;
+			window.targetSmoothFactor = null; // Reset smooth factor
+		}
+	}
+}
+animate();
+
+// --- Resize ---
+function resizeRenderer(){
+	const w = container.clientWidth;
+	const h = container.clientHeight;
+	renderer.setSize(w,h);
+	const aspect=w/h;
+	camera.aspect = aspect;
+	camera.updateProjectionMatrix();
+}
+window.addEventListener('resize',resizeRenderer);
+resizeRenderer();
+
+// Handle three.js overlay click
+document.getElementById('three-overlay').addEventListener('click', function () {
+	// Hide the overlay
+	this.classList.add('hidden');
+
+	// Enable pointer events on the canvas
+	const canvas = document.querySelector('#three-container canvas');
+	if (canvas) {
+		canvas.style.pointerEvents = 'auto';
+	}
+
+	// Animate the three-ui into view
+	const threeUI = document.querySelector('.three-ui');
+	if (threeUI) {
+		threeUI.classList.add('visible');
+	}
+});

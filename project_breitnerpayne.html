@@ -181,8 +181,8 @@
 			</div>
 		</div>
 	</div>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 	<script type="text/javascript" src="js/gsap.js"></script>
 	<script src="js/jquery.imageviewer.js"></script>
 	
@@ -190,7 +190,6 @@
 	<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/DRACOLoader.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 	<script src="js/ThreeJS/helpers.js"></script>
 	<script src="js/ThreeJS/threejs_breitnerpayne.js"></script>
 	<script type="text/javascript">
@@ -199,25 +198,6 @@
 		$("footer").load("footer.html");
 
 		imageviewer();
-
-		// Handle three.js overlay click
-		document.getElementById('three-overlay').addEventListener('click', function() {
-			// Hide the overlay
-			this.classList.add('hidden');
-			
-			// Enable pointer events on the canvas
-			const canvas = document.querySelector('#three-container canvas');
-			if (canvas) {
-				canvas.style.pointerEvents = 'auto';
-			}
-			
-			// Animate the three-ui into view
-			const threeUI = document.querySelector('.three-ui');
-			if (threeUI) {
-				threeUI.classList.add('visible');
-			}
-		});
-
 	</script>
 </body>
 </html>
