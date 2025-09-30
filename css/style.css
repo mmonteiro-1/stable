@@ -1483,6 +1483,7 @@ button {
 	}
 	.project-hero {
 		padding: 20px;
+		box-sizing: border-box;
 	}
 	.spacer-logo img {
 		max-height: 70px;
