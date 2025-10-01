@@ -7,11 +7,11 @@ const SHOW_LIGHT_HELPERS = false;   // Set to false to hide light helpers
 // Scene + renderer
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xf2f2f2);
-const renderer = new THREE.WebGLRenderer({ antialias: true });
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
 renderer.setPixelRatio(window.devicePixelRatio || 1);
 renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-renderer.autoClear = false;
+renderer.shadowMap.type = THREE.PCFShadowMap; // filtered hard shadows (reduced jaggies)
+renderer.autoClear = true;
 container.appendChild(renderer.domElement);
 
 // --- PERSPECTIVE CAMERA SETUP ---
@@ -27,11 +27,17 @@ function createPerspectiveCamera(pos, target, fov=50){
 
 function addCreaseEdges(mesh, thresholdAngleDeg = 20, edgeColor = 0x808080) {
 	const edgesGeom = new THREE.EdgesGeometry(mesh.geometry, thresholdAngleDeg);
-	const edgesMat = new THREE.LineBasicMaterial({ color: edgeColor, transparent: true, opacity: 0.4});
+	const edgesMat = new THREE.LineBasicMaterial({
+		color: edgeColor,
+		transparent: true,
+		opacity: 0.45,
+		depthTest: true,
+		depthWrite: false
+	});
 	const edges = new THREE.LineSegments(edgesGeom, edgesMat);
 	edges.userData.isCreaseEdges = true;
 	edges.frustumCulled = false;
-	edges.renderOrder = 2; // draw on top of mesh
+	edges.renderOrder = 2; // rely on depth to hide back edges
 	mesh.add(edges);
 	return edges;
 }
@@ -48,9 +54,12 @@ ground.visible = false;
 scene.add(ground);
 
 // --- Lights ---
-const ambientLight = new THREE.AmbientLight(0xffffff, .9);
+const ambientLight = new THREE.AmbientLight(0xffffff, .5);
 scene.add(ambientLight);
-const dirLight = new THREE.DirectionalLight(0x808080, .7);
+// Add a subtle sky light to lift shadowed areas
+const hemiLight = new THREE.HemisphereLight(0xffffff, 0xb0b0b0, 0.3);
+scene.add(hemiLight);
+const dirLight = new THREE.DirectionalLight(0xffffff, .5);
 dirLight.position.set(20,20,-20);
 dirLight.castShadow = true;
 dirLight.target.position.set(0, 0, 0);
@@ -64,16 +73,20 @@ if (SHOW_LIGHT_HELPERS) {
 }
 
 const c = dirLight.shadow.camera; // OrthographicCamera
-c.left = -10;
-c.right = 10;
-c.top = 10;
-c.bottom = -10;
+// Tighter frustum for higher texel density (sharper edges)
+c.left = -6;
+c.right = 6;
+c.top = 6;
+c.bottom = -6;
 c.near = 1;
 c.far = 50;
 c.updateProjectionMatrix();
 
 // Increase resolution for cleaner edges
 dirLight.shadow.mapSize.set(4096, 4096);
+// Reduce shadow acne and peter-panning
+dirLight.shadow.bias = -0.0005;
+dirLight.shadow.normalBias = 0.02;
 
 // GLTF / GLB loader with proper base paths and DRACO support
 const loader = new THREE.GLTFLoader()
@@ -111,10 +124,21 @@ loader.load(
 		root.traverse((obj) => {
 			if (obj.isMesh && !obj.userData?.isOutline) {
 				obj.castShadow = obj.receiveShadow = true;
-				// Apply an unlit white material for the whole model
-				obj.material = new THREE.MeshBasicMaterial({ color: 0xffffff });
-				// Add gray crease edges to all meshes
-				addCreaseEdges(obj, 30, 0x808080);
+				// Use a flat-shaded standard material so the model can receive self-shadows
+				obj.material = new THREE.MeshStandardMaterial({ 
+					color: 0xffffff,
+					metalness: 0,
+					roughness: 1,
+					flatShading: true
+				});
+				// Slightly push base mesh back to avoid z-fighting with edges
+				if (obj.material && obj.material.polygonOffset !== undefined) {
+					obj.material.polygonOffset = true;
+					obj.material.polygonOffsetFactor = 1;
+					obj.material.polygonOffsetUnits = 1;
+				}
+				// Add gray crease edges to all meshes (higher threshold = fewer lines)
+				addCreaseEdges(obj, 45, 0x808080);
 			}
 		});
 
@@ -273,6 +297,97 @@ renderer.domElement.addEventListener('wheel', e=>{
 	targetRadius = Math.max(minDistance, Math.min(maxDistance, targetRadius*zoomFactor));
 });
 
+// --- Touch controls (mobile): 1-finger orbit, 2-finger pan, pinch to zoom ---
+let activeTouchMode = null; // 'orbit' | 'pan' | 'pinch'
+let touchLastX = 0, touchLastY = 0;
+let pinchStartDistance = 0;
+let pinchStartRadius = 0;
+
+function getTouchMidpoint(t1, t2) {
+	return {
+		x: (t1.clientX + t2.clientX) * 0.5,
+		y: (t1.clientY + t2.clientY) * 0.5
+	};
+}
+
+function getTouchDistance(t1, t2) {
+	const dx = t1.clientX - t2.clientX;
+	const dy = t1.clientY - t2.clientY;
+	return Math.hypot(dx, dy);
+}
+
+renderer.domElement.addEventListener('touchstart', (e) => {
+	e.preventDefault();
+	if (e.touches.length === 1) {
+		activeTouchMode = 'orbit';
+		touchLastX = e.touches[0].clientX;
+		touchLastY = e.touches[0].clientY;
+		hasDragged = false;
+	} else if (e.touches.length === 2) {
+		activeTouchMode = 'pinch';
+		const [t1, t2] = e.touches;
+		pinchStartDistance = getTouchDistance(t1, t2);
+		pinchStartRadius = targetRadius;
+		// Initialize pan midpoint for two-finger pan
+		const mid = getTouchMidpoint(t1, t2);
+		touchLastX = mid.x;
+		touchLastY = mid.y;
+	}
+}, { passive: false });
+
+renderer.domElement.addEventListener('touchmove', (e) => {
+	e.preventDefault();
+	if (isTransitioning) return;
+
+	if (e.touches.length === 1 && activeTouchMode === 'orbit') {
+		const t = e.touches[0];
+		const dx = t.clientX - touchLastX;
+		const dy = t.clientY - touchLastY;
+		touchLastX = t.clientX;
+		touchLastY = t.clientY;
+
+		const orbitSpeed = 0.01;
+		targetAz += dx * orbitSpeed;
+		targetPolar += dy * orbitSpeed;
+		targetPolar = clampPolar(targetPolar, targetRadius, targetLookAt.y);
+
+		if (Math.abs(dx) > 2 || Math.abs(dy) > 2) hasDragged = true;
+	} else if (e.touches.length === 2) {
+		const [t1, t2] = e.touches;
+
+		// Pan using midpoint movement
+		const mid = getTouchMidpoint(t1, t2);
+		const dx = mid.x - touchLastX;
+		const dy = mid.y - touchLastY;
+		touchLastX = mid.x;
+		touchLastY = mid.y;
+
+		const panSpeed = 0.01;
+		const right = new THREE.Vector3();
+		const up = new THREE.Vector3();
+		camera.getWorldDirection(right);
+		right.cross(camera.up).normalize();
+		up.copy(camera.up);
+
+		targetLookAt.addScaledVector(right, -dx * panSpeed);
+		targetLookAt.addScaledVector(up, dy * panSpeed);
+		clampPanTarget(targetLookAt);
+
+		// Pinch zoom based on distance delta
+		const currentDist = getTouchDistance(t1, t2);
+		const scale = pinchStartDistance > 0 ? (pinchStartDistance / currentDist) : 1;
+		const desiredRadius = pinchStartRadius * scale;
+		targetRadius = Math.max(minDistance, Math.min(maxDistance, desiredRadius));
+	}
+}, { passive: false });
+
+renderer.domElement.addEventListener('touchend', (e) => {
+	if (e.touches.length === 0) {
+		activeTouchMode = null;
+		pinchStartDistance = 0;
+	}
+}, { passive: false });
+
 // --- Animate ---
 const smoothFactor=0.05; // Slower camera movement for smoother transitions
 
@@ -318,6 +433,13 @@ function animate(){
 			window.targetSmoothFactor = null; // Reset smooth factor
 		}
 	}
+
+	const dampingFactor = activeTouchMode ? 0.3 : 0.1; // Faster during touch, slower otherwise
+
+	currentAz += (targetAz - currentAz) * dampingFactor;
+	currentPolar += (targetPolar - currentPolar) * dampingFactor;
+	currentRadius += (targetRadius - currentRadius) * dampingFactor;
+	currentLookAt.lerp(targetLookAt, dampingFactor);
 }
 animate();
 
@@ -337,6 +459,20 @@ resizeRenderer();
 document.getElementById('three-overlay').addEventListener('click', function () {
 	// Hide the overlay
 	this.classList.add('hidden');
+
+	// Get the three-container
+	const threeContainer = document.getElementById('three-container');
+
+	// 1. Scroll to center the container
+	if (threeContainer) {
+		threeContainer.scrollIntoView({
+			behavior: 'smooth',
+			block: 'center'
+		});
+
+		// 2. Add red border
+		threeContainer.style.border = '1px #ddd solid';
+	}
 
 	// Enable pointer events on the canvas
 	const canvas = document.querySelector('#three-container canvas');

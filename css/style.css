@@ -1163,6 +1163,12 @@ button {
 .three-ui img, .three-hover-card img {
 	height: 20px;
 }
+.three-icon-mobile {
+	display: none;
+}
+.three-icon-desktop {
+	display: block;
+}
 .three-ui {
 	position: absolute;
 	bottom: -70px;
@@ -1489,8 +1495,25 @@ button {
 		max-height: 70px;
 		max-width: 250px;
 	}
-	.button-ui:first-child {
+	.three-ui {
+		background: none;
+		border: none;
+	}
+	.three-icon-desktop {
 		display: none;
+	}
+	.three-icon-mobile {
+		display: block;
+	}
+	.button-ui:not(:first-child) {
+		display: none;
+	}
+	.button-ui {
+		gap: 20px;
+		height: 45px;
+		background: #5e5e5e;
+		border-radius: 0;
+		border: none;
 	}
 	.flip-click:hover .default-text {
 		transform: none;
