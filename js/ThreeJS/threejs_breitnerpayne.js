@@ -665,6 +665,96 @@ function checkHover() {
 	}
 }
 
+// --- Touch controls (mobile): 1-finger orbit, 2-finger pan, pinch to zoom ---
+let activeTouchMode = null; // 'orbit' | 'pan' | 'pinch'
+let touchLastX = 0, touchLastY = 0;
+let pinchStartDistance = 0;
+let pinchStartRadius = 0;
+
+function getTouchMidpoint(t1, t2) {
+	return {
+		x: (t1.clientX + t2.clientX) * 0.5,
+		y: (t1.clientY + t2.clientY) * 0.5
+	};
+}
+
+function getTouchDistance(t1, t2) {
+	const dx = t1.clientX - t2.clientX;
+	const dy = t1.clientY - t2.clientY;
+	return Math.hypot(dx, dy);
+}
+
+renderer.domElement.addEventListener('touchstart', (e) => {
+	e.preventDefault();
+	if (e.touches.length === 1) {
+		activeTouchMode = 'orbit';
+		touchLastX = e.touches[0].clientX;
+		touchLastY = e.touches[0].clientY;
+		hasDragged = false;
+	} else if (e.touches.length === 2) {
+		activeTouchMode = 'pinch';
+		const [t1, t2] = e.touches;
+		pinchStartDistance = getTouchDistance(t1, t2);
+		pinchStartRadius = targetRadius;
+		// Initialize pan midpoint for two-finger pan
+		const mid = getTouchMidpoint(t1, t2);
+		touchLastX = mid.x;
+		touchLastY = mid.y;
+	}
+}, { passive: false });
+
+renderer.domElement.addEventListener('touchmove', (e) => {
+	e.preventDefault();
+	if (isTransitioning) return;
+
+	if (e.touches.length === 1 && activeTouchMode === 'orbit') {
+		const t = e.touches[0];
+		const dx = t.clientX - touchLastX;
+		const dy = t.clientY - touchLastY;
+		touchLastX = t.clientX;
+		touchLastY = t.clientY;
+
+		const orbitSpeed = 0.01;
+		targetAz += dx * orbitSpeed;
+		targetPolar += dy * orbitSpeed;
+		targetPolar = clampPolar(targetPolar, targetRadius, targetLookAt.y);
+
+		if (Math.abs(dx) > 2 || Math.abs(dy) > 2) hasDragged = true;
+	} else if (e.touches.length === 2) {
+		const [t1, t2] = e.touches;
+
+		// Pan using midpoint movement
+		const mid = getTouchMidpoint(t1, t2);
+		const dx = mid.x - touchLastX;
+		const dy = mid.y - touchLastY;
+		touchLastX = mid.x;
+		touchLastY = mid.y;
+
+		const panSpeed = 0.01;
+		const right = new THREE.Vector3();
+		const up = new THREE.Vector3();
+		camera.getWorldDirection(right);
+		right.cross(camera.up).normalize();
+		up.copy(camera.up);
+
+		targetLookAt.addScaledVector(right, -dx * panSpeed);
+		targetLookAt.addScaledVector(up, dy * panSpeed);
+		clampPanTarget(targetLookAt);
+
+		// Pinch zoom based on distance delta
+		const currentDist = getTouchDistance(t1, t2);
+		const scale = pinchStartDistance > 0 ? (pinchStartDistance / currentDist) : 1;
+		const desiredRadius = pinchStartRadius * scale;
+		targetRadius = Math.max(minDistance, Math.min(maxDistance, desiredRadius));
+	}
+}, { passive: false });
+
+renderer.domElement.addEventListener('touchend', (e) => {
+	if (e.touches.length === 0) {
+		activeTouchMode = null;
+		pinchStartDistance = 0;
+	}
+}, { passive: false });
 // --- Animate ---
 const smoothFactor=0.05; // Slower camera movement for smoother transitions
 
@@ -715,6 +805,13 @@ function animate(){
 			isTransitioning=false;
 			window.targetSmoothFactor = null; // Reset smooth factor
 		}
+
+		const dampingFactor = activeTouchMode ? 0.3 : 0.1; // Faster during touch, slower otherwise
+
+		currentAz += (targetAz - currentAz) * dampingFactor;
+		currentPolar += (targetPolar - currentPolar) * dampingFactor;
+		currentRadius += (targetRadius - currentRadius) * dampingFactor;
+		currentLookAt.lerp(targetLookAt, dampingFactor);
 	}
 }
 animate();
@@ -736,6 +833,20 @@ resizeRenderer();
 document.getElementById('three-overlay').addEventListener('click', function () {
 	// Hide the overlay
 	this.classList.add('hidden');
+
+	// Get the three-container
+	const threeContainer = document.getElementById('three-container');
+
+	// 1. Scroll to center the container
+	if (threeContainer) {
+		threeContainer.scrollIntoView({
+			behavior: 'smooth',
+			block: 'center'
+		});
+
+		// 2. Add red border
+		threeContainer.style.border = '1px #ddd solid';
+	}
 
 	// Enable pointer events on the canvas
 	const canvas = document.querySelector('#three-container canvas');
