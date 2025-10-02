@@ -203,8 +203,7 @@
 		$(document).ready(function() {
 			$('#watch-office, #watch-cinematic, #watch-surroundings').click(function() {
 				var videoType = $(this).attr('id').split('-')[1];
-				var scrollTop = $(window).scrollTop();
-				$('#video-overlay').css('top', scrollTop + 'px').show();
+				$('#video-overlay').show();
 				$('#' + videoType + '-video').show().siblings('iframe').hide();
 				$('body').addClass('no-scroll');
 				$('nav').hide();
@@ -219,7 +218,6 @@
 				$('nav').show();
 			});
 		});
-
 	</script>
 </body>
 </html>
