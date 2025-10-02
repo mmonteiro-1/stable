@@ -54,19 +54,6 @@ ScrollTrigger.matchMedia({
 			});
 		});
 
-		/* // ---------- HERO PARALLAX ----------
-		gsap.to(".hero-logo", {
-			yPercent: -600,
-			ease: "none",
-			scrollTrigger: {
-				trigger: ".hero",
-				start: "top top",
-				end: "bottom top",
-				scrub: true,
-				scroller: wrapper
-			}
-		}); */
-
 		gsap.to(".project-hero > .dictionary", {
 			yPercent: -300,
 			ease: "none",
