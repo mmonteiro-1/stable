@@ -138,7 +138,7 @@ loader.load(
 					obj.material.polygonOffsetUnits = 1;
 				}
 				// Add gray crease edges to all meshes (higher threshold = fewer lines)
-				addCreaseEdges(obj, 45, 0x808080);
+				addCreaseEdges(obj, 30, 0x808080);
 			}
 		});
 
