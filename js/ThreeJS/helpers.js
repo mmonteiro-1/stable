@@ -124,10 +124,15 @@ class CameraDebugger {
 		this.camera = camera;
 		this.homePositions = homePositions;
 		this.activeHome = activeHome;
+		this.isVisible = false;
+		this.debugContainer = null;
 		this.initUI();
 	}
 
 	initUI() {
+		// Create debug container if it doesn't exist
+		this.createDebugUI();
+		
 		// Get UI elements
 		this.xSlider = document.getElementById('cam-x');
 		this.ySlider = document.getElementById('cam-y');
@@ -159,6 +164,95 @@ class CameraDebugger {
 
 		// Initial update
 		this.updateUI();
+	}
+
+	createDebugUI() {
+		// Check if debug container already exists
+		let debugContainer = document.getElementById('camera-debug');
+		if (!debugContainer) {
+			// Create the debug UI container
+			debugContainer = document.createElement('div');
+			debugContainer.id = 'camera-debug';
+			debugContainer.style.cssText = `
+				position: absolute; 
+				top: 20px; 
+				right: 20px; 
+				background: rgba(0,0,0,0.8); 
+				color: white; 
+				padding: 20px; 
+				border-radius: 8px; 
+				font-family: monospace; 
+				font-size: 12px; 
+				z-index: 1000; 
+				min-width: 300px;
+				display: none;
+			`;
+			
+			debugContainer.innerHTML = `
+				<h3 style="margin: 0 0 15px 0; color: #fff;">Camera Debug</h3>
+				
+				<!-- Camera Position -->
+				<div style="margin-bottom: 15px;">
+					<h4 style="margin: 0 0 10px 0; color: #ccc;">Camera Position</h4>
+					<div style="display: flex; align-items: center; margin-bottom: 5px;">
+						<label style="width: 20px; margin-right: 10px;">X:</label>
+						<input type="range" id="cam-x" min="-50" max="50" step="0.1" style="flex: 1; margin-right: 10px;">
+						<span id="cam-x-value" style="width: 40px; text-align: right;">0.0</span>
+					</div>
+					<div style="display: flex; align-items: center; margin-bottom: 5px;">
+						<label style="width: 20px; margin-right: 10px;">Y:</label>
+						<input type="range" id="cam-y" min="0" max="50" step="0.1" style="flex: 1; margin-right: 10px;">
+						<span id="cam-y-value" style="width: 40px; text-align: right;">0.0</span>
+					</div>
+					<div style="display: flex; align-items: center; margin-bottom: 5px;">
+						<label style="width: 20px; margin-right: 10px;">Z:</label>
+						<input type="range" id="cam-z" min="-50" max="50" step="0.1" style="flex: 1; margin-right: 10px;">
+						<span id="cam-z-value" style="width: 40px; text-align: right;">0.0</span>
+					</div>
+					<div style="display: flex; align-items: center; margin-bottom: 5px;">
+						<label style="width: 20px; margin-right: 10px;">FOV:</label>
+						<input type="range" id="cam-fov" min="1" max="120" step="1" style="flex: 1; margin-right: 10px;">
+						<span id="cam-fov-value" style="width: 40px; text-align: right;">50</span>
+					</div>
+				</div>
+				
+				<!-- Camera Target -->
+				<div style="margin-bottom: 15px;">
+					<h4 style="margin: 0 0 10px 0; color: #ccc;">Camera Target</h4>
+					<div style="display: flex; align-items: center; margin-bottom: 5px;">
+						<label style="width: 20px; margin-right: 10px;">X:</label>
+						<input type="range" id="target-x" min="-50" max="50" step="0.1" style="flex: 1; margin-right: 10px;">
+						<span id="target-x-value" style="width: 40px; text-align: right;">0.0</span>
+					</div>
+					<div style="display: flex; align-items: center; margin-bottom: 5px;">
+						<label style="width: 20px; margin-right: 10px;">Y:</label>
+						<input type="range" id="target-y" min="-10" max="20" step="0.1" style="flex: 1; margin-right: 10px;">
+						<span id="target-y-value" style="width: 40px; text-align: right;">0.0</span>
+					</div>
+					<div style="display: flex; align-items: center; margin-bottom: 5px;">
+						<label style="width: 20px; margin-right: 10px;">Z:</label>
+						<input type="range" id="target-z" min="-50" max="50" step="0.1" style="flex: 1; margin-right: 10px;">
+						<span id="target-z-value" style="width: 40px; text-align: right;">0.0</span>
+					</div>
+				</div>
+				
+				<!-- Controls -->
+				<div style="display: flex; gap: 10px;">
+					<button id="toggle-helpers" style="background: #333; color: white; border: 1px solid #555; padding: 5px 10px; border-radius: 4px; cursor: pointer;">Toggle Helpers</button>
+					<button id="reset-camera" style="background: #333; color: white; border: 1px solid #555; padding: 5px 10px; border-radius: 4px; cursor: pointer;">Reset</button>
+				</div>
+			`;
+			
+			// Add to the three-container if it exists, otherwise to body
+			const threeContainer = document.getElementById('three-container');
+			if (threeContainer) {
+				threeContainer.appendChild(debugContainer);
+			} else {
+				document.body.appendChild(debugContainer);
+			}
+		}
+		
+		this.debugContainer = debugContainer;
 	}
 
 	updateUI() {
@@ -262,5 +356,29 @@ class CameraDebugger {
 	onCameraChange(newActiveHome) {
 		this.activeHome = newActiveHome;
 		this.updateUI();
+	}
+
+	// Toggle debug UI visibility
+	toggle() {
+		if (this.debugContainer) {
+			this.isVisible = !this.isVisible;
+			this.debugContainer.style.display = this.isVisible ? 'block' : 'none';
+		}
+	}
+
+	// Show debug UI
+	show() {
+		if (this.debugContainer) {
+			this.isVisible = true;
+			this.debugContainer.style.display = 'block';
+		}
+	}
+
+	// Hide debug UI
+	hide() {
+		if (this.debugContainer) {
+			this.isVisible = false;
+			this.debugContainer.style.display = 'none';
+		}
 	}
 }

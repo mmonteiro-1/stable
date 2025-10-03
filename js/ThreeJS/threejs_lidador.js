@@ -10,7 +10,7 @@ scene.background = new THREE.Color(0xf2f2f2);
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
 renderer.setPixelRatio(window.devicePixelRatio || 1);
 renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFShadowMap; // filtered hard shadows (reduced jaggies)
+renderer.shadowMap.type = THREE.PCFSoftShadowMap; // soft shadows for smoother edges
 renderer.autoClear = true;
 container.appendChild(renderer.domElement);
 
@@ -18,7 +18,7 @@ container.appendChild(renderer.domElement);
 let camera;
 function createPerspectiveCamera(pos, target, fov=50){
 	const aspect = container.clientWidth / container.clientHeight;
-	const cam = new THREE.PerspectiveCamera(fov, aspect, 0.01, 1000);
+	const cam = new THREE.PerspectiveCamera(fov, aspect, 0.01, 100);
 	cam.position.copy(pos);
 	cam.lookAt(target);
 	cam.userData.fov = fov; // store for resize
@@ -30,7 +30,7 @@ function addCreaseEdges(mesh, thresholdAngleDeg = 20, edgeColor = 0x808080) {
 	const edgesMat = new THREE.LineBasicMaterial({
 		color: edgeColor,
 		transparent: true,
-		opacity: 0.45,
+		opacity: .4,
 		depthTest: true,
 		depthWrite: false
 	});
@@ -85,8 +85,10 @@ c.updateProjectionMatrix();
 // Increase resolution for cleaner edges
 dirLight.shadow.mapSize.set(4096, 4096);
 // Reduce shadow acne and peter-panning
-dirLight.shadow.bias = -0.0005;
-dirLight.shadow.normalBias = 0.02;
+dirLight.shadow.bias = -0.0001;
+dirLight.shadow.normalBias = 0.005;
+// Add radius for softer shadow edges
+dirLight.shadow.radius = 4;
 
 // GLTF / GLB loader with proper base paths and DRACO support
 const loader = new THREE.GLTFLoader()
@@ -124,21 +126,47 @@ loader.load(
 		root.traverse((obj) => {
 			if (obj.isMesh && !obj.userData?.isOutline) {
 				obj.castShadow = obj.receiveShadow = true;
-				// Use a flat-shaded standard material so the model can receive self-shadows
-				obj.material = new THREE.MeshStandardMaterial({ 
-					color: 0xffffff,
-					metalness: 0,
-					roughness: 1,
-					flatShading: true
-				});
-				// Slightly push base mesh back to avoid z-fighting with edges
-				if (obj.material && obj.material.polygonOffset !== undefined) {
-					obj.material.polygonOffset = true;
-					obj.material.polygonOffsetFactor = 1;
-					obj.material.polygonOffsetUnits = 1;
+				
+				// Special treatment for ground mesh - solid background color, no outline
+				if (obj.name.toLowerCase().includes('ground')) {
+					obj.material = new THREE.MeshStandardMaterial({ 
+						color: 0xdddddd,
+						metalness: 0,
+						roughness: 1
+					});
+				} else if (obj.name.toLowerCase().includes('stairs')) {
+					// Special treatment for stairs mesh - yellow material with outline
+					obj.material = new THREE.MeshStandardMaterial({ 
+						color: 0xd6aa26,
+						metalness: 0,
+						roughness: 1,
+						flatShading: true
+					});
+					// Slightly push base mesh back to avoid z-fighting with edges
+					if (obj.material && obj.material.polygonOffset !== undefined) {
+						obj.material.polygonOffset = true;
+						obj.material.polygonOffsetFactor = 1;
+						obj.material.polygonOffsetUnits = 1;
+					}
+					// Add white crease edges to stairs mesh
+					addCreaseEdges(obj, 30, 0xffffff);
+				} else {
+					// Use a flat-shaded standard material so the model can receive self-shadows
+					obj.material = new THREE.MeshStandardMaterial({ 
+						color: 0xffffff,
+						metalness: 0,
+						roughness: 1,
+						flatShading: true
+					});
+					// Slightly push base mesh back to avoid z-fighting with edges
+					if (obj.material && obj.material.polygonOffset !== undefined) {
+						obj.material.polygonOffset = true;
+						obj.material.polygonOffsetFactor = 1;
+						obj.material.polygonOffsetUnits = 1;
+					}
+					// Add gray crease edges to all meshes (higher threshold = fewer lines)
+					addCreaseEdges(obj, 30, 0x808080);
 				}
-				// Add gray crease edges to all meshes (higher threshold = fewer lines)
-				addCreaseEdges(obj, 30, 0x808080);
 			}
 		});
 
@@ -149,11 +177,14 @@ loader.load(
 
 // After any model load completes, set pan center and limit from its bounds
 THREE.DefaultLoadingManager.onLoad = function(){
-	// Find a recently added group as model root; fallback to scene center
+	// Find the model root by looking for meshes; fallback to scene center
 	let modelRoot = null;
 	for (let i = scene.children.length - 1; i >= 0; i--) {
 		const child = scene.children[i];
-		if (child.type === 'Group') { modelRoot = child; break; }
+		if (child.isMesh || (child.children && child.children.length > 0)) { 
+			modelRoot = child; 
+			break; 
+		}
 	}
 	if (modelRoot) {
 		const bbox = new THREE.Box3().setFromObject(modelRoot);
@@ -168,7 +199,7 @@ THREE.DefaultLoadingManager.onLoad = function(){
 
 // --- Camera home (single) ---
 const homePositions = {
-	cameraDefault: { pos:new THREE.Vector3(20,10,20), target:new THREE.Vector3(0,0,0), fov:6, color:0xffffff },
+	cameraDefault: { pos:new THREE.Vector3(15.7,5.6,15), target:new THREE.Vector3(0.3,0.5,0), fov:6, color:0xffffff },
 };
 
 // --- Camera helpers ---
@@ -178,7 +209,13 @@ if (SHOW_CAMERA_HELPERS) {
 }
 camera = createPerspectiveCamera(homePositions.cameraDefault.pos, homePositions.cameraDefault.target, homePositions.cameraDefault.fov);
 
-const minHeight=1, minDistance=5, maxDistance=50;
+// Initialize camera debugger
+let cameraDebugger;
+if (typeof CameraDebugger !== 'undefined') {
+	cameraDebugger = new CameraDebugger(camera, homePositions, 'cameraDefault');
+}
+
+const minHeight=1, minDistance=5, maxDistance=25;
 let panLimit=5; // updated after model load
 let sceneFocus = new THREE.Vector3(0,0.5,0); // pan center updated from model
 
@@ -486,3 +523,103 @@ document.getElementById('three-overlay').addEventListener('click', function () {
 		threeUI.classList.add('visible');
 	}
 });
+
+// Camera debug UI event listeners
+document.addEventListener('DOMContentLoaded', function() {
+	// Set up event listeners after the debug UI is created
+	setTimeout(() => {
+		// Toggle helpers button
+		const toggleHelpersBtn = document.getElementById('toggle-helpers');
+		if (toggleHelpersBtn) {
+			toggleHelpersBtn.addEventListener('click', function() {
+				SHOW_CAMERA_HELPERS = !SHOW_CAMERA_HELPERS;
+				if (SHOW_CAMERA_HELPERS) {
+					cameraHelpers.addCameraHelpers(homePositions);
+				} else {
+					cameraHelpers.clearHelpers();
+				}
+			});
+		}
+		
+		// Reset camera button
+		const resetCameraBtn = document.getElementById('reset-camera');
+		if (resetCameraBtn) {
+			resetCameraBtn.addEventListener('click', function() {
+				// Reset to default position
+				const home = homePositions.cameraDefault;
+				targetLookAt.copy(home.target);
+				currentLookAt.copy(home.target);
+				const ang = computeAnglesFromPos(home.pos, home.target);
+				targetAz = currentAz = ang.azimuth;
+				targetPolar = currentPolar = ang.polar;
+				targetRadius = currentRadius = ang.radius;
+				targetFov = currentFov = home.fov;
+				
+				// Update debugger UI if it exists
+				if (cameraDebugger) {
+					cameraDebugger.updateUI();
+				}
+			});
+		}
+	}, 100);
+});
+
+// Global function to toggle camera debug UI
+window.toggleCameraDebug = function() {
+	if (cameraDebugger) {
+		cameraDebugger.toggle();
+	}
+};
+
+// Global function to show camera debug UI
+window.showCameraDebug = function() {
+	if (cameraDebugger) {
+		cameraDebugger.show();
+	}
+};
+
+// Global function to hide camera debug UI
+window.hideCameraDebug = function() {
+	if (cameraDebugger) {
+		cameraDebugger.hide();
+	}
+};
+
+// Global function to toggle camera helpers
+window.toggleCameraHelpers = function() {
+	SHOW_CAMERA_HELPERS = !SHOW_CAMERA_HELPERS;
+	if (SHOW_CAMERA_HELPERS) {
+		cameraHelpers.addCameraHelpers(homePositions);
+	} else {
+		cameraHelpers.clearHelpers();
+	}
+};
+
+// Global function to show camera helpers
+window.showCameraHelpers = function() {
+	SHOW_CAMERA_HELPERS = true;
+	cameraHelpers.addCameraHelpers(homePositions);
+};
+
+// Global function to hide camera helpers
+window.hideCameraHelpers = function() {
+	SHOW_CAMERA_HELPERS = false;
+	cameraHelpers.clearHelpers();
+};
+
+// Make functions available globally for the debugger
+window.computeAnglesFromPos = computeAnglesFromPos;
+window.targetLookAt = targetLookAt;
+window.targetAz = targetAz;
+window.targetPolar = targetPolar;
+window.targetRadius = targetRadius;
+window.currentAz = currentAz;
+window.currentPolar = currentPolar;
+window.currentRadius = currentRadius;
+
+// Function to update spherical coordinates (for debugger)
+window.updateSphericalCoords = function(az, pol, rad) {
+	targetAz = currentAz = az;
+	targetPolar = currentPolar = pol;
+	targetRadius = currentRadius = rad;
+};

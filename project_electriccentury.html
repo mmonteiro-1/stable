@@ -51,6 +51,32 @@
 						<img alt="3d render of an office lobby" src="images/electriccentury_04.webp">
 					</div>
 				</div>
+				<section class="margin-top-200">
+					<div class="three-display" id="three-container">
+						<div class="three-overlay" id="three-overlay">
+							<div>CLICK TO EXPLORE</div>
+						</div>
+						<div class="three-ui ">
+							<div class="button-ui">
+								<div>
+									<img class="three-icon-desktop" src="images/icons/icon_mouse_left_white.svg">
+									<img class="three-icon-mobile" src="images/icons/icon_finger_orbit_white.svg">
+									<div>ORBIT</div>
+								</div>
+								<div>
+									<img class="three-icon-desktop" src="images/icons/icon_mouse_right_white.svg">
+									<img class="three-icon-mobile" src="images/icons/icon_finger_pan_white.svg">
+									<div>PAN</div>
+								</div>
+								<div>
+									<img class="three-icon-desktop" src="images/icons/icon_mouse_scroll_white.svg">
+									<img class="three-icon-mobile" src="images/icons/icon_finger_zoom_white.svg">
+									<div>ZOOM</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
 				<div class="spacer-logo">
 					<img src="images/logo_electriccentury.svg">
 				</div>
@@ -60,10 +86,17 @@
 			</div>
 		</div>
 	</div>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 	<script type="text/javascript" src="js/gsap.js"></script>
 	<script src="js/jquery.imageviewer.js"></script>
+	
+	<!-- Three.js libraries -->
+	<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/DRACOLoader.js"></script>
+	<script src="js/ThreeJS/helpers.js"></script>
+	<script src="js/ThreeJS/threejs_electric.js"></script>
 	<script type="text/javascript">
 
 		$("nav").load("nav.html");
