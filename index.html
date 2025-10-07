@@ -28,19 +28,16 @@
 			height: 80vh;
 		}
 		@media (max-width: 800px) {
-			.video {
-				aspect-ratio: 1;
+			nav .logo {
+				opacity: 0;
+				pointer-events: none; 
+				transition: opacity 0.3s ease;
 			}
-		}
-		nav .logo {
-			opacity: 0;
-			pointer-events: none; 
-			transition: opacity 0.3s ease;
-		}
 
-		nav .logo.visible {
-			opacity: 1;
-			pointer-events: auto;
+			nav .logo.visible {
+				opacity: 1;
+				pointer-events: auto;
+			}
 		}
 	</style>
 	<nav></nav>

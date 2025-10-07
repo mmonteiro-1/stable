@@ -180,6 +180,7 @@ nav.inverted .default-text {
 }
 .mobile-menu img {
 	height: 20px;
+	max-width: 25px;
 }
 .mobile-menu.visible {
 	clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
@@ -224,8 +225,14 @@ footer {
 	display: flex;
 	gap: 20px;
 }
+.email > div {
+	height: 20px;
+	max-width: 25px;
+}
 .email a img {
-	height: 15px;
+	height: 100%;
+	width: 100%;
+	object-fit: contain;
 }
 .hero {
 	position: relative;
@@ -997,7 +1004,7 @@ button {
 }
 .bp-container {
 	position: relative;
-	max-height: 80vh;
+	height: 80vh;
 	width: 100%;
 	aspect-ratio: 16/9;
 	background: black;
@@ -1368,11 +1375,11 @@ button {
 		left: -20px;
 		padding: 100px 20px;
 	}
-	.dark video, .thousand > img {
+	.dark:not(.office) video, .thousand > img {
 		filter: brightness(.6);
 	}
 	.video {
-		aspect-ratio: 1;
+		aspect-ratio: .8;
 	}
 	.office {
 		margin-top: 100px;
@@ -1468,7 +1475,7 @@ button {
 		margin-bottom: 50px;
 	}
 	.bp-container {
-		aspect-ratio: 0.8;
+		aspect-ratio: unset;
 	}
 	.bp-sidebar-line, .bp-sidebar-tour {
 		display: none;
