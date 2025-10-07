@@ -198,8 +198,15 @@ THREE.DefaultLoadingManager.onLoad = function(){
 };
 
 // --- Camera home (single) ---
+// Responsive camera position based on screen size
+const isMobile = window.innerWidth < 800;
 const homePositions = {
-	cameraDefault: { pos:new THREE.Vector3(15.7,5.6,15), target:new THREE.Vector3(0.3,0.5,0), fov:6, color:0xffffff },
+	cameraDefault: { 
+		pos: isMobile ? new THREE.Vector3(15.7,6.8,21.7) : new THREE.Vector3(15.7,5.6,15), 
+		target: isMobile ? new THREE.Vector3(0,0.5,0) : new THREE.Vector3(0.3,0.5,0), 
+		fov: isMobile ? 6 : 6, 
+		color: 0xffffff 
+	},
 };
 
 // --- Camera helpers ---
