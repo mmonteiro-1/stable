@@ -15,7 +15,6 @@
 	<link href="https://fonts.googleapis.com/css2?family=Overpass+Mono:wght@300;500&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<script type="text/javascript" src="js/jquery.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 	<link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico">
 	<title>Stable</title>
 </head>
@@ -386,26 +385,24 @@
 					</a>
 					<div class="type">project</div>
 					<div class="video">
-						<svg class="play-button" id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 302.05 302.05">
-							<defs>
-							<style>
-								.cls-1 {
-								opacity: 1;
-								fill: #fff;
-								}
-
-								.cls-2 {
-								fill: #000;
-								}
-							</style>
-							</defs>
-							<g id="Layer_1-2" data-name="Layer 1">
-							<g>
-								<path class="cls-2" d="m215.64,140.77c-.44-.23-.85-.49-1.28-.73-23.32-13.39-46.64-26.78-69.96-40.16-7.32-4.2-14.58-8.5-22-12.53-5.36-2.91-11.78-.74-13.98,4.42-.9,2.11-1.13,4.34-1.13,6.62.02,17.37.01,34.75.01,52.12,0,17.77-.06,35.53.02,53.3.04,9.44,8.3,14.37,16.26,9.78,30.7-17.69,61.31-35.52,92.1-53.03,7.2-4.1,10.03-14.56-.06-19.79Z"/>
-								<path class="cls-1" d="m151.03,0C67.62,0,0,67.62,0,151.03s67.62,151.03,151.03,151.03,151.03-67.62,151.03-151.03S234.44,0,151.03,0Zm64.67,160.56c-30.79,17.51-61.41,35.35-92.1,53.03-7.96,4.59-16.22-.34-16.26-9.78-.08-17.77-.02-35.53-.02-53.3,0-17.37,0-34.75-.01-52.12,0-2.28.23-4.52,1.13-6.62,2.2-5.16,8.62-7.33,13.98-4.42,7.42,4.03,14.68,8.33,22,12.53,23.32,13.38,46.64,26.77,69.96,40.16.43.24.84.5,1.28.73,10.08,5.23,7.26,15.69.06,19.79Z"/>
-							</g>
-							</g>
-						</svg>
+						<div class="watch-button" id="watch-planoalto">
+							<div class="button">
+								<div class="flip-click" style="margin-top: 0;">
+									<div class="flip-mask">
+										<div class="default-text white-shadow">
+											WATCH VIDEO
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="watch-button youtube-bypass">
+							<a href="https://www.youtube.com/watch?v=H3fiQQPz9Tg">
+								<div class="button">
+									WATCH VIDEO
+								</div>
+							</a>
+						</div>
 						<img class="planoalto-video-placeholder" src="images/planoalto_03.webp">
 					</div>
 					<a href="project_planoalto.html">
@@ -537,9 +534,13 @@
 			</div>
 		</div>
 	</div>
+	<div id="video-overlay" style="display: none;">
+		<div id="video-container"></div>
+		<div id="video-close"></div>
+	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-	<script type="text/javascript" src="js/gsap.js"></script>
+	<script type="text/javascript" src="js/navigation.js"></script>
 	<script src="js/jquery.imageviewer.js"></script>
 	
 	<!-- Three.js libraries -->
@@ -552,34 +553,50 @@
 		$("nav").load("nav.html");
 		$("footer").load("footer.html");
 
-		// Play video
-		$(document).ready(function(){
-			$('.play-button').click(function(){
-				var videoElement = $('<video>', {
-					class: 'video-full-width',
-					width: '100%',
-					height: '100%',
-					controls: true,
-					autoplay: true,
-					playsinline: true
-				}).append($('<source>', {
-					src: 'videos/planoalto_cinematic.mp4',
-					type: 'video/mp4'
-				}));
+		// Create Iframe for Plano Alto video
+		function createIframes() {
+			var videoContainer = document.getElementById("video-container");
 
-				// Replace image with video
-				$('.planoalto-video-placeholder').replaceWith(videoElement);
+			// Create Plano Alto Cinematic Iframe (same as Citadel cinematic)
+			var planoaltoIframe = document.createElement("iframe");
+			planoaltoIframe.id = "planoalto-video";
+			planoaltoIframe.width = "100%";
+			planoaltoIframe.height = "100%";
+			planoaltoIframe.src = "https://www.youtube.com/embed/H3fiQQPz9Tg?si=i1x70bpIw_q5xSRp&rel=0";
+			planoaltoIframe.title = "YouTube video player";
+			planoaltoIframe.frameBorder = "0";
+			planoaltoIframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+			planoaltoIframe.referrerPolicy = "strict-origin-when-cross-origin";
+			planoaltoIframe.allowFullscreen = true;
+			planoaltoIframe.style.display = "none";
+			videoContainer.appendChild(planoaltoIframe);
+		}
 
-				// Adjust aspect ratio for desktop
-				if ($(window).width() > 800) {
-					$('.video-container').css('aspect-ratio', 'unset');
-				}
+		// Load the iframe after the page has loaded
+		if (window.addEventListener) {
+			window.addEventListener("load", createIframes, false);
+		} else if (window.attachEvent) {
+			window.attachEvent("onload", createIframes);
+		} else {
+			window.onload = createIframes;
+		}
 
-				// Hide play button
-				$('.play-button').hide();
+		$(document).ready(function() {
+			$('#watch-planoalto').click(function() {
+				var videoType = $(this).attr('id').split('-')[1];
+				$('#video-overlay').show();
+				$('#' + videoType + '-video').show().siblings('iframe').hide();
+				$('body').addClass('no-scroll');
+				$('nav').hide();
+			});
 
-				// Start playing
-				videoElement[0].play();
+			$('#video-close').click(function() {
+				$('#video-overlay').hide();
+				$('#video-container iframe').each(function() {
+					this.src = this.src;
+				});
+				$('body').removeClass('no-scroll');
+				$('nav').show();
 			});
 		});
 

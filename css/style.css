@@ -779,7 +779,6 @@ button {
 	height: 100%;
 	object-fit: cover;
 	object-position: center;
-	filter: brightness(.7);
 }
 .unmute-button {
 	position: absolute;
