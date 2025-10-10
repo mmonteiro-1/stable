@@ -460,7 +460,7 @@
 					</div>
 					<div class="gallery">
 							<a href="project_citadel.html">
-								<img alt="3d render of a house" src="images/citadel_layer4.webp">
+								<img alt="3d render of a house" src="images/citadel_04.webp">
 								<div class="pantone">
 									4040 Citadel Park
 								</div>
@@ -602,20 +602,20 @@
 
 		//Citadel image sequence
 		$(document).ready(function() {
-			const $section = $(".citadel");
-			const $images = $section.find(".gsap-layer");
-			const $dim = $section.find(".dim"); // optional: still reveal if needed
-			const $playBtn = $("#citadel-play");
+			const section = $(".citadel");
+			const images = section.find(".gsap-layer");
+			const dim = section.find(".dim"); // optional: still reveal if needed
+			const playBtn = $("#citadel-play");
 			let sequenceStarted = false;
 
 			// Hide all images and .dim initially
-			$images.css("opacity", 0);
-			$dim.css("display", "none");
+			images.css("opacity", 0);
+			dim.css("display", "none");
 
 			function startSequence() {
 				sequenceStarted = true;
 
-				$images.each(function(index) {
+				images.each(function(index) {
 					setTimeout(() => {
 						// Show current image
 						$(this).css({
@@ -624,14 +624,14 @@
 						});
 						// Hide previous image
 						if (index > 0) {
-							$images.eq(index - 1).css("opacity", 0);
+							images.eq(index - 1).css("opacity", 0);
 						}
 
 						// If last image, show .dim and change button text
-						if (index === $images.length - 1) {
+						if (index === images.length - 1) {
 							setTimeout(() => {
-								$dim.css("display", "block"); // optional
-								$playBtn.text("Play again");
+								dim.css("display", "block"); // optional
+								playBtn.text("Play again");
 							}, 2000); // wait for fade-in
 						}
 
@@ -639,10 +639,10 @@
 				});
 			}
 
-			$playBtn.on("click", function() {
+			playBtn.on("click", function() {
 				// Reset images and .dim if replay
-				$images.css("opacity", 0);
-				$dim.css("display", "none");
+				images.css("opacity", 0);
+				dim.css("display", "none");
 
 				startSequence();
 			});
@@ -651,21 +651,21 @@
 		// Breitner & Payne change view and sidebar
 		$(document).ready(function() {
 
-			function switchView($icon, $container) {
-				let target = $icon.data("target");
-				let description = $icon.data("description");
+			function switchView(icon, container) {
+				let target = icon.data("target");
+				let description = icon.data("description");
 
 				// Update selected state
-				$container.find(".bp-icon").removeClass("selected");
-				$icon.addClass("selected");
+				container.find(".bp-icon").removeClass("selected");
+				icon.addClass("selected");
 
 				// Fade images
-				$container.find(".bp-image:visible").fadeOut(150, function() {
-					$container.find('.bp-image[data-target="' + target + '"]').fadeIn(150);
+				container.find(".bp-image:visible").fadeOut(150, function() {
+					container.find('.bp-image[data-target="' + target + '"]').fadeIn(150);
 				});
 
 				// Update text
-				$container.next(".feature_description").fadeOut(150, function() {
+				container.next(".feature_description").fadeOut(150, function() {
 					$(this).html(description).fadeIn(150);
 				});
 
@@ -680,27 +680,27 @@
 
 			// Icon click
 			$(".bp-icon").on("click", function() {
-				let $container = $(this).closest(".bp-container");
-				switchView($(this), $container);
+				let container = $(this).closest(".bp-container");
+				switchView($(this), container);
 			});
 
 			// Hover zone: trigger only once on first enter
 			$(".bp-hover-zone").one("mouseenter", function() {
-				let $container = $(this).closest(".bp-container");
-				let $lineIcon = $container.find('.bp-icon[data-target="line"]');
-				switchView($lineIcon, $container);
+				let container = $(this).closest(".bp-container");
+				let lineIcon = container.find('.bp-icon[data-target="line"]');
+				switchView(lineIcon, container);
 			});
 
 			// Initial state
 			$(".bp-container").each(function() {
-				let $container = $(this);
-				let $first = $container.find(".bp-icon.selected");
-				let firstTarget = $first.data("target");
-				let firstDesc = $first.data("description");
+				let container = $(this);
+				let first = container.find(".bp-icon.selected");
+				let firstTarget = first.data("target");
+				let firstDesc = first.data("description");
 
-				$container.find(".bp-image").hide();
-				$container.find('.bp-image[data-target="' + firstTarget + '"]').show();
-				$container.next(".feature_description").html(firstDesc);
+				container.find(".bp-image").hide();
+				container.find('.bp-image[data-target="' + firstTarget + '"]').show();
+				container.next(".feature_description").html(firstDesc);
 
 				if (firstTarget === "line") {
 					$(".bp-sidebar-line").addClass("visible");
@@ -712,18 +712,18 @@
 
 		// Override the general nav function for index page with 500px trigger
 		$(window).on('load', function() {
-			var $nav = $('nav');
-			var $logo = $('nav .logo');
+			var nav = $('nav');
+			var logo = $('nav .logo');
 			
 			function updateIndexNav() {
 				var scrollPosition = $(window).scrollTop();
 				
 				if (scrollPosition >= 300) {
-					$nav.addClass('inverted');
-					$logo.addClass("visible");
+					nav.addClass('inverted');
+					logo.addClass("visible");
 				} else {
-					$nav.removeClass('inverted');
-					$logo.removeClass("visible");
+					nav.removeClass('inverted');
+					logo.removeClass("visible");
 				}
 			}
 			

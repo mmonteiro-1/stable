@@ -70,41 +70,41 @@ ScrollTrigger.matchMedia({
 
 // ---------- SUGGESTS OTHER PROJECTS RANDOM ----------
 $.get("project_gallery.html", function(data) {
-	var $loaded = $(data);
-	var $projects = $loaded.find(".other_projects").addBack(".other_projects");
+	var loaded = $(data);
+	var projects = loaded.find(".other_projects").addBack(".other_projects");
 
 	// Current page
 	var currentPage = window.location.pathname.split("/").pop();
 
 	// Filter out current
-	$projects = $projects.filter(function() {
+	projects = projects.filter(function() {
 		var href = $(this).attr("href");
 		return href !== currentPage;
 	});
 
 	// Shuffle
-	var projectsArray = $projects.toArray();
+	var projectsArray = projects.toArray();
 	for (let i = projectsArray.length - 1; i > 0; i--) {
 		const j = Math.floor(Math.random() * (i + 1));
 		[projectsArray[i], projectsArray[j]] = [projectsArray[j], projectsArray[i]];
 	}
 
 	// Take 5
-	var $selected = $(projectsArray.slice(0, 5));
-	$(".row_other_projects").empty().append($selected);
+	var selected = $(projectsArray.slice(0, 5));
+	$(".row_other_projects").empty().append(selected);
 });
 
 // ---------- CHANGE NAV COLOR + TOGGLE LOGO ----------
 $(window).on('load', function() {
-	var $nav = $('nav');
-	var $logo = $('nav .logo');
+	var nav = $('nav');
+	var logo = $('nav .logo');
 	var heroBottom;
 
 	function updateNav() {
-		var $hero = $('.project-hero, .hero').first();
+		var hero = $('.project-hero, .hero').first();
 
-		if ($hero.length) {
-			heroBottom = $hero.offset().top + $hero.outerHeight();
+		if (hero.length) {
+			heroBottom = hero.offset().top + hero.outerHeight();
 		} else {
 			heroBottom = 0;
 		}
@@ -112,18 +112,18 @@ $(window).on('load', function() {
 		var scrollPosition = $(window).scrollTop();
 
 		if (scrollPosition >= heroBottom - 60) {
-			$nav.addClass('inverted');
+			nav.addClass('inverted');
 			
 			// only on index page: show logo
 			if (window.location.pathname.endsWith("index.html") || window.location.pathname === "/") {
-				$logo.addClass("visible");
+				logo.addClass("visible");
 			}
 		} else {
-			$nav.removeClass('inverted');
+			nav.removeClass('inverted');
 
 			// only on index page: hide logo
 			if (window.location.pathname.endsWith("index.html") || window.location.pathname === "/") {
-				$logo.removeClass("visible");
+				logo.removeClass("visible");
 			}
 		}
 	}
