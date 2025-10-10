@@ -42,11 +42,6 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="image solo">
-						<img alt="3d render of a house" src="images/citadel_03.webp">
-					</div>
-				</div>
-				<div class="row">
 					<div class="image">
 						<img alt="3d render of a house" src="images/citadel_05.webp">
 					</div>
@@ -69,6 +64,11 @@
 								</div>
 							</a>
 						</div>
+						<img alt="3d render of a house" src="images/citadel_03.webp">
+					</div>
+				</div>
+				<div class="row">
+					<div class="image solo">
 						<img alt="3d render of a house" src="images/citadel_07.webp">
 					</div>
 				</div>
@@ -123,7 +123,7 @@
 							</div>
 						</div>
 						<div class="watch-button youtube-bypass">
-							<a href="https://www.youtube.com/watch?v=qBjrA3zwUfg">
+							<a href="https://www.youtube.com/watch?v=263-Cva8gGI">
 								<div class="button">
 									WATCH VIDEO
 								</div>
@@ -182,6 +182,20 @@
 			cinematicIframe.width = "100%";
 			cinematicIframe.height = "100%";
 			cinematicIframe.src = "https://www.youtube.com/embed/b-a8b2OD-Mg?si=EFWgFpe7aJTXfNSK&rel=0";
+			cinematicIframe.title = "YouTube video player";
+			cinematicIframe.frameBorder = "0";
+			cinematicIframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+			cinematicIframe.referrerPolicy = "strict-origin-when-cross-origin";
+			cinematicIframe.allowFullscreen = true;
+			cinematicIframe.style.display = "none";
+			videoContainer.appendChild(cinematicIframe);
+
+			//create surroundings iframe
+			var cinematicIframe = document.createElement("iframe");
+			cinematicIframe.id = "surroundings-video";
+			cinematicIframe.width = "100%";
+			cinematicIframe.height = "100%";
+			cinematicIframe.src = "https://www.youtube.com/embed/263-Cva8gGI?si=4Emwjyme3txan5mq&rel=0";
 			cinematicIframe.title = "YouTube video player";
 			cinematicIframe.frameBorder = "0";
 			cinematicIframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
