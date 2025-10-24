@@ -19,6 +19,16 @@
 	<title>Stable</title>
 </head>
 <body>
+	<div id="loading-screen">
+		<div class="loading-progress-bar">
+			<div class="loading-progress-fill"></div>
+		</div>
+		<div class="loading-content">
+			<video autoplay loop muted playsinline class="loading-video">
+				<source src="videos/stable_logo_loop.mp4" type="video/mp4">
+			</video>
+		</div>
+	</div>
 	<style type="text/css">
 		.dictionary {
 			position: unset;
@@ -731,5 +741,6 @@
 			updateIndexNav();
 		});
 	</script>
+	<script src="js/loading_screen.js"></script>
 </body>
 </html>

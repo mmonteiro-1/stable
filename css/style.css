@@ -1230,8 +1230,56 @@ button {
 .three-hover-card img {
 	height: 20px;
 }
+#loading-screen {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100dvw;
+	height: 100dvh;
+	background: #000;
+	z-index: 10000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: opacity 0.5s ease;
+}
+#loading-screen.fade-out {
+	opacity: 0;
+	pointer-events: none;
+}
+.loading-progress-bar {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 5px;
+	background: rgba(255, 255, 255, 0.1);
+	z-index: 10001;
+}
+.loading-progress-fill {
+	height: 100%;
+	width: 0%;
+	background: #fff;
+	transition: width 0.1s ease-out;
+}
+.loading-content {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+}
+.loading-video {
+	max-width: 30%;
+	max-height: 30%;
+	object-fit: contain;
+}
 
 @media (max-width: 800px) {
+	.loading-video {
+		max-width: 40%;
+		max-height: 40%;
+	}
 	.smooth-wrapper {
 		position: unset;
 	}
