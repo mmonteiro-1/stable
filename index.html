@@ -51,6 +51,158 @@
 				pointer-events: auto;
 			}
 		}
+
+
+		.citadel img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		.citadel .gsap-layer {
+			opacity: 0;
+			transition: opacity 0.2s ease;
+		}
+
+		@keyframes activeDot {
+			0%, 100% {
+				transform: scaleY(1);
+			}
+			25% {
+				transform: scaleY(0.75);
+			}
+		}
+
+		@keyframes inactiveDot {
+			0%, 100% {
+				transform: scaleX(1) scaleY(1);
+			}
+			25% {
+				transform: scaleX(0.85) scaleY(1.25);
+			}
+		}
+
+		.pagination-wrapper {
+			position: absolute;
+			top: 40px;
+			left: 50%;
+			transform: translateX(-50%);
+			display: flex;
+			align-items: center;
+			gap: 1rem;
+			z-index: 10;
+		}
+
+		.pagination {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			gap: 0.1rem;
+		}
+
+		.pagination div {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 1rem;
+			width: 1rem;
+			cursor: pointer;
+			transition: width 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+			position: relative;
+		}
+
+		.pagination div::before {
+			content: "";
+			display: block;
+			height: 0.5rem;
+			width: 0.5rem;
+			border-radius: 0.25rem;
+			background: #fff;
+			transform-origin: 50% 50%;
+			transition: width 0.6s cubic-bezier(0.23, 1, 0.32, 1), transform 0.2s ease-out, opacity 0.2s ease-out;
+			opacity: 0.2;
+			overflow: hidden;
+		}
+
+		.pagination div::after {
+			content: "";
+			position: absolute;
+			height: 0.5rem;
+			left: 0;
+			top: 50%;
+			transform: translateY(-50%);
+			border-radius: 0.25rem;
+			background: #666;
+			width: 0%;
+			transition: width 0s linear;
+		}
+
+		.pagination div.current {
+			width: 30px;
+		}
+
+		.pagination div.current::before {
+			width: 30px;
+			animation: activeDot 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+			opacity: 1;
+		}
+
+		.pagination div.current::after {
+			width: 100%;
+			transition: width 3s linear;
+		}
+
+		.pagination div:not(.current)::before {
+			animation: inactiveDot 0.6s ease backwards;
+		}
+
+		.pagination div:not(.current):hover::before {
+			opacity: 0.75;
+		}
+
+		.play-pause-btn {
+			width: 2rem;
+			height: 2rem;
+			background: transparent;
+			border: 2px solid #fff;
+			border-radius: 50%;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			opacity: 0.6;
+			transition: opacity 0.3s;
+		}
+
+		.play-pause-btn:hover {
+			opacity: 1;
+		}
+
+		.play-pause-btn::before {
+			content: "";
+			width: 0;
+			height: 0;
+			border-style: solid;
+		}
+
+		.play-pause-btn.paused::before {
+			border-width: 6px 0 6px 10px;
+			border-color: transparent transparent transparent #fff;
+			margin-left: 2px;
+		}
+
+		.play-pause-btn.playing::before {
+			width: 8px;
+			height: 12px;
+			border-left: 3px solid #fff;
+			border-right: 3px solid #fff;
+			border-top: 0;
+			border-bottom: 0;
+		}
+
 	</style>
 	<nav></nav>
 	<div class="smooth-wrapper">
@@ -319,19 +471,20 @@
 				</a>
 				<div class="type">project</div>
 				<section class="citadel">
-					<img  src="images/citadel_layer0.webp">
-					<img class="gsap-layer" src="images/citadel_layer1.webp">
-					<img class="gsap-layer" src="images/citadel_layer2.webp">
-					<img class="gsap-layer" src="images/citadel_layer3.webp">
-					<img class="gsap-layer" src="images/citadel_layer4.webp">
-					<!-- <img class="gsap-layer" src="images/citadel_layer6.png"> -->
-					<div class="flip-click" id="citadel-play">
-						<div class="flip-mask">
-							<div class="default-text white-shadow">
-								Start
-							</div>
+					<div class="pagination-wrapper">
+						<div class="pagination">
+							<div class="current" data-index="0"></div>
+							<div data-index="1"></div>
+							<div data-index="2"></div>
+							<div data-index="3"></div>
 						</div>
+						<div class="play-pause-btn paused"></div>
 					</div>
+					<img  src="images/citadel_layer0.webp">
+					<img class="gsap-layer" src="images/citadel_layer1.webp" data-index="0">
+					<img class="gsap-layer" src="images/citadel_layer2.webp" data-index="1">
+					<img class="gsap-layer" src="images/citadel_layer3.webp" data-index="2">
+					<img class="gsap-layer" src="images/citadel_layer4.webp" data-index="3">
 					<div class="dim">
 						<div>
 							<div class="title centered">
@@ -339,18 +492,15 @@
 							</div>
 							<div class="buttons-row">
 								<a href="project_citadel.html" class="button">
-									<div class="flip-click">
-										<div class="flip-mask">
-											<div class="default-text white-shadow">
-												GO TO PROJECT →
-											</div>
-										</div>
+									<div class="white-shadow">
+										GO TO PROJECT →
 									</div>
 								</a>
 							</div>
 						</div>
 					</div>
 				</section>
+
 				<section>
 					<a href="project_lidador.html">
 						<img class="project-logo" src="images/logo_lidador.svg">
@@ -610,53 +760,189 @@
 			});
 		});
 
-		//Citadel image sequence
+		//CITADEL IMAGE SEQUENCE
 		$(document).ready(function() {
 			const section = $(".citadel");
 			const images = section.find(".gsap-layer");
-			const dim = section.find(".dim"); // optional: still reveal if needed
-			const playBtn = $("#citadel-play");
-			let sequenceStarted = false;
+			const dim = section.find(".dim");
+			const playPauseBtn = $(".play-pause-btn");
+			const paginationDots = $(".pagination div");
+			
+			let autoplayTimeout;
+			let isPlaying = false;
+			let currentIndex = -1;
 
-			// Hide all images and .dim initially
+			// Hide all images and dim initially
 			images.css("opacity", 0);
 			dim.css("display", "none");
 
-			function startSequence() {
-				sequenceStarted = true;
-
-				images.each(function(index) {
-					setTimeout(() => {
-						// Show current image
-						$(this).css({
-							"transition": "opacity 0.2s ease",
-							"opacity": 1
-						});
-						// Hide previous image
-						if (index > 0) {
-							images.eq(index - 1).css("opacity", 0);
-						}
-
-						// If last image, show .dim and change button text
-						if (index === images.length - 1) {
-							setTimeout(() => {
-								dim.css("display", "block"); // optional
-								playBtn.text("Play again");
-							}, 2000); // wait for fade-in
-						}
-
-					}, index * 2000); // 2s per image
+			// Show a specific layer
+			function showLayer(index) {
+				if (index < 0 || index >= images.length) return;
+				
+				// Hide all layers
+				images.css("opacity", 0);
+				
+				// Show all layers up to and including the target index
+				images.each(function(i) {
+					if (i <= index) {
+						$(this).css("opacity", 1);
+					}
 				});
+				
+				currentIndex = index;
+				
+				// Update pagination - force reflow to restart animation
+				paginationDots.removeClass("current");
+				// Force a reflow to restart the CSS animation
+				void paginationDots[0].offsetWidth;
+				paginationDots.eq(index).addClass("current");
+				
+				// Show dim overlay on last layer
+				if (index === images.length - 1) {
+					setTimeout(() => {
+						dim.css("display", "flex");
+					}, 3000);
+				} else {
+					dim.css("display", "none");
+				}
 			}
 
-			playBtn.on("click", function() {
-				// Reset images and .dim if replay
-				images.css("opacity", 0);
-				dim.css("display", "none");
+			// Go to next layer
+			function nextLayer() {
+				let nextIndex = currentIndex + 1;
+				if (nextIndex >= images.length) {
+					// Stop autoplay when reaching the end
+					pause();
+					return;
+				}
+				showLayer(nextIndex);
+			}
 
-				startSequence();
+			// Autoplay function
+			function autoplay() {
+				if (!isPlaying) return;
+				
+				nextLayer();
+				
+				// Check if we just showed the last layer
+				if (currentIndex >= images.length - 1) {
+					// Stop autoplay after showing the last layer
+					setTimeout(() => {
+						pause();
+					}, 3000);
+				} else {
+					autoplayTimeout = setTimeout(() => {
+						autoplay();
+					}, 3000);
+				}
+			}
+
+			// Play
+			function play() {
+				isPlaying = true;
+				playPauseBtn.removeClass("paused").addClass("playing");
+				
+				// If we're at the end or haven't started, restart from beginning
+				if (currentIndex === -1 || currentIndex === images.length - 1) {
+					images.css("opacity", 0);
+					dim.css("display", "none");
+					currentIndex = -1;
+					
+					// Show first layer immediately
+					showLayer(0);
+					
+					// Start autoplay from second layer
+					autoplayTimeout = setTimeout(() => {
+						autoplay();
+					}, 3000);
+				} else {
+					// Continue from current position
+					autoplay();
+				}
+			}
+
+			// Pause
+			function pause() {
+				isPlaying = false;
+				playPauseBtn.removeClass("playing").addClass("paused");
+				clearTimeout(autoplayTimeout);
+			}
+
+			// Play/Pause button click
+			playPauseBtn.on("click", function() {
+				if (isPlaying) {
+					pause();
+				} else {
+					play();
+				}
+			});
+
+			// Pagination dot clicks
+			paginationDots.on("click", function() {
+				const index = parseInt($(this).data("index"));
+				
+				// Reset all layers first
+				images.css("opacity", 0);
+				
+				showLayer(index);
+				
+				// Restart autoplay if playing
+				if (isPlaying) {
+					clearTimeout(autoplayTimeout);
+					autoplayTimeout = setTimeout(() => {
+						autoplay();
+					}, 3000);
+				}
 			});
 		});
+		// //Citadel image sequence
+		// $(document).ready(function() {
+		// 	const section = $(".citadel");
+		// 	const images = section.find(".gsap-layer");
+		// 	const dim = section.find(".dim"); // optional: still reveal if needed
+		// 	const playBtn = $("#citadel-play");
+		// 	let sequenceStarted = false;
+
+		// 	// Hide all images and .dim initially
+		// 	images.css("opacity", 0);
+		// 	dim.css("display", "none");
+
+		// 	function startSequence() {
+		// 		sequenceStarted = true;
+
+		// 		images.each(function(index) {
+		// 			setTimeout(() => {
+		// 				// Show current image
+		// 				$(this).css({
+		// 					"transition": "opacity 0.2s ease",
+		// 					"opacity": 1
+		// 				});
+		// 				// Hide previous image
+		// 				if (index > 0) {
+		// 					images.eq(index - 1).css("opacity", 0);
+		// 				}
+
+		// 				// If last image, show .dim and change button text
+		// 				if (index === images.length - 1) {
+		// 					setTimeout(() => {
+		// 						dim.css("display", "block"); // optional
+		// 						playBtn.text("Play again");
+		// 					}, 3000); // wait for fade-in
+		// 				}
+
+		// 			}, index * 3000); // 2s per image
+		// 		});
+		// 	}
+
+		// 	playBtn.on("click", function() {
+		// 		// Reset images and .dim if replay
+		// 		images.css("opacity", 0);
+		// 		dim.css("display", "none");
+
+		// 		startSequence();
+		// 	});
+		// });
 
 		// Breitner & Payne change view and sidebar
 		$(document).ready(function() {
