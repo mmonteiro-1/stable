@@ -1,5 +1,5 @@
 function initLoadingScreen(options = {}) {
-	const totalDuration = options.duration || 300;
+	const totalDuration = options.duration || 3000;
 	const loadingScreen = document.getElementById('loading-screen');
 	const progressFill = document.querySelector('.loading-progress-fill');
 	
