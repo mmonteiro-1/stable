@@ -852,8 +852,7 @@ button {
 }
 .citadel .dim {
 	height: 100%;
-	/*opacity: 0;*/
-	/*background: #000000a1;*/
+	background: #000000a1;
 
 }
 .dim > div {
@@ -1371,6 +1370,9 @@ button {
 	}
 	.other_projects {
 		aspect-ratio: .8;
+	}
+	.other_projects > div {
+		padding-top: 5px;
 	}
 	.flip-mask {
 		line-height: unset;
