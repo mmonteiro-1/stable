@@ -41,7 +41,7 @@
 		border: none;
 		height: 100%;
 	}
-	.overlay {
+	.path-overlay {
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -52,17 +52,23 @@
 		pointer-events: none;
 		z-index: -1;
 	}
+	.top-layer {
+		height: 100vh;
+		pointer-events: none;
+	}
 	.timeline, .info, .slide {
 		height: 80%;
 		padding: 20px;
 		box-sizing: border-box;
 	}
 	.timeline {
+		width: 15%;
+		padding: 0 20px;
+	}
+	.timeline .border {
 		display: flex;
 		flex-direction: column;
 		gap: 20px;
-		width: 15%;
-		padding: 0 20px;
 		box-sizing: border-box;
 		text-transform: uppercase;
 	}
@@ -73,6 +79,7 @@
 		color: #808080;
 		font-weight: 300;
 		cursor: pointer;
+		width: 100%;
 	}
 	.era > div {
 		margin-bottom: 5px;
@@ -128,6 +135,50 @@
 	.slide .border img.current {
 		opacity: 1 !important;
 		transform: translateY(0) !important;
+	}
+	@media (max-width: 1200px) {
+		body {
+			font-size: 14px;
+		}
+	}
+	@media (max-width: 800px) {
+		.top-layer, .scroll-layer {
+			flex-direction: column;
+			padding: 0 10px;
+		}
+		.top-layer > div, .scroll-layer	> div {
+			width: 100%;
+		}
+		.timeline {
+			height: 13%;
+			background: #262626;
+			padding: 10px 0;
+		}
+		.info {
+			height: 37%;
+			padding: 10px;
+		}
+		.slide {
+			height: 50%;
+			background: #262626;
+			padding: 10px 0;
+		}
+		.timeline .border {
+			flex-direction: row;
+			padding: 10px;
+		}
+		.path-overlay {
+			display: none;
+		}
+		.subject {
+			display: none;
+		}
+		.subject.current {
+			display: block;
+		}
+		.info.border {
+			overflow: hidden;
+		}
 	}
 </style>
 <body>
@@ -242,8 +293,8 @@
 				</div>
 				<div class="slide"></div>
 			</div>
-			<div class="overlay"></div>
-			<div class="flex align-center" style="height: 100vh; pointer-events: none;">
+			<div class="path-overlay"></div>
+			<div class="flex align-center top-layer">
 				<div class="timeline">
 					<div class="border padding-20 flex column gap-20 height-100">
 						<div class="era y2023-2025 current">
