@@ -32,12 +32,15 @@ body.menu-open {
 }
 .padding-0 {
 	padding: 0;
+	box-sizing: border-box;
 }
 .padding-10 {
 	padding: 10px;
+	box-sizing: border-box;
 }
 .padding-20 {
 	padding: 20px;
+	box-sizing: border-box;
 }
 .margin-top-5 {
 	margin-top: 5px;
@@ -77,6 +80,9 @@ body.menu-open {
 }
 .flex{
 	display: flex;
+}
+.column {
+	flex-direction: column;
 }
 .align-center {
 	align-items: center;

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="apple-touch-icon" href="images/favicon/apple-touch-icon.png">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Overpass+Mono:wght@300..700&family=Overpass:wght@100..900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico">
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<title>Stable</title>
+</head>
+<style>
+	::-webkit-scrollbar {
+		width: 0;
+		height: 0;
+	}
+	* {
+		scrollbar-width: none;
+	}
+	body {
+		background: #262626;
+		font-family: "Overpass Mono", monospace;
+		color: #f2f2f2;
+	}
+	.landing {
+		height: 100vh;
+		width: 100vw;
+	}
+	.scroll-layer {
+		position: absolute;
+		z-index: -2;
+		height: 100vh;
+		/*padding: 0 20px;*/
+		box-sizing: border-box;
+		overflow: auto;
+	}
+	.scroll-layer .timeline, .scroll-layer .info, .scroll-layer .slide {
+		border: none;
+		height: 100%;
+	}
+	.overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: #262626ba;
+		clip-path: polygon(0% 0%, 0% 100%, 15% 100%, 15% 10%, 45% 10%, 45% 90%, 15% 90%, 15% 100%, 100% 100%, 100% 0%);
+		pointer-events: none;
+		z-index: -1;
+	}
+	.timeline, .info, .slide {
+		height: 80%;
+		padding: 20px;
+		box-sizing: border-box;
+	}
+	.timeline {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		width: 15%;
+		padding: 0 20px;
+		box-sizing: border-box;
+		text-transform: uppercase;
+	}
+	.border {
+		border: 1px #575757 solid;
+	}
+	.era {
+		color: #808080;
+		font-weight: 300;
+		cursor: pointer;
+	}
+	.era > div {
+		margin-bottom: 5px;
+	}
+	.era.current {
+		color: #f2f2f2;
+	}
+	.year {
+		font-weight: bold;
+	}
+	.subject.current {
+		border-left: 1px #f2f2f2 solid;
+		padding-left: 5px;
+	}
+	.info {
+		width: 30%;
+		font-family: "Overpass", sans-serif;
+		font-weight: 300;
+	}
+	.info-block {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		margin-top: calc(10% + 40px);
+		box-sizing: border-box;
+	}
+	.info .header {
+		font-size: 1.5em;
+		font-weight: bold;
+		font-family: "Overpass Mono", monospace;
+	}
+	.tools div {
+		height: 30px;
+	}
+	.tools img {
+		height: 100%;
+	}
+	.slide {
+		width: 55%;
+		padding: 0 20px;
+		box-sizing: border-box;
+	}
+	.slide .border {
+		position: relative;
+		padding: 0;
+		overflow: hidden;
+	}
+	.slide .border img {
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
+	}
+	.slide .border img.current {
+		opacity: 1 !important;
+		transform: translateY(0) !important;
+	}
+</style>
+<body>
+	<div class="smooth-wrapper">
+		<div class="smooth-content">
+<!-- 			<div class="landing">
+				
+			</div> -->
+			<div class="scroll-layer flex width-100">
+				<div class="timeline"></div>
+				<div class="info">
+					<div class="info-block 3d y2025 height-100">
+						<div class="header">VIDEOWALL UI</div>
+						<div>We architect your go-to-market strategy
+							combining corporate positioning, product design,
+							and operational readiness.
+							<br> <br>
+							Through rapid iteration, market validation, and
+							data-driven refinement, we accelerate your path to
+							product-market fit and investor readiness.
+						</div>
+						<div>
+							→ key feature <br>
+							→ key feature <br>
+							→ key feature <br>
+							→ key feature <br>
+						</div>
+						<div class="tools">
+							<div class="flex gap-10 align-center">
+								<img src="images/icons/icon_target_white.svg">
+								<img src="images/icons/icon_target_white.svg">
+								<img src="images/icons/icon_target_white.svg">
+								<img src="images/icons/icon_target_white.svg">
+							</div>
+						</div>
+					</div>
+					<div class="info-block frontend y2025 height-100">
+						<div class="header">VIDEOWALL UI</div>
+						<div>We architect your go-to-market strategy
+							combining corporate positioning, product design,
+							and operational readiness.
+							<br> <br>
+							Through rapid iteration, market validation, and
+							data-driven refinement, we accelerate your path to
+							product-market fit and investor readiness.
+						</div>
+						<div>
+							→ key feature <br>
+							→ key feature <br>
+							→ key feature <br>
+							→ key feature <br>
+						</div>
+						<div class="tools">
+							<div class="flex gap-10 align-center">
+								<img src="images/icons/icon_target_white.svg">
+								<img src="images/icons/icon_target_white.svg">
+								<img src="images/icons/icon_target_white.svg">
+								<img src="images/icons/icon_target_white.svg">
+							</div>
+						</div>
+					</div>
+					<div class="info-block ux y2023 height-100">
+						<div class="header">VIDEOWALL UI</div>
+						<div>We architect your go-to-market strategy
+							combining corporate positioning, product design,
+							and operational readiness.
+							<br> <br>
+							Through rapid iteration, market validation, and
+							data-driven refinement, we accelerate your path to
+							product-market fit and investor readiness.
+						</div>
+						<div>
+							→ key feature <br>
+							→ key feature <br>
+							→ key feature <br>
+							→ key feature <br>
+						</div>
+						<div class="tools">
+							<div class="flex gap-10 align-center">
+								<img src="images/icons/icon_target_white.svg">
+								<img src="images/icons/icon_target_white.svg">
+								<img src="images/icons/icon_target_white.svg">
+								<img src="images/icons/icon_target_white.svg">
+							</div>
+						</div>
+					</div>
+					<div class="info-block graphic y2022 height-100">
+						<div class="header">VIDEOWALL UI</div>
+						<div>We architect your go-to-market strategy
+							combining corporate positioning, product design,
+							and operational readiness.
+							<br> <br>
+							Through rapid iteration, market validation, and
+							data-driven refinement, we accelerate your path to
+							product-market fit and investor readiness.
+						</div>
+						<div>
+							→ key feature <br>
+							→ key feature <br>
+							→ key feature <br>
+							→ key feature <br>
+						</div>
+						<div class="tools">
+							<div class="flex gap-10 align-center">
+								<img src="images/icons/icon_target_white.svg">
+								<img src="images/icons/icon_target_white.svg">
+								<img src="images/icons/icon_target_white.svg">
+								<img src="images/icons/icon_target_white.svg">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="slide"></div>
+			</div>
+			<div class="overlay"></div>
+			<div class="flex align-center" style="height: 100vh; pointer-events: none;">
+				<div class="timeline">
+					<div class="border padding-20 flex column gap-20 height-100">
+						<div class="era y2023-2025 current">
+							<div class="year">2023-2025</div>
+							<div class="subject current 3d">3D</div>
+							<div class="subject threejs">THREE JS</div>
+							<div class="subject frontend">FRONTEND DEV</div>
+							<div class="subject ux">UX UI</div>
+						</div>
+						<div class="era y2021-2022">
+							<div class="year">2021-2022</div>
+							<div class="subject graphic">GRAPHIC DESIGN</div>
+							<div class="subject frontend">FRONTEND DEV</div>
+							<div class="subject ux">UX UI</div>
+						</div>
+						<div class="era y2017-2020">
+							<div class="year">2017-2020</div>
+							<div class="subject 3d">3D</div>
+							<div class="subject frontend">FRONTEND DEV</div>
+							<div class="subject ux">UX UI</div>
+						</div>
+					</div>
+				</div>
+				<div class="info treshold border"></div>
+				<div class="slide">
+					<div class="border height-100">
+						<img class="y2025 3d" src="https://elements-resized.envatousercontent.com/elements-cover-images/a7acbea0-1b98-471d-bb8e-9e4444d8c0b4?w=2038&cf_fit=scale-down&q=85&format=auto&s=61ca3ea2743775cac638146d5887366d12eba7c649c87e2209920c3a832b72aa">
+						<img class="y2025 frontend" src="https://elements-resized.envatousercontent.com/elements-cover-images/4ffb2624-a790-429e-9668-dfcddb5fc77c?w=2038&cf_fit=scale-down&q=85&format=auto&s=97f5fce9e7a3a247d4a99d524e0e7d6b81264292d132eca5aed1e3e0a648bdd7">
+						<img class="y2023 ux" src="https://elements-resized.envatousercontent.com/elements-preview-images/4d869250-a071-4777-bc38-b08d2efd2a2e?w=1370&cf_fit=scale-down&q=85&format=auto&s=6d34d27364d759cb79d37f82857395722e0d6444f3edae3c65b9bbe83e28795b">
+						<img class="y2022 graphic" src="https://elements-resized.envatousercontent.com/elements-preview-images/af08aebe-1e3a-4ba3-9a86-04757aa5dd8a?w=1370&cf_fit=scale-down&q=85&format=auto&s=126a844950ad9ae652cf2efb9ace759ae22a13add9247ef60f76d79657f6bd33">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+	<script type="text/javascript" src="js/navigation.js"></script>
+	<script src="js/jquery.imageviewer.js"></script>
+	<script type="text/javascript">
+
+		imageviewer();
+
+		// Function to update the current era, subject, and slide image based on visible info-block
+		function updateCurrentEra() {
+		  var viewportMiddle = $(window).height() / 2;
+		  var currentInfoBlock = null;
+		  var closestDistance = Infinity;
+		  
+		  // Find which info-block is closest to the middle of the screen
+		  $('.info-block').each(function() {
+			var rect = $(this)[0].getBoundingClientRect();
+			var blockMiddle = rect.top + (rect.height / 2);
+			var distance = Math.abs(blockMiddle - viewportMiddle);
+			
+			if (distance < closestDistance) {
+			  closestDistance = distance;
+			  currentInfoBlock = $(this);
+			}
+		  });
+		  
+		  if (currentInfoBlock) {
+			// Get the year class from the info-block (e.g., 'y2025', 'y2020')
+			var classes = currentInfoBlock.attr('class').split(' ');
+			var yearClass = null;
+			
+			$.each(classes, function(index, cls) {
+			  if (cls.startsWith('y') && !cls.includes('-')) {
+				yearClass = cls;
+				return false; // break
+			  }
+			});
+			
+			if (yearClass) {
+			  var year = parseInt(yearClass.substring(1)); // Extract year number
+			  
+			  // Get the category class from the info-block (e.g., '3d', 'ux', 'frontend', 'graphic')
+			  var categoryClass = null;
+			  $.each(classes, function(index, cls) {
+				if (!cls.startsWith('y') && cls !== 'info-block' && cls !== 'height-100') {
+				  categoryClass = cls;
+				  return false; // break
+				}
+			  });
+			  
+			  // Remove current class from all eras, subjects, and slide images
+			  $('.era').removeClass('current');
+			  $('.subject').removeClass('current');
+			  $('.slide img').removeClass('current');
+			  
+			  // Add current class to the matching era and subject
+			  $('.era').each(function() {
+				var eraClasses = $(this).attr('class').split(' ');
+				var eraClass = null;
+				
+				$.each(eraClasses, function(index, cls) {
+				  if (cls.startsWith('y') && cls.includes('-')) {
+					eraClass = cls;
+					return false; // break
+				  }
+				});
+				
+				if (eraClass) {
+				  // Parse the year range (e.g., 'y2023-2025' -> [2023, 2025])
+				  var match = eraClass.match(/y(\d+)-(\d+)/);
+				  if (match) {
+					var startYear = parseInt(match[1]);
+					var endYear = parseInt(match[2]);
+					
+					// Check if the current year falls within this era's range
+					if (year >= startYear && year <= endYear) {
+					  $(this).addClass('current');
+					  
+					  // Find and highlight the matching subject within this era
+					  if (categoryClass) {
+						$(this).find('.subject.' + categoryClass).addClass('current');
+					  }
+					}
+				  }
+				}
+			  });
+			  
+			  // Find and show the matching slide image
+			  if (yearClass && categoryClass) {
+				$('.slide img.' + yearClass + '.' + categoryClass).addClass('current');
+			  }
+			}
+		  }
+		}
+
+		// Add scroll event listener to the scroll-layer
+		$('.scroll-layer').on('scroll', updateCurrentEra);
+
+		// Initial check on page load
+		$(document).ready(function() {
+		  // Add transitions
+		  $('.era, .subject').css('transition', 'all 0.4s ease');
+		  $('.slide img').css({
+			'position': 'absolute',
+			'top': '0',
+			'left': '0',
+			'opacity': '0',
+			'transform': 'translateY(50px)',
+			'transition': 'opacity 0.3s ease, transform 0.3s ease'
+		  });
+		  
+		  updateCurrentEra();
+		});
+
+	</script>
+</body>
+</html>
