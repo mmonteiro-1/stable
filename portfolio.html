@@ -25,17 +25,25 @@
 		font-family: "Overpass Mono", monospace;
 		color: #f2f2f2;
 	}
+	a {
+		color: #a1e53c;
+		text-decoration: underline;
+	}
+	a:hover {
+		color: white;
+	}
 	.landing {
-		height: 100vh;
-		width: 100vw;
+		position: absolute;
+		height: 100dvh;
+		width: 100dvw;
 	}
 	.scroll-layer {
 		position: absolute;
 		z-index: -2;
-		height: 100vh;
-		/*padding: 0 20px;*/
+		height: 100dvh;
 		box-sizing: border-box;
 		overflow: auto;
+		pointer-events: auto;
 	}
 	.scroll-layer .timeline, .scroll-layer .info, .scroll-layer .slide {
 		border: none;
@@ -47,13 +55,13 @@
 		left: 0;
 		right: 0;
 		bottom: 0;
-		background: #262626ba;
+		background: #262626d6;
 		clip-path: polygon(0% 0%, 0% 100%, 15% 100%, 15% 10%, 45% 10%, 45% 90%, 15% 90%, 15% 100%, 100% 100%, 100% 0%);
 		pointer-events: none;
 		z-index: -1;
 	}
 	.top-layer {
-		height: 100vh;
+		height: 100dvh;
 		pointer-events: none;
 	}
 	.timeline, .info, .slide {
@@ -73,10 +81,10 @@
 		text-transform: uppercase;
 	}
 	.border {
-		border: 1px #575757 solid;
+		border: 1px #5c5c5c solid;
 	}
 	.era {
-		color: #808080;
+		color: #5c5c5c;
 		font-weight: 300;
 		cursor: pointer;
 		width: 100%;
@@ -89,6 +97,9 @@
 	}
 	.year {
 		font-weight: bold;
+	}
+	.subject {
+		font-size: .9em;
 	}
 	.subject.current {
 		border-left: 1px #f2f2f2 solid;
@@ -103,19 +114,66 @@
 		display: flex;
 		flex-direction: column;
 		gap: 20px;
+		height: 100%;
 		margin-top: calc(10% + 40px);
 		box-sizing: border-box;
+	}
+	.info-block.credits {
+		margin-top: 400px;
+		text-align: center;
+		gap: 10px;
+		font-size: .9em;
+	}
+	.info-block.credits > div {
+		display: flex;
+		justify-content: center;
+		gap: 5px;
+	}
+	.info-block.credits > div > div {
+		flex: 1;
+	}
+	.info-block.credits > div > div:first-child {
+		text-align: end;
+		color: #808080;
+	}
+	.info-block.credits > div > div:last-child {
+		text-align: start;
 	}
 	.info .header {
 		font-size: 1.5em;
 		font-weight: bold;
 		font-family: "Overpass Mono", monospace;
 	}
-	.tools div {
+	.tools {
+		display: flex;
+		align-items: center;
+		gap: 10px;
 		height: 30px;
+	}
+	.tools > div {
+		height: 100%;
+		position: relative;
+	}
+	.tools > div:hover .tooltip {
+		visibility: visible;
+		opacity: 1;
 	}
 	.tools img {
 		height: 100%;
+	}
+	.tooltip {
+		visibility: hidden;
+		opacity: 0;
+		position: absolute;
+		bottom: -80%;
+		left: 50%;
+		transform: translateX(-50%);
+		background-color: #a1e53c;
+		color: #262626;
+		padding: 3px;
+		font-size: .6em;
+		white-space: nowrap;
+		transition: opacity 0.3s, visibility 0.3s;
 	}
 	.slide {
 		width: 55%;
@@ -136,6 +194,67 @@
 		opacity: 1 !important;
 		transform: translateY(0) !important;
 	}
+	.scroll-indicator {
+		position: absolute;
+		bottom: 20px;
+		right: 20px;
+		height: 70px;
+		display: grid;
+		place-items: center;
+		z-index: 10;
+	}
+	.scroll-indicator::before {
+		background: white;
+		content: "";
+		height: 100%;
+		width: 32px;
+		border-radius: 20px;
+	}
+	.scroll-indicator::after {
+		position: absolute;
+		content: "";
+		border-radius: 10px;
+		width: 12px;
+		aspect-ratio: 1;
+		background: #ff007c;
+		translate: 0 -1.55rem;
+		animation: indicator 2s ease-in-out infinite;
+	}
+	.scroll-indicator.hide {
+		opacity: 0;
+		transition: opacity 0.6s ease;
+	}
+	@keyframes indicator {
+		/* Start: circle at the bottom */
+		0% {
+			aspect-ratio: 1;
+			translate: 0 1.55rem;
+		}
+
+		/* Stretch begins upward */
+		20% {
+			aspect-ratio: 1 / 4;
+			translate: 0 0.1rem; /* stretch up toward the top */
+		}
+
+		/* Stretch + contraction finish together here */
+		35% {
+			aspect-ratio: 1;
+			translate: 0 -1.2rem; /* top position */
+		}
+
+		/* Hold the dot at the top */
+		55% {
+			aspect-ratio: 1;
+			translate: 0 -1.2rem;
+		}
+
+		/* Reset back to bottom */
+		100% {
+			translate: 0 1.55rem;
+		}
+	}
+
 	@media (max-width: 1200px) {
 		body {
 			font-size: 14px;
@@ -167,6 +286,9 @@
 			flex-direction: row;
 			padding: 10px;
 		}
+		.era {
+			white-space: nowrap;
+		}
 		.path-overlay {
 			display: none;
 		}
@@ -179,18 +301,57 @@
 		.info.border {
 			overflow: hidden;
 		}
+		.info-block {
+			gap: 10px;
+		}
 	}
 </style>
 <body>
 	<div class="smooth-wrapper">
 		<div class="smooth-content">
-<!-- 			<div class="landing">
-				
-			</div> -->
+			<div class="scroll-indicator"></div>
 			<div class="scroll-layer flex width-100">
 				<div class="timeline"></div>
 				<div class="info">
-					<div class="info-block 3d y2025 height-100">
+					<div class="info-block 3d y2025">
+						<div class="header">BREITNER & PAYNE</div>
+						<div>We architect your go-to-market strategy
+							combining corporate positioning, product design,
+							and operational readiness.
+							<br> <br>
+							Through rapid iteration, market validation, and
+							data-driven refinement, we accelerate your path to
+							product-market fit and investor readiness.
+						</div>
+						<div>
+							→ key feature <br>
+							→ key feature <br>
+							→ key feature <br>
+							→ key feature <br>
+						</div>
+						<div class="tools">
+							<div class="tooltip-trigger">
+								<img src="images/icons/logos/logo_3dsmax.svg">
+								<span class="tooltip">3ds Max</span>
+							</div>
+							<div class="tooltip-trigger">
+								<img src="images/icons/logos/logo_unreal.svg">
+								<span class="tooltip">Unreal Engine</span>
+							</div>
+							<div class="tooltip-trigger">
+								<img src="images/icons/logos/logo_figma.svg">
+								<span class="tooltip">Figma</span>
+							</div>
+							<div class="tooltip-trigger">
+								<img src="images/icons/logos/logo_code.svg">
+								<span class="tooltip">HTML/CSS/JS</span>
+							</div>
+						</div>
+						<div style="text-align: center;">
+							<a href="https://dribbble.com/shots/14896636-Scroll-indicator">→ MORE</a>
+						</div>
+					</div>
+					<div class="info-block frontend y2025">
 						<div class="header">VIDEOWALL UI</div>
 						<div>We architect your go-to-market strategy
 							combining corporate positioning, product design,
@@ -215,7 +376,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="info-block frontend y2025 height-100">
+					<div class="info-block ux y2023">
 						<div class="header">VIDEOWALL UI</div>
 						<div>We architect your go-to-market strategy
 							combining corporate positioning, product design,
@@ -240,7 +401,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="info-block ux y2023 height-100">
+					<div class="info-block graphic y2022">
 						<div class="header">VIDEOWALL UI</div>
 						<div>We architect your go-to-market strategy
 							combining corporate positioning, product design,
@@ -265,31 +426,121 @@
 							</div>
 						</div>
 					</div>
-					<div class="info-block graphic y2022 height-100">
-						<div class="header">VIDEOWALL UI</div>
-						<div>We architect your go-to-market strategy
-							combining corporate positioning, product design,
-							and operational readiness.
-							<br> <br>
-							Through rapid iteration, market validation, and
-							data-driven refinement, we accelerate your path to
-							product-market fit and investor readiness.
+					<!-- <div class="info-block credits">
+						<div>
+							Credits
 						</div>
 						<div>
-							→ key feature <br>
-							→ key feature <br>
-							→ key feature <br>
-							→ key feature <br>
+							<div>carlos peixoto</div>
+							<div>MATHEUS MONTEIRO</div>
 						</div>
-						<div class="tools">
-							<div class="flex gap-10 align-center">
-								<img src="images/icons/icon_target_white.svg">
-								<img src="images/icons/icon_target_white.svg">
-								<img src="images/icons/icon_target_white.svg">
-								<img src="images/icons/icon_target_white.svg">
-							</div>
+						<div>
+							<div>roberto carlos</div>
+							<div>LUCAS MENDES</div>
 						</div>
+					</div> -->
+					<div class="info-block credits">
+						<div>MOVIES</div>
+						<div>
+							<div>favorite</div>
+							<div>PARIS, TEXAS</div>
+						</div>
+						<div>
+							<div>second</div>
+							<div>THE SHAWSHANK REDEMPTION</div>
+						</div>
+						<div>
+							<div>third</div>
+							<div>SUPERBAD</div>
+						</div>
+
+						<div>TV SHOWS</div>
+						<div>
+							<div>favorite</div>
+							<div>BREAKING BAD</div>
+						</div>
+						<div>
+							<div>second</div>
+							<div>NORMAL PEOPLE</div>
+						</div>
+						<div>
+							<div>third</div>
+							<div>JOE PERA TALKS WITH YOU</div>
+						</div>
+
+						<div>GAMES</div>
+						<div>
+							<div>favorite game</div>
+							<div>RED DEAD REDEMPTION 2</div>
+						</div>
+						<div>
+							<div>second</div>
+							<div>OUTER WILDS</div>
+						</div>
+						<div>
+							<div>third</div>
+							<div>CONTROL</div>
+						</div>
+
+						<div>BEST 2025</div>
+						<div>
+							<div>favorite</div>
+							<div>ONE BATTLE AFTER ANOTHER</div>
+						</div>
+						<div>
+							<div>second</div>
+							<div>CLAIR OBSCURE</div>
+						</div>
+						<div>
+							<div>third</div>
+							<div>PLURIBUS</div>
+						</div>
+
+						<div>TOUCH GRASS</div>
+						<div>
+							<div>favorite</div>
+							<div>TENNIS (can’t get enough)</div>
+						</div>
+						<div>
+							<div>second</div>
+							<div>COOKING (too much youtube)</div>
+						</div>
+						<div>
+							<div>third</div>
+							<div>WOODWORKING (i’m getting old)</div>
+						</div>
+
+						<div>EDUCATION</div>
+						<div>
+							<div>university</div>
+							<div>SÃO PAULO STATE UNIVERSITY (UNESP)</div>
+						</div>
+						<div>
+							<div>bachelor</div>
+							<div>ECONOMICS</div>
+						</div>
+
+						<div>PLACES</div>
+						<div>
+							<div>natural</div>
+							<div>BRAZIL</div>
+						</div>
+						<div>
+							<div>exchange study</div>
+							<div>SPAIN</div>
+						</div>
+						<div>
+							<div>worked</div>
+							<div>IRELAND</div>
+						</div>
+						<div>
+							<div>living</div>
+							<div>PORTUGAL</div>
+						</div>
+
+						<div>THANK YOU</div>
 					</div>
+
 				</div>
 				<div class="slide"></div>
 			</div>
@@ -307,12 +558,13 @@
 						<div class="era y2021-2022">
 							<div class="year">2021-2022</div>
 							<div class="subject graphic">GRAPHIC DESIGN</div>
+							<div class="subject product">PRODUCT DESIGN</div>
+							<div class="subject video-content">VIDEO CONTENT</div>
 							<div class="subject frontend">FRONTEND DEV</div>
-							<div class="subject ux">UX UI</div>
 						</div>
 						<div class="era y2017-2020">
 							<div class="year">2017-2020</div>
-							<div class="subject 3d">3D</div>
+							<div class="subject graphic">GRAPHIC DESIGN</div>
 							<div class="subject frontend">FRONTEND DEV</div>
 							<div class="subject ux">UX UI</div>
 						</div>
@@ -338,91 +590,132 @@
 
 		imageviewer();
 
-		// Function to update the current era, subject, and slide image based on visible info-block
+		window.addEventListener("load", () => {
+			setTimeout(() => {
+				const el = document.querySelector(".scroll-indicator");
+				if (el) el.classList.add("hide");
+			}, 5000);
+		});
+
+		// Function to update the current era, subject, slide image, and body class based on visible info-block
 		function updateCurrentEra() {
-		  var viewportMiddle = $(window).height() / 2;
-		  var currentInfoBlock = null;
-		  var closestDistance = Infinity;
-		  
-		  // Find which info-block is closest to the middle of the screen
-		  $('.info-block').each(function() {
-			var rect = $(this)[0].getBoundingClientRect();
-			var blockMiddle = rect.top + (rect.height / 2);
-			var distance = Math.abs(blockMiddle - viewportMiddle);
+			var viewportMiddle = $(window).height() / 2;
+			var currentInfoBlock = null;
+			var closestDistance = Infinity;
 			
-			if (distance < closestDistance) {
-			  closestDistance = distance;
-			  currentInfoBlock = $(this);
-			}
-		  });
-		  
-		  if (currentInfoBlock) {
-			// Get the year class from the info-block (e.g., 'y2025', 'y2020')
-			var classes = currentInfoBlock.attr('class').split(' ');
-			var yearClass = null;
-			
-			$.each(classes, function(index, cls) {
-			  if (cls.startsWith('y') && !cls.includes('-')) {
-				yearClass = cls;
-				return false; // break
-			  }
+			// Find which info-block is closest to the middle of the screen
+			$('.info-block').each(function() {
+				var rect = $(this)[0].getBoundingClientRect();
+				var blockMiddle = rect.top + (rect.height / 2);
+				var distance = Math.abs(blockMiddle - viewportMiddle);
+				
+				if (distance < closestDistance) {
+					closestDistance = distance;
+					currentInfoBlock = $(this);
+				}
 			});
 			
-			if (yearClass) {
-			  var year = parseInt(yearClass.substring(1)); // Extract year number
-			  
-			  // Get the category class from the info-block (e.g., '3d', 'ux', 'frontend', 'graphic')
-			  var categoryClass = null;
-			  $.each(classes, function(index, cls) {
-				if (!cls.startsWith('y') && cls !== 'info-block' && cls !== 'height-100') {
-				  categoryClass = cls;
-				  return false; // break
+			if (currentInfoBlock) {
+				// Check if this is the credits block
+				if (currentInfoBlock.hasClass('credits')) {
+					// Start the credits animation if not already started
+					if (!currentInfoBlock.hasClass('rolling')) {
+						currentInfoBlock.addClass('rolling');
+						
+						// Get the scroll container (.scroll-layer)
+						var scrollContainer = $('.scroll-layer');
+						var currentScroll = scrollContainer.scrollTop();
+						var creditsHeight = currentInfoBlock.outerHeight();
+						
+						// Calculate the target scroll position
+						var targetScroll = currentScroll + creditsHeight;
+						
+						// Animate the scroll
+						var duration = (creditsHeight / 50) * 1000; // Convert to milliseconds
+						
+						scrollContainer.animate({
+							scrollTop: targetScroll
+						}, duration, 'linear');
+					}
+					return; // Exit early for credits block
 				}
-			  });
-			  
-			  // Remove current class from all eras, subjects, and slide images
-			  $('.era').removeClass('current');
-			  $('.subject').removeClass('current');
-			  $('.slide img').removeClass('current');
-			  
-			  // Add current class to the matching era and subject
-			  $('.era').each(function() {
-				var eraClasses = $(this).attr('class').split(' ');
-				var eraClass = null;
 				
-				$.each(eraClasses, function(index, cls) {
-				  if (cls.startsWith('y') && cls.includes('-')) {
-					eraClass = cls;
-					return false; // break
-				  }
+				// Get the year class from the info-block (e.g., 'y2025', 'y2020')
+				var classes = currentInfoBlock.attr('class').split(' ');
+				var yearClass = null;
+				
+				$.each(classes, function(index, cls) {
+					if (cls.startsWith('y') && !cls.includes('-')) {
+						yearClass = cls;
+						return false; // break
+					}
 				});
 				
-				if (eraClass) {
-				  // Parse the year range (e.g., 'y2023-2025' -> [2023, 2025])
-				  var match = eraClass.match(/y(\d+)-(\d+)/);
-				  if (match) {
-					var startYear = parseInt(match[1]);
-					var endYear = parseInt(match[2]);
+				if (yearClass) {
+					var year = parseInt(yearClass.substring(1)); // Extract year number
 					
-					// Check if the current year falls within this era's range
-					if (year >= startYear && year <= endYear) {
-					  $(this).addClass('current');
-					  
-					  // Find and highlight the matching subject within this era
-					  if (categoryClass) {
-						$(this).find('.subject.' + categoryClass).addClass('current');
-					  }
+					// Get the category class from the info-block (e.g., '3d', 'ux', 'frontend', 'graphic')
+					var categoryClass = null;
+					$.each(classes, function(index, cls) {
+						if (!cls.startsWith('y') && cls !== 'info-block') {
+							categoryClass = cls;
+							return false; // break
+						}
+					});
+					
+					// Remove current class from all eras, subjects, and slide images
+					$('.era').removeClass('current');
+					$('.subject').removeClass('current');
+					$('.slide img').removeClass('current');
+					
+					// Remove color classes from body
+					$('body').removeClass('green purple');
+					
+					// Add current class to the matching era and subject
+					$('.era').each(function() {
+						var eraClasses = $(this).attr('class').split(' ');
+						var eraClass = null;
+						
+						$.each(eraClasses, function(index, cls) {
+							if (cls.startsWith('y') && cls.includes('-')) {
+								eraClass = cls;
+								return false; // break
+							}
+						});
+						
+						if (eraClass) {
+							// Parse the year range (e.g., 'y2023-2025' -> [2023, 2025])
+							var match = eraClass.match(/y(\d+)-(\d+)/);
+							if (match) {
+								var startYear = parseInt(match[1]);
+								var endYear = parseInt(match[2]);
+								
+								// Check if the current year falls within this era's range
+								if (year >= startYear && year <= endYear) {
+									$(this).addClass('current');
+									
+									// Add body class based on era
+									if (eraClass === 'y2021-2022') {
+										$('body').addClass('green');
+									} else if (eraClass === 'y2017-2020') {
+										$('body').addClass('purple');
+									}
+									
+									// Find and highlight the matching subject within this era
+									if (categoryClass) {
+										$(this).find('.subject.' + categoryClass).addClass('current');
+									}
+								}
+							}
+						}
+					});
+					
+					// Find and show the matching slide image
+					if (yearClass && categoryClass) {
+						$('.slide img.' + yearClass + '.' + categoryClass).addClass('current');
 					}
-				  }
 				}
-			  });
-			  
-			  // Find and show the matching slide image
-			  if (yearClass && categoryClass) {
-				$('.slide img.' + yearClass + '.' + categoryClass).addClass('current');
-			  }
 			}
-		  }
 		}
 
 		// Add scroll event listener to the scroll-layer
@@ -430,18 +723,18 @@
 
 		// Initial check on page load
 		$(document).ready(function() {
-		  // Add transitions
-		  $('.era, .subject').css('transition', 'all 0.4s ease');
-		  $('.slide img').css({
-			'position': 'absolute',
-			'top': '0',
-			'left': '0',
-			'opacity': '0',
-			'transform': 'translateY(50px)',
-			'transition': 'opacity 0.3s ease, transform 0.3s ease'
-		  });
-		  
-		  updateCurrentEra();
+			// Add transitions
+			$('.era, .subject').css('transition', 'all 0.4s ease');
+			$('.slide img').css({
+				'position': 'absolute',
+				'top': '0',
+				'left': '0',
+				'opacity': '0',
+				'transform': 'translateY(50px)',
+				'transition': 'opacity 0.3s ease, transform 0.3s ease'
+			});
+			
+			updateCurrentEra();
 		});
 
 	</script>
