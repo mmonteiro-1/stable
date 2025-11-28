@@ -117,6 +117,9 @@
 	.info-block:first-child {
 		margin-top: 10dvh;
 	}
+	.info-block .b-roll {
+		height: 0;
+	}
 	.info-block.credits {
 		height: unset;
 		padding-top: 300px;
@@ -535,6 +538,7 @@
 								<img src="images/icons/icon_target_white.svg">
 							</div>
 						</div>
+						<div class="b-roll"></div>
 					</div>
 					<div class="info-block graphic y2022">
 						<div class="header">VIDEOWALL UI</div>
@@ -709,6 +713,7 @@
 						<img class="y2023 3d" src="images/planoalto_03.webp">
 						<img class="y2025 frontend" src="https://elements-resized.envatousercontent.com/elements-cover-images/4ffb2624-a790-429e-9668-dfcddb5fc77c?w=2038&cf_fit=scale-down&q=85&format=auto&s=97f5fce9e7a3a247d4a99d524e0e7d6b81264292d132eca5aed1e3e0a648bdd7">
 						<img class="y2025 ux" src="images/portfolio/mockup.jpg">
+						<img class="b-roll" src="images/portfolio/mockup3.jpg">
 						<img class="y2022 graphic" src="https://elements-resized.envatousercontent.com/elements-preview-images/af08aebe-1e3a-4ba3-9a86-04757aa5dd8a?w=1370&cf_fit=scale-down&q=85&format=auto&s=126a844950ad9ae652cf2efb9ace759ae22a13add9247ef60f76d79657f6bd33">
 					</div>
 				</div>
@@ -807,6 +812,19 @@
 				}
 			});
 			
+			// Check for b-roll elements within the current view
+			var currentBRoll = null;
+			$('.info-block .b-roll').each(function() {
+				var rect = $(this)[0].getBoundingClientRect();
+				var bRollMiddle = rect.top + (rect.height / 2);
+				var distance = Math.abs(bRollMiddle - viewportMiddle);
+				
+				// If b-roll is closer to middle than threshold, use it
+				if (distance < viewportHeight * 0.3) {
+					currentBRoll = $(this);
+				}
+			});
+			
 			if (currentInfoBlock) {
 				
 				// Get the year class from the info-block (e.g., 'y2025', 'y2020')
@@ -880,7 +898,11 @@
 					});
 					
 					// Find and show the matching slide image
-					if (yearClass && categoryClass) {
+					if (currentBRoll) {
+						// If there's a b-roll element in view, show the b-roll image
+						$('.slide img.b-roll').addClass('current');
+					} else if (yearClass && categoryClass) {
+						// Otherwise show the regular image
 						$('.slide img.' + yearClass + '.' + categoryClass).addClass('current');
 					}
 				}
