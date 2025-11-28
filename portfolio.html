@@ -115,14 +115,18 @@
 		flex-direction: column;
 		gap: 20px;
 		height: 100%;
-		margin-top: calc(10% + 40px);
 		box-sizing: border-box;
 	}
+	.info-block:first-child {
+		margin-top: 10dvh;
+	}
 	.info-block.credits {
-		margin-top: 400px;
+		height: unset;
+		padding-top: 800px;
 		text-align: center;
 		gap: 10px;
 		font-size: .9em;
+		margin-top: 0;
 	}
 	.info-block.credits > div {
 		display: flex;
@@ -138,6 +142,14 @@
 	}
 	.info-block.credits > div > div:last-child {
 		text-align: start;
+	}
+	.extra-credits {
+		margin-top: 400px	;
+		margin-bottom: 100px;
+	}
+	.farewell {
+		padding-top: 50dvh;
+		padding-bottom: 50dvh;
 	}
 	.info .header {
 		font-size: 1.5em;
@@ -230,31 +242,26 @@
 			aspect-ratio: 1;
 			translate: 0 1.55rem;
 		}
-
 		/* Stretch begins upward */
 		20% {
 			aspect-ratio: 1 / 4;
 			translate: 0 0.1rem; /* stretch up toward the top */
 		}
-
 		/* Stretch + contraction finish together here */
 		35% {
 			aspect-ratio: 1;
 			translate: 0 -1.2rem; /* top position */
 		}
-
 		/* Hold the dot at the top */
 		55% {
 			aspect-ratio: 1;
 			translate: 0 -1.2rem;
 		}
-
 		/* Reset back to bottom */
 		100% {
 			translate: 0 1.55rem;
 		}
 	}
-
 	@media (max-width: 1200px) {
 		body {
 			font-size: 14px;
@@ -269,16 +276,23 @@
 			width: 100%;
 		}
 		.timeline {
-			height: 13%;
+			height: fit-content;
 			background: #262626;
 			padding: 10px 0;
 		}
 		.info {
-			height: 37%;
 			padding: 10px;
 		}
+		.tools {
+			height: 20px;
+		}
+		.tooltip {
+			bottom: -100%;
+		}
 		.slide {
-			height: 50%;
+			position: relative;
+			top: 0;
+			bottom: 0;
 			background: #262626;
 			padding: 10px 0;
 		}
@@ -303,6 +317,17 @@
 		}
 		.info-block {
 			gap: 10px;
+		}
+		.info-block.credits {
+			padding-top: 0;
+			height: 100%;
+		}
+		.extra-credits {
+			margin-top: 200px	;
+		}
+		.farewell {
+			padding-top: 50dvh;
+			padding-bottom: 60dvh;
 		}
 	}
 </style>
@@ -426,35 +451,33 @@
 							</div>
 						</div>
 					</div>
-					<!-- <div class="info-block credits">
-						<div>
-							Credits
-						</div>
-						<div>
-							<div>carlos peixoto</div>
-							<div>MATHEUS MONTEIRO</div>
-						</div>
-						<div>
-							<div>roberto carlos</div>
-							<div>LUCAS MENDES</div>
-						</div>
-					</div> -->
 					<div class="info-block credits">
-						<div>MOVIES</div>
+						<div style="margin-bottom: 100px">IT SEEMS LIKE WE'VE REACHED THE END<br>OF MY PROFESSIONAL CAPABILITIES</div>
+						<div  style="margin-bottom: -10px;">DESIGNED BY</div>
+						<div>Matheus Monteiro</div>
+						<div style="margin-bottom: -10px;">DEVELOPED BY</div>
+						<div>Matheus Monteiro</div>
+						<div style="margin-bottom: -10px;">VISUAL CONTENT</div>
+						<div>Matheus Monteiro</div>
+						<div style="margin-bottom: -10px;">CONSULTANT</div>
+						<div>Claude</div>
+						<div class="extra-credits">BUT PERHAPS THERE ARE OTHER RELEVANT THINGS<br>APART FROM COMPUTER SKILLS</div>
+						<div >HERE'S SOME BLUNT EXPOSITION OF THOSE THINGS</div>
+						<div  style="margin-top: 100px;">MOVIES</div>
 						<div>
 							<div>favorite</div>
 							<div>PARIS, TEXAS</div>
 						</div>
 						<div>
 							<div>second</div>
-							<div>THE SHAWSHANK REDEMPTION</div>
+							<div>SHAWSHANK REDEMPTION</div>
 						</div>
 						<div>
 							<div>third</div>
 							<div>SUPERBAD</div>
 						</div>
 
-						<div>TV SHOWS</div>
+						<div  style="margin-top: 50px;">TV SHOWS</div>
 						<div>
 							<div>favorite</div>
 							<div>BREAKING BAD</div>
@@ -468,9 +491,9 @@
 							<div>JOE PERA TALKS WITH YOU</div>
 						</div>
 
-						<div>GAMES</div>
+						<div  style="margin-top: 50px;">GAMES</div>
 						<div>
-							<div>favorite game</div>
+							<div>favorite</div>
 							<div>RED DEAD REDEMPTION 2</div>
 						</div>
 						<div>
@@ -482,35 +505,35 @@
 							<div>CONTROL</div>
 						</div>
 
-						<div>BEST 2025</div>
+						<div style="margin-top: 50px;">2025 BEST</div>
 						<div>
 							<div>favorite</div>
 							<div>ONE BATTLE AFTER ANOTHER</div>
 						</div>
 						<div>
 							<div>second</div>
-							<div>CLAIR OBSCURE</div>
+							<div>CLAIR OBSCUR</div>
 						</div>
 						<div>
 							<div>third</div>
 							<div>PLURIBUS</div>
 						</div>
 
-						<div>TOUCH GRASS</div>
+						<div style="margin-top: 50px;">TOUCH GRASS</div>
 						<div>
 							<div>favorite</div>
-							<div>TENNIS (can’t get enough)</div>
+							<div>TENNIS</div>
 						</div>
 						<div>
 							<div>second</div>
-							<div>COOKING (too much youtube)</div>
+							<div>COOKING</div>
 						</div>
 						<div>
 							<div>third</div>
 							<div>WOODWORKING (i’m getting old)</div>
 						</div>
 
-						<div>EDUCATION</div>
+						<div style="margin-top: 50px;">EDUCATION</div>
 						<div>
 							<div>university</div>
 							<div>SÃO PAULO STATE UNIVERSITY (UNESP)</div>
@@ -520,7 +543,7 @@
 							<div>ECONOMICS</div>
 						</div>
 
-						<div>PLACES</div>
+						<div style="margin-top: 50px;">PLACES</div>
 						<div>
 							<div>natural</div>
 							<div>BRAZIL</div>
@@ -530,17 +553,15 @@
 							<div>SPAIN</div>
 						</div>
 						<div>
-							<div>worked</div>
+							<div>lived</div>
 							<div>IRELAND</div>
 						</div>
 						<div>
 							<div>living</div>
 							<div>PORTUGAL</div>
 						</div>
-
-						<div>THANK YOU</div>
+						<div class="farewell">THANK YOU</div>
 					</div>
-
 				</div>
 				<div class="slide"></div>
 			</div>
@@ -606,7 +627,7 @@
 			// Find which info-block is closest to the middle of the screen
 			$('.info-block').each(function() {
 				var rect = $(this)[0].getBoundingClientRect();
-				var blockMiddle = rect.top + (rect.height / 2);
+				var blockMiddle = rect.top + (rect.height / 3);
 				var distance = Math.abs(blockMiddle - viewportMiddle);
 				
 				if (distance < closestDistance) {
@@ -625,17 +646,32 @@
 						// Get the scroll container (.scroll-layer)
 						var scrollContainer = $('.scroll-layer');
 						var currentScroll = scrollContainer.scrollTop();
-						var creditsHeight = currentInfoBlock.outerHeight();
+						var maxScroll = scrollContainer[0].scrollHeight - scrollContainer.height();
 						
-						// Calculate the target scroll position
-						var targetScroll = currentScroll + creditsHeight;
+						// Calculate how much distance we need to scroll
+						var scrollDistance = maxScroll - currentScroll;
 						
-						// Animate the scroll
-						var duration = (creditsHeight / 50) * 1000; // Convert to milliseconds
+						// Animate the scroll to the very bottom
+						var duration = (scrollDistance / 50) * 1000; // Adjust speed: pixels per second
 						
 						scrollContainer.animate({
-							scrollTop: targetScroll
-						}, duration, 'linear');
+							scrollTop: maxScroll
+						}, {
+							duration: duration,
+							easing: 'linear',
+							complete: function() {
+								// Re-enable scrolling
+								scrollContainer.css('overflow', 'auto');
+								
+								// Fade out, change text, fade in
+								$('.farewell').fadeOut(300, function() {
+									$(this).text("SORRY FOR TAKING AWAY THE SCROLL. IT'S BACK NOW.").fadeIn(300);
+								});
+							}
+						});
+						
+						// Disable scrolling entirely during animation
+						scrollContainer.css('overflow', 'hidden');
 					}
 					return; // Exit early for credits block
 				}

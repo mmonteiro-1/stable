@@ -1279,7 +1279,9 @@ button {
 	max-height: 30%;
 	object-fit: contain;
 }
-
+.text-centered {
+	text-align: center;
+}
 @media (max-width: 800px) {
 	.loading-video {
 		max-width: 40%;
