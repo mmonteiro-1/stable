@@ -81,14 +81,17 @@
 		border: 1px #5c5c5c solid;
 	}
 	.era {
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
 		color: #5c5c5c;
 		font-weight: 300;
 		cursor: pointer;
 		width: 100%;
 	}
-	.era > div {
+/*	.era > div{
 		margin-bottom: 5px;
-	}
+	}*/
 	.era.current {
 		color: #f2f2f2;
 	}
@@ -97,10 +100,38 @@
 	}
 	.subject {
 		font-size: .9em;
+		width: fit-content;
 	}
-	.subject.current {
+	/*.subject.current {
 		border-left: 1px #f2f2f2 solid;
 		padding-left: 5px;
+	}*/
+	.subject.current {
+		position: relative;
+		display: inline-block;
+		color: black;
+		padding: 5px;
+		padding-bottom: 0;
+	}
+	.subject.current::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: #a1e53c;
+		z-index: -1;
+		animation: highlightMarker 0.3s ease-out forwards;
+		transform-origin: left center;
+	}
+	@keyframes highlightMarker {
+		from {
+			transform: scaleX(0);
+		}
+		to {
+			transform: scaleX(1);
+		}
 	}
 	.info {
 		width: 30%;
@@ -494,7 +525,7 @@
 						</a>
 					</div>
 					<div class="info-block web y2025">
-						<div class="header">INDUSTRY APPS</div>
+						<div class="header">MOBILE APPS</div>
 						<div>As the solo frontend dev / designer at ThinkDigital, one of my roles is to design our apps interface and develop them alongside my backend team.
 							<br> <br>
 							Over the past couple of years I've been working on a suite of mobile web apps that tackle different needs of our industry clients. Users are usually workers on the factory floor.
@@ -511,9 +542,56 @@
 						</div>
 						<div class="tools">
 							<div class="tooltip-trigger">
+								<img src="images/icons/logos/logo_figma.svg">
+								<span class="tooltip">Figma</span>
+							</div>
+							<div class="tooltip-trigger">
 								<img src="images/icons/logos/logo_code.svg">
 								<span class="tooltip">HTML/CSS/JS</span>
 							</div>
+							<div class="tooltip-trigger">
+								<img src="images/icons/logos/logo_ai.svg">
+								<span class="tooltip">Illustrator</span>
+							</div>
+						</div>
+					</div>
+					<div class="info-block web y2024">
+						<div class="header">VIDEOWALS</div>
+						<div>Videowalls continuously presents key operational metrics and status on a work environment large-format display.
+							<br> <br>
+							A web-based, plug and play solution that gives the entire team instant visibility into critical information.
+							<br><br>
+							These videowalls are already deployed and in active use by our clients.
+						</div>
+						<div class="bullets">
+							▪ Production status<br>
+							▪ OEE and other metrics <br>
+							▪ Personel oversight <br>
+							▪ Product expedition schedule<br>
+						</div>
+						<div class="tools">
+							<img src="images/icons/icon_target_white.svg">
+							<img src="images/icons/icon_target_white.svg">
+							<img src="images/icons/icon_target_white.svg">
+							<img src="images/icons/icon_target_white.svg">
+						</div>
+						<div class="b-roll b-roll-2"></div>
+					</div>
+					<div class="info-block web y2023">
+						<div class="header">STABLE WEBSITE</div>
+						<div>Videowalls continuously presents key operational metrics and status on a work environment large-format display.
+							<br> <br>
+							A web-based, plug and play solution that gives the entire team instant visibility into critical information.
+							<br><br>
+							These videowalls are already deployed and in active use by our clients.
+						</div>
+						<div class="bullets">
+							▪ Production status<br>
+							▪ OEE and other metrics <br>
+							▪ Personel oversight <br>
+							▪ Product expedition schedule<br>
+						</div>
+						<div class="tools">
 							<div class="tooltip-trigger">
 								<img src="images/icons/logos/logo_figma.svg">
 								<span class="tooltip">Figma</span>
@@ -522,7 +600,26 @@
 								<img src="images/icons/logos/logo_ai.svg">
 								<span class="tooltip">Illustrator</span>
 							</div>
+							<div class="tooltip-trigger">
+								<img src="images/icons/logos/logo_code.svg">
+								<span class="tooltip">HTML/CSS/JS</span>
+							</div>
+							<div class="tooltip-trigger">
+								<img src="images/icons/logos/logo_threejs.svg">
+								<span class="tooltip">ThreeJS</span>
+							</div>
+							<div class="tooltip-trigger">
+								<img src="images/icons/logos/logo_gsap.svg">
+								<span class="tooltip">GSAP</span>
+							</div>
 						</div>
+						<a target="blank" href="index.html">
+							<div class="flip-click">
+								<div class="flip-mask">
+									<div class="default-text">→ MORE</div>
+								</div>
+							</div>
+						</a>
 					</div>
 					<div class="info-block threejs y2025">
 						<div class="header">THREE.JS</div>
@@ -551,32 +648,6 @@
 						</div>
 						<div class="b-roll b-roll-1"></div>
 					</div>
-					<div class="info-block ux y2025">
-						<div class="header">VIDEOWALL UI</div>
-						<div>We architect your go-to-market strategy
-							combining corporate positioning, product design,
-							and operational readiness.
-							<br> <br>
-							Through rapid iteration, market validation, and
-							data-driven refinement, we accelerate your path to
-							product-market fit and investor readiness.
-						</div>
-						<div>
-							→ key feature <br>
-							→ key feature <br>
-							→ key feature <br>
-							→ key feature <br>
-						</div>
-						<div class="tools">
-							<div class="flex gap-10 align-center">
-								<img src="images/icons/icon_target_white.svg">
-								<img src="images/icons/icon_target_white.svg">
-								<img src="images/icons/icon_target_white.svg">
-								<img src="images/icons/icon_target_white.svg">
-							</div>
-						</div>
-						<div class="b-roll b-roll-2"></div>
-					</div>
 					<div class="info-block graphic y2022">
 						<div class="header">VIDEOWALL UI</div>
 						<div>We architect your go-to-market strategy
@@ -587,18 +658,24 @@
 							data-driven refinement, we accelerate your path to
 							product-market fit and investor readiness.
 						</div>
-						<div>
-							→ key feature <br>
-							→ key feature <br>
-							→ key feature <br>
-							→ key feature <br>
+						<div class="bullets">
+							▪ key feature <br>
+							▪ key feature <br>
+							▪ key feature <br>
+							▪ key feature <br>
 						</div>
 						<div class="tools">
-							<div class="flex gap-10 align-center">
-								<img src="images/icons/icon_target_white.svg">
-								<img src="images/icons/icon_target_white.svg">
-								<img src="images/icons/icon_target_white.svg">
-								<img src="images/icons/icon_target_white.svg">
+							<div class="tooltip-trigger">
+								<img src="images/icons/logos/logo_threejs.svg">
+								<span class="tooltip">ThreeJS</span>
+							</div>
+							<div class="tooltip-trigger">
+								<img src="images/icons/logos/logo_3dsmax.svg">
+								<span class="tooltip">3ds Max</span>
+							</div>
+							<div class="tooltip-trigger">
+								<img src="images/icons/logos/logo_code.svg">
+								<span class="tooltip">HTML/CSS/JS</span>
 							</div>
 						</div>
 					</div>
@@ -720,10 +797,10 @@
 						<div class="era y2023-2025 current">
 							<div class="year">2023-2025</div>
 							<div class="subject current 3d">3D</div>
-							<div class="subject web">WEB DESIGN</div>
+							<div class="subject web">UX UI & DEV</div>
 							<div class="subject threejs">THREE JS</div>
-							<div class="subject ux">UX UI</div>
-						</div>
+<!-- 							<div class="subject ux">UX UI</div>
+ -->						</div>
 						<div class="era y2021-2022">
 							<div class="year">2021-2022</div>
 							<div class="subject graphic">GRAPHIC DESIGN</div>
@@ -735,8 +812,8 @@
 							<div class="year">2017-2020</div>
 							<div class="subject graphic">GRAPHIC DESIGN</div>
 							<div class="subject web">WEB DESIGN</div>
-							<div class="subject ux">UX UI</div>
-						</div>
+<!-- 							<div class="subject ux">UX UI</div>
+ -->						</div>
 					</div>
 				</div>
 				<div class="info border"></div>
@@ -746,10 +823,11 @@
 						<img class="y2024 3d" src="images/citadel_00.webp" style="background: #262626;">
 						<img class="y2023 3d" src="images/planoalto_03.webp">
 						<img class="y2025 web" src="images/portfolio/mockup_isometric_phones.jpg">
+						<img class="y2024 web top" src="images/portfolio/mockup.jpg">
+						<img class="b-roll b-roll-2 top" src="images/portfolio/mockup3.jpg">
+						<img class="y2023 web" src="images/portfolio/mockup_isometric_devices.jpg">
 						<img class="y2025 threejs" src="images/portfolio/screenshot_threejs_bp.png">
 						<img class="b-roll b-roll-1" src="images/portfolio/screenshot_threejs_lidador.png">
-						<img class="y2025 ux top" src="images/portfolio/mockup.jpg">
-						<img class="b-roll b-roll-2 top" src="images/portfolio/mockup3.jpg">
 						<img class="y2022 graphic" src="https://elements-resized.envatousercontent.com/elements-preview-images/af08aebe-1e3a-4ba3-9a86-04757aa5dd8a?w=1370&cf_fit=scale-down&q=85&format=auto&s=126a844950ad9ae652cf2efb9ace759ae22a13add9247ef60f76d79657f6bd33">
 					</div>
 				</div>
