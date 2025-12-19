@@ -149,9 +149,6 @@
 	.info-block:first-child {
 		margin-top: 10dvh;
 	}
-	.info-block .b-roll {
-		height: 0;
-	}
 	.info-block.credits {
 		height: unset;
 		padding-top: 300px;
@@ -249,36 +246,6 @@
 	.slide .border img.current {
 		opacity: 1 !important;
 		transform: translateY(0) !important;
-	}
-	.scroll-indicator {
-		position: absolute;
-		bottom: 20px;
-		right: 20px;
-		height: 70px;
-		display: grid;
-		place-items: center;
-		z-index: 10;
-	}
-	.scroll-indicator::before {
-		background: white;
-		content: "";
-		height: 100%;
-		width: 32px;
-		border-radius: 20px;
-	}
-	.scroll-indicator::after {
-		position: absolute;
-		content: "";
-		border-radius: 10px;
-		width: 12px;
-		aspect-ratio: 1;
-		background: #ff007c;
-		translate: 0 -1.55rem;
-		animation: indicator 2s ease-in-out infinite;
-	}
-	.scroll-indicator.hide {
-		opacity: 0;
-		transition: opacity 0.6s ease;
 	}
 	.flip-click{
 		font-family: unset;
@@ -386,7 +353,6 @@
 <body>
 	<div class="smooth-wrapper">
 		<div class="smooth-content">
-			<div class="scroll-indicator"></div>
 			<div class="scroll-layer flex width-100">
 				<div class="timeline"></div>
 				<div class="info">
@@ -608,7 +574,6 @@
 								<span class="tooltip">HTML/CSS/JS</span>
 							</div>
 						</div>
-						<div class="b-roll b-roll-2"></div>
 					</div>
 					<div class="info-block web y2023">
 						<div class="header">STABLE WEBSITE</div>
@@ -665,16 +630,24 @@
 						</div>
 						<div class="tools">
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_threejs.svg">
-								<span class="tooltip">ThreeJS</span>
-							</div>
-							<div class="tooltip-trigger">
 								<img src="images/icons/logos/logo_3dsmax.svg">
 								<span class="tooltip">3ds Max</span>
 							</div>
 							<div class="tooltip-trigger">
+								<img src="images/icons/logos/logo_c4d.svg">
+								<span class="tooltip">Cinema 4D</span>
+							</div>
+							<div class="tooltip-trigger">
+								<img src="images/icons/logos/logo_ai.svg">
+								<span class="tooltip">Illustrator</span>
+							</div>
+							<div class="tooltip-trigger">
 								<img src="images/icons/logos/logo_code.svg">
 								<span class="tooltip">HTML/CSS/JS</span>
+							</div>
+							<div class="tooltip-trigger">
+								<img src="images/icons/logos/logo_threejs.svg">
+								<span class="tooltip">ThreeJS</span>
 							</div>
 						</div>
 					</div>
@@ -837,11 +810,6 @@
 							<div class="subject graphic">GRAPHIC DESIGN</div>
 							<div class="subject video-content">VIDEO CONTENT</div>
 						</div>
-						<!-- <div class="era y2017-2020">
-							<div class="year">2017-2020</div>
-							<div class="subject graphic">GRAPHIC DESIGN</div>
-							<div class="subject web">WEB DESIGN</div>
-						</div> -->
 					</div>
 				</div>
 				<div class="info border"></div>
@@ -852,8 +820,7 @@
 						<img class="y2023 3d" src="images/planoalto_03.webp">
 						<img class="y2025 threejs" src="images/portfolio/screenshot_threejs_bp.png">
 						<img class="y2025 web" src="images/portfolio/mockup_isometric_phones.jpg">
-						<img class="y2024 web top" src="images/portfolio/mockup.jpg">
-						<img class="b-roll b-roll-2 top" src="images/portfolio/mockup3.jpg">
+						<img class="y2024 web top" src="images/portfolio/mockup3.jpg">
 						<img class="y2023 web" src="images/portfolio/mockup_isometric_devices.jpg">
 						<img class="y2022 product" src="images/portfolio/exploded_box.jpg">
 						<img class="y2022 web" src="images/portfolio/mockup_macbook_website.jpg">
@@ -868,15 +835,6 @@
 	<script type="text/javascript" src="js/navigation.js"></script>
 	<script src="js/jquery.imageviewer.js"></script>
 	<script type="text/javascript">
-
-		imageviewer();
-
-		window.addEventListener("load", () => {
-			setTimeout(() => {
-				const el = document.querySelector(".scroll-indicator");
-				if (el) el.classList.add("hide");
-			}, 5000);
-		});
 
 		// Function to update the current era, subject, slide image based on visible info-block
 		function updateCurrentEra() {
@@ -955,45 +913,6 @@
 				}
 			});
 			
-			// Check for b-roll elements within the current view
-			var currentBRoll = null;
-			var currentBRollClass = null;
-			
-			if (currentInfoBlock && currentInfoBlock.find('.b-roll').length > 0) {
-				var lastPassedBRoll = null;
-				var lastPassedClass = null;
-				
-				currentInfoBlock.find('.b-roll').each(function() {
-					var rect = $(this)[0].getBoundingClientRect();
-					
-					// Use different calculation for mobile vs desktop
-					var bRollTrigger;
-					if ($(window).width() <= 800) {
-						bRollTrigger = rect.top + (rect.height / 2);
-					} else {
-						bRollTrigger = rect.top + (rect.height / 3);
-					}
-					
-					// Track the last b-roll that has scrolled past the trigger point
-					if (bRollTrigger <= viewportMiddle) {
-						lastPassedBRoll = $(this);
-						// Get the specific b-roll class (b-roll-1, b-roll-2, etc.)
-						var bRollClasses = $(this).attr('class').split(' ');
-						$.each(bRollClasses, function(index, cls) {
-							if (cls.startsWith('b-roll-')) {
-								lastPassedClass = cls;
-								return false; // break
-							}
-						});
-					}
-				});
-				
-				if (lastPassedBRoll) {
-					currentBRoll = lastPassedBRoll;
-					currentBRollClass = lastPassedClass;
-				}
-			}
-			
 			if (currentInfoBlock) {
 				
 				// Get the year class from the info-block (e.g., 'y2025', 'y2020')
@@ -1010,7 +929,7 @@
 				if (yearClass) {
 					var year = parseInt(yearClass.substring(1)); // Extract year number
 					
-					// Get the category class from the info-block (e.g., '3d', 'ux', 'web', 'graphic')
+					// Get the category class from the info-block (e.g., '3d', 'web', 'threejs', 'product')
 					var categoryClass = null;
 					$.each(classes, function(index, cls) {
 						if (!cls.startsWith('y') && cls !== 'info-block') {
@@ -1057,16 +976,7 @@
 					});
 					
 					// Find and show the matching slide image
-					if (currentBRoll) {
-						// If there's a b-roll element in view, show the specific b-roll image
-						if (currentBRollClass) {
-							$('.slide img.b-roll.' + currentBRollClass).addClass('current');
-						} else {
-							// Fallback for b-rolls without numbers
-							$('.slide img.b-roll').addClass('current');
-						}
-					} else if (yearClass && categoryClass) {
-						// Otherwise show the regular image
+					if (yearClass && categoryClass) {
 						$('.slide img.' + yearClass + '.' + categoryClass).addClass('current');
 					}
 				}
