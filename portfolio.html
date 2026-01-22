@@ -79,6 +79,7 @@
 	}
 	.border {
 		border: 1px #5c5c5c solid;
+		border-radius: 10px;
 	}
 	.era {
 		display: flex;
@@ -122,6 +123,7 @@
 		width: 100%;
 		height: 100%;
 		background-color: #a1e53c;
+		border-radius: 5px;
 		z-index: -1;
 		animation: highlightMarker 0.3s ease-out forwards;
 		transform-origin: left center;
@@ -277,7 +279,9 @@
 		position: absolute;
 		bottom: 0;
 		background: #262626;
-		padding: 5px;
+		padding: 10px;
+		width: 100%;
+		border-top: 1px #5c5c5c solid;
 		font-family: "Overpass", sans-serif;
 		font-size: .5em;
 		text-transform: uppercase;
@@ -479,6 +483,54 @@
 							</div>
 						</a>
 					</div>
+					<div class="info-block 3d y2022">
+						<div class="header">PORTO LIDADOR</div>
+						<div>Using Unreal Engine VCam Mobile App, this Plano Alto apartment is presented with real camera movement and cinematic takes.
+							<br> <br>
+							The phone’s motion was captured as camera tracking data, which directly drove the movement of the virtual camera inside the scene.
+						</div>
+						<div class="bullets">
+							▪ Targeted at real estate firms<br>
+							▪ Virtual walk tour video to be reproduced anywhere <a target="blank" href="https://www.youtube.com/watch?v=GOxOQFDSvAU">→</a><br>
+							▪ Cinematic bonus video to highlight the space <a target="blank" href="https://www.youtube.com/watch?v=H3fiQQPz9Tg">→</a><br>
+							▪ Cinematic narration using ElevenLabs AI <a target="blank" href="https://www.youtube.com/watch?v=H3fiQQPz9Tg">→</a><br>
+							▪ Textured with Megascans<br>
+							▪ First time texturing, rendering and animating in Unreal Engine
+						</div>
+						<div class="tools">
+							<div class="tooltip-trigger">
+								<img src="images/icons/logos/logo_3dsmax.svg">
+								<span class="tooltip">3ds Max</span>
+							</div>
+							<div class="tooltip-trigger">
+								<img src="images/icons/logos/logo_unreal.svg">
+								<span class="tooltip">Unreal Engine</span>
+							</div>
+							<div class="tooltip-trigger">
+								<img src="images/icons/logos/logo_vcam.svg">
+								<span class="tooltip">Unreal Engine VCam</span>
+							</div>
+							<div class="tooltip-trigger">
+								<img src="images/icons/logos/logo_davinci.svg">
+								<span class="tooltip">Davinci Resolve</span>
+							</div>
+							<div class="tooltip-trigger">
+								<img src="images/icons/logos/logo_ps.svg">
+								<span class="tooltip">Photoshop</span>
+							</div>
+							<div class="tooltip-trigger">
+								<img src="images/icons/logos/logo_ai.svg">
+								<span class="tooltip">Illustrator</span>
+							</div>
+						</div>
+						<a target="blank" href="project_planoalto.html">
+							<div class="flip-click">
+								<div class="flip-mask">
+									<div class="default-text">→ MORE</div>
+								</div>
+							</div>
+						</a>
+					</div>
 					<div class="info-block 3d y2023">
 						<div class="header">PLANO ALTO</div>
 						<div>Using Unreal Engine VCam Mobile App, this Plano Alto apartment is presented with real camera movement and cinematic takes.
@@ -526,32 +578,6 @@
 								</div>
 							</div>
 						</a>
-					</div>
-					<div class="info-block threejs y2025">
-						<div class="header">THREE.JS</div>
-						<div>Three.js is the intersection between 3D and Web Design. It allows me to present 3D without converting it back to 2D.
-							<br> <br>
-							Having a 3D project catalog at <a target="blank" href="https://stablearchviz.com/">Stable</a>, Three.js is my favorite way to include models in the website.
-						</div>
-						<div class="bullets">
-							▪ Precise animation control <a target="blank" href="https://stablearchviz.com/project_breitnerpayne.html">→</a><br>
-							▪ Orbit-based exploration <a target="blank" href="https://stablearchviz.com/project_electriccentury.html">→</a><br>
-							▪ Responsiveness to mobile devices
-						</div>
-						<div class="tools">
-							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_threejs.svg">
-								<span class="tooltip">ThreeJS</span>
-							</div>
-							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_3dsmax.svg">
-								<span class="tooltip">3ds Max</span>
-							</div>
-							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_code.svg">
-								<span class="tooltip">HTML/CSS/JS</span>
-							</div>
-						</div>
 					</div>
 					<div class="info-block web y2023">
 						<div class="header">STABLE WEBSITE</div>
@@ -648,6 +674,32 @@
 							<div class="tooltip-trigger">
 								<img src="images/icons/logos/logo_figma.svg">
 								<span class="tooltip">Figma</span>
+							</div>
+							<div class="tooltip-trigger">
+								<img src="images/icons/logos/logo_code.svg">
+								<span class="tooltip">HTML/CSS/JS</span>
+							</div>
+						</div>
+					</div>
+					<div class="info-block threejs y2025">
+						<div class="header">THREE.JS</div>
+						<div>Three.js is the intersection between 3D and Web Design. It allows me to present 3D without converting it back to 2D.
+							<br> <br>
+							Having a 3D project catalog at <a target="blank" href="https://stablearchviz.com/">Stable</a>, Three.js is my favorite way to include models in the website.
+						</div>
+						<div class="bullets">
+							▪ Precise animation control <a target="blank" href="https://stablearchviz.com/project_breitnerpayne.html">→</a><br>
+							▪ Orbit-based exploration <a target="blank" href="https://stablearchviz.com/project_electriccentury.html">→</a><br>
+							▪ Responsiveness to mobile devices
+						</div>
+						<div class="tools">
+							<div class="tooltip-trigger">
+								<img src="images/icons/logos/logo_threejs.svg">
+								<span class="tooltip">ThreeJS</span>
+							</div>
+							<div class="tooltip-trigger">
+								<img src="images/icons/logos/logo_3dsmax.svg">
+								<span class="tooltip">3ds Max</span>
 							</div>
 							<div class="tooltip-trigger">
 								<img src="images/icons/logos/logo_code.svg">
@@ -904,9 +956,9 @@
 					<div class="border padding-20 flex column gap-20 height-100">
 						<div class="era y2023-2025 current">
 							<div class="year">2023-2025</div>
-							<div class="subject current 3d">3D</div>
-							<div class="subject threejs">THREE.JS</div>
+							<div class="subject current 3d">3D ARCHVIZ</div>
 							<div class="subject web">UX UI & DEV</div>
+							<div class="subject threejs">THREE.JS</div>
 						</div>
 						<div class="era y2020-2022">
 							<div class="year">2020-2022</div>
@@ -923,25 +975,25 @@
 							<div class="image-container">
 								<img src="images/breitnerpayne_aerial2_ui.webp" alt="Breitner & Payne">
 							</div>
-							<div class="description">Aerial view of Breitner Payne's digital replica. User can explore all factory sectors and go in-depth on the production line</div>
+							<div class="description">Aerial view of Breitner Payne's digital replica. User can explore all factory sectors and go in-depth on the production line. Personal Project</div>
 						</div>
 						<div class="slide-item y2024 3d">
 							<div class="image-container">
 								<img src="images/citadel_00.webp" style="background: #262626;" alt="Citadel Park">
 							</div>
-							<div class="description">Surrounding view of 4040 Citadel complex</div>
+							<div class="description">Surrounding view of 4040 Citadel complex. Personal Project</div>
+						</div>
+						<div class="slide-item y2022 3d">
+							<div class="image-container">
+								<img src="images/lidador_04.webp" alt="Porto Lidador">
+							</div>
+							<div class="description">One of Plano Alto apartment's living room. Client: Actual Arquitectos</div>
 						</div>
 						<div class="slide-item y2023 3d">
 							<div class="image-container">
-								<img src="images/planoalto_09.webp" alt="Plano Alto">
+								<img src="images/planoalto_03.webp" alt="Plano Alto">
 							</div>
-							<div class="description">One of Plano Alto apartment's living room</div>
-						</div>
-						<div class="slide-item y2025 threejs">
-							<div class="image-container">
-								<img class="top" src="images/portfolio/screenshot_threejs_lidador.png" alt="Three.js">
-							</div>
-							<div class="description">Screenshot of an interactive 3D house model on Stable's website. Client (Actual Arquitectos)</div>
+							<div class="description">One of Plano Alto apartment's living room. Personal Project</div>
 						</div>
 						<div class="slide-item y2023 web">
 							<div class="image-container">
@@ -960,6 +1012,12 @@
 								<img class="top" src="images/portfolio/mockup_videowall.jpg" alt="Videowall">
 							</div>
 							<div class="description">Videowall used on factory floor to monitor production metrics, progress and equipment status. Client: Sumol Compal (food and beverage)</div>
+						</div>
+						<div class="slide-item y2025 threejs">
+							<div class="image-container">
+								<img class="top" src="images/portfolio/screenshot_threejs_lidador.png" alt="Three.js">
+							</div>
+							<div class="description">Screenshot of an interactive 3D house model on Stable's website. Client (Actual Arquitectos)</div>
 						</div>
 						<div class="slide-item y2022 product">
 							<div class="image-container">
