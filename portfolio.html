@@ -79,7 +79,7 @@
 	}
 	.border {
 		border: 1px #5c5c5c solid;
-		border-radius: 10px;
+		/*border-radius: 10px;*/
 	}
 	.era {
 		display: flex;
@@ -123,7 +123,7 @@
 		width: 100%;
 		height: 100%;
 		background-color: #a1e53c;
-		border-radius: 5px;
+		/*border-radius: 5px;*/
 		z-index: -1;
 		animation: highlightMarker 0.3s ease-out forwards;
 		transform-origin: left center;
@@ -183,7 +183,7 @@
 		padding-bottom: 50dvh;
 	}
 	.info .header {
-		font-size: 1.5em;
+		font-size: 1.8em;
 		font-weight: bold;
 		font-family: "Overpass Mono", monospace;
 		text-transform: uppercase;
@@ -396,7 +396,7 @@
 			<div class="scroll-layer flex width-100">
 				<div class="timeline"></div>
 				<div class="info">
-					<div class="info-block 3d y2025">
+					<div class="info-block 3d y2026">
 						<div class="header">BREITNER & PAYNE</div>
 						<div>This project is an in-depth exploration of a digital twin. Unreal Engine allows for an immersive experience — not just viewing the factory floor, but interacting with it too.
 							<br> <br>
@@ -440,7 +440,7 @@
 							</div>
 						</a>
 					</div>
-					<div class="info-block 3d y2024">
+					<div class="info-block 3d y2025">
 						<div class="header">4040 CITADEL PARK</div>
 						<div>A showcase for a new business, residential and comercial complex development. 
 							<br><br>
@@ -483,47 +483,34 @@
 							</div>
 						</a>
 					</div>
-					<div class="info-block 3d y2022">
+					<div class="info-block 3d y2024">
 						<div class="header">PORTO LIDADOR</div>
-						<div>Using Unreal Engine VCam Mobile App, this Plano Alto apartment is presented with real camera movement and cinematic takes.
+						<div>Still images of a new residential development in Porto, rendered for <a target="blank" href="https://www.actualarquitectos.pt/">Actual Arquitectos</a>.
 							<br> <br>
-							The phone’s motion was captured as camera tracking data, which directly drove the movement of the virtual camera inside the scene.
+							Close collaboration with the architects’ team improved my understanding of Revit technical drawings, scale and material fidelity and approaching image creation from a marketing perspective.
 						</div>
 						<div class="bullets">
-							▪ Targeted at real estate firms<br>
-							▪ Virtual walk tour video to be reproduced anywhere <a target="blank" href="https://www.youtube.com/watch?v=GOxOQFDSvAU">→</a><br>
-							▪ Cinematic bonus video to highlight the space <a target="blank" href="https://www.youtube.com/watch?v=H3fiQQPz9Tg">→</a><br>
-							▪ Cinematic narration using ElevenLabs AI <a target="blank" href="https://www.youtube.com/watch?v=H3fiQQPz9Tg">→</a><br>
-							▪ Textured with Megascans<br>
-							▪ First time texturing, rendering and animating in Unreal Engine
+							▪ Building currently in development <a target="blank" href="https://www.actualarquitectos.pt/lidor-78-2/">→</a><br>
+							▪ Model sourced from architect's Revit files<br>
+							▪ Model rebuilt in 3ds Max for geometry coherence<br>
+							▪ Custom materials created to match client specifications<br>
+							▪ Rendered with V-Ray
 						</div>
 						<div class="tools">
+							<div class="tooltip-trigger">
+								<img src="images/icons/logos/logo_revit.svg">
+								<span class="tooltip">Revit</span>
+							</div>
 							<div class="tooltip-trigger">
 								<img src="images/icons/logos/logo_3dsmax.svg">
 								<span class="tooltip">3ds Max</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_unreal.svg">
-								<span class="tooltip">Unreal Engine</span>
-							</div>
-							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_vcam.svg">
-								<span class="tooltip">Unreal Engine VCam</span>
-							</div>
-							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_davinci.svg">
-								<span class="tooltip">Davinci Resolve</span>
-							</div>
-							<div class="tooltip-trigger">
 								<img src="images/icons/logos/logo_ps.svg">
 								<span class="tooltip">Photoshop</span>
 							</div>
-							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_ai.svg">
-								<span class="tooltip">Illustrator</span>
-							</div>
 						</div>
-						<a target="blank" href="project_planoalto.html">
+						<a target="blank" href="project_lidador.html">
 							<div class="flip-click">
 								<div class="flip-mask">
 									<div class="default-text">→ MORE</div>
@@ -539,9 +526,9 @@
 						</div>
 						<div class="bullets">
 							▪ Targeted at real estate firms<br>
-							▪ Virtual walk tour video to be reproduced anywhere <a target="blank" href="https://www.youtube.com/watch?v=GOxOQFDSvAU">→</a><br>
-							▪ Cinematic bonus video to highlight the space <a target="blank" href="https://www.youtube.com/watch?v=H3fiQQPz9Tg">→</a><br>
-							▪ Cinematic narration using ElevenLabs AI <a target="blank" href="https://www.youtube.com/watch?v=H3fiQQPz9Tg">→</a><br>
+							▪ Virtual walk tour video to be reproduced anywhere <a target="blank" href="https://youtube.com/watch?v=GOxOQFDSvAU">→</a><br>
+							▪ Cinematic bonus video to highlight the space <a target="blank" href="https://youtube.com/watch?v=H3fiQQPz9Tg">→</a><br>
+							▪ Cinematic narration using ElevenLabs AI <a target="blank" href="https://youtube.com/watch?v=H3fiQQPz9Tg">→</a><br>
 							▪ Textured with Megascans<br>
 							▪ First time texturing, rendering and animating in Unreal Engine
 						</div>
@@ -631,13 +618,10 @@
 						</div>
 						<div class="bullets">
 							▪ 7 Web Apps deployed <br>
-							▪ Production oversight and control (purple)<br>
-							▪ Stock management (green)<br>
-							▪ Fleet monitoring (magenta)<br>
-							▪ Finished product expedition<br>
-							▪ Maintenance workflow guidance<br>
-							▪ Ticket management<br>
-							▪ Personel time clocking
+							▪ Production Oversight (purple)<br>
+							▪ Stock Management (green)<br>
+							▪ Fleet Monitoring (magenta)<br>
+							▪ Maintenance Guidance, Ticket Management, and more<br>
 						</div>
 						<div class="tools">
 							<div class="tooltip-trigger">
@@ -664,11 +648,9 @@
 						</div>
 						<div class="bullets">
 							▪ 15+ Videowalls deployed <br>
-							▪ Production status<br>
-							▪ OEE and other metrics <br>
-							▪ Personel oversight <br>
-							▪ Product expedition schedule<br>
-							▪ Equipment status mosaic <br>
+							▪ Production Status<br>
+							▪ OEE and Metrics <br>
+							▪ Personel Oversight, Product Expedition and more <br>
 						</div>
 						<div class="tools">
 							<div class="tooltip-trigger">
@@ -685,11 +667,11 @@
 						<div class="header">THREE.JS</div>
 						<div>Three.js is the intersection between 3D and Web Design. It allows me to present 3D without converting it back to 2D.
 							<br> <br>
-							Having a 3D project catalog at <a target="blank" href="https://stablearchviz.com/">Stable</a>, Three.js is my favorite way to include models in the website.
+							Having a 3D project catalog on <a target="blank" href="https://www.stablearchviz.com/">Stable website</a>, Three.js is my favorite way to exibit the models created in 3ds Max.
 						</div>
 						<div class="bullets">
-							▪ Precise animation control <a target="blank" href="https://stablearchviz.com/project_breitnerpayne.html">→</a><br>
-							▪ Orbit-based exploration <a target="blank" href="https://stablearchviz.com/project_electriccentury.html">→</a><br>
+							▪ Intuitive building exploration <a target="blank" href="https://www.stablearchviz.com/project_breitnerpayne.html">→</a><br>
+							▪ Clear understanding of space and scale <a target="blank" href="https://www.stablearchviz.com/project_electriccentury.html">→</a><br>
 							▪ Responsiveness to mobile devices
 						</div>
 						<div class="tools">
@@ -742,7 +724,7 @@
 						</div>
 					</div>
 					<div class="info-block product y2021">
-						<div class="header">PRODUCTION LINE VISUALIZATION</div>
+						<div class="header">PRODUCTION LINE REPLICA</div>
 						<div>My first introduction to 3D was at <a href="https://www.thinkdigital.pt/">ThinkDigital</a> when I was asked to develop a visual representation of one of our clients production lines.
 							<br> <br>
 							Using real photos as a reference, I created low poly versions of each machine in several production lines. The renders would later receive color overlays to signal any machine malfunction. 
@@ -774,19 +756,15 @@
 					</div>
 					<div class="info-block web y2022">
 						<div class="header">COMPANY WEBSITES</div>
-						<div>We architect your go-to-market strategy
-							combining corporate positioning, product design,
-							and operational readiness.
+						<div>Not long after I joined <a href="https://www.thinkdigital.pt/">ThinkDigital</a>, I was tasked with the revamping of the company websites.
 							<br> <br>
-							Through rapid iteration, market validation, and
-							data-driven refinement, we accelerate your path to
-							product-market fit and investor readiness.
+							Drawing inspiration from Apple's website presentation style, my goal was to let the images talk and keep the text large, catchy and concise.
 						</div>
 						<div class="bullets">
-							▪ key feature <br>
-							▪ key feature <br>
-							▪ key feature <br>
-							▪ key feature <br>
+							▪ ThinkDigital main website <a target="blank" href="https://www.thinkdigital.pt/">→</a><br>
+							▪ Efficient Factory (industrial solution) website <a target="blank" href="https://www.efficient-factory.com/">→</a><br>
+							▪ TrackingDiary (fleet solution) website <a target="blank" href="https://www.trackingdiary.com/">→</a><br>
+							▪ Hundreds of imagery material (mockups and renders) created
 						</div>
 						<div class="tools">
 							<div class="tooltip-trigger">
@@ -954,8 +932,8 @@
 			<div class="flex align-center top-layer">
 				<div class="timeline">
 					<div class="border padding-20 flex column gap-20 height-100">
-						<div class="era y2023-2025 current">
-							<div class="year">2023-2025</div>
+						<div class="era y2023-2026 current">
+							<div class="year">2023-2026</div>
 							<div class="subject current 3d">3D ARCHVIZ</div>
 							<div class="subject web">UX UI & DEV</div>
 							<div class="subject threejs">THREE.JS</div>
@@ -971,23 +949,23 @@
 				<div class="info border"></div>
 				<div class="slide">
 					<div class="border height-100">
-						<div class="slide-item y2025 3d">
+						<div class="slide-item y2026 3d">
 							<div class="image-container">
 								<img src="images/breitnerpayne_aerial2_ui.webp" alt="Breitner & Payne">
 							</div>
 							<div class="description">Aerial view of Breitner Payne's digital replica. User can explore all factory sectors and go in-depth on the production line. Personal Project</div>
 						</div>
-						<div class="slide-item y2024 3d">
+						<div class="slide-item y2025 3d">
 							<div class="image-container">
 								<img src="images/citadel_00.webp" style="background: #262626;" alt="Citadel Park">
 							</div>
 							<div class="description">Surrounding view of 4040 Citadel complex. Personal Project</div>
 						</div>
-						<div class="slide-item y2022 3d">
+						<div class="slide-item y2024 3d">
 							<div class="image-container">
 								<img src="images/lidador_04.webp" alt="Porto Lidador">
 							</div>
-							<div class="description">One of Plano Alto apartment's living room. Client: Actual Arquitectos</div>
+							<div class="description">Rear view of a residential building in Porto. Client: Actual Arquitectos</div>
 						</div>
 						<div class="slide-item y2023 3d">
 							<div class="image-container">
