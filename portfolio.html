@@ -27,8 +27,7 @@
 	}
 	a {
 		color: #a1e53c;
-/*		text-decoration: underline;
-*/	}
+	}
 	.landing {
 		position: absolute;
 		height: 100dvh;
@@ -77,9 +76,25 @@
 		box-sizing: border-box;
 		text-transform: uppercase;
 	}
+	.timeline .border {
+		position: relative;
+	}
+	.timeline .border::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: var(--border-progress, 0%);
+		border: 2px solid #a1e53c;
+		box-sizing: border-box;
+		pointer-events: none;
+		border-bottom: none; 
+		border-top: none; 
+		border-right: none; 
+	}
 	.border {
 		border: 1px #5c5c5c solid;
-		/*border-radius: 10px;*/
 	}
 	.era {
 		display: flex;
@@ -90,9 +105,6 @@
 		cursor: pointer;
 		width: 100%;
 	}
-/*	.era > div{
-		margin-bottom: 5px;
-	}*/
 	.era.current {
 		color: #f2f2f2;
 	}
@@ -102,12 +114,8 @@
 	.subject {
 		font-size: .9em;
 		width: fit-content;
-		white-space: nowrap;
+/*		white-space: nowrap;*/
 	}
-	/*.subject.current {
-		border-left: 1px #f2f2f2 solid;
-		padding-left: 5px;
-	}*/
 	.subject.current {
 		position: relative;
 		display: inline-block;
@@ -123,7 +131,6 @@
 		width: 100%;
 		height: 100%;
 		background-color: #a1e53c;
-		/*border-radius: 5px;*/
 		z-index: -1;
 		animation: highlightMarker 0.3s ease-out forwards;
 		transform-origin: left center;
@@ -234,8 +241,6 @@
 		padding: 0;
 		overflow: hidden;
 	}
-	
-	/* NEW: Slide item wrapper styles */
 	.slide-item {
 		position: absolute;
 		top: 0;
@@ -253,33 +258,29 @@
 		opacity: 1 !important;
 		transform: translateY(0) !important;
 	}
-	
 	.slide-item .image-container {
 		flex: 1;
 		overflow: hidden;
 		position: relative;
 	}
-	
 	.slide-item img {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
 		display: block;
 	}
-	
 	.slide-item img.top {
 		object-position: top;
 	}
-	
 	.slide-item img.bottom {
 		object-position: bottom;
 	}
-	
 	.slide-item .description {
 		position: absolute;
 		bottom: 0;
 		background: #262626;
 		padding: 10px;
+		box-sizing: border-box;
 		width: 100%;
 		border-top: 1px #5c5c5c solid;
 		font-family: "Overpass", sans-serif;
@@ -295,32 +296,6 @@
 	.default-text {
 		text-shadow: 0px 1.1em 0px #a1e53c;
 		transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-	}
-	@keyframes indicator {
-		/* Start: circle at the bottom */
-		0% {
-			aspect-ratio: 1;
-			translate: 0 1.55rem;
-		}
-		/* Stretch begins upward */
-		20% {
-			aspect-ratio: 1 / 4;
-			translate: 0 0.1rem; /* stretch up toward the top */
-		}
-		/* Stretch + contraction finish together here */
-		35% {
-			aspect-ratio: 1;
-			translate: 0 -1.2rem; /* top position */
-		}
-		/* Hold the dot at the top */
-		55% {
-			aspect-ratio: 1;
-			translate: 0 -1.2rem;
-		}
-		/* Reset back to bottom */
-		100% {
-			translate: 0 1.55rem;
-		}
 	}
 	@media (max-width: 1200px) {
 		body {
@@ -341,7 +316,7 @@
 			padding: 10px 0;
 		}
 		.info {
-			height: 47%;
+			height: 60%;
 			padding: 10px;
 		}
 		.tools {
@@ -351,7 +326,7 @@
 			bottom: -100%;
 		}
 		.slide {
-			height: 40%;
+			height: 50%;
 			background: #262626;
 			padding: 10px 0;
 		}
@@ -370,6 +345,8 @@
 		}
 		.subject.current {
 			display: block;
+			color: white;
+			padding: 0;
 		}
 		.info.border {
 			overflow: hidden;
@@ -388,6 +365,9 @@
 			padding-top: 50dvh;
 			padding-bottom: 60dvh;
 		}
+		.slide-item .description {
+			padding: 5px;
+		}
 	}
 </style>
 <body>
@@ -397,7 +377,10 @@
 				<div class="timeline"></div>
 				<div class="info">
 					<div class="info-block 3d y2026">
-						<div class="header">BREITNER & PAYNE</div>
+						<div>
+							<div class="header">BREITNER & PAYNE</div>
+							<div class="text-small color-gray">PERSONAL PROJECT</div>
+						</div>
 						<div>This project is an in-depth exploration of a digital twin. Unreal Engine allows for an immersive experience — not just viewing the factory floor, but interacting with it too.
 							<br> <br>
 							JSON data communication between the Unreal server, client computer, and mobile app enables users to move around the factory, interact, and control the machines remotely.
@@ -441,7 +424,10 @@
 						</a>
 					</div>
 					<div class="info-block 3d y2025">
-						<div class="header">4040 CITADEL PARK</div>
+						<div>
+							<div class="header">4040 CITADEL PARK</div>
+							<div class="text-small color-gray">PERSONAL PROJECT</div>
+						</div>
 						<div>A showcase for a new business, residential and comercial complex development. 
 							<br><br>
 							Focusing both in and outwards, the project explores multiple stores, offices and amenities inside the complex, as well as landmarks throughout the 30,044km<sup>2</sup> cityscape.
@@ -484,7 +470,10 @@
 						</a>
 					</div>
 					<div class="info-block 3d y2024">
-						<div class="header">PORTO LIDADOR</div>
+						<div>
+							<div class="header">PORTO LIDADOR</div>
+							<div class="text-small color-gray">CLIENT PROJECT</div>
+						</div>
 						<div>Still images of a new residential development in Porto, rendered for <a target="blank" href="https://www.actualarquitectos.pt/">Actual Arquitectos</a>.
 							<br> <br>
 							Close collaboration with the architects’ team improved my understanding of Revit technical drawings, scale and material fidelity and approaching image creation from a marketing perspective.
@@ -519,7 +508,10 @@
 						</a>
 					</div>
 					<div class="info-block 3d y2023">
-						<div class="header">PLANO ALTO</div>
+						<div>
+							<div class="header">PLANO ALTO</div>
+							<div class="text-small color-gray">PERSONAL PROJECT</div>
+						</div>
 						<div>Using Unreal Engine VCam Mobile App, this Plano Alto apartment is presented with real camera movement and cinematic takes.
 							<br> <br>
 							The phone’s motion was captured as camera tracking data, which directly drove the movement of the virtual camera inside the scene.
@@ -609,7 +601,10 @@
 						</a>
 					</div>
 					<div class="info-block web y2025">
-						<div class="header">MOBILE APPS</div>
+						<div>
+							<div class="header">MOBILE APPS</div>
+							<div class="text-small color-gray">THINKDIGITAL</div>
+						</div>
 						<div>As the solo frontend dev / designer at <a href="https://www.thinkdigital.pt/">ThinkDigital</a>, one of my roles is to design our web apps interface and develop them alongside my backend team.
 							<br> <br>
 							Over the past couple of years I've been working on a suite of mobile web apps that tackle different needs of our industry clients. Users are usually workers on the factory floor.
@@ -639,7 +634,10 @@
 						</div>
 					</div>
 					<div class="info-block web y2024">
-						<div class="header">VIDEOWALS</div>
+						<div>
+							<div class="header">VIDEOWALLS</div>
+							<div class="text-small color-gray">THINKDIGITAL</div>
+						</div>
 						<div>Videowalls present key operational metrics on a work environment large-format display.
 							<br> <br>
 							A web-based, plug and play solution that gives the entire team instant visibility into critical information.
@@ -690,7 +688,10 @@
 						</div>
 					</div>
 					<div class="info-block product y2022">
-						<div class="header">PRODUCT DESIGN</div>
+						<div>
+							<div class="header">PRODUCT DESIGN</div>
+							<div class="text-small color-gray">THINKDIGITAL</div>
+						</div>
 						<div>At <a href="https://www.thinkdigital.pt/">ThinkDigital</a> we develop both soft and hardware for business instrumentation purposes.
 							<br> <br>
 							On the hardware side, my role was to use the 3D models from the manufacturer to render out product images used in the prototyping and marketing stages.
@@ -724,7 +725,10 @@
 						</div>
 					</div>
 					<div class="info-block product y2021">
-						<div class="header">PRODUCTION LINE REPLICA</div>
+						<div>
+							<div class="header">DIGITAL TWINS</div>
+							<div class="text-small color-gray">THINKDIGITAL</div>
+						</div>
 						<div>My first introduction to 3D was at <a href="https://www.thinkdigital.pt/">ThinkDigital</a> when I was asked to develop a visual representation of one of our clients production lines.
 							<br> <br>
 							Using real photos as a reference, I created low poly versions of each machine in several production lines. The renders would later receive color overlays to signal any machine malfunction. 
@@ -755,7 +759,10 @@
 						</div>
 					</div>
 					<div class="info-block web y2022">
-						<div class="header">COMPANY WEBSITES</div>
+						<div>
+							<div class="header">COMPANY WEBSITES</div>
+							<div class="text-small color-gray">THINKDIGITAL</div>
+						</div>
 						<div>Not long after I joined <a href="https://www.thinkdigital.pt/">ThinkDigital</a>, I was tasked with the revamping of the company websites.
 							<br> <br>
 							Drawing inspiration from Apple's website presentation style, my goal was to let the images talk and keep the text large, catchy and concise.
@@ -782,7 +789,10 @@
 						</div>
 					</div>
 					<div class="info-block graphic y2020">
-						<div class="header">COMPANY LOGOS</div>
+						<div>
+							<div class="header">COMPANY LOGOS</div>
+							<div class="text-small color-gray">THINKDIGITAL</div>
+						</div>
 						<div>One of my first assignments at <a href="https://www.thinkdigital.pt/">ThinkDigital</a> was to redesign the company logo. The creative and fun process had to be balance with the responsability of capturing a company image I wasn't too familiar with.
 							<br> <br>
 							The rebranding was a success and I ended up redesigning and creating logos for several other company products.
@@ -1159,16 +1169,43 @@
 			}
 		}
 
-		// Add scroll event listener to the scroll-layer
-		$('.scroll-layer').on('scroll', updateCurrentEra);
+		function updateTimelineBorderFill() {
+			const scrollContainer = $('.scroll-layer')[0];
+			const border = document.querySelector('.timeline .border');
+			const credits = document.querySelector('.graphic.y2020');
 
-		// Initial check on page load
+			if (!border || !credits) return;
+
+			// Current scroll
+			const scrollTop = scrollContainer.scrollTop;
+
+			// Distance from top of scroll container to credits
+			const creditsOffset =
+				credits.offsetTop - scrollContainer.offsetTop;
+
+			// Progress ratio
+			let progress = scrollTop / creditsOffset;
+
+			// Clamp between 0 and 1
+			progress = Math.max(0, Math.min(1, progress));
+
+			// Apply
+			border.style.setProperty(
+				'--border-progress',
+				`${progress * 100}%`
+			);
+		}
+
+		$('.scroll-layer').on('scroll', function() {
+			updateCurrentEra();
+			updateTimelineBorderFill(); 
+		});
+
 		$(document).ready(function() {
 			$('.era, .subject').css('transition', 'all 0.4s ease');
 			updateCurrentEra();
+			updateTimelineBorderFill();
 		});
-
-
 	</script>
 </body>
 </html>
