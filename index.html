@@ -30,9 +30,6 @@
 		</div>
 	</div>
 	<style type="text/css">
-		.dictionary {
-			position: unset;
-		}
 		.video {
 			height: 80vh;
 		}
@@ -51,158 +48,6 @@
 				pointer-events: auto;
 			}
 		}
-
-
-		.citadel img {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-		}
-
-		.citadel .gsap-layer {
-			opacity: 0;
-			transition: opacity 0.2s ease;
-		}
-
-		@keyframes activeDot {
-			0%, 100% {
-				transform: scaleY(1);
-			}
-			25% {
-				transform: scaleY(0.75);
-			}
-		}
-
-		@keyframes inactiveDot {
-			0%, 100% {
-				transform: scaleX(1) scaleY(1);
-			}
-			25% {
-				transform: scaleX(0.85) scaleY(1.25);
-			}
-		}
-
-		.pagination-wrapper {
-			position: absolute;
-			top: 40px;
-			left: 50%;
-			transform: translateX(-50%);
-			display: flex;
-			align-items: center;
-			gap: 10px;
-			z-index: 10;
-		}
-
-		.pagination {
-			display: flex;
-			flex-direction: row;
-			align-items: center;
-			gap: 3px;
-		}
-
-		.pagination div {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			height: 1rem;
-			width: 1rem;
-			cursor: pointer;
-			transition: width 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-			position: relative;
-		}
-
-		.pagination div::before {
-			content: "";
-			display: block;
-			height: 0.5rem;
-			width: 0.5rem;
-			border-radius: 0.25rem;
-			background: #808080;
-			transform-origin: 50% 50%;
-			transition: width 0.6s cubic-bezier(0.23, 1, 0.32, 1), transform 0.2s ease-out, opacity 0.2s ease-out;
-			opacity: 0.5;
-			overflow: hidden;
-		}
-
-		.pagination div::after {
-			content: "";
-			position: absolute;
-			height: 0.5rem;
-			left: 0;
-			top: 50%;
-			transform: translateY(-50%);
-			border-radius: 0.25rem;
-			background: #eabb13;
-			width: 0%;
-			transition: width 0s linear;
-		}
-
-		.pagination div.current {
-			width: 30px;
-		}
-
-		.pagination div.current::before {
-			width: 30px;
-			animation: activeDot 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-			opacity: 1;
-		}
-
-		.pagination div.current::after {
-			width: 100%;
-			transition: width 3s linear;
-		}
-
-		.pagination div:not(.current)::before {
-			animation: inactiveDot 0.6s ease backwards;
-		}
-
-		.pagination div:not(.current):hover::before {
-			opacity: 1;
-		}
-
-		.play-pause-btn {
-			width: 1.5rem;
-			height: 1.5rem;
-			background: transparent;
-			border: 3px solid #808080;
-			border-radius: 50%;
-			cursor: pointer;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			opacity: .5;
-			transition: opacity 0.3s;
-		}
-
-		.play-pause-btn:hover {
-			opacity: 1;
-		}
-
-		.play-pause-btn::before {
-			content: "";
-			width: 0;
-			height: 0;
-			border-style: solid;
-		}
-
-		.play-pause-btn.paused::before {
-			border-width: 6px 0 6px 10px;
-			border-color: transparent transparent transparent #808080;
-			margin-left: 2px;
-		}
-
-		.play-pause-btn.playing::before {
-			width: 6px;
-			height: 12px;
-			border-left: 3px solid #808080;
-			border-right: 3px solid #808080;
-			border-top: 0;
-			border-bottom: 0;
-		}
-
 	</style>
 	<nav></nav>
 	<div class="smooth-wrapper">
@@ -575,15 +420,10 @@
 					</a>
 				</section>
 				<section class="thousand">
-					<a href="project_olivagiulianova.html">
-						<img class="project-logo" src="images/logo_oliva2.svg">
-					</a>
-					<div class="type">project</div>
 					<div class="title centered">An image is worth <br> a thousand words</div>
-					<img alt="3d render of a house exterior" src="images/oliva_05.webp">
-					<a href="project_olivagiulianova.html">
+					<img alt="3d render of a kitchen" src="images/guntherhouse_02.webp">
+					<a href="project_guntherhouse.html">
 						<div class="flip-click margin-top-10">
-							The owners of <i>Oliva Giulianova</i> don't save the best for last with this front yard pool.<br>
 							<div class="flip-mask">
 								<div class="default-text">GO TO PROJECT →</div>
 							</div>
@@ -607,7 +447,6 @@
 					</div>
 					<a href="project_planoalto.html">
 						<div class="flip-click margin-top-10">
-							Images alone won't cut it for this <i>Plano Alto</i> apartment unit.<br>
 							<div class="flip-mask">
 								<div class="default-text white-shadow">GO TO PROJECT →</div>
 							</div>
@@ -896,53 +735,6 @@
 				}
 			});
 		});
-		// //Citadel image sequence
-		// $(document).ready(function() {
-		// 	const section = $(".citadel");
-		// 	const images = section.find(".gsap-layer");
-		// 	const dim = section.find(".dim"); // optional: still reveal if needed
-		// 	const playBtn = $("#citadel-play");
-		// 	let sequenceStarted = false;
-
-		// 	// Hide all images and .dim initially
-		// 	images.css("opacity", 0);
-		// 	dim.css("display", "none");
-
-		// 	function startSequence() {
-		// 		sequenceStarted = true;
-
-		// 		images.each(function(index) {
-		// 			setTimeout(() => {
-		// 				// Show current image
-		// 				$(this).css({
-		// 					"transition": "opacity 0.2s ease",
-		// 					"opacity": 1
-		// 				});
-		// 				// Hide previous image
-		// 				if (index > 0) {
-		// 					images.eq(index - 1).css("opacity", 0);
-		// 				}
-
-		// 				// If last image, show .dim and change button text
-		// 				if (index === images.length - 1) {
-		// 					setTimeout(() => {
-		// 						dim.css("display", "block"); // optional
-		// 						playBtn.text("Play again");
-		// 					}, 3000); // wait for fade-in
-		// 				}
-
-		// 			}, index * 3000); // 2s per image
-		// 		});
-		// 	}
-
-		// 	playBtn.on("click", function() {
-		// 		// Reset images and .dim if replay
-		// 		images.css("opacity", 0);
-		// 		dim.css("display", "none");
-
-		// 		startSequence();
-		// 	});
-		// });
 
 		// Breitner & Payne change view and sidebar
 		$(document).ready(function() {

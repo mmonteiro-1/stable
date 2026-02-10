@@ -819,7 +819,7 @@ button {
 	width: 100%;
 	height: 80vh;
 	object-fit: cover;
-	object-position: center 30%;
+	filter: brightness(.8);
 }
 .button {
 	background: #eabb13;
@@ -855,6 +855,7 @@ button {
 } 
 .citadel img.gsap-layer {
 	opacity: 0;
+	transition: opacity 0.5s ease;
 }
 .citadel .dim {
 	height: 100%;
@@ -1282,6 +1283,129 @@ button {
 .text-centered {
 	text-align: center;
 }
+
+/*CITADEL PAGINATION ANIMATION BELOW*/
+@keyframes activeDot {
+	0%, 100% {
+		transform: scaleY(1);
+	}
+	25% {
+		transform: scaleY(0.75);
+	}
+}
+
+@keyframes inactiveDot {
+	0%, 100% {
+		transform: scaleX(1) scaleY(1);
+	}
+	25% {
+		transform: scaleX(0.85) scaleY(1.25);
+	}
+}
+.pagination-wrapper {
+	position: absolute;
+	top: 40px;
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	z-index: 10;
+}
+.pagination {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 3px;
+}
+.pagination div {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 1rem;
+	width: 1rem;
+	cursor: pointer;
+	transition: width 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+	position: relative;
+}
+.pagination div::before {
+	content: "";
+	display: block;
+	height: 0.5rem;
+	width: 0.5rem;
+	border-radius: 0.25rem;
+	background: #808080;
+	transform-origin: 50% 50%;
+	transition: width 0.6s cubic-bezier(0.23, 1, 0.32, 1), transform 0.2s ease-out, opacity 0.2s ease-out;
+	opacity: 0.5;
+	overflow: hidden;
+}
+.pagination div::after {
+	content: "";
+	position: absolute;
+	height: 0.5rem;
+	left: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	border-radius: 0.25rem;
+	background: #eabb13;
+	width: 0%;
+	transition: width 0s linear;
+}
+.pagination div.current {
+	width: 30px;
+}
+.pagination div.current::before {
+	width: 30px;
+	animation: activeDot 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+	opacity: 1;
+}
+.pagination div.current::after {
+	width: 100%;
+	transition: width 3s linear;
+}
+.pagination div:not(.current)::before {
+	animation: inactiveDot 0.6s ease backwards;
+}
+.pagination div:not(.current):hover::before {
+	opacity: 1;
+}
+.play-pause-btn {
+	width: 1.5rem;
+	height: 1.5rem;
+	background: transparent;
+	border: 3px solid #808080;
+	border-radius: 50%;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: .5;
+	transition: opacity 0.3s;
+}
+.play-pause-btn:hover {
+	opacity: 1;
+}
+.play-pause-btn::before {
+	content: "";
+	width: 0;
+	height: 0;
+	border-style: solid;
+}
+.play-pause-btn.paused::before {
+	border-width: 6px 0 6px 10px;
+	border-color: transparent transparent transparent #808080;
+	margin-left: 2px;
+}
+.play-pause-btn.playing::before {
+	width: 6px;
+	height: 12px;
+	border-left: 3px solid #808080;
+	border-right: 3px solid #808080;
+	border-top: 0;
+	border-bottom: 0;
+}
+
 @media (max-width: 800px) {
 	.loading-video {
 		max-width: 40%;
