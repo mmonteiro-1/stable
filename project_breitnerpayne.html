@@ -119,32 +119,53 @@
 				</div>
 				<section class="grid">
 					<div>
-						<div class="flex gap-10 align-center">
-							<img src="images/icons/icon_programming_orange.svg">
-							<div class="title">JSON Data</div>
+						<div class="grid-thumbnail">
+							<img src="images/breitnerpayne_machine_palletizer.webp">
 						</div>
-						<div class="type">The application receives factory data in JSON format generated from physical sensors embedded in the machines, parsed at runtime in Unreal Engine. A <span class="italic">UE Blueprint interprets the incoming data</span> and updates the different elements in the scene like machine status, production counts and details.</div>
+						<div>
+							<div class="flex gap-10">
+								<img src="images/icons/icon_programming_orange.svg">
+								<div class="title">JSON Data</div>
+							</div>
+							<div class="type"><span>The engine receives real-time factory data in JSON format.</span> An Unreal Engine "Manager" Blueprint parses the data and sends them to other Blueprints responsible for the visualization functionality.</div>
+						</div>
 					</div>
 					<div>
-						<div class="flex gap-10 align-center">
-							<img src="images/icons/icon_cloud_sync_orange.svg">
-							<div class="title">Unreal Engine Server</div>
+						<div class="grid-thumbnail">
+							<img src="images/breitnerpayne_machine_palletizer.webp">
 						</div>
-						<div class="type">The server handles data synchronization, processes incoming JSON updates, and streams real-time factory states to connected clients, enabling remote monitoring and interaction.</div>
+						<div>
+							<div class="flex gap-10">
+								<img src="images/icons/icon_cloud_sync_orange.svg">
+								<div class="title">Unreal Engine Server</div>
+							</div>
+							<div class="type">Several other Blueprints receive the parsed data from the Manager Blueprint and <span>update the UI and objects in the scene</span> like machine colors, production counts, active views and alert notifications.</div>
+						</div>
 					</div>
 					<div>
-						<div class="flex gap-10 align-center">
-							<img src="images/icons/icon_globe_orange.svg">
-							<div class="title">Browser-based</div>
+						<div class="grid-thumbnail">
+							<img src="images/breitnerpayne_machine_palletizer.webp">
 						</div>
-						<div class="type">Leveraging Pixel Streaming, the factory visualization renders entirely on the server-side and streams video output to any browser, users interact through instantaneous input forwarding, <span class="italic">ensuring full control with no local processing power.</span></div>
+						<div>
+							<div class="flex gap-10">
+								<img src="images/icons/icon_globe_orange.svg">
+								<div class="title">Web-based</div>
+							</div>
+							<div class="type">Leveraging Pixel Streaming, the factory visualization <span>requires no local processing power.</span> It runs entirely on the server side and streams video output to any browser. Inputs from the user’s keyboard and mouse are forwarded instantaneously to the engine.</div>
+						</div>
+						
 					</div>
 					<div>
-						<div class="flex gap-10 align-center">
-							<img src="images/icons/icon_phone_app_orange.svg">
-							<div class="title">Companion App</div>
+						<div class="grid-thumbnail">
+							<img src="images/breitnerpayne_machine_palletizer.webp">
 						</div>
-						<div class="type">The mobile app serves as a companion tool, offering a real-time overview of the factory’s operations with key metrics. In addition to monitoring, it allows users to adjust factory parameters, providing a <span class="italic">streamlined and accessible control interface.</span></div>
+						<div>
+							<div class="flex gap-10">
+								<img src="images/icons/icon_phone_app_orange.svg">
+								<div class="title">Mobile App</div>
+							</div>
+							<div class="type">The mobile app is the <span>remote control for the factory.</span> It allows a quick overview of the factory’s operations, change factory settings and switch between camera views in the visualization.</div>
+						</div>
 					</div>
 				</section>
 				<div class="width-100 devices-mockup image">
@@ -164,20 +185,16 @@
 						<img src="images/breitnerpayne_mockup_machine.webp">
 					</div>
 				</div>
-				<div class="spacer-logo">
+				<section class="bp-logo">
+					<img src="images/wireframe_cans.jpg" class="paint-cans">
 					<img src="images/logo_breitnerpayne.svg">
-				</div>
+				</section>
 				<div class="row">
 					<div class="image">
 						<img src="images/breitnerpayne_aerial2.webp">
 					</div>
 					<div class="image">
 						<img src="images/breitnerpayne_office.webp">
-					</div>
-				</div>
-				<div class="row">
-					<div class="image solo">
-						<img src="images/breitnerpayne_production_line.webp">
 					</div>
 				</div>
 				<div class="row">

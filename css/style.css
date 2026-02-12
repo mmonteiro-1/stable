@@ -477,26 +477,42 @@ footer {
 }
 .grid {
 	display: flex;
-	justify-content: space-evenly;
-	align-items: flex-start;
+	justify-content: center;
 	flex-wrap: wrap;
 	gap: 20px;
-	margin-top: 200px;
+	margin: 200px 0;
 }
 .grid > div {
-	max-width: 35%;
-	padding: 20px;
+	display: flex;
+	width: calc(50% - 10px);
+	padding: 10px;
 	box-sizing: border-box;
+	border: 1px solid #ddd;
+	gap: 20px;
+}
+.grid-thumbnail {
+	height: 100%;
+	max-width: 150px;
+	aspect-ratio: 1;
+}
+.grid .grid-thumbnail img {
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
 }
 .grid img {
-	width: 30px;
+	width: 25px;
 }
 .grid .title {
 	font-size: 2em;
-	margin-top: 7px;
 }
 .grid .type {
 	font-size: 1em;
+	margin-bottom: 0;
+	margin-top: 5px;
+}
+.grid .type span {
+	color: #232323;
 }
 .feature {
 	display: flex;
@@ -529,9 +545,6 @@ footer {
 	z-index: 1;
 	cursor: pointer;
 }
-/*.image:hover, .tile:hover {
-	cursor: zoom-in;
-}*/
 .image:hover > img, .tile:hover > img {
 	transform: scale(1.01);
 	transition: transform .2s ease;
@@ -1302,8 +1315,44 @@ button {
 .text-centered {
 	text-align: center;
 }
-
-/*CITADEL PAGINATION ANIMATION BELOW*/
+.bp-logo {
+	position: relative;
+	height: 80vh;
+	aspect-ratio: 1;
+	padding: 0;
+	box-sizing: border-box;
+	margin-left: -20px;
+	margin-bottom: 0;
+	background: url(../images/wireframe_belt.jpg);
+	background-size: contain;
+	margin: 200px auto;
+	overflow: hidden;
+	border: 1px #ddd solid;
+}
+.bp-logo img:not(.paint-cans) {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	height: 150px;
+}
+.paint-cans {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	mix-blend-mode: darken;
+	animation: moveCans 30s steps(350) infinite;
+}
+/*BP PAINT CANS ANIMATION*/
+@keyframes moveCans {
+	0% {
+		transform: translate(100%, -57%);
+	}
+	100% {
+		transform: translate(-100%, 54%);
+	}
+}
+/*CITADEL PAGINATION ANIMATION*/
 @keyframes activeDot {
 	0%, 100% {
 		transform: scaleY(1);
@@ -1661,9 +1710,17 @@ button {
 		aspect-ratio: 1/1;
 	}
 	.grid > div {
-		max-width: 100%;
-		padding: 0;
-		margin-bottom: 50px;
+		width: 100%;
+		flex-direction: column;
+		gap: 10px;
+	}
+	.grid .title {
+		font-size: 1.7em;
+	}
+	.grid-thumbnail {
+		max-height: 150px;
+		width: 100%;
+		max-width: unset;
 	}
 	.bp-container {
 		aspect-ratio: unset;
@@ -1702,6 +1759,12 @@ button {
 	}
 	.project-logo {
 		max-width: 120px;
+	}
+	.bp-logo {
+		height: unset;
+	}
+	.bp-logo img:not(.paint-cans) {
+		height: 100px;
 	}
 }
 
