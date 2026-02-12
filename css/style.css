@@ -1340,8 +1340,7 @@ button {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
-	mix-blend-mode: darken;
-	animation: moveCans 30s steps(350) infinite;
+	animation: moveCans 25s steps(350) infinite;
 }
 /*BP PAINT CANS ANIMATION*/
 @keyframes moveCans {
@@ -1830,5 +1829,8 @@ button {
 	}
 	.dictionary-stable > div {
 		padding-left: 200px;
+	}
+	.grid {
+		padding: 0 350px;
 	}
 }
