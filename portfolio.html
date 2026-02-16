@@ -339,6 +339,14 @@
 			flex-direction: row;
 			padding: 10px;
 		}
+		.timeline .border::before {
+			width: var(--border-progress-horizontal, 0%);
+			height: 100%;
+			border-bottom: none;
+			border-left: none;
+			border-right: none;
+			border-top: 2px solid #a1e53c;
+		}
 		.era {
 			white-space: nowrap;
 		}
@@ -866,7 +874,7 @@
 							<div>THINKDIGITAL</div>
 						</div>
 
-						<div style="margin: 200px 0">UNSOLICITED BUT PERHAPS USEFUL INFORMATION</div>
+						<div style="margin: 200px 0 100px 0">UNSOLICITED BUT PERHAPS USEFUL INFORMATION</div>
 
 						<div>MOVIES</div>
 						<div>
@@ -1182,8 +1190,7 @@
 			const scrollTop = scrollContainer.scrollTop;
 
 			// Distance from top of scroll container to credits
-			const creditsOffset =
-				credits.offsetTop - scrollContainer.offsetTop;
+			const creditsOffset = credits.offsetTop - scrollContainer.offsetTop;
 
 			// Progress ratio
 			let progress = scrollTop / creditsOffset;
@@ -1191,11 +1198,12 @@
 			// Clamp between 0 and 1
 			progress = Math.max(0, Math.min(1, progress));
 
-			// Apply
-			border.style.setProperty(
-				'--border-progress',
-				`${progress * 100}%`
-			);
+			// Apply - check if mobile
+			if (window.innerWidth <= 800) {
+				border.style.setProperty('--border-progress-horizontal', `${progress * 100}%`);
+			} else {
+				border.style.setProperty('--border-progress', `${progress * 100}%`);
+			}
 		}
 
 		$('.scroll-layer').on('scroll', function() {

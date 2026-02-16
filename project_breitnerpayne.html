@@ -35,6 +35,7 @@
 				<div class="row">
 					<div class="image solo">
 						<img src="images/breitnerpayne_production_line2.webp">
+						<div class="legend">breitner & payne production line</div>
 					</div>
 				</div>
 				<div class="width-100 devices-mockup image">
@@ -94,95 +95,111 @@
 						</div>
 					</div>
 				</section>
-				<div class="mosaic">
+				<div class="type">production line machinery</div>
+				<section class="mosaic">
 					<div class="tile">
 						<img src="images/breitnerpayne_machine_filler.webp">
+						<div class="legend">Filler</div>
 					</div>
 					<div class="tile">
 						<img src="images/breitnerpayne_machine_labeler_orange.webp">
+						<div class="legend">Labeler</div>
 					</div>
 					<div class="tile">
 						<img src="images/breitnerpayne_machine_inspector.webp">
+						<div class="legend">Inspector</div>
 					</div>
 					<div class="tile">
 						<img src="images/breitnerpayne_machine_sealer.webp">
+						<div class="legend">Sealer</div>
 					</div>
 					<div class="tile double-width">
 						<img src="images/breitnerpayne_machine_wrapper2.webp">
+						<div class="legend">Wrapper</div>
 					</div>
 					<div class="tile">
 						<img src="images/breitnerpayne_machine_weigher.webp">
+						<div class="legend">Weigher</div>
 					</div>
 					<div class="tile">
 						<img src="images/breitnerpayne_machine_palletizer.webp">
+						<div class="legend">Palletizer</div>
 					</div>
-				</div>
-				<section class="grid">
-					<div>
-						<div class="grid-thumbnail">
-							<img src="images/breitnerpayne_machine_palletizer.webp">
+				</section>
+				<section>
+					<div class="type">data architecture</div>
+					<div class="grid">
+						<div>
+							<div class="grid-thumbnail">
+								<img src="images/breitnerpayne_machine_palletizer.webp">
+							</div>
+							<div>
+								<div class="flex gap-10">
+									<img src="images/icons/icon_programming_orange.svg">
+									<div class="title">JSON Data</div>
+								</div>
+								<div class="type"><span>The engine receives real-time factory data in JSON format.</span> An Unreal Engine "Manager" Blueprint parses the data and sends them to other Blueprints responsible for the visualization functionality.</div>
+							</div>
 						</div>
 						<div>
-							<div class="flex gap-10">
-								<img src="images/icons/icon_programming_orange.svg">
-								<div class="title">JSON Data</div>
+							<div class="grid-thumbnail">
+								<img src="images/breitnerpayne_machine_palletizer.webp">
 							</div>
-							<div class="type"><span>The engine receives real-time factory data in JSON format.</span> An Unreal Engine "Manager" Blueprint parses the data and sends them to other Blueprints responsible for the visualization functionality.</div>
-						</div>
-					</div>
-					<div>
-						<div class="grid-thumbnail">
-							<img src="images/breitnerpayne_machine_palletizer.webp">
+							<div>
+								<div class="flex gap-10">
+									<img src="images/icons/icon_cloud_sync_orange.svg">
+									<div class="title">Unreal Engine Server</div>
+								</div>
+								<div class="type">Several other Blueprints receive the parsed data from the Manager Blueprint and <span>update the UI and objects in the scene</span> like machine colors, production counts, active views and alert notifications.</div>
+							</div>
 						</div>
 						<div>
-							<div class="flex gap-10">
-								<img src="images/icons/icon_cloud_sync_orange.svg">
-								<div class="title">Unreal Engine Server</div>
+							<div class="grid-thumbnail">
+								<img src="images/breitnerpayne_machine_palletizer.webp">
 							</div>
-							<div class="type">Several other Blueprints receive the parsed data from the Manager Blueprint and <span>update the UI and objects in the scene</span> like machine colors, production counts, active views and alert notifications.</div>
-						</div>
-					</div>
-					<div>
-						<div class="grid-thumbnail">
-							<img src="images/breitnerpayne_machine_palletizer.webp">
+							<div>
+								<div class="flex gap-10">
+									<img src="images/icons/icon_globe_orange.svg">
+									<div class="title">Web-based</div>
+								</div>
+								<div class="type">Leveraging Pixel Streaming, the factory visualization <span>requires no local processing power.</span> It runs entirely on the server side and streams video output to any browser. Inputs from the user’s keyboard and mouse are forwarded instantaneously to the engine.</div>
+							</div>
+							
 						</div>
 						<div>
-							<div class="flex gap-10">
-								<img src="images/icons/icon_globe_orange.svg">
-								<div class="title">Web-based</div>
+							<div class="grid-thumbnail">
+								<img src="images/breitnerpayne_machine_palletizer.webp">
 							</div>
-							<div class="type">Leveraging Pixel Streaming, the factory visualization <span>requires no local processing power.</span> It runs entirely on the server side and streams video output to any browser. Inputs from the user’s keyboard and mouse are forwarded instantaneously to the engine.</div>
-						</div>
-						
-					</div>
-					<div>
-						<div class="grid-thumbnail">
-							<img src="images/breitnerpayne_machine_palletizer.webp">
-						</div>
-						<div>
-							<div class="flex gap-10">
-								<img src="images/icons/icon_phone_app_orange.svg">
-								<div class="title">Mobile App</div>
+							<div>
+								<div class="flex gap-10">
+									<img src="images/icons/icon_phone_app_orange.svg">
+									<div class="title">Mobile App</div>
+								</div>
+								<div class="type">The mobile app is the <span>remote control for the factory.</span> It allows a quick overview of the factory’s operations, change factory settings and switch between camera views in the visualization.</div>
 							</div>
-							<div class="type">The mobile app is the <span>remote control for the factory.</span> It allows a quick overview of the factory’s operations, change factory settings and switch between camera views in the visualization.</div>
 						</div>
 					</div>
 				</section>
-				<div class="width-100 devices-mockup image">
+				<div class="width-100 devices-mockup image margin-bottom-20">
+					<div class="type">mobile app</div>
 					<img class="width-100" src="images/breitnerpayne_phones_mockup.webp">
 				</div>
 				<div class="mosaic">
 					<div class="tile">
 						<img src="images/breitnerpayne_mockup_factory.webp">
+						<div class="legend">App Homepage</div>
 					</div>
 					<div class="tile">
 						<img src="images/breitnerpayne_mockup_section.webp">
+						<div class="legend">Factory Sector Detail</div>
 					</div>
 					<div class="tile">
 						<img src="images/breitnerpayne_mockup_production_line.webp">
+						<div class="legend">Production Line Detail</div>
 					</div>
 					<div class="tile">
 						<img src="images/breitnerpayne_mockup_machine.webp">
+						<div class="legend">Machine Detail</div>
 					</div>
 				</div>
 				<section class="bp-logo">
@@ -192,17 +209,21 @@
 				<div class="row">
 					<div class="image">
 						<img src="images/breitnerpayne_aerial2.webp">
+						<div class="legend">breitner & payne factory</div>
 					</div>
 					<div class="image">
 						<img src="images/breitnerpayne_office.webp">
+						<div class="legend">office entrance</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="image">
 						<img src="images/breitnerpayne_robot.webp">
+						<div class="legend">palletizer vacuum gripper</div>
 					</div>
 					<div class="image">
 						<img src="images/breitnerpayne_container.webp">
+						<div class="legend">containers on product departure</div>
 					</div>
 				</div>
 				<div class="section_title">Other projects</div>
