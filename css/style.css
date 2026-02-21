@@ -48,6 +48,9 @@ body.menu-open {
 .margin-top-10 {
 	margin-top: 10px;
 }
+.margin-top-20 {
+	margin-top: 20px;
+}
 .margin-top-200 {
 	margin-top: 200px;
 }
@@ -479,7 +482,6 @@ footer {
 	bottom: 10px;
 	left: 10px;
 	color: white;
-	text-transform: lowercase;
 	font-family: 'League Spartan', sans-serif;
 	font-size: .8em;
 	line-height: .4;
@@ -1075,7 +1077,7 @@ button {
 }
 .bp-sidebar-line, .bp-sidebar-tour {
 	position: absolute;
-	height: calc(100% - 35px);
+	/*height: calc(100% - 35px);*/
 	width: 300px;
 	top: 0;
 	right: -330px;
@@ -1841,8 +1843,5 @@ button {
 	}
 	.dictionary-stable > div {
 		padding-left: 200px;
-	}
-	.grid {
-		padding: 0 350px;
 	}
 }

@@ -29,35 +29,32 @@
 						<div class="type">project</div>
 						<div class="title">Breitner & Payne</div>
 						<div class="definition">1. A paint factory in Wexford.</div>
-						<div class="definition">2. A digital replica to interact with the production line in real-time.</div>
+						<div class="definition">2. A tool to interact with the production line in real-time.</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="image solo">
-						<img src="images/breitnerpayne_production_line2.webp">
-						<div class="legend">breitner & payne production line</div>
-					</div>
-				</div>
-				<div class="width-100 devices-mockup image">
-					<img class="width-100" src="images/breitnerpayne_devices_mockup2.webp">
-					<div class="watch-cinematic">
-						<div class="button" style="background: #ff3333;">
-							<div class="flip-click" style="margin-top: 0;">
-								<div class="flip-mask">
-									<div class="default-text white-shadow">
-										WATCH DEMO
+						<img class="width-100" src="images/breitnerpayne_macbook_mockup.webp">
+						<div class="watch-button" id="watch-factory">
+							<div class="button" style="background: #ff3333;">
+								<div class="flip-click" style="margin-top: 0;">
+									<div class="flip-mask">
+										<div class="default-text white-shadow">
+											WATCH VIDEO
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
+						<div class="watch-button youtube-bypass">
+							<a href="https://www.youtube.com/watch?v=qBjrA3zwUfg">
+								<div class="button" style="background: #ff3333;">
+									WATCH VIDEO
+								</div>
+							</a>
+						</div>
 					</div>
-					<div class="watch-button youtube-bypass">
-						<a href="https://www.youtube.com/watch?v=qBjrA3zwUfg">
-							<div class="button" style="background: #ff3333;">
-								WATCH VIDEO
-							</div>
-						</a>
-					</div>
+					
 				</div>
 				<section class="margin-top-200">
 					<div class="three-display" id="three-container">
@@ -95,8 +92,68 @@
 						</div>
 					</div>
 				</section>
+				<div class="row">
+					<div class="image solo">
+						<img src="images/breitnerpayne_production_line2.webp">
+						<div class="legend">Breitner & Payne production line</div>
+					</div>
+				</div>
+				<section class="margin-top-200">
+					<div class="type">data architecture</div>
+					<div class="grid">
+						<div>
+							<div class="grid-thumbnail">
+								<img src="images/breitnerpayne_screenshot_json.webp">
+							</div>
+							<div>
+								<div class="flex gap-10">
+									<img src="images/icons/icon_programming_orange.svg">
+									<div class="title">JSON Data</div>
+								</div>
+								<div class="type"><span>The engine receives real-time factory data in JSON format.</span> An Unreal Engine "Manager" Blueprint parses the data and sends them to other Blueprints responsible for the visualization functionality.</div>
+							</div>
+						</div>
+						<div>
+							<div class="grid-thumbnail">
+								<img src="images/breitnerpayne_screenshot_blueprint.webp">
+							</div>
+							<div>
+								<div class="flex gap-10">
+									<img src="images/icons/icon_cloud_sync_orange.svg">
+									<div class="title">Unreal Engine Server</div>
+								</div>
+								<div class="type">Several other Blueprints receive the parsed data from the Manager Blueprint and <span>update the UI and objects in the scene</span> like machine colors, production counts, active views and alert notifications.</div>
+							</div>
+						</div>
+						<div>
+							<div class="grid-thumbnail">
+								<img src="images/breitnerpayne_still_macbook.webp">
+							</div>
+							<div>
+								<div class="flex gap-10">
+									<img src="images/icons/icon_globe_orange.svg">
+									<div class="title">Web-based</div>
+								</div>
+								<div class="type">Leveraging Pixel Streaming, the factory visualization <span>requires no local processing power.</span> It runs entirely on the server side and streams video output to any browser. Inputs from the user’s keyboard and mouse are forwarded instantaneously to the engine.</div>
+							</div>
+							
+						</div>
+						<div>
+							<div class="grid-thumbnail">
+								<img src="images/breitnerpayne_still_iphone.webp">
+							</div>
+							<div>
+								<div class="flex gap-10">
+									<img src="images/icons/icon_phone_app_orange.svg">
+									<div class="title">Mobile App</div>
+								</div>
+								<div class="type">The mobile app is the <span>remote control for the factory.</span> It allows a quick overview of the factory’s operations, change factory settings and switch between camera views in the visualization.</div>
+							</div>
+						</div>
+					</div>
+				</section>
 				<div class="type">production line machinery</div>
-				<section class="mosaic">
+				<section class="mosaic padding-0">
 					<div class="tile">
 						<img src="images/breitnerpayne_machine_filler.webp">
 						<div class="legend">Filler</div>
@@ -126,60 +183,6 @@
 						<div class="legend">Palletizer</div>
 					</div>
 				</section>
-				<section>
-					<div class="type">data architecture</div>
-					<div class="grid">
-						<div>
-							<div class="grid-thumbnail">
-								<img src="images/breitnerpayne_machine_palletizer.webp">
-							</div>
-							<div>
-								<div class="flex gap-10">
-									<img src="images/icons/icon_programming_orange.svg">
-									<div class="title">JSON Data</div>
-								</div>
-								<div class="type"><span>The engine receives real-time factory data in JSON format.</span> An Unreal Engine "Manager" Blueprint parses the data and sends them to other Blueprints responsible for the visualization functionality.</div>
-							</div>
-						</div>
-						<div>
-							<div class="grid-thumbnail">
-								<img src="images/breitnerpayne_machine_palletizer.webp">
-							</div>
-							<div>
-								<div class="flex gap-10">
-									<img src="images/icons/icon_cloud_sync_orange.svg">
-									<div class="title">Unreal Engine Server</div>
-								</div>
-								<div class="type">Several other Blueprints receive the parsed data from the Manager Blueprint and <span>update the UI and objects in the scene</span> like machine colors, production counts, active views and alert notifications.</div>
-							</div>
-						</div>
-						<div>
-							<div class="grid-thumbnail">
-								<img src="images/breitnerpayne_machine_palletizer.webp">
-							</div>
-							<div>
-								<div class="flex gap-10">
-									<img src="images/icons/icon_globe_orange.svg">
-									<div class="title">Web-based</div>
-								</div>
-								<div class="type">Leveraging Pixel Streaming, the factory visualization <span>requires no local processing power.</span> It runs entirely on the server side and streams video output to any browser. Inputs from the user’s keyboard and mouse are forwarded instantaneously to the engine.</div>
-							</div>
-							
-						</div>
-						<div>
-							<div class="grid-thumbnail">
-								<img src="images/breitnerpayne_machine_palletizer.webp">
-							</div>
-							<div>
-								<div class="flex gap-10">
-									<img src="images/icons/icon_phone_app_orange.svg">
-									<div class="title">Mobile App</div>
-								</div>
-								<div class="type">The mobile app is the <span>remote control for the factory.</span> It allows a quick overview of the factory’s operations, change factory settings and switch between camera views in the visualization.</div>
-							</div>
-						</div>
-					</div>
-				</section>
 				<div class="width-100 devices-mockup image margin-bottom-20">
 					<div class="type">mobile app</div>
 					<img class="width-100" src="images/breitnerpayne_phones_mockup.webp">
@@ -187,19 +190,19 @@
 				<div class="mosaic">
 					<div class="tile">
 						<img src="images/breitnerpayne_mockup_factory.webp">
-						<div class="legend">App Homepage</div>
+						<div class="legend">App homepage</div>
 					</div>
 					<div class="tile">
 						<img src="images/breitnerpayne_mockup_section.webp">
-						<div class="legend">Factory Sector Detail</div>
+						<div class="legend">Factory sector detail</div>
 					</div>
 					<div class="tile">
 						<img src="images/breitnerpayne_mockup_production_line.webp">
-						<div class="legend">Production Line Detail</div>
+						<div class="legend">Production line detail</div>
 					</div>
 					<div class="tile">
 						<img src="images/breitnerpayne_mockup_machine.webp">
-						<div class="legend">Machine Detail</div>
+						<div class="legend">Machine detail</div>
 					</div>
 				</div>
 				<section class="bp-logo">
@@ -209,21 +212,21 @@
 				<div class="row">
 					<div class="image">
 						<img src="images/breitnerpayne_aerial2.webp">
-						<div class="legend">breitner & payne factory</div>
+						<div class="legend">Breitner & Payne factory</div>
 					</div>
 					<div class="image">
 						<img src="images/breitnerpayne_office.webp">
-						<div class="legend">office entrance</div>
+						<div class="legend">Office entrance</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="image">
 						<img src="images/breitnerpayne_robot.webp">
-						<div class="legend">palletizer vacuum gripper</div>
+						<div class="legend">Palletizer vacuum gripper</div>
 					</div>
 					<div class="image">
 						<img src="images/breitnerpayne_container.webp">
-						<div class="legend">containers on product departure</div>
+						<div class="legend">Containers on product departure</div>
 					</div>
 				</div>
 				<div class="section_title">Other projects</div>
@@ -231,6 +234,10 @@
 				<footer></footer>
 			</div>
 		</div>
+	</div>
+	<div id="video-overlay" style="display: none;">
+		<div id="video-container"></div>
+		<div id="video-close"></div>
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -249,6 +256,53 @@
 		$("footer").load("footer.html");
 
 		imageviewer();
+
+		// Create Iframes
+		function createIframes() {
+			var videoContainer = document.getElementById("video-container");
+
+			// Create factory Iframe
+			var factoryIframe = document.createElement("iframe");
+			factoryIframe.id = "factory-video";
+			factoryIframe.width = "100%";
+			factoryIframe.height = "100%";
+			factoryIframe.src = "https://www.youtube.com/embed/B7x6hSPKcbA?si=b0Q0b8am4jpjvY08&rel=0";
+			factoryIframe.title = "YouTube video player";
+			factoryIframe.frameBorder = "0";
+			factoryIframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+			factoryIframe.referrerPolicy = "strict-origin-when-cross-origin";
+			factoryIframe.allowFullscreen = true;
+			factoryIframe.style.display = "none";
+			videoContainer.appendChild(factoryIframe);
+		}
+
+		// Load the iframes after the page has loaded
+		if (window.addEventListener) {
+			window.addEventListener("load", createIframes, false);
+		} else if (window.attachEvent) {
+			window.attachEvent("onload", createIframes);
+		} else {
+			window.onload = createIframes;
+		}
+
+		$(document).ready(function() {
+			$('#watch-factory').click(function() {
+				var videoType = $(this).attr('id').split('-')[1];
+				$('#video-overlay').show();
+				$('#' + videoType + '-video').show().siblings('iframe').hide();
+				$('body').addClass('no-scroll');
+				$('nav').hide();
+			});
+
+			$('#video-close').click(function() {
+				$('#video-overlay').hide();
+				$('#video-container iframe').each(function() {
+					this.src = this.src;
+				});
+				$('body').removeClass('no-scroll');
+				$('nav').show();
+			});
+		});
 	</script>
 </body>
 </html>
