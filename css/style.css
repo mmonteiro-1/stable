@@ -506,7 +506,7 @@ footer {
 }
 .grid-thumbnail {
 	height: 100%;
-	max-width: 150px;
+	max-width: clamp(0px, 30%, 150px);
 	aspect-ratio: 1;
 }
 .grid .grid-thumbnail img {
@@ -757,7 +757,7 @@ button {
 	overflow: auto;
 }
 #imageviewer-image {
-	cursor: zoom-out;
+	cursor: zoom-in;
 	height: 100%;
 	width: 100%;
 	object-fit: contain;
@@ -1175,6 +1175,7 @@ button {
 }
 .project-logo {
 	max-width: 150px;
+	margin-bottom: 5px;
 }
 .spacer-logo {
 	display: flex;
@@ -1731,7 +1732,7 @@ button {
 		font-size: 1.7em;
 	}
 	.grid-thumbnail {
-		max-height: 150px;
+		max-height: 120px;
 		width: 100%;
 		max-width: unset;
 	}
