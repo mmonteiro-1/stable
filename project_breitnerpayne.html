@@ -7,15 +7,19 @@
 	<meta name="apple-mobile-web-app-status-bar" content="white">
 	<meta name="theme-color" content="#FFFFFF">
 	<meta name="description" content="3D architectural visualization renders of a paint production facility. A system to interact with the production line in real-time.">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Breitner & Payne — Stable">
+	<meta property="og:description" content="3D architectural visualization renders of a paint production facility. An interactive system to explore the production line in real-time.">
+	<meta property="og:image" content="https://stablearchviz.com/images/breitnerpayne_aerial2.webp">
+	<meta property="og:url" content="https://stablearchviz.com/project_breitnerpayne.html">
 	<link rel="apple-touch-icon" href="images/favicon/apple-touch-icon.png">
 	<link rel="manifest" href="js/manifest.json">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700;800&family=League+Spartan:wght@400;600;800&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Overpass+Mono:wght@300;500&display=swap" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?v=2" />
 	<link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico">
-	<script type="text/javascript" src="js/jquery.js"></script>
 	<title>Stable</title>
 </head>
 <body>
@@ -24,7 +28,7 @@
 		<div class="smooth-content">
 			<div class="content">
 				<div class="project-hero">
-					<img class="project-hero-image" src="images/breitnerpayne_aerial2.webp">
+					<img loading="eager" class="project-hero-image" src="images/breitnerpayne_aerial2.webp">
 					<div class="dictionary">
 						<div class="type">project</div>
 						<div class="title">Breitner & Payne</div>
@@ -34,7 +38,7 @@
 				</div>
 				<div class="row">
 					<div class="image solo">
-						<img class="width-100" src="images/breitnerpayne_macbook_mockup.webp">
+						<img loading="lazy" class="width-100" src="images/breitnerpayne_macbook_mockup.webp">
 						<div class="watch-button" id="watch-factory">
 							<div class="button" style="background: #ff3333;">
 								<div class="flip-click" style="margin-top: 0;">
@@ -64,29 +68,29 @@
 						<div class="three-ui ">
 							<div class="button-ui">
 								<div>
-									<img class="three-icon-desktop" src="images/icons/icon_mouse_left_white.svg">
-									<img class="three-icon-mobile" src="images/icons/icon_finger_orbit_white.svg">
+									<img loading="lazy" class="three-icon-desktop" src="images/icons/icon_mouse_left_white.svg">
+									<img loading="lazy" class="three-icon-mobile" src="images/icons/icon_finger_orbit_white.svg">
 									<div>ORBIT</div>
 								</div>
 								<div>
-									<img class="three-icon-desktop" src="images/icons/icon_mouse_right_white.svg">
-									<img class="three-icon-mobile" src="images/icons/icon_finger_pan_white.svg">
+									<img loading="lazy" class="three-icon-desktop" src="images/icons/icon_mouse_right_white.svg">
+									<img loading="lazy" class="three-icon-mobile" src="images/icons/icon_finger_pan_white.svg">
 									<div>PAN</div>
 								</div>
 								<div>
-									<img class="three-icon-desktop" src="images/icons/icon_mouse_scroll_white.svg">
-									<img class="three-icon-mobile" src="images/icons/icon_finger_zoom_white.svg">
+									<img loading="lazy" class="three-icon-desktop" src="images/icons/icon_mouse_scroll_white.svg">
+									<img loading="lazy" class="three-icon-mobile" src="images/icons/icon_finger_zoom_white.svg">
 									<div>ZOOM</div>
 								</div>
 							</div>
 							<div class="button-ui selected" id="cameraFactory">
 								<div>
-									<img  src="images/icons/icon_factory_white.svg">
+									<img loading="lazy"  src="images/icons/icon_factory_white.svg">
 								</div>
 							</div>
 							<div class="button-ui" id="cameraProduction">
 								<div>
-									<img  src="images/icons/icon_conveyor_white.svg">
+									<img loading="lazy"  src="images/icons/icon_conveyor_white.svg">
 								</div>
 							</div>
 						</div>
@@ -94,7 +98,7 @@
 				</section>
 				<div class="row">
 					<div class="image solo">
-						<img src="images/breitnerpayne_production_line2.webp">
+						<img loading="lazy" src="images/breitnerpayne_production_line2.webp">
 						<div class="legend">Breitner & Payne production line</div>
 					</div>
 				</div>
@@ -102,11 +106,11 @@
 					<div class="grid">
 						<div>
 							<div class="grid-thumbnail">
-								<img src="images/breitnerpayne_screenshot_json.webp">
+								<img loading="lazy" src="images/breitnerpayne_screenshot_json.webp">
 							</div>
 							<div>
 								<div class="flex gap-10">
-									<img src="images/icons/icon_programming_orange.svg">
+									<img loading="lazy" src="images/icons/icon_programming_orange.svg">
 									<div class="title">JSON Data</div>
 								</div>
 								<div class="type"><span>The engine receives real-time factory data in JSON format.</span> An Unreal Engine "Manager" Blueprint parses the data and sends them to other Blueprints responsible for the visualization functionality.</div>
@@ -114,11 +118,11 @@
 						</div>
 						<div>
 							<div class="grid-thumbnail">
-								<img src="images/breitnerpayne_screenshot_blueprint.webp">
+								<img loading="lazy" src="images/breitnerpayne_screenshot_blueprint.webp">
 							</div>
 							<div>
 								<div class="flex gap-10">
-									<img src="images/icons/icon_cloud_sync_orange.svg">
+									<img loading="lazy" src="images/icons/icon_cloud_sync_orange.svg">
 									<div class="title">Unreal Engine Server</div>
 								</div>
 								<div class="type">Several other Blueprints receive the parsed data from the Manager Blueprint and <span>update the UI and objects in the scene</span> like machine colors, production counts, active views and alert notifications.</div>
@@ -126,11 +130,11 @@
 						</div>
 						<div>
 							<div class="grid-thumbnail">
-								<img src="images/breitnerpayne_still_macbook.webp">
+								<img loading="lazy" src="images/breitnerpayne_still_macbook.webp">
 							</div>
 							<div>
 								<div class="flex gap-10">
-									<img src="images/icons/icon_globe_orange.svg">
+									<img loading="lazy" src="images/icons/icon_globe_orange.svg">
 									<div class="title">Web-based</div>
 								</div>
 								<div class="type">Leveraging Pixel Streaming, the factory visualization <span>requires no local processing power.</span> It runs entirely on the server side and streams video content. Inputs from the user’s keyboard and mouse are forwarded instantaneously to the engine.</div>
@@ -139,11 +143,11 @@
 						</div>
 						<div>
 							<div class="grid-thumbnail">
-								<img src="images/breitnerpayne_still_iphone.webp">
+								<img loading="lazy" src="images/breitnerpayne_still_iphone.webp">
 							</div>
 							<div>
 								<div class="flex gap-10">
-									<img src="images/icons/icon_phone_app_orange.svg">
+									<img loading="lazy" src="images/icons/icon_phone_app_orange.svg">
 									<div class="title">Mobile App</div>
 								</div>
 								<div class="type">The mobile app is the <span>remote control for the factory.</span> It allows a quick overview of the factory’s operations, change factory settings and switch between camera views in the visualization.</div>
@@ -151,80 +155,80 @@
 						</div>
 					</div>
 				</section>
-				<div class="type">production line machinery</div>
+				<div class="type">Production line machinery</div>
 				<section class="mosaic padding-0">
 					<div class="tile">
-						<img src="images/breitnerpayne_machine_filler.webp">
+						<img loading="lazy" src="images/breitnerpayne_machine_filler.webp">
 						<div class="legend">Filler</div>
 					</div>
 					<div class="tile">
-						<img src="images/breitnerpayne_machine_labeler_orange.webp">
+						<img loading="lazy" src="images/breitnerpayne_machine_labeler_orange.webp">
 						<div class="legend">Labeler</div>
 					</div>
 					<div class="tile">
-						<img src="images/breitnerpayne_machine_inspector.webp">
+						<img loading="lazy" src="images/breitnerpayne_machine_inspector.webp">
 						<div class="legend">Inspector</div>
 					</div>
 					<div class="tile">
-						<img src="images/breitnerpayne_machine_sealer.webp">
+						<img loading="lazy" src="images/breitnerpayne_machine_sealer.webp">
 						<div class="legend">Sealer</div>
 					</div>
 					<div class="tile double-width">
-						<img src="images/breitnerpayne_machine_wrapper2.webp">
+						<img loading="lazy" src="images/breitnerpayne_machine_wrapper2.webp">
 						<div class="legend">Wrapper</div>
 					</div>
 					<div class="tile">
-						<img src="images/breitnerpayne_machine_weigher.webp">
+						<img loading="lazy" src="images/breitnerpayne_machine_weigher.webp">
 						<div class="legend">Weigher</div>
 					</div>
 					<div class="tile">
-						<img src="images/breitnerpayne_machine_palletizer.webp">
+						<img loading="lazy" src="images/breitnerpayne_machine_palletizer.webp">
 						<div class="legend">Palletizer</div>
 					</div>
 				</section>
 				<div class="width-100 devices-mockup image margin-bottom-20">
-					<div class="type">mobile app</div>
-					<img class="width-100" src="images/breitnerpayne_phones_mockup.webp">
+					<div class="type">Mobile app</div>
+					<img loading="lazy" class="width-100" src="images/breitnerpayne_phones_mockup.webp">
 				</div>
 				<div class="mosaic">
 					<div class="tile">
-						<img src="images/breitnerpayne_mockup_factory.webp">
+						<img loading="lazy" src="images/breitnerpayne_mockup_factory.webp">
 						<div class="legend">App homepage</div>
 					</div>
 					<div class="tile">
-						<img src="images/breitnerpayne_mockup_section.webp">
+						<img loading="lazy" src="images/breitnerpayne_mockup_section.webp">
 						<div class="legend">Factory sector detail</div>
 					</div>
 					<div class="tile">
-						<img src="images/breitnerpayne_mockup_production_line.webp">
+						<img loading="lazy" src="images/breitnerpayne_mockup_production_line.webp">
 						<div class="legend">Production line detail</div>
 					</div>
 					<div class="tile">
-						<img src="images/breitnerpayne_mockup_machine.webp">
+						<img loading="lazy" src="images/breitnerpayne_mockup_machine.webp">
 						<div class="legend">Machine detail</div>
 					</div>
 				</div>
 				<section class="bp-logo">
-					<img src="images/wireframe_cans.webp" class="paint-cans">
-					<img src="images/logo_breitnerpayne.svg">
+					<img loading="lazy" src="images/wireframe_cans.webp" class="paint-cans">
+					<img loading="lazy" src="images/logo_breitnerpayne.svg">
 				</section>
 				<div class="row">
 					<div class="image">
-						<img src="images/breitnerpayne_aerial2.webp">
+						<img loading="lazy" src="images/breitnerpayne_aerial2.webp">
 						<div class="legend">Breitner & Payne factory</div>
 					</div>
 					<div class="image">
-						<img src="images/breitnerpayne_office.webp">
+						<img loading="lazy" src="images/breitnerpayne_office.webp">
 						<div class="legend">Office entrance</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="image">
-						<img src="images/breitnerpayne_robot.webp">
+						<img loading="lazy" src="images/breitnerpayne_robot.webp">
 						<div class="legend">Palletizer vacuum gripper</div>
 					</div>
 					<div class="image">
-						<img src="images/breitnerpayne_container.webp">
+						<img loading="lazy" src="images/breitnerpayne_container.webp">
 						<div class="legend">Containers on product departure</div>
 					</div>
 				</div>
@@ -240,20 +244,18 @@
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-	<script type="text/javascript" src="js/navigation.js"></script>
-	<script src="js/jquery.imageviewer.js"></script>
-	
+	<script type="text/javascript" src="js/navigation.js?v=2"></script>
+	<script src="js/imageviewer.js?v=2"></script>
+
 	<!-- Three.js libraries -->
 	<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/DRACOLoader.js"></script>
-	<script src="js/ThreeJS/helpers.js"></script>
-	<script src="js/ThreeJS/threejs_breitnerpayne.js"></script>
+	<script src="js/ThreeJS/helpers.js?v=2"></script>
+	<script src="js/ThreeJS/threejs_breitnerpayne.js?v=2"></script>
 	<script type="text/javascript">
-
-		$("nav").load("nav.html");
-		$("footer").load("footer.html");
-
+		fetch("nav.html").then(r=>r.text()).then(h=>{document.querySelector("nav").innerHTML=h});
+		fetch("footer.html").then(r=>r.text()).then(h=>{document.querySelector("footer").innerHTML=h});
 		imageviewer();
 
 		// Create Iframes
@@ -284,22 +286,23 @@
 			window.onload = createIframes;
 		}
 
-		$(document).ready(function() {
-			$('#watch-factory').click(function() {
-				var videoType = $(this).attr('id').split('-')[1];
-				$('#video-overlay').show();
-				$('#' + videoType + '-video').show().siblings('iframe').hide();
-				$('body').addClass('no-scroll');
-				$('nav').hide();
-			});
-
-			$('#video-close').click(function() {
-				$('#video-overlay').hide();
-				$('#video-container iframe').each(function() {
-					this.src = this.src;
+		document.addEventListener('DOMContentLoaded', () => {
+			document.querySelectorAll('[id^="watch-"]').forEach(btn => {
+				btn.addEventListener('click', () => {
+					const videoType = btn.id.split('-')[1];
+					document.getElementById('video-overlay').style.display = '';
+					document.querySelectorAll('#video-container iframe').forEach(iframe => {
+						iframe.style.display = iframe.id === videoType + '-video' ? '' : 'none';
+					});
+					document.body.classList.add('no-scroll');
+					document.querySelector('nav').style.display = 'none';
 				});
-				$('body').removeClass('no-scroll');
-				$('nav').show();
+			});
+			document.getElementById('video-close').addEventListener('click', () => {
+				document.getElementById('video-overlay').style.display = 'none';
+				document.querySelectorAll('#video-container iframe').forEach(iframe => { iframe.src = iframe.src; });
+				document.body.classList.remove('no-scroll');
+				document.querySelector('nav').style.display = '';
 			});
 		});
 	</script>

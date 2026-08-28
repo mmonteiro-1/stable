@@ -1,3 +1,10 @@
+:root {
+	--color-bg: #f2f2f2;
+	--color-dark: #232323;
+	--color-darkest: #1b1c1b;
+	--color-accent-red: #ff3d33;
+	--color-accent-yellow: #eabb13;
+}
 body {
 	margin: 0;
 	padding: 0;
@@ -5,8 +12,8 @@ body {
 	font-family: 'EB Garamond', serif;
 	font-weight: 500;
 	font-size: 16px;
-	background: #f2f2f2;
-	color: #232323;
+	background: var(--color-bg);
+	color: var(--color-dark);
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body.menu-open {
@@ -24,7 +31,7 @@ body.menu-open {
 	will-change: transform;
 	transform: translate3d(0,0,0) scale(1.0001); /*TRICK TO AVOID JITTER*/
 }
-*:focus {
+*:focus-visible {
 	outline: none;
 }
 .nowrap {
@@ -80,9 +87,6 @@ body.menu-open {
 }
 .relative {
 	position: relative;
-}
-.debug {
-	border: 1px red solid;
 }
 .flex{
 	display: flex;
@@ -150,10 +154,10 @@ nav.inverted .logo-stable-white {
 	display: none;
 }
 nav.inverted .flip-mask {
-	color: #232323;
+	color: var(--color-dark);
 }
 nav.inverted .default-text {
-	text-shadow: 0px 1.1em 0px #232323;
+	text-shadow: 0px 1.1em 0px var(--color-dark);
 }
 .mobile-nav {
 	position: absolute;
@@ -170,10 +174,10 @@ nav.inverted .default-text {
 	left: 0;
 	width: 100dvw;
 	height: 100dvh;
-	background:  #1b1c1b;
+	background:  var(--color-darkest);
 	clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
 	transition: clip-path 0.6s cubic-bezier(0.77, 0, 0.175, 1);
-	color: #f2f2f2;
+	color: var(--color-bg);
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -188,7 +192,7 @@ nav.inverted .default-text {
 	font-size: 2.5em;
 }
 .mobile-menu-pages div {
-	color: #f2f2f2;
+	color: var(--color-bg);
 }
 .mobile-menu img {
 	height: 20px;
@@ -204,7 +208,7 @@ nav.inverted .default-text {
 }
 a {
 	text-decoration: none;
-	color: #232323;
+	color: var(--color-dark);
 }
 .logo img {
 	height: 60%;
@@ -226,8 +230,8 @@ footer {
 	align-items: center;
 	width: 100vw;
 	height: 60px;
-	background: #232323;
-	color: #f2f2f2;
+	background: var(--color-dark);
+	color: var(--color-bg);
 	padding: 0 20px;
 	box-sizing: border-box;
 	font-family: 'League Spartan', sans-serif;
@@ -250,7 +254,7 @@ footer {
 	position: relative;
 	width: 100vw;
 	left: -20px;
-	background: #1b1c1b;
+	background: var(--color-darkest);
 	padding-top: 30%;
 }
 .hero-logo {
@@ -367,17 +371,17 @@ footer {
 .dark {
 	position: relative;
 	left: -20px;
-	background: #232323;
+	background: var(--color-dark);
 	padding: 200px 20px;
 	box-sizing: border-box;
-	color: #f2f2f2;
+	color: var(--color-bg);
 	margin-bottom: 0;
 }
 .dark .feature, .dark a {
-	color: #f2f2f2;
+	color: var(--color-bg);
 }
 .dictionary.darkmode .title, .dictionary.darkmode .definition {
-	color: #f2f2f2;
+	color: var(--color-bg);
 }
 .dictionary.darkmode .synonyms {
 	color: gray;
@@ -525,7 +529,7 @@ footer {
 	margin-top: 5px;
 }
 .grid .type span {
-	color: #232323;
+	color: var(--color-dark);
 }
 .feature {
 	display: flex;
@@ -620,7 +624,7 @@ footer {
 	width: 100%;
 	bottom: 0;
 	padding-top: 10px;
-	background: #f2f2f2;
+	background: var(--color-bg);
 	font-family: 'League Spartan', sans-serif;
 }
 .plans img {
@@ -629,7 +633,7 @@ footer {
 .about, .contacts {
 	width: 50%;
 	height: calc(100vh - 60px);
-	background: #232323;
+	background: var(--color-dark);
 	padding: 200px 50px;
 	box-sizing: border-box;
 }
@@ -656,14 +660,14 @@ input, textarea {
 	border-bottom: 3px #3e3e3e solid;
 	padding: 10px 0;
 	color: lightgray;
-	border-radius: none;
+	border-radius: 0;
 }
 input:focus, textarea:focus {
 	color: white;
 	border-bottom: 3px white solid;
 	transition: .5s ease;
 }
-lable {
+label {
 	color: white;
 	font-family: 'League Spartan', sans-serif;
 }
@@ -671,11 +675,11 @@ button {
 	background: white;
 	margin-top: 30px;
 	padding: 10px 20px;
-	color: #232323;
+	color: var(--color-dark);
 	border: none;
 	cursor: pointer;
 }
-.socia_media {
+.social_media {
 	display: flex;
 }
 .icon {
@@ -726,8 +730,8 @@ button {
 	width: 100vw;
 	padding: 20px;
 	box-sizing: border-box;
-	background: #232323;
-	color: #f2f2f2;
+	background: var(--color-dark);
+	color: var(--color-bg);
 }
 .logo_signature {
 	position: relative;
@@ -752,7 +756,7 @@ button {
 	z-index: 99999;
 	width: 100vw;
 	height: 100vh;
-	background-color: #232323;
+	background-color: var(--color-dark);
 	overflow: auto;
 }
 #imageviewer-image {
@@ -803,7 +807,7 @@ button {
 	background-color: rgba(0,0,0,.6) !important;
 	border-radius: 0 !important;
 	font-size: 3em !important;
-	color: #f2f2f2 !important;
+	color: var(--color-bg) !important;
 	font-family: 'League Spartan', sans-serif !important;
 }
 .video {
@@ -857,7 +861,7 @@ button {
 	top: 25%;
 	left: 0;
 	width: 100%;
-	color: #f2f2f2;
+	color: var(--color-bg);
 	z-index: 2;
 }
 .thousand > img {
@@ -867,7 +871,7 @@ button {
 	filter: brightness(.8);
 }
 .button {
-	background: #eabb13;
+	background: var(--color-accent-yellow);
 	color: #fff;
 	padding: 15px 25px;
 	font-family: 'League Spartan', sans-serif;
@@ -912,7 +916,7 @@ button {
 	top: 200px;
 	left: 50%;
 	transform: translate(-50%, 0%);
-	color: #f2f2f2;
+	color: var(--color-bg);
 	white-space: nowrap;
 	margin: 0;
 	width: fit-content;
@@ -947,7 +951,7 @@ button {
 	overflow: hidden;
 }
 .default-text {
-	text-shadow: 0px 1.1em 0px #232323;
+	text-shadow: 0px 1.1em 0px var(--color-dark);
 	transition: transform 0.545s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .default-text.white-shadow {
@@ -1102,7 +1106,7 @@ button {
 	padding: 15px;
 	box-sizing: border-box;
 	border-radius: 10px;
-	background: #ff3d33;
+	background: var(--color-accent-red);
 }
 .bp-sidebar-content {
 	color: white;
@@ -1147,7 +1151,7 @@ button {
 	border-radius: 50%;
 	height: 70%;
 	aspect-ratio: 1;
-	background: #ff3d33;
+	background: var(--color-accent-red);
 }
 .bp-navbar {
 	position: absolute;
@@ -1159,7 +1163,7 @@ button {
 	bottom: 20px;
 	left: 50%;
 	transform: translate(-50%, 0%);
-	background: #ff3d33;
+	background: var(--color-accent-red);
 	padding: 15px 20px;
 	box-sizing: border-box;
 	border-radius: 10px;
@@ -1264,7 +1268,7 @@ button {
 	cursor: pointer;
 }
 .button-ui.selected {
-	background: #ff3d33;
+	background: var(--color-accent-red);
 }
 .three-hover-card {
 	position: absolute;
@@ -1273,7 +1277,7 @@ button {
 	display: flex;
 	align-items: center;
 	gap: 17px;
-	background: #ff3d33;
+	background: var(--color-accent-red);
 	border-radius: 5px;
 	padding: 5px;
 	box-sizing: border-box;
@@ -1428,7 +1432,7 @@ button {
 	top: 50%;
 	transform: translateY(-50%);
 	border-radius: 0.25rem;
-	background: #eabb13;
+	background: var(--color-accent-yellow);
 	width: 0%;
 	transition: width 0s linear;
 }
@@ -1504,7 +1508,7 @@ button {
 		border-radius: 50%;
 	}
 	nav.inverted {
-		background: #232323;
+		background: var(--color-dark);
 	}
 	section {
 		margin-bottom: 100px;

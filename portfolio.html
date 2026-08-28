@@ -7,389 +7,389 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Overpass+Mono:wght@300..700&family=Overpass:wght@100..900&display=swap" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?v=2" />
 	<link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico">
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<title>Stable</title>
+	<meta name="description" content="The creative portfolio of Stable — 3D architectural visualization work spanning residential, commercial, and interactive projects.">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Portfolio — Stable">
+	<meta property="og:description" content="The creative portfolio of Stable — 3D architectural visualization work spanning residential, commercial, and interactive projects.">
+	<meta property="og:image" content="https://stablearchviz.com/images/citadel_03.webp">
+	<meta property="og:url" content="https://stablearchviz.com/portfolio.html">
+	<title>Portfolio</title>
 </head>
-<style>
-	::-webkit-scrollbar {
-		width: 0;
-		height: 0;
-	}
-	* {
-		scrollbar-width: none;
-	}
-	body {
-		background: #262626;
-		font-family: "Overpass Mono", monospace;
-		color: #f2f2f2;
-	}
-	a {
-		color: #a1e53c;
-	}
-	.landing {
-		position: absolute;
-		height: 100dvh;
-		width: 100dvw;
-	}
-	.scroll-layer {
-		position: absolute;
-		z-index: -2;
-		height: 100dvh;
-		box-sizing: border-box;
-		overflow: auto;
-		pointer-events: auto;
-	}
-	.scroll-layer .timeline, .scroll-layer .info, .scroll-layer .slide {
-		border: none;
-		height: 100%;
-	}
-	.path-overlay {
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background: #262626d6;
-		clip-path: polygon(0% 0%, 0% 100%, 15% 100%, 15% 10%, 45% 10%, 45% 90%, 15% 90%, 15% 100%, 100% 100%, 100% 0%);
-		pointer-events: none;
-		z-index: -1;
-	}
-	.top-layer {
-		height: 100dvh;
-		pointer-events: none;
-	}
-	.timeline, .info, .slide {
-		height: 80%;
-		padding: 20px;
-		box-sizing: border-box;
-	}
-	.timeline {
-		width: 15%;
-		padding: 0 20px;
-	}
-	.timeline .border {
-		display: flex;
-		flex-direction: column;
-		gap: 20px;
-		box-sizing: border-box;
-		text-transform: uppercase;
-	}
-	.timeline .border {
-		position: relative;
-	}
-	.timeline .border::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: var(--border-progress, 0%);
-		border: 2px solid #a1e53c;
-		box-sizing: border-box;
-		pointer-events: none;
-		border-bottom: none; 
-		border-top: none; 
-		border-right: none; 
-	}
-	.border {
-		border: 1px #5c5c5c solid;
-	}
-	.era {
-		display: flex;
-		flex-direction: column;
-		gap: 5px;
-		color: #5c5c5c;
-		font-weight: 300;
-		cursor: pointer;
-		width: 100%;
-	}
-	.era.current {
-		color: #f2f2f2;
-	}
-	.year {
-		font-weight: bold;
-	}
-	.subject {
-		font-size: .9em;
-		width: fit-content;
-		white-space: nowrap;
-	}
-	.subject.current {
-		position: relative;
-		display: inline-block;
-		color: black;
-		padding: 5px;
-		padding-bottom: 0;
-	}
-	.subject.current::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background-color: #a1e53c;
-		z-index: -1;
-		animation: highlightMarker 0.3s ease-out forwards;
-		transform-origin: left center;
-	}
-	@keyframes highlightMarker {
-		from {
-			transform: scaleX(0);
+<body>
+	<style>
+		::-webkit-scrollbar {
+			width: 0;
+			height: 0;
 		}
-		to {
-			transform: scaleX(1);
+		* {
+			scrollbar-width: none;
 		}
-	}
-	.info {
-		width: 30%;
-		font-family: "Overpass", sans-serif;
-		font-weight: 300;
-	}
-	.info-block {
-		display: flex;
-		flex-direction: column;
-		gap: 20px;
-		height: 100%;
-		box-sizing: border-box;
-	}
-	.info-block:first-child {
-		margin-top: 10dvh;
-	}
-	.info-block.credits {
-		height: unset;
-		padding-top: 100px;
-		text-align: center;
-		gap: 10px;
-		font-size: .9em;
-		margin-top: 0;
-	}
-	.info-block.credits > div {
-		display: flex;
-		justify-content: center;
-		gap: 5px;
-	}
-	.info-block.credits > div > div {
-		flex: 1;
-	}
-	.info-block.credits > div > div:first-child {
-		text-align: end;
-		color: #808080;
-	}
-	.info-block.credits > div > div:last-child {
-		text-align: start;
-	}
-	.extra-credits {
-		margin-top: 400px;
-		margin-bottom: 100px;
-	}
-	.farewell {
-		padding-top: 50dvh;
-		padding-bottom: 50dvh;
-	}
-	.info .header {
-		font-size: 1.8em;
-		font-weight: bold;
-		font-family: "Overpass Mono", monospace;
-		text-transform: uppercase;
-	}
-	.info .bullets {
-		font-size: 0.8em;
-		line-height: 2em;
-		color: #bababa;
-	}
-	.tools {
-		display: flex;
-		align-items: center;
-		gap: 10px;
-		height: 25px;
-	}
-	.tools > div {
-		height: 100%;
-		position: relative;
-	}
-	.tools > div:hover .tooltip {
-		visibility: visible;
-		opacity: 1;
-	}
-	.tools img {
-		height: 100%;
-	}
-	.tooltip {
-		visibility: hidden;
-		opacity: 0;
-		position: absolute;
-		bottom: -100%;
-		left: 50%;
-		transform: translateX(-50%);
-		background-color: #a1e53c;
-		color: #262626;
-		padding: 3px;
-		font-size: .6em;
-		white-space: nowrap;
-		transition: opacity 0.3s, visibility 0.3s;
-	}
-	.slide {
-		width: 55%;
-		padding: 0 20px;
-		box-sizing: border-box;
-	}
-	.slide .border {
-		position: relative;
-		padding: 0;
-		overflow: hidden;
-	}
-	.slide-item {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		opacity: 0;
-		transform: translateY(50px);
-		transition: opacity 0.3s ease, transform 0.3s ease;
-		display: flex;
-		flex-direction: column;
-	}
-	
-	.slide-item.current {
-		opacity: 1 !important;
-		transform: translateY(0) !important;
-	}
-	.slide-item .image-container {
-		flex: 1;
-		overflow: hidden;
-		position: relative;
-	}
-	.slide-item img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		display: block;
-	}
-	.slide-item img.top {
-		object-position: top;
-	}
-	.slide-item img.bottom {
-		object-position: bottom;
-	}
-	.slide-item .description {
-		position: absolute;
-		bottom: 0;
-		background: #262626;
-		padding: 10px;
-		box-sizing: border-box;
-		width: 100%;
-		border-top: 1px #5c5c5c solid;
-		font-family: "Overpass", sans-serif;
-		font-size: .5em;
-		text-transform: uppercase;
-		font-weight: normal;
-	}
-	.flip-click{
-		font-family: unset;
-		margin-top: 10px;
-		text-align: center;
-	}
-	.default-text {
-		text-shadow: 0px 1.1em 0px #a1e53c;
-		transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-	}
-	@media (max-width: 1200px) {
 		body {
-			font-size: 14px;
-		}
-	}
-	@media (max-width: 1370px) {
-		.subject {
-			white-space: unset;
-		}
-	}
-	@media (max-width: 800px) {
-		.top-layer, .scroll-layer {
-			flex-direction: column;
-			padding: 0 10px;
-		}
-		.top-layer > div, .scroll-layer	> div {
-			width: 100%;
-		}
-		.timeline {
-			height: 13%;
 			background: #262626;
-			padding: 10px 0;
+			font-family: "Overpass Mono", monospace;
+			color: #f2f2f2;
 		}
-		.info {
-			height: 60%;
-			padding: 10px;
+		a {
+			color: #a1e53c;
 		}
-		.tools {
-			height: 20px;
+		.scroll-layer {
+			position: absolute;
+			z-index: -2;
+			height: 100dvh;
+			box-sizing: border-box;
+			overflow: auto;
+			pointer-events: auto;
 		}
-		.tooltip {
-			bottom: -100%;
-		}
-		.slide {
-			height: 50%;
-			background: #262626;
-			padding: 10px 0;
-		}
-		.timeline .border {
-			flex-direction: row;
-			padding: 10px;
-		}
-		.timeline .border::before {
-			width: var(--border-progress-horizontal, 0%);
+		.scroll-layer .timeline, .scroll-layer .info, .scroll-layer .slide {
+			border: none;
 			height: 100%;
-			border-bottom: none;
-			border-left: none;
-			border-right: none;
-			border-top: 2px solid #a1e53c;
-		}
-		.era {
-			white-space: nowrap;
 		}
 		.path-overlay {
-			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: #262626d6;
+			clip-path: polygon(0% 0%, 0% 100%, 15% 100%, 15% 10%, 45% 10%, 45% 90%, 15% 90%, 15% 100%, 100% 100%, 100% 0%);
+			pointer-events: none;
+			z-index: -1;
+		}
+		.top-layer {
+			height: 100dvh;
+			pointer-events: none;
+		}
+		.timeline, .info, .slide {
+			height: 80%;
+			padding: 20px;
+			box-sizing: border-box;
+		}
+		.timeline {
+			width: 15%;
+			padding: 0 20px;
+		}
+		.timeline .border {
+			display: flex;
+			flex-direction: column;
+			gap: 20px;
+			box-sizing: border-box;
+			text-transform: uppercase;
+		}
+		.timeline .border {
+			position: relative;
+		}
+		.timeline .border::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: var(--border-progress, 0%);
+			border: 2px solid #a1e53c;
+			box-sizing: border-box;
+			pointer-events: none;
+			border-bottom: none; 
+			border-top: none; 
+			border-right: none; 
+		}
+		.border {
+			border: 1px #5c5c5c solid;
+		}
+		.era {
+			display: flex;
+			flex-direction: column;
+			gap: 5px;
+			color: #5c5c5c;
+			font-weight: 300;
+			cursor: pointer;
+			width: 100%;
+		}
+		.era.current {
+			color: #f2f2f2;
+		}
+		.year {
+			font-weight: bold;
 		}
 		.subject {
-			display: none;
+			font-size: .9em;
+			width: fit-content;
+			white-space: nowrap;
 		}
 		.subject.current {
-			display: block;
-			color: white;
-			padding: 0;
+			position: relative;
+			display: inline-block;
+			color: black;
+			padding: 5px;
+			padding-bottom: 0;
 		}
-		.info.border {
-			overflow: hidden;
+		.subject.current::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: #a1e53c;
+			z-index: -1;
+			animation: highlightMarker 0.3s ease-out forwards;
+			transform-origin: left center;
+		}
+		@keyframes highlightMarker {
+			from {
+				transform: scaleX(0);
+			}
+			to {
+				transform: scaleX(1);
+			}
+		}
+		.info {
+			width: 30%;
+			font-family: "Overpass", sans-serif;
+			font-weight: 300;
 		}
 		.info-block {
-			gap: 10px;
+			display: flex;
+			flex-direction: column;
+			gap: 20px;
+			height: 100%;
+			box-sizing: border-box;
+		}
+		.info-block:first-child {
+			margin-top: 10dvh;
 		}
 		.info-block.credits {
-			padding-top: 0;
-			height: 100%;
+			height: unset;
+			padding-top: 100px;
+			text-align: center;
+			gap: 10px;
+			font-size: .9em;
+			margin-top: 0;
+		}
+		.info-block.credits > div {
+			display: flex;
+			justify-content: center;
+			gap: 5px;
+		}
+		.info-block.credits > div > div {
+			flex: 1;
+		}
+		.info-block.credits > div > div:first-child {
+			text-align: end;
+			color: #808080;
+		}
+		.info-block.credits > div > div:last-child {
+			text-align: start;
 		}
 		.extra-credits {
-			margin-top: 200px	;
+			margin-top: 400px;
+			margin-bottom: 100px;
 		}
 		.farewell {
 			padding-top: 50dvh;
-			padding-bottom: 60dvh;
+			padding-bottom: 50dvh;
+		}
+		.info .header {
+			font-size: 1.8em;
+			font-weight: bold;
+			font-family: "Overpass Mono", monospace;
+			text-transform: uppercase;
+		}
+		.info .bullets {
+			font-size: 0.8em;
+			line-height: 2em;
+			color: #bababa;
+		}
+		.tools {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			height: 25px;
+		}
+		.tooltip-trigger {
+			height: 100%;
+			position: relative;
+		}
+		.tooltip-trigger:hover .tooltip {
+			visibility: visible;
+			opacity: 1;
+		}
+		.tools img {
+			height: 100%;
+		}
+		.tooltip {
+			visibility: hidden;
+			opacity: 0;
+			position: absolute;
+			bottom: -100%;
+			left: 50%;
+			transform: translateX(-50%);
+			background-color: #a1e53c;
+			color: #262626;
+			padding: 3px;
+			font-size: .6em;
+			white-space: nowrap;
+			transition: opacity 0.3s, visibility 0.3s;
+		}
+		.slide {
+			width: 55%;
+			padding: 0 20px;
+			box-sizing: border-box;
+		}
+		.slide .border {
+			position: relative;
+			padding: 0;
+			overflow: hidden;
+		}
+		.slide-item {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			opacity: 0;
+			transform: translateY(50px);
+			transition: opacity 0.3s ease, transform 0.3s ease;
+			display: flex;
+			flex-direction: column;
+		}
+		
+		.slide-item.current {
+			opacity: 1 !important;
+			transform: translateY(0) !important;
+		}
+		.slide-item .image-container {
+			flex: 1;
+			overflow: hidden;
+			position: relative;
+		}
+		.slide-item img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			display: block;
+		}
+		.slide-item img.top {
+			object-position: top;
+		}
+		.slide-item img.bottom {
+			object-position: bottom;
 		}
 		.slide-item .description {
-			padding: 5px;
+			position: absolute;
+			bottom: 0;
+			background: #262626;
+			padding: 10px;
+			box-sizing: border-box;
+			width: 100%;
+			border-top: 1px #5c5c5c solid;
+			font-family: "Overpass", sans-serif;
+			font-size: .5em;
+			text-transform: uppercase;
+			font-weight: normal;
 		}
-	}
-</style>
-<body>
+		.flip-click{
+			font-family: unset;
+			margin-top: 10px;
+			text-align: center;
+		}
+		.default-text {
+			text-shadow: 0px 1.1em 0px #a1e53c;
+			transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+		}
+		@media (max-width: 1200px) {
+			body {
+				font-size: 14px;
+			}
+		}
+		@media (max-width: 1370px) {
+			.subject {
+				white-space: unset;
+			}
+		}
+		@media (max-width: 800px) {
+			.top-layer, .scroll-layer {
+				flex-direction: column;
+				padding: 0 10px;
+			}
+			.top-layer > div, .scroll-layer	> div {
+				width: 100%;
+			}
+			.timeline {
+				height: 13%;
+				background: #262626;
+				padding: 10px 0;
+			}
+			.info {
+				height: 60%;
+				padding: 10px;
+			}
+			.tools {
+				height: 20px;
+			}
+			.tooltip {
+				bottom: -100%;
+			}
+			.slide {
+				height: 50%;
+				background: #262626;
+				padding: 10px 0;
+			}
+			.timeline .border {
+				flex-direction: row;
+				padding: 10px;
+			}
+			.timeline .border::before {
+				width: var(--border-progress-horizontal, 0%);
+				height: 100%;
+				border-bottom: none;
+				border-left: none;
+				border-right: none;
+				border-top: 2px solid #a1e53c;
+			}
+			.era {
+				white-space: nowrap;
+			}
+			.path-overlay {
+				display: none;
+			}
+			.subject {
+				display: none;
+			}
+			.subject.current {
+				display: block;
+				color: white;
+				padding: 0;
+			}
+			.info.border {
+				overflow: hidden;
+			}
+			.info-block {
+				gap: 10px;
+			}
+			.info-block.credits {
+				padding-top: 0;
+				height: 100%;
+			}
+			.extra-credits {
+				margin-top: 200px	;
+			}
+			.farewell {
+				padding-top: 50dvh;
+				padding-bottom: 60dvh;
+			}
+			.slide-item .description {
+				padding: 5px;
+			}
+		}
+	</style>
 	<div class="smooth-wrapper">
 		<div class="smooth-content">
 			<div class="scroll-layer flex width-100">
 				<div class="timeline"></div>
 				<div class="info">
-					<div class="info-block 3d y2026">
+					<div class="info-block c3d y2026">
 						<div>
 							<div class="header">BREITNER & PAYNE</div>
 							<div class="text-small color-gray">PERSONAL PROJECT</div>
@@ -408,27 +408,27 @@
 						</div>
 						<div class="tools">
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_3dsmax.svg">
+								<img loading="lazy" src="images/icons/logos/logo_3dsmax.svg">
 								<span class="tooltip">3ds Max</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_unreal.svg">
+								<img loading="lazy" src="images/icons/logos/logo_unreal.svg">
 								<span class="tooltip">Unreal Engine</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_davinci.svg">
+								<img loading="lazy" src="images/icons/logos/logo_davinci.svg">
 								<span class="tooltip">Davinci Resolve</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_code.svg">
+								<img loading="lazy" src="images/icons/logos/logo_code.svg">
 								<span class="tooltip">HTML/CSS/JS</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_node.svg">
+								<img loading="lazy" src="images/icons/logos/logo_node.svg">
 								<span class="tooltip">node.js</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_figma.svg">
+								<img loading="lazy" src="images/icons/logos/logo_figma.svg">
 								<span class="tooltip">Figma</span>
 							</div>
 						</div>
@@ -440,7 +440,7 @@
 							</div>
 						</a>
 					</div>
-					<div class="info-block 3d y2025">
+					<div class="info-block c3d y2025">
 						<div>
 							<div class="header">4040 CITADEL PARK</div>
 							<div class="text-small color-gray">PERSONAL PROJECT</div>
@@ -458,23 +458,23 @@
 						</div>
 						<div class="tools">
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_3dsmax.svg">
+								<img loading="lazy" src="images/icons/logos/logo_3dsmax.svg">
 								<span class="tooltip">3ds Max</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_unreal.svg">
+								<img loading="lazy" src="images/icons/logos/logo_unreal.svg">
 								<span class="tooltip">Unreal Engine</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_davinci.svg">
+								<img loading="lazy" src="images/icons/logos/logo_davinci.svg">
 								<span class="tooltip">Davinci Resolve</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_ps.svg">
+								<img loading="lazy" src="images/icons/logos/logo_ps.svg">
 								<span class="tooltip">Photoshop</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_ai.svg">
+								<img loading="lazy" src="images/icons/logos/logo_ai.svg">
 								<span class="tooltip">Illustrator</span>
 							</div>
 						</div>
@@ -486,7 +486,7 @@
 							</div>
 						</a>
 					</div>
-					<div class="info-block 3d y2024">
+					<div class="info-block c3d y2024">
 						<div>
 							<div class="header">PORTO LIDADOR</div>
 							<div class="text-small color-gray">CLIENT PROJECT</div>
@@ -504,15 +504,15 @@
 						</div>
 						<div class="tools">
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_revit.svg">
+								<img loading="lazy" src="images/icons/logos/logo_revit.svg">
 								<span class="tooltip">Revit</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_3dsmax.svg">
+								<img loading="lazy" src="images/icons/logos/logo_3dsmax.svg">
 								<span class="tooltip">3ds Max</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_ps.svg">
+								<img loading="lazy" src="images/icons/logos/logo_ps.svg">
 								<span class="tooltip">Photoshop</span>
 							</div>
 						</div>
@@ -524,7 +524,7 @@
 							</div>
 						</a>
 					</div>
-					<div class="info-block 3d y2023">
+					<div class="info-block c3d y2023">
 						<div>
 							<div class="header">PLANO ALTO</div>
 							<div class="text-small color-gray">PERSONAL PROJECT</div>
@@ -542,27 +542,27 @@
 						</div>
 						<div class="tools">
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_3dsmax.svg">
+								<img loading="lazy" src="images/icons/logos/logo_3dsmax.svg">
 								<span class="tooltip">3ds Max</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_unreal.svg">
+								<img loading="lazy" src="images/icons/logos/logo_unreal.svg">
 								<span class="tooltip">Unreal Engine</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_vcam.svg">
+								<img loading="lazy" src="images/icons/logos/logo_vcam.svg">
 								<span class="tooltip">Unreal Engine VCam</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_davinci.svg">
+								<img loading="lazy" src="images/icons/logos/logo_davinci.svg">
 								<span class="tooltip">Davinci Resolve</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_ps.svg">
+								<img loading="lazy" src="images/icons/logos/logo_ps.svg">
 								<span class="tooltip">Photoshop</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_ai.svg">
+								<img loading="lazy" src="images/icons/logos/logo_ai.svg">
 								<span class="tooltip">Illustrator</span>
 							</div>
 						</div>
@@ -588,23 +588,23 @@
 						</div>
 						<div class="tools">
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_figma.svg">
+								<img loading="lazy" src="images/icons/logos/logo_figma.svg">
 								<span class="tooltip">Figma</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_ai.svg">
+								<img loading="lazy" src="images/icons/logos/logo_ai.svg">
 								<span class="tooltip">Illustrator</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_code.svg">
+								<img loading="lazy" src="images/icons/logos/logo_code.svg">
 								<span class="tooltip">HTML/CSS/JS</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_threejs.svg">
+								<img loading="lazy" src="images/icons/logos/logo_threejs.svg">
 								<span class="tooltip">ThreeJS</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_gsap.svg">
+								<img loading="lazy" src="images/icons/logos/logo_gsap.svg">
 								<span class="tooltip">GSAP</span>
 							</div>
 						</div>
@@ -636,15 +636,15 @@
 						</div>
 						<div class="tools">
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_figma.svg">
+								<img loading="lazy" src="images/icons/logos/logo_figma.svg">
 								<span class="tooltip">Figma</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_code.svg">
+								<img loading="lazy" src="images/icons/logos/logo_code.svg">
 								<span class="tooltip">HTML/CSS/JS</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_ai.svg">
+								<img loading="lazy" src="images/icons/logos/logo_ai.svg">
 								<span class="tooltip">Illustrator</span>
 							</div>
 						</div>
@@ -668,11 +668,11 @@
 						</div>
 						<div class="tools">
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_figma.svg">
+								<img loading="lazy" src="images/icons/logos/logo_figma.svg">
 								<span class="tooltip">Figma</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_code.svg">
+								<img loading="lazy" src="images/icons/logos/logo_code.svg">
 								<span class="tooltip">HTML/CSS/JS</span>
 							</div>
 						</div>
@@ -693,15 +693,15 @@
 						</div>
 						<div class="tools">
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_3dsmax.svg">
+								<img loading="lazy" src="images/icons/logos/logo_3dsmax.svg">
 								<span class="tooltip">3ds Max</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_ai.svg">
+								<img loading="lazy" src="images/icons/logos/logo_ai.svg">
 								<span class="tooltip">Illustrator</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_ps.svg">
+								<img loading="lazy" src="images/icons/logos/logo_ps.svg">
 								<span class="tooltip">Photoshop</span>
 							</div>
 						</div>
@@ -719,15 +719,15 @@
 						</div>
 						<div class="tools">
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_threejs.svg">
+								<img loading="lazy" src="images/icons/logos/logo_threejs.svg">
 								<span class="tooltip">ThreeJS</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_3dsmax.svg">
+								<img loading="lazy" src="images/icons/logos/logo_3dsmax.svg">
 								<span class="tooltip">3ds Max</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_code.svg">
+								<img loading="lazy" src="images/icons/logos/logo_code.svg">
 								<span class="tooltip">HTML/CSS/JS</span>
 							</div>
 						</div>
@@ -749,19 +749,19 @@
 						</div>
 						<div class="tools">
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_3dsmax.svg">
+								<img loading="lazy" src="images/icons/logos/logo_3dsmax.svg">
 								<span class="tooltip">3ds Max</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_c4d.svg">
+								<img loading="lazy" src="images/icons/logos/logo_c4d.svg">
 								<span class="tooltip">Cinema 4D</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_ai.svg">
+								<img loading="lazy" src="images/icons/logos/logo_ai.svg">
 								<span class="tooltip">Illustrator</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_code.svg">
+								<img loading="lazy" src="images/icons/logos/logo_code.svg">
 								<span class="tooltip">HTML/CSS/JS</span>
 							</div>
 						</div>
@@ -783,19 +783,19 @@
 						</div>
 						<div class="tools">
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_figma.svg">
+								<img loading="lazy" src="images/icons/logos/logo_figma.svg">
 								<span class="tooltip">Figma</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_code.svg">
+								<img loading="lazy" src="images/icons/logos/logo_code.svg">
 								<span class="tooltip">HTML/CSS/JS</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_gsap.svg">
+								<img loading="lazy" src="images/icons/logos/logo_gsap.svg">
 								<span class="tooltip">GSAP</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_threejs.svg">
+								<img loading="lazy" src="images/icons/logos/logo_threejs.svg">
 								<span class="tooltip">ThreeJS</span>
 							</div>
 						</div>
@@ -816,11 +816,11 @@
 						</div>
 						<div class="tools">
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_ai.svg">
+								<img loading="lazy" src="images/icons/logos/logo_ai.svg">
 								<span class="tooltip">Illustrator</span>
 							</div>
 							<div class="tooltip-trigger">
-								<img src="images/icons/logos/logo_ps.svg">
+								<img loading="lazy" src="images/icons/logos/logo_ps.svg">
 								<span class="tooltip">Photoshop</span>
 							</div>
 						</div>
@@ -955,7 +955,7 @@
 					<div class="border padding-20 flex column gap-20 height-100">
 						<div class="era y2023-2026 current">
 							<div class="year">2023-2026</div>
-							<div class="subject current 3d">3D ARCHVIZ</div>
+							<div class="subject current c3d">3D ARCHVIZ</div>
 							<div class="subject web">UX UI & DEV</div>
 							<div class="subject product">PRODUCT DESIGN</div>
 							<div class="subject threejs">THREE.JS</div>
@@ -970,75 +970,75 @@
 				<div class="info border"></div>
 				<div class="slide">
 					<div class="border height-100">
-						<div class="slide-item y2026 3d">
+						<div class="slide-item y2026 c3d">
 							<div class="image-container">
-								<img src="images/breitnerpayne_macbook_mockup.webp" alt="Breitner & Payne">
+								<img loading="lazy" src="images/breitnerpayne_macbook_mockup.webp" alt="Breitner & Payne">
 							</div>
 							<div class="description">Aerial view of Breitner Payne's factory replica. User can explore all factory sectors and go in-depth on the production line.</div>
 						</div>
-						<div class="slide-item y2025 3d">
+						<div class="slide-item y2025 c3d">
 							<div class="image-container">
-								<img src="images/citadel_00.webp" style="background: #262626;" alt="Citadel Park">
+								<img loading="lazy" src="images/citadel_00.webp" style="background: #262626;" alt="Citadel Park">
 							</div>
 							<div class="description">Surrounding view of 4040 Citadel complex.</div>
 						</div>
-						<div class="slide-item y2024 3d">
+						<div class="slide-item y2024 c3d">
 							<div class="image-container">
-								<img src="images/lidador_04.webp" alt="Porto Lidador">
+								<img loading="lazy" src="images/lidador_04.webp" alt="Porto Lidador">
 							</div>
 							<div class="description">Rear view of a residential building in Porto. Client: Actual Arquitectos</div>
 						</div>
-						<div class="slide-item y2023 3d">
+						<div class="slide-item y2023 c3d">
 							<div class="image-container">
-								<img src="images/planoalto_03.webp" alt="Plano Alto">
+								<img loading="lazy" src="images/planoalto_03.webp" alt="Plano Alto">
 							</div>
 							<div class="description">One of Plano Alto apartment's living room.</div>
 						</div>
 						<div class="slide-item y2023 web">
 							<div class="image-container">
-								<img src="images/portfolio/mockup_macbook_stable.jpg" alt="Stable Website">
+								<img loading="lazy" src="images/portfolio/mockup_macbook_stable.jpg" alt="Stable Website">
 							</div>
 							<div class="description">Stable website homepage</div>
 						</div>
 						<div class="slide-item y2025 web">
 							<div class="image-container">
-								<img src="images/portfolio/mockup_isometric_phones.jpg" alt="Mobile Apps">
+								<img loading="lazy" src="images/portfolio/mockup_isometric_phones.jpg" alt="Mobile Apps">
 							</div>
 							<div class="description">Web apps screenshots. Clients: JC Ribeiro (cork), Sumol Compal (food and beverage), Motaengil (construction)</div>
 						</div>
 						<div class="slide-item y2024 web">
 							<div class="image-container">
-								<img class="top" src="images/portfolio/mockup_videowall.jpg" alt="Videowall">
+								<img loading="lazy" class="top" src="images/portfolio/mockup_videowall.jpg" alt="Videowall">
 							</div>
 							<div class="description">Videowall used on factory floor to monitor production metrics, progress and equipment status. Client: Sumol Compal (food and beverage)</div>
 						</div>
 						<div class="slide-item y2023 product">
 							<div class="image-container">
-								<img src="images/portfolio/exploded_box.jpg" alt="Product">
+								<img loading="lazy" src="images/portfolio/exploded_box.jpg" alt="Product">
 							</div>
 							<div class="description">Exploded view of a smoke detector/sensor device to prevent forest fires. Client: Portuguese government</div>
 						</div>
 						<div class="slide-item y2025 threejs">
 							<div class="image-container">
-								<img class="top" src="images/portfolio/screenshot_threejs_lidador.png" alt="Three.js">
+								<img loading="lazy" class="top" src="images/portfolio/screenshot_threejs_lidador.png" alt="Three.js">
 							</div>
 							<div class="description">Screenshot of an interactive 3D house model on Stable's website.</div>
 						</div>
 						<div class="slide-item y2021 web">
 							<div class="image-container">
-								<img class="top" src="images/portfolio/mockup_sinoptic.jpg" alt="Production Line">
+								<img loading="lazy" class="top" src="images/portfolio/mockup_sinoptic.jpg" alt="Production Line">
 							</div>
 							<div class="description">Real-time overview of a canned food production line. Client: Sumol Compal (food and beverage)</div>
 						</div>
 						<div class="slide-item y2022 web">
 							<div class="image-container">
-								<img src="images/portfolio/mockup_macbook_website.jpg" alt="Company Website">
+								<img loading="lazy" src="images/portfolio/mockup_macbook_website.jpg" alt="Company Website">
 							</div>
 							<div class="description">Screenshots of ThinkDigital's (company) and Efficient Factory's (product) websites</div>
 						</div>
 						<div class="slide-item y2020 graphic">
 							<div class="image-container">
-								<img src="images/portfolio/logos.jpg" alt="Logo Design">
+								<img loading="lazy" src="images/portfolio/logos.jpg" alt="Logo Design">
 							</div>
 							<div class="description">ThinkDigital's (company) and TrackingDiary's (product) logo redesigns</div>
 						</div>
@@ -1047,173 +1047,141 @@
 			</div>
 		</div>
 	</div>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
-	<script type="text/javascript" src="js/navigation.js"></script>
-	<script src="js/jquery.imageviewer.js"></script>
 	<script type="text/javascript">
 
 		function updateCurrentEra() {
-			var viewportHeight = $(window).height();
+			var viewportHeight = window.innerHeight;
 			var viewportMiddle = viewportHeight / 2;
 			var viewport30FromBottom = viewportHeight * 0.8;
 			var currentInfoBlock = null;
 			var closestDistance = Infinity;
-			
+
 			// Check if credits block has reached 30% from bottom
-			var creditsBlock = $('.info-block.credits');
-			if (creditsBlock.length) {
-				var creditsRect = creditsBlock[0].getBoundingClientRect();
-				var creditsTop = creditsRect.top;
-				
-				if (creditsTop <= viewport30FromBottom && !creditsBlock.hasClass('rolling')) {
-					creditsBlock.addClass('rolling');
-					
-					var scrollContainer = $('.scroll-layer');
-					var currentScroll = scrollContainer.scrollTop();
-					var maxScroll = scrollContainer[0].scrollHeight - scrollContainer.height();
+			var creditsBlock = document.querySelector('.info-block.credits');
+			if (creditsBlock) {
+				var creditsTop = creditsBlock.getBoundingClientRect().top;
+
+				if (creditsTop <= viewport30FromBottom && !creditsBlock.classList.contains('rolling')) {
+					creditsBlock.classList.add('rolling');
+
+					var scrollContainer = document.querySelector('.scroll-layer');
+					var currentScroll = scrollContainer.scrollTop;
+					var maxScroll = scrollContainer.scrollHeight - scrollContainer.clientHeight;
 					var scrollDistance = maxScroll - currentScroll;
 					var duration = (scrollDistance / 50) * 1000;
-					
-					scrollContainer.animate({
-						scrollTop: maxScroll
-					}, {
-						duration: duration,
-						easing: 'linear',
-						complete: function() {
-							scrollContainer.css('overflow', 'auto');
-							$('.farewell').fadeOut(300, function() {
-								$(this).text("SORRY FOR TAKING AWAY THE SCROLL. IT'S BACK NOW.").fadeIn(300);
-							});
+
+					scrollContainer.style.overflow = 'hidden';
+
+					var startTime = performance.now();
+					function animateScroll(now) {
+						var t = Math.min((now - startTime) / duration, 1);
+						scrollContainer.scrollTop = currentScroll + scrollDistance * t;
+						if (t < 1) {
+							requestAnimationFrame(animateScroll);
+						} else {
+							scrollContainer.style.overflow = 'auto';
+							var farewell = document.querySelector('.farewell');
+							if (farewell) {
+								farewell.style.transition = 'opacity 0.3s';
+								farewell.style.opacity = '0';
+								setTimeout(function() {
+									farewell.textContent = "SORRY FOR TAKING AWAY THE SCROLL. IT'S BACK NOW.";
+									farewell.style.opacity = '1';
+								}, 300);
+							}
 						}
-					});
-					
-					scrollContainer.css('overflow', 'hidden');
+					}
+					requestAnimationFrame(animateScroll);
 					return;
 				}
 			}
-			
+
 			// Find which info-block is closest to the middle of the screen
-			$('.info-block').each(function() {
-				if ($(this).hasClass('credits')) {
-					return true;
-				}
-				
-				var rect = $(this)[0].getBoundingClientRect();
-				var blockMiddle;
-				
-				if ($(window).width() <= 800) {
-					blockMiddle = rect.top + (rect.height / 2);
-				} else {
-					blockMiddle = rect.top + (rect.height / 3);
-				}
-				
+			document.querySelectorAll('.info-block').forEach(function(block) {
+				if (block.classList.contains('credits')) return;
+
+				var rect = block.getBoundingClientRect();
+				var blockMiddle = window.innerWidth <= 800
+					? rect.top + (rect.height / 2)
+					: rect.top + (rect.height / 3);
+
 				var distance = Math.abs(blockMiddle - viewportMiddle);
-				
 				if (distance < closestDistance) {
 					closestDistance = distance;
-					currentInfoBlock = $(this);
+					currentInfoBlock = block;
 				}
 			});
-			
+
 			if (currentInfoBlock) {
-				var classes = currentInfoBlock.attr('class').split(' ');
-				var yearClass = null;
-				
-				$.each(classes, function(index, cls) {
-					if (cls.startsWith('y') && !cls.includes('-')) {
-						yearClass = cls;
-						return false;
-					}
-				});
-				
+				var classes = Array.from(currentInfoBlock.classList);
+				var yearClass = classes.find(function(cls) { return cls.startsWith('y') && !cls.includes('-'); }) || null;
+
 				if (yearClass) {
 					var year = parseInt(yearClass.substring(1));
-					var categoryClass = null;
-					
-					$.each(classes, function(index, cls) {
-						if (!cls.startsWith('y') && cls !== 'info-block') {
-							categoryClass = cls;
-							return false;
-						}
-					});
-					
-					// Remove current class from all eras, subjects, and slide items
-					$('.era').removeClass('current');
-					$('.subject').removeClass('current');
-					$('.slide-item').removeClass('current');
-					
-					// Add current class to the matching era and subject
-					$('.era').each(function() {
-						var eraClasses = $(this).attr('class').split(' ');
-						var eraClass = null;
-						
-						$.each(eraClasses, function(index, cls) {
-							if (cls.startsWith('y') && cls.includes('-')) {
-								eraClass = cls;
-								return false;
-							}
-						});
-						
+					var categoryClass = classes.find(function(cls) { return !cls.startsWith('y') && cls !== 'info-block'; }) || null;
+
+					document.querySelectorAll('.era').forEach(function(el) { el.classList.remove('current'); });
+					document.querySelectorAll('.subject').forEach(function(el) { el.classList.remove('current'); });
+					document.querySelectorAll('.slide-item').forEach(function(el) { el.classList.remove('current'); });
+
+					document.querySelectorAll('.era').forEach(function(era) {
+						var eraClasses = Array.from(era.classList);
+						var eraClass = eraClasses.find(function(cls) { return cls.startsWith('y') && cls.includes('-'); }) || null;
+
 						if (eraClass) {
 							var match = eraClass.match(/y(\d+)-(\d+)/);
 							if (match) {
 								var startYear = parseInt(match[1]);
 								var endYear = parseInt(match[2]);
-								
 								if (year >= startYear && year <= endYear) {
-									$(this).addClass('current');
-									
+									era.classList.add('current');
 									if (categoryClass) {
-										$(this).find('.subject.' + categoryClass).addClass('current');
+										var subject = era.querySelector('.subject.' + categoryClass);
+										if (subject) subject.classList.add('current');
 									}
 								}
 							}
 						}
 					});
-					
-					// Find and show the matching slide item
+
 					if (yearClass && categoryClass) {
-						$('.slide-item.' + yearClass + '.' + categoryClass).addClass('current');
+						var slideItem = document.querySelector('.slide-item.' + yearClass + '.' + categoryClass);
+						if (slideItem) slideItem.classList.add('current');
 					}
 				}
 			}
 		}
 
 		function updateTimelineBorderFill() {
-			const scrollContainer = $('.scroll-layer')[0];
-			const border = document.querySelector('.timeline .border');
-			const credits = document.querySelector('.graphic.y2020');
+			var scrollContainer = document.querySelector('.scroll-layer');
+			var border = document.querySelector('.timeline .border');
+			var credits = document.querySelector('.graphic.y2020');
 
-			if (!border || !credits) return;
+			if (!border || !credits || !scrollContainer) return;
 
-			// Current scroll
-			const scrollTop = scrollContainer.scrollTop;
+			var scrollTop = scrollContainer.scrollTop;
+			var creditsOffset = credits.offsetTop - scrollContainer.offsetTop;
+			var progress = Math.max(0, Math.min(1, scrollTop / creditsOffset));
 
-			// Distance from top of scroll container to credits
-			const creditsOffset = credits.offsetTop - scrollContainer.offsetTop;
-
-			// Progress ratio
-			let progress = scrollTop / creditsOffset;
-
-			// Clamp between 0 and 1
-			progress = Math.max(0, Math.min(1, progress));
-
-			// Apply - check if mobile
 			if (window.innerWidth <= 800) {
-				border.style.setProperty('--border-progress-horizontal', `${progress * 100}%`);
+				border.style.setProperty('--border-progress-horizontal', progress * 100 + '%');
 			} else {
-				border.style.setProperty('--border-progress', `${progress * 100}%`);
+				border.style.setProperty('--border-progress', progress * 100 + '%');
 			}
 		}
 
-		$('.scroll-layer').on('scroll', function() {
-			updateCurrentEra();
-			updateTimelineBorderFill(); 
-		});
+		var scrollLayer = document.querySelector('.scroll-layer');
+		if (scrollLayer) {
+			scrollLayer.addEventListener('scroll', function() {
+				updateCurrentEra();
+				updateTimelineBorderFill();
+			});
+		}
 
-		$(document).ready(function() {
-			$('.era, .subject').css('transition', 'all 0.4s ease');
+		document.addEventListener('DOMContentLoaded', function() {
+			document.querySelectorAll('.era, .subject').forEach(function(el) {
+				el.style.transition = 'all 0.4s ease';
+			});
 			updateCurrentEra();
 			updateTimelineBorderFill();
 		});

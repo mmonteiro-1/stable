@@ -1,0 +1,13 @@
+[
+	{ "href": "project_planoalto.html",        "img": "images/small/planoalto_03_small.webp",       "label": "Plano Alto" },
+	{ "href": "project_electriccentury.html",   "img": "images/small/electriccentury_03_small.webp", "label": "Electric Century" },
+	{ "href": "project_citadel.html",           "img": "images/citadel_01.webp",                     "label": "4040 Citadel Park" },
+	{ "href": "project_casaalmada.html",        "img": "images/small/casaalmada_02_small.webp",      "label": "Casa Almada" },
+	{ "href": "project_acrylichail.html",       "img": "images/small/acrylichail_02_small.webp",     "label": "Acrylic Hail" },
+	{ "href": "project_breitnerpayne.html",     "img": "images/breitnerpayne_production_line2.webp", "label": "Breitner & Payne" },
+	{ "href": "project_lidador.html",           "img": "images/small/lidador_04_small.webp",         "label": "Porto Lidador" },
+	{ "href": "project_olivagiulianova.html",   "img": "images/small/oliva_02_small.webp",           "label": "Oliva Giulianova" },
+	{ "href": "project_maisonhaute.html",       "img": "images/small/maisonhaute_04_small.webp",     "label": "Maison Haute" },
+	{ "href": "project_guntherhouse.html",      "img": "images/small/guntherhouse_01_small.webp",   "label": "Gunther House" },
+	{ "href": "project_casaornatoverde.html",   "img": "images/small/casaornato_02_small.webp",      "label": "Casa Ornato Verde" }
+]

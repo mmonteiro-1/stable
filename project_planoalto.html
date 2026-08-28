@@ -6,15 +6,19 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar" content="white">
 	<meta name="theme-color" content="#FFFFFF">
-	<meta name="description" content="3D architectural visualization renders of a summer house in Italy, with a frontyard pool and plenty of green space around the location.">
+	<meta name="description" content="3D architectural visualization renders of Plano Alto — a residential project exploring light and landscape.">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Plano Alto — Stable">
+	<meta property="og:description" content="3D architectural visualization renders of Plano Alto — a residential project exploring light and landscape.">
+	<meta property="og:image" content="https://stablearchviz.com/images/planoalto_09.webp">
+	<meta property="og:url" content="https://stablearchviz.com/project_planoalto.html">
 	<link rel="apple-touch-icon" href="images/favicon/apple-touch-icon.png">
 	<link rel="manifest" href="js/manifest.json">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700;800&family=League+Spartan:wght@400;600;800&display=swap" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?v=2" />
 	<link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico">
-	<script type="text/javascript" src="js/jquery.js"></script>
 	<title>Stable</title>
 </head>
 <body>
@@ -23,7 +27,7 @@
 		<div class="smooth-content">
 			<div class="content">
 				<div class="project-hero">
-					<img class="project-hero-image" src="images/planoalto_09.webp">
+					<img loading="eager" class="project-hero-image" src="images/planoalto_09.webp">
 					<div class="dictionary">
 						<div class="type">project</div>
 						<div class="title">Plano Alto</div>
@@ -50,26 +54,26 @@
 								</div>
 							</a>
 						</div>
-						<img alt="3d render of a house" src="images/planoalto_03.webp">
+						<img loading="lazy" alt="3d render of a house" src="images/planoalto_03.webp">
 					</div>
 					<div class="image">
-						<img alt="3d render of a house" src="images/planoalto_08.webp">
-					</div>
-				</div>
-				<div class="row">
-					<div class="image">
-						<img alt="3d render of a house" src="images/planoalto_04.webp">
-					</div>
-					<div class="image">
-						<img alt="3d render of a house" src="images/planoalto_01.webp">
+						<img loading="lazy" alt="3d render of a house" src="images/planoalto_08.webp">
 					</div>
 				</div>
 				<div class="row">
 					<div class="image">
-						<img alt="3d render of a house" src="images/planoalto_09.webp">
+						<img loading="lazy" alt="3d render of a house" src="images/planoalto_04.webp">
 					</div>
 					<div class="image">
-						<img alt="3d render of a house" src="images/planoalto_06.webp">
+						<img loading="lazy" alt="3d render of a house" src="images/planoalto_01.webp">
+					</div>
+				</div>
+				<div class="row">
+					<div class="image">
+						<img loading="lazy" alt="3d render of a house" src="images/planoalto_09.webp">
+					</div>
+					<div class="image">
+						<img loading="lazy" alt="3d render of a house" src="images/planoalto_06.webp">
 					</div>
 				</div>
 				<div class="row">
@@ -92,28 +96,28 @@
 								</div>
 							</a>
 						</div>
-						<video class="video-full-width" width="100%" height="100%" autoplay loop muted preload playsinline>
+						<video class="video-full-width" width="100%" height="100%" autoplay loop muted preload="metadata" playsinline>
 							<source src="videos/planoalto_teaser.mp4" type="video/mp4">
 						</video>
 					</div>
 				</div>
 				<div class="spacer-logo">
-					<img src="images/logo_planoalto.svg" style="max-height: 100px;">
+					<img loading="lazy" src="images/logo_planoalto.svg" style="max-height: 100px;">
 				</div>
 				<div class="row">
 					<div class="image">
-						<img alt="3d render of a house" src="images/planoalto_02.webp">
+						<img loading="lazy" alt="3d render of a house" src="images/planoalto_02.webp">
 					</div>
 					<div class="image">
-						<img alt="3d render of a house" src="images/planoalto_10.webp">
+						<img loading="lazy" alt="3d render of a house" src="images/planoalto_10.webp">
 					</div>
 				</div>
 				<div class="row">
 					<div class="image">
-						<img alt="3d render of a house" src="images/planoalto_07.webp">
+						<img loading="lazy" alt="3d render of a house" src="images/planoalto_07.webp">
 					</div>
 					<div class="image">
-						<img alt="3d render of a house" src="images/planoalto_05.webp">
+						<img loading="lazy" alt="3d render of a house" src="images/planoalto_05.webp">
 					</div>
 				</div>
 				<div class="section_title">Other projects</div>
@@ -126,15 +130,13 @@
 		<div id="video-container"></div>
 		<div id="video-close"></div>
 	</div>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
-	<script type="text/javascript" src="js/navigation.js"></script>
-	<script src="js/jquery.imageviewer.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+	<script type="text/javascript" src="js/navigation.js?v=2"></script>
+	<script src="js/imageviewer.js?v=2"></script>
 	<script type="text/javascript">
-
-		$("nav").load("nav.html");
-		$("footer").load("footer.html");
-
+		fetch("nav.html").then(r=>r.text()).then(h=>{document.querySelector("nav").innerHTML=h});
+		fetch("footer.html").then(r=>r.text()).then(h=>{document.querySelector("footer").innerHTML=h});
 		imageviewer();
 
 		// Create Iframes
@@ -179,22 +181,23 @@
 			window.onload = createIframes;
 		}
 
-		$(document).ready(function() {
-			$('#watch-cinematic, #watch-walkthrough').click(function() {
-				var videoType = $(this).attr('id').split('-')[1];
-				$('#video-overlay').show();
-				$('#' + videoType + '-video').show().siblings('iframe').hide();
-				$('body').addClass('no-scroll');
-				$('nav').hide();
-			});
-
-			$('#video-close').click(function() {
-				$('#video-overlay').hide();
-				$('#video-container iframe').each(function() {
-					this.src = this.src;
+		document.addEventListener('DOMContentLoaded', () => {
+			document.querySelectorAll('[id^="watch-"]').forEach(btn => {
+				btn.addEventListener('click', () => {
+					const videoType = btn.id.split('-')[1];
+					document.getElementById('video-overlay').style.display = '';
+					document.querySelectorAll('#video-container iframe').forEach(iframe => {
+						iframe.style.display = iframe.id === videoType + '-video' ? '' : 'none';
+					});
+					document.body.classList.add('no-scroll');
+					document.querySelector('nav').style.display = 'none';
 				});
-				$('body').removeClass('no-scroll');
-				$('nav').show();
+			});
+			document.getElementById('video-close').addEventListener('click', () => {
+				document.getElementById('video-overlay').style.display = 'none';
+				document.querySelectorAll('#video-container iframe').forEach(iframe => { iframe.src = iframe.src; });
+				document.body.classList.remove('no-scroll');
+				document.querySelector('nav').style.display = '';
 			});
 		});
 	</script>

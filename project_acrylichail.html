@@ -6,16 +6,20 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar" content="white">
 	<meta name="theme-color" content="#FFFFFF">
-	<meta name="description" content="3D architectural visualization renders of an office bulding lobby with waiting seats, reception and lifts.">
+	<meta name="description" content="3D architectural visualization renders of an office building lobby in Eindhoven that leverages yellow, translucent acrylic to contrast the city's moody weather.">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Acrylic Hail — Stable">
+	<meta property="og:description" content="An office building lobby in Eindhoven that leverages yellow, translucent acrylic to contrast the city's moody weather.">
+	<meta property="og:image" content="https://stablearchviz.com/images/acrylichail_05.webp">
+	<meta property="og:url" content="https://stablearchviz.com/project_acrylichail.html">
 	<link rel="apple-touch-icon" href="images/favicon/apple-touch-icon.png">
 	<link rel="manifest" href="js/manifest.json">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700;800&family=League+Spartan:wght@400;600;800&display=swap" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css?v=2" />
 	<link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
-	<script type="text/javascript" src="js/jquery.js"></script>
 	<title>Stable</title>
 </head>
 <body>
@@ -24,7 +28,7 @@
 		<div class="smooth-content">
 			<div class="content">
 				<div class="project-hero">
-					<img class="project-hero-image" src="images/acrylichail_05.webp">
+					<img loading="eager" class="project-hero-image" src="images/acrylichail_05.webp">
 					<div class="dictionary">
 						<div class="type">project</div>
 						<div class="title">Acrylic Hail</div>
@@ -33,27 +37,27 @@
 				</div>
 				<div class="row">
 					<div class="image">
-						<img alt="3d render of an office lobby" src="images/acrylichail_01.webp">
+						<img loading="lazy" alt="3d render of an office lobby" src="images/acrylichail_01.webp">
 					</div>
 					<div class="image">
-						<img alt="3d render of an office lobby" src="images/acrylichail_02.webp">
+						<img loading="lazy" alt="3d render of an office lobby" src="images/acrylichail_02.webp">
 					</div>
 				</div>
 				<div class="row">
 					<div class="image">
-						<img alt="3d render of an office lobby" src="images/acrylichail_03.webp">
+						<img loading="lazy" alt="3d render of an office lobby" src="images/acrylichail_03.webp">
 					</div>
 					<div class="image">
-						<img alt="3d render of an office lobby" src="images/acrylichail_04.webp">
+						<img loading="lazy" alt="3d render of an office lobby" src="images/acrylichail_04.webp">
 					</div>
 				</div>
 				<div class="row">
 					<div class="image solo">
-						<img alt="3d render of an office lobby" src="images/acrylichail_05.webp">
+						<img loading="lazy" alt="3d render of an office lobby" src="images/acrylichail_05.webp">
 					</div>
 				</div>
 				<div class="spacer-logo">
-					<img src="images/logo_acrylichail.svg">
+					<img loading="lazy" src="images/logo_acrylichail.svg">
 				</div>
 				<div class="row">
 					<div id="panorama"></div>
@@ -62,31 +66,31 @@
 				<div class="row row_other_projects">
 					<a href="project_casaornatoverde.html">
 						<div class="other_projects">
-							<img alt="3d render of a house" src="images/small/casaornato_02_small.webp">
+							<img loading="lazy" alt="3d render of a house" src="images/small/casaornato_02_small.webp">
 							<div>Casa Ornato Verde</div>
 						</div>
 					</a>
 					<a href="project_electriccentury.html">
 						<div class="other_projects">
-							<img alt="3d render of a house" src="images/small/electriccentury_01_small.webp">
+							<img loading="lazy" alt="3d render of a house" src="images/small/electriccentury_01_small.webp">
 							<div>Electric Century</div>
 						</div>
 					</a>
 					<a href="project_olivagiulianova.html">
 						<div class="other_projects">
-							<img alt="3d render of a house" src="images/small/oliva_05_small.webp">
+							<img loading="lazy" alt="3d render of a house" src="images/small/oliva_05_small.webp">
 							<div>Oliva Giulianova</div>
 						</div>
 					</a>
 					<a href="project_planoalto.html">
 						<div class="other_projects">
-							<img alt="3d render of a house" src="images/small/planoalto_06_small.webp">
+							<img loading="lazy" alt="3d render of a house" src="images/small/planoalto_06_small.webp">
 							<div>Plano Alto</div>
 						</div>
 					</a>
 					<a href="project_casaalmada.html">
 						<div class="other_projects">
-							<img alt="3d render of a house" src="images/small/casaalmada_01_small.webp">
+							<img loading="lazy" alt="3d render of a house" src="images/small/casaalmada_01_small.webp">
 							<div>Casa Almada</div>
 						</div>
 					</a>
@@ -95,16 +99,14 @@
 			</div>
 		</div>
 	</div>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
-	<script type="text/javascript" src="js/navigation.js"></script>
-	<script src="js/jquery.imageviewer.js"></script>
+	<script type="text/javascript" src="js/navigation.js?v=2"></script>
+	<script src="js/imageviewer.js?v=2"></script>
 	<script type="text/javascript">
-
-		$("nav").load("nav.html");
-		$("footer").load("footer.html");
-
+		fetch("nav.html").then(r=>r.text()).then(h=>{document.querySelector("nav").innerHTML=h});
+		fetch("footer.html").then(r=>r.text()).then(h=>{document.querySelector("footer").innerHTML=h});
 		imageviewer();
 
 		//panorama
@@ -121,8 +123,9 @@
 		});
 
 		/* HOVER ON THUMBNAIL */
-		$(".other_projects").hover(function() {
-			$(this).find("img").toggleClass("clear");
+		document.querySelectorAll('.other_projects').forEach(el => {
+			el.addEventListener('mouseenter', () => el.querySelector('img')?.classList.add('clear'));
+			el.addEventListener('mouseleave', () => el.querySelector('img')?.classList.remove('clear'));
 		});
 	</script>
 </body>
