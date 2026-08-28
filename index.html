@@ -741,26 +741,22 @@
 		});
 
 		// Override the general nav function for index page with 300px trigger
-		window.addEventListener('load', function() {
+		function updateIndexNav() {
 			var nav = document.querySelector('nav');
 			var logo = document.querySelector('nav .logo');
+			if (!nav || !logo) return;
 
-			function updateIndexNav() {
-				var scrollPosition = window.scrollY;
-
-				if (scrollPosition >= 300) {
-					nav.classList.add('inverted');
-					logo.classList.add('visible');
-				} else {
-					nav.classList.remove('inverted');
-					logo.classList.remove('visible');
-				}
+			if (window.scrollY >= 300) {
+				nav.classList.add('inverted');
+				logo.classList.add('visible');
+			} else {
+				nav.classList.remove('inverted');
+				logo.classList.remove('visible');
 			}
-
-			window.addEventListener('scroll', updateIndexNav);
-			window.addEventListener('resize', updateIndexNav);
-			updateIndexNav();
-		});
+		}
+		window.addEventListener('scroll', updateIndexNav);
+		window.addEventListener('resize', updateIndexNav);
+		window.addEventListener('load', updateIndexNav);
 	</script>
 	<script src="js/loading_screen.js?v=2"></script>
 </body>
