@@ -128,3 +128,13 @@ window.addEventListener("load", () => {
 	window.addEventListener("resize", updateNav);
 	updateNav();
 });
+
+// Mobile nav toggle — delegated so it works after nav.html is fetched into innerHTML
+document.addEventListener("click", function(e) {
+	if (e.target.closest(".mobile-nav")) {
+		e.preventDefault();
+		const menu = document.querySelector(".mobile-menu");
+		if (menu) menu.classList.toggle("visible");
+		document.body.classList.toggle("menu-open");
+	}
+});
