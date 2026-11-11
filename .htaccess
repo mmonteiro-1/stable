@@ -1,0 +1,6 @@
+# Clean URLs: serve /page from page.html (e.g. /portfolio -> portfolio.html).
+# Existing .html links keep working.
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+?)/?$ $1.html [L]
